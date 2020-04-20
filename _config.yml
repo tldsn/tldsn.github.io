@@ -8,8 +8,10 @@
 # Site settings
 title: TLDSN
 brief-intro: 太阳升起时，请重新开始
+description: ^^
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://tldsn.github.io" # the base hostname & protocol for your site
+author: tldsn
 
 permalink: /:year/:month/:day/:title/
 
@@ -18,8 +20,10 @@ twitter_username:
 facebook_username: 
 github_username:  tldsn
 email: 742720531@qq.com
-weibo_username: 5578237033
+weibo_username:
 zhihu_username: yao-yu-jie-90
+douban_username: 122400251
+cloudmusic_username: 263386850
 linkedIn_username: 
 dribbble_username:
 
@@ -58,3 +62,10 @@ excerpt_separator: "\n\n\n\n"
 # paginate
 gems: [jekyll-paginate]
 paginate: 6
+
+#plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
