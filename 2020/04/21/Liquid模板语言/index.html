@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Liquid模板语言</title>
+    <meta name="description" content="  Liquid模板语言  操作符  真值与假值  数据类型  对象  标记  控制流  迭代  变量赋值  过滤器  filtersLiquid模板语言  https://liquid.bootcss.com/basics/types/对象、标记、过滤器、操作符  contains      检查在一个字符串中...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <script src="https://kit.fontawesome.com/b8df0d6464.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ccd4104a124f2218d64c124431d52789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-163446273-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">TLDSN</a>
+        <small>太阳升起时，请重新开始</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>Liquid模板语言</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2020-04-21
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>tldsn
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#语言" title="Category: 语言" rel="category">语言</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#Liquid" title="Tag: Liquid" rel="tag">Liquid</a-->
+        <a href="/tag/#Liquid" title="Tag: Liquid" rel="tag">Liquid</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc" role="doc-toc">
+  <li><a href="#liquid模板语言" id="markdown-toc-liquid模板语言">Liquid模板语言</a></li>
+  <li><a href="#操作符" id="markdown-toc-操作符">操作符</a></li>
+  <li><a href="#真值与假值" id="markdown-toc-真值与假值">真值与假值</a></li>
+  <li><a href="#数据类型" id="markdown-toc-数据类型">数据类型</a></li>
+  <li><a href="#对象" id="markdown-toc-对象">对象</a></li>
+  <li><a href="#标记" id="markdown-toc-标记">标记</a></li>
+  <li><a href="#控制流" id="markdown-toc-控制流">控制流</a></li>
+  <li><a href="#迭代" id="markdown-toc-迭代">迭代</a></li>
+  <li><a href="#变量赋值" id="markdown-toc-变量赋值">变量赋值</a></li>
+  <li><a href="#过滤器" id="markdown-toc-过滤器">过滤器</a></li>
+  <li><a href="#filters" id="markdown-toc-filters">filters</a></li>
+</ul>
+
+<h3 id="liquid模板语言">Liquid模板语言</h3>
+
+<blockquote>
+  <p><a href="https://liquid.bootcss.com/basics/types/">https://liquid.bootcss.com/basics/types/</a>
+对象、标记、过滤器、</p>
+</blockquote>
+
+<h3 id="操作符">操作符</h3>
+
+<p><img src="en-resource://database/1896:1" alt="6214808f018e77251bca039b88a8bdf1.png" /></p>
+
+<ul>
+  <li>contains</li>
+</ul>
+
+<blockquote>
+  <ul>
+    <li>检查在一个字符串中是否存在某个子串</li>
+    <li>检查一个字符串数组中是否存在某个字符串</li>
+  </ul>
+</blockquote>
+
+<h3 id="真值与假值">真值与假值</h3>
+
+<blockquote>
+  <p>除了 nil 和 false 之外的所有值都是真值</p>
+</blockquote>
+
+<h3 id="数据类型">数据类型</h3>
+
+<blockquote>
+  <p>通过 assign 或 capture 标记来初始化 Liquid 变量</p>
+</blockquote>
+
+<ul>
+  <li>String</li>
+  <li>Number</li>
+  <li>Boolean</li>
+  <li>Nil</li>
+  <li>Array</li>
+</ul>
+
+<p><code class="highlighter-rouge">★关于空字符串和Nil</code></p>
+
+<p><code class="highlighter-rouge">★你无法只通过 Liquid 语法初始化一个数组。然而，你可以利用 split 过滤器将一个字符串分割为一个子字符串数组。</code></p>
+
+<h3 id="对象">对象</h3>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Liquid模板语言
+</code></pre></div></div>
+
+<h3 id="标记">标记</h3>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<h3 id="控制流">控制流</h3>
+
+<ul>
+  <li>if</li>
+  <li>else</li>
+  <li>elseif</li>
+  <li>unless</li>
+  <li>case    when</li>
+</ul>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+         This is a cake
+      
+</code></pre></div></div>
+
+<h3 id="迭代">迭代</h3>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for     in      [limit/offset/reversed]
+break
+continue
+
+limit   限定循环执行的次数。
+offset  从指定索引号开始执行循环。
+</code></pre></div></div>
+
+<hr />
+
+<ul>
+  <li>tablerow</li>
+</ul>
+
+<blockquote>
+  <p>生成一个 HTML 表格。必须用 <code class="highlighter-rouge">&lt;table&gt;</code> 和 <code class="highlighter-rouge">&lt;/table&gt;</code> 这两个 HTML 标签将其包裹起来。
+cols 定义表格应当有多少列</p>
+</blockquote>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<ul>
+  <li>raw</li>
+</ul>
+
+<blockquote>
+  <p>原始内容</p>
+</blockquote>
+
+<h3 id="变量赋值">变量赋值</h3>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bar
+
+
+
+</code></pre></div></div>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+1
+2
+输出
+    0
+    1
+    2
+-1
+-2
+-3
+输出
+    -1
+    -2
+    -3
+</code></pre></div></div>
+
+<h3 id="过滤器">过滤器</h3>
+
+<blockquote>
+  <p>过滤器 改变 Liquid 对象的输出。他们被用在输出上，通过一个 <code class="highlighter-rouge">|</code> 符号分隔。</p>
+</blockquote>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello Adam!
+输出：
+Hello Adam!
+</code></pre></div></div>
+
+<h3 id="filters">filters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">filters</th>
+      <th style="text-align: right">解释</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">abs</td>
+      <td style="text-align: right">绝对值</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">append</td>
+      <td style="text-align: right">追加</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">at_least</td>
+      <td style="text-align: right">限制最小值</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">at_most</td>
+      <td style="text-align: right">限制最大值</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">capitalize</td>
+      <td style="text-align: right">首字母大写</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ceil</td>
+      <td style="text-align: right">取整</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">compact</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">concat</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">date</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">default</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">divided_by</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">downcase</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">escape</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">escape_once</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">first</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">floor</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">join</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">last</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">lstrip</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">map</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">minus</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">modulo</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">newline_to_br</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">plus</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">prepend</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">remove</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">remove_first</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">replace</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">replace_first</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">reverse</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">round</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">rstrip</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">size</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">slice</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sort</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sort_natural</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">split</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">strip</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">strip_html</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">strip_newlines</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">times</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">truncate</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">truncatewords</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">uniq</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">upcase</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">url_decode</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">url_encode</td>
+      <td style="text-align: right"> </td>
+    </tr>
+  </tbody>
+</table>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2020/04/20/github%E5%B8%B8%E7%94%A8%E6%90%9C%E7%B4%A2/">github常用搜索</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2020/04/21/jekyll/">jekyll静态博客网站生成器</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//https-tldsn-github-io.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/tldsn" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=742720531@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="http://weibo.com/5578237033" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>  
+            <a href="https://www.zhihu.com/people/yao-yu-jie-90" title="Zhihu"><i class="iconfont blog-zhihu"></i></a>  
+            <a href="https://www.douban.com/people/122400251" title="Douban"><i class="iconfont blog-douban"></i></a>  
+            <a href="https://music.163.com/#/user/home?id=263386850" title="Cloudmusic"><i class="iconfont blog-yinle"></i></a>  
+             
+               
+            
+        </p>
+        <p class="busuanzi">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

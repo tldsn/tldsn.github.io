@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>jekyll静态博客网站生成器</title>
+    <meta name="description" content="  基本命令  目录结构  配置  指定 Jekyll build 时的环境  头信息默认值  头信息  永久连接  常用变量  集合  过滤器  标签  github-pages  markdown选项  Liquid选项  分页  插件  自动部署  持续集成  参考基本命令      jekyll buil...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <script src="https://kit.fontawesome.com/b8df0d6464.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="https://tldsn.github.io/2020/04/21/jekyll/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ccd4104a124f2218d64c124431d52789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-163446273-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">TLDSN</a>
+        <small>太阳升起时，请重新开始</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>jekyll静态博客网站生成器</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2020-04-21
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>tldsn
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#语言" title="Category: 语言" rel="category">语言</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc" role="doc-toc">
+  <li><a href="#基本命令" id="markdown-toc-基本命令">基本命令</a></li>
+  <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
+  <li><a href="#配置" id="markdown-toc-配置">配置</a></li>
+  <li><a href="#指定-jekyll-build-时的环境" id="markdown-toc-指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</a></li>
+  <li><a href="#头信息默认值" id="markdown-toc-头信息默认值">头信息默认值</a></li>
+  <li><a href="#头信息" id="markdown-toc-头信息">头信息</a></li>
+  <li><a href="#永久连接" id="markdown-toc-永久连接">永久连接</a></li>
+  <li><a href="#常用变量" id="markdown-toc-常用变量">常用变量</a></li>
+  <li><a href="#集合" id="markdown-toc-集合">集合</a></li>
+  <li><a href="#过滤器" id="markdown-toc-过滤器">过滤器</a></li>
+  <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
+  <li><a href="#github-pages" id="markdown-toc-github-pages">github-pages</a></li>
+  <li><a href="#markdown选项" id="markdown-toc-markdown选项">markdown选项</a></li>
+  <li><a href="#liquid选项" id="markdown-toc-liquid选项">Liquid选项</a></li>
+  <li><a href="#分页" id="markdown-toc-分页">分页</a></li>
+  <li><a href="#插件" id="markdown-toc-插件">插件</a></li>
+  <li><a href="#自动部署" id="markdown-toc-自动部署">自动部署</a></li>
+  <li><a href="#持续集成" id="markdown-toc-持续集成">持续集成</a></li>
+  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
+</ul>
+
+<h3 id="基本命令">基本命令</h3>
+
+<ul>
+  <li>
+    <p>jekyll build
+默认构建到<code class="highlighter-rouge">./_site</code>文件夹中</p>
+  </li>
+  <li>
+    <p>jekyll sever
+ 一个开发服务器将会运行在 <a href="http://localhost:4000/">http://localhost:4000/</a></p>
+  </li>
+</ul>
+
+<h3 id="目录结构">目录结构</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">文件/目录</th>
+      <th style="text-align: right">描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">_config.yml</td>
+      <td style="text-align: right">配置文件</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_drafts</td>
+      <td style="text-align: right">草稿</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_includes</td>
+      <td style="text-align: right">复用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_layouts</td>
+      <td style="text-align: right">模板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_posts</td>
+      <td style="text-align: right">文章</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_data</td>
+      <td style="text-align: right">网站数据</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_site</td>
+      <td style="text-align: right">略</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">.jekyll-metadata</td>
+      <td style="text-align: right">略</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="配置">配置</h3>
+
+<blockquote>
+  <p>参考：<a href="http://jekyllcn.com/docs/configuration/">jekyll配置</a></p>
+</blockquote>
+
+<h3 id="指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</h3>
+
+<p><code class="highlighter-rouge">★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数</code></p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+   JEKYLL_ENV=production jekyll build
+
+   <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">jekyll</span><span class="p">.</span><span class="nv">environment</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"production"</span><span class="w"> </span><span class="p">%}</span>
+      <span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>disqus.html<span class="w"> </span><span class="p">%}</span>
+   <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
+
+</code></pre></div></div>
+
+<h3 id="头信息默认值">头信息默认值</h3>
+
+<blockquote>
+  <p>在_config.yml 文件里设置 defaults 的值指定全站范围的默认值</p>
+</blockquote>
+
+<h3 id="头信息">头信息</h3>
+
+<p>预定义全局变量</p>
+
+<ul>
+  <li>layout</li>
+  <li>permalink</li>
+  <li>published</li>
+  <li>date</li>
+  <li>category/categories</li>
+  <li>tags</li>
+</ul>
+
+<h3 id="永久连接">永久连接</h3>
+
+<ul>
+  <li>permalink</li>
+</ul>
+
+<h3 id="常用变量">常用变量</h3>
+
+<ul>
+  <li>site</li>
+  <li>page</li>
+  <li>paginator</li>
+</ul>
+
+<hr />
+
+<ul>
+  <li>site.pages</li>
+  <li>site.posts</li>
+  <li>site.collections</li>
+  <li>site.data</li>
+  <li>site.categories.category</li>
+  <li>site.tags.tag</li>
+  <li>site.自定义变量</li>
+</ul>
+
+<hr />
+
+<ul>
+  <li>page.title</li>
+  <li>page.excerpt</li>
+  <li>page.url</li>
+  <li>page.date</li>
+  <li>page.id</li>
+  <li>page.categories</li>
+  <li>page.tags</li>
+  <li>page.next</li>
+  <li>page.previous</li>
+</ul>
+
+<hr />
+
+<ul>
+  <li>paginator.posts</li>
+  <li>paginator.per_page</li>
+  <li>paginator.total_posts</li>
+  <li>paginator.page</li>
+  <li>paginator.previous_page</li>
+  <li>paginator.next_page</li>
+  <li>paginator.previous_page_path</li>
+  <li>paginator.next_page_path</li>
+  <li>paginator.total_pages</li>
+</ul>
+
+<hr />
+
+<h3 id="集合">集合</h3>
+
+<blockquote>
+  <p>同pages、posts</p>
+</blockquote>
+
+<h3 id="过滤器">过滤器</h3>
+
+<ul>
+  <li>日期格式</li>
+  <li>字符串操作｛转码、过滤字符｝</li>
+  <li>json转换</li>
+  <li>数组操作｛push、pop、随机、排序、数组转句子、｝</li>
+  <li>对象操作｛分组、判断、检索、｝</li>
+</ul>
+
+<h3 id="标签">标签</h3>
+
+<ul>
+  <li>include</li>
+</ul>
+
+<blockquote>
+  <p>如果你需要在多个地方引用一小代码片段，可以使用 include 标签
+Jekyll 要求所有被引用的文件放在根目录的 _includes 文件夹
+还可以传递参数、变量
+变量可以通过被调用
+include_relative引入其他文件</p>
+</blockquote>
+
+<ul>
+  <li>highlight</li>
+</ul>
+
+<blockquote>
+  <p>可以加入行号
+要使用代码高亮，你还需要包含一个样式表。例如 syntax.css 。它包含了和 GitHub 一样的样式，并且免费</p>
+</blockquote>
+
+<ul>
+  <li>link</li>
+</ul>
+
+<blockquote>
+  <p>链接</p>
+</blockquote>
+
+<ul>
+  <li>post_url</li>
+</ul>
+
+<blockquote>
+  <p>博文链接</p>
+</blockquote>
+
+<ul>
+  <li>gist</li>
+</ul>
+
+<blockquote>
+  <p>引入Github Gist
+需要引入jekyll-gist gem</p>
+</blockquote>
+
+<h3 id="github-pages">github-pages</h3>
+
+<p>使用 github-pages gem包</p>
+<blockquote>
+  <p>管理Jekyll和其在Github Pages上的依赖，
+使用这个包可以让你在将网站部署到Github Pages上时， 不&gt;会因为各种不同版本的gem包而导致意外报错。</p>
+</blockquote>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">source</span> <span class="dl">'</span><span class="s1">https://rubygems.org</span><span class="dl">'</span>
+
+<span class="nx">require</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span>
+<span class="nx">require</span> <span class="dl">'</span><span class="s1">open-uri</span><span class="dl">'</span>
+<span class="nx">versions</span> <span class="o">=</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">open</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pages.github.com/versions.json</span><span class="dl">'</span><span class="p">).</span><span class="nx">read</span><span class="p">)</span>
+
+<span class="nx">gem</span> <span class="dl">'</span><span class="s1">github-pages</span><span class="dl">'</span><span class="p">,</span> <span class="nx">versions</span><span class="p">[</span><span class="dl">'</span><span class="s1">github-pages</span><span class="dl">'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="markdown选项">markdown选项</h3>
+
+<ul>
+  <li>
+    <p>Redcarpet</p>
+  </li>
+  <li>
+    <p>Kramdown</p>
+  </li>
+</ul>
+
+<h3 id="liquid选项">Liquid选项</h3>
+
+<ul>
+  <li>liquid错误处理方式</li>
+</ul>
+
+<h3 id="分页">分页</h3>
+
+<blockquote>
+  <p>参考：<a href="http://jekyllcn.com/docs/pagination/">分页</a></p>
+</blockquote>
+
+<ul>
+  <li>jekyll-paginate插件</li>
+  <li>只支持html文件</li>
+  <li>现不支持标签和类别分页，也不支持集合</li>
+</ul>
+
+<p><code class="highlighter-rouge">
+★不要设置 permalink在你的博客的头信息中设置 permalink 会造成分页功能的瘫痪。缺省设置 permalink 即可。
+</code></p>
+
+<h3 id="插件">插件</h3>
+
+<p>安装插件三种方法</p>
+
+<ul>
+  <li>_plugins文件夹</li>
+  <li>在_config.yml中配置</li>
+  <li>在gemfile中安装</li>
+</ul>
+
+<p>自定义插件支持</p>
+
+<ol>
+  <li>生成器 - Generators</li>
+  <li>转换器 - Converters</li>
+  <li>命令 - Commands</li>
+  <li>标记 - Tags</li>
+  <li>钩子 - Hooks</li>
+</ol>
+
+<h3 id="自动部署">自动部署</h3>
+
+<h3 id="持续集成">持续集成</h3>
+
+<h3 id="参考">参考</h3>
+
+<blockquote>
+  <p><a href="http://jekyllcn.com/docs/quickstart/">http://jekyllcn.com/docs/quickstart/</a></p>
+</blockquote>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/">Liquid模板语言</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2020/04/21/%E4%B8%80%E4%BA%9Bsql/">一些sql</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'https://tldsn.github.io/2020/04/21/jekyll/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://tldsn.github.io/2020/04/21/jekyll/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//https-tldsn-github-io.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/tldsn" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=742720531@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="http://weibo.com/5578237033" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>  
+            <a href="https://www.zhihu.com/people/yao-yu-jie-90" title="Zhihu"><i class="iconfont blog-zhihu"></i></a>  
+            <a href="https://www.douban.com/people/122400251" title="Douban"><i class="iconfont blog-douban"></i></a>  
+            <a href="https://music.163.com/#/user/home?id=263386850" title="Cloudmusic"><i class="iconfont blog-yinle"></i></a>  
+             
+               
+            
+        </p>
+        <p class="busuanzi">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
