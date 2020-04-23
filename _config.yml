@@ -5,6 +5,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'jekyll serve'. If you change this file, please restart the server process.
 
+
 # Site settings
 title: TLDSN
 brief-intro: 太阳升起时，请重新开始
@@ -19,8 +20,8 @@ permalink: /:year/:month/:day/:title/
 twitter_username: 
 facebook_username: 
 github_username:  tldsn
-email: 742720531@qq.com
-weibo_username:
+email_username: 742720531@qq.com
+weibo_username: 5578237033
 zhihu_username: yao-yu-jie-90
 douban_username: 122400251
 cloudmusic_username: 263386850
@@ -30,21 +31,15 @@ dribbble_username:
 description_footer:
 
 # comments
-# two ways to comment, only choose one, and use your own short name
-# 两种评论插件，选一个就好了，使用自己的 short_name
 duoshuo_shortname: #hygblog
 disqus_shortname: https-tldsn-github-io
 
 # statistic analysis 统计代码
-# 百度统计 id，将统计代码替换为自己的百度统计id，即
-# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
-# xxxxx字符串
 baidu_tongji_id: ccd4104a124f2218d64c124431d52789
-google_analytics_id: UA-163446273-1 # google 分析追踪id
+google_analytics_id: UA-163446273-1
 
-# Build settings
+# markdown
 markdown: kramdown
-
 kramdown:
   input: GFM
   syntax_highlighter: rouge

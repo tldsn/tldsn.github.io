@@ -16,7 +16,7 @@
         line-height: 38px;
         text-align: center;
         font-size: 20px;
-        color: #b4b4b4;
+        color: #1BC4F7;
     }
 }
 .back-to-top-show{
@@ -24,7 +24,8 @@
     opacity: 0.7;
     &:hover{
         opacity: 1
-    }
+    };
+    border: .3em solid #1BC4F7;
 }
 @media screen and (max-width:1200px) and (min-width: 770px) {
     .back-to-top {

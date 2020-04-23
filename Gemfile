@@ -6,11 +6,10 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "jekyll"
 
-gem "github-pages"
-
 gem 'wdm'
 
-gem "rouge"
+gem "github-pages"
+
 
 group :jekyll_plugins do
     gem "jekyll-feed"
@@ -18,3 +17,7 @@ group :jekyll_plugins do
     gem "jekyll-sitemap"
 end
 
+gem "kramdown", "~> 1.17"
+gem "rouge"
+
+gem "jekyll-paginate", "~> 1.1"

@@ -246,8 +246,10 @@ DEPENDENCIES
   github-pages
   jekyll
   jekyll-feed
+  jekyll-paginate (~> 1.1)
   jekyll-seo-tag
   jekyll-sitemap
+  kramdown (~> 1.17)
   rouge
   wdm
 
