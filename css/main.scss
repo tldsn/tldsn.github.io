@@ -1,7 +1,7 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
-@charset  "utf-8"; //
+@charset "utf-8";
 //
 //
 // // Our variables
@@ -49,8 +49,8 @@
 
 
 //
-blockquote,p
-{
+blockquote,
+p {
     margin: 0;
     padding: 0;
     border: 0;
@@ -59,12 +59,12 @@ blockquote,p
 }
 
 //背景色
-.left{
+.left {
     background: #fff9e4 !important;
     border-top: 0.5em solid #1BC4F7;
 }
 
-.side{
+.side {
     background: #fff9e4 !important;
 }
 
@@ -230,6 +230,5 @@ tr {
 }
 
 a:visited {
-    color:  #1bcebdb5 !important;
+    color: #1bcebdb5 !important;
 }
-
