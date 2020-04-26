@@ -60,8 +60,11 @@
                         color: #fff;
                         font-size: 90%;
                         transition: 0.3s ease;
-                        &:hover {
-                            background-color: #b6b6b9;
+                        // &:hover {
+                        //     background-color: #b6b6b9;
+                        // };
+                        &:visited {
+                            background-color: #ffdab9;
                         }
                     }
                 }
@@ -78,8 +81,11 @@
                         color: #fff;
                         font-size: 90%;
                         transition: 0.3s ease;
-                        &:hover {
-                            background-color: #c0ddc7;
+                        // &:hover {
+                        //     background-color: #c0ddc7;
+                        // };
+                        &:visited {
+                            background-color: #ffb8c6;
                         }
                     }
                 }

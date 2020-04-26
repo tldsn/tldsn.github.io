@@ -1,9 +1,10 @@
-body,
 html,
+body,
 div,
 header,
 footer,
 nav,
+p,
 li,
 h1,
 h2,
@@ -14,107 +15,199 @@ h6 {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 400;
+    font: inherit;
 }
 html {
     height: 100%;
 }
 body {
-    font-family: 'Helvetica Neue',Helvetica,Arial,'Microsoft YaHei',sans-serif;
-    color: #333;
-    // background-image: url(https://gw.alicdn.com/tfs/TB1xzbUumBYBeNjy0FeXXbnmFXa-125-121.png);
-    background-color: #e7f1e4;
     position: relative;
     min-height: 100%;
     padding-bottom: 190px;
+
+    background-color: #e7f1e4;
+    
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,'Microsoft YaHei';
+    font-size: 16px;
+	line-height: 1.6;
+    color: rgba(51,51,51,0.9);
+    word-break: break-all;
 }
+// p{
+//     font: inherit;
+//     margin: 0 0 8px;
+// }
+//背景色-------------------------------------------------------------------------------------
+.left {
+    background: #fff9e4 !important;
+    border-top: 0.5em solid #1BC4F7;
+}
+.side {
+    background: #fff9e4 !important;
+}
+//标题-------------------------------------------------------------------------------------
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font: bold 18px/1.6 Arial, SimHei;
+    color: #000;
+    margin: 12px 0 12px 0;
+    padding: 0
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 36px;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 2px #ddd
+}
+
+h2 {
+    font-size: 30px;
+    margin: 12px 0 6px;
+    border-bottom: 3px double
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 21px;
+}
+
+h5 {
+    font-size: 18px;
+}
+//引用-------------------------------------------------------------------------------------
+blockquote {
+    margin: 0 0 14 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    p:last-of-type{
+        margin: 0;
+    }
+}
+
+blockquote,
+q {
+    font: 18px/1.6 Consolas, "Courier New", "KaiTi", "KaiTi_GB2312", "FangSong_GB2312", SimHei, arial, Monaco, monospace;
+    color: #000;
+    background: #C3F3F7;
+    margin: 10px;
+    padding: 3px;
+    max-width: 95%;
+    quotes: "\201C""\201D""\2018""\2019";
+    border-radius: 20px;
+}
+
+q:before,
+blockquote:before,
+q:after,
+blockquote:after {
+    font-size: 2em;
+    color: #ccc;
+    line-height: .01em;
+    vertical-align: -0.5em;
+}
+
+q:before,
+blockquote:before {
+    content: open-quote;
+    top: 20px;
+    float: left;
+    position: relative;
+    margin-left: -.8em;
+}
+
+q:after,
+blockquote:after {
+    float: right;
+    position: relative;
+    content: close-quote;
+    bottom: 20px;
+    margin-right: -.8em;
+}
+
+blockquote ol {
+    margin: .2em;
+    padding: 0
+}
+
+blockquote li {
+    margin: .2em;
+    padding: 0
+}
+
+
+
+//table-------------------------------------------------------------------------------------
+table {
+    max-width: 100%;
+    border-collapse: collapse;
+    border: 4px solid #888;
+    color: #000;
+    background-color: #ece8cd;
+    th {
+        color: #fff;
+        background-color: #a82918;
+        border: 4px solid #000;
+        padding: 5px
+    }   
+    td,
+    tr {
+        border: 2px solid #aaa;
+        padding: 5px 7px 4px 7px;
+    }
+}
+
+
+//gist-------------------------------------------------------------------------------------
+.gist {
+    tr {
+        border: 0;
+    }
+}
+
 a {
     text-decoration: none;
+    &:visited {
+        color: #1bcebdb5 !important;
+    }
 }
 button {
     border: none;
     outline: none;
 }
+
 hr {
     border: 0;
     border-top: 1px solid #eee;
-    margin: 20px 0;
-}
-
-///////////
-h1 {
-    font-size: 30px;
-}
-h2 {
-    font-size: 26px;
-    border-bottom: 1px solid #eee;
-    margin: 50px 0 25px;
-}
-h3 {
-    font-size: 23px;
-    margin: 50px 0 20px;
-}
-h4 {
-    font-size: 19px;
-    margin: 30px 0 10px;
-}
-h5 {
-    font-size: 17px;
-    margin: 20px 0 10px;
-}
-h6 {
-    font-size: 16px;
-    margin: 10px 0 5px;
-}
-blockquote {
-    color: #444;
-    border-left: 5px solid #D6DBDF;
-    padding-left: 15px;
-    background: rgba(112,138,153,.1);
-    padding: 10px 20px;
-    margin: 0 0 20px;
-    p:last-of-type{
-        margin: 0;
-    }
-}
-table {
-    border-top: 2px solid #777;
-    border-bottom: 2px solid #777;
     margin: 8px 0;
-    border-collapse: collapse;
-    thead {
-        border-bottom: 1px solid #777;
-        background-color: #aaa;
-        color: #fff;
-    }
-    th {
-        padding: 2px 10px;
-        text-align: left;
-    }
-    // tbody {
-    //     tr {
-    //         &:nth-of-type(2n+1) {
-    //             background-color: #f8f8fd;
-    //         }
-    //         &:nth-of-type(2n) {
-    //             background-color: #e5eaed;
-    //         }
-    //     }
-    // }
-    td {
-        padding: 2px 10px;
-    }
 }
-p {
-    margin: 0 0 14px;
+li> hr, .left>hr{
+        border: 0;
+        border-top: 1px solid #eee;
+        margin: 20px 0;
 }
 img {
     max-width: 100%;
+}
+
+strong {
+    text-shadow: 0 1px 0 #fff,0 1px 1px rgba(170,170,170,0.8);
+}
+
+mark {
+    border: 1px solid #E0DFCC;
+    background-color: #ffb8c6;
+    padding: 2px;
+    border-radius: 4px;
 }
