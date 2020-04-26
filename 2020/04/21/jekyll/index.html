@@ -7,13 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>jekyll静态博客网站生成器</title>
-    <meta name="description" content="  基本命令  目录结构  配置  指定 Jekyll build 时的环境  头信息默认值  头信息  永久连接  常用变量  集合  过滤器  标签  github-pages  markdown选项  Liquid选项  分页  插件  自动部署  持续集成  参考基本命令      jekyll buil...">
+    <meta name="description" content="  base  基本命令  目录结构  配置          指定 Jekyll build 时的环境      头信息默认值        头信息  永久连接  常用变量  集合  过滤器  标签  github-pages  markdown选项  Liquid选项  分页  插件  自动部署  持续集成 ...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
-    <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <script src="https://kit.fontawesome.com/b8df0d6464.js" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
     <link rel="stylesheet" href="/css/main.css ">
     <link rel="canonical" href="http://localhost:4000/2020/04/21/jekyll/">
@@ -195,11 +194,14 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc" role="doc-toc">
+  <li><a href="#base" id="markdown-toc-base">base</a></li>
   <li><a href="#基本命令" id="markdown-toc-基本命令">基本命令</a></li>
   <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
-  <li><a href="#配置" id="markdown-toc-配置">配置</a></li>
-  <li><a href="#指定-jekyll-build-时的环境" id="markdown-toc-指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</a></li>
-  <li><a href="#头信息默认值" id="markdown-toc-头信息默认值">头信息默认值</a></li>
+  <li><a href="#配置" id="markdown-toc-配置">配置</a>    <ul>
+      <li><a href="#指定-jekyll-build-时的环境" id="markdown-toc-指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</a></li>
+      <li><a href="#头信息默认值" id="markdown-toc-头信息默认值">头信息默认值</a></li>
+    </ul>
+  </li>
   <li><a href="#头信息" id="markdown-toc-头信息">头信息</a></li>
   <li><a href="#永久连接" id="markdown-toc-永久连接">永久连接</a></li>
   <li><a href="#常用变量" id="markdown-toc-常用变量">常用变量</a></li>
@@ -216,17 +218,13 @@
   <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
 </ul>
 
+<h3 id="base">base</h3>
+
 <h3 id="基本命令">基本命令</h3>
 
 <ul>
-  <li>
-    <p>jekyll build
-默认构建到<code class="highlighter-rouge">./_site</code>文件夹中</p>
-  </li>
-  <li>
-    <p>jekyll sever
- 一个开发服务器将会运行在 <a href="http://localhost:4000/">http://localhost:4000/</a></p>
-  </li>
+  <li>jekyll build　　默认构建到<code class="highlighter-rouge">./_site</code>文件夹中</li>
+  <li>jekyll sever　　一个开发服务器将会运行在 <a href="http://localhost:4000/">http://localhost:4000/</a></li>
 </ul>
 
 <h3 id="目录结构">目录结构</h3>
@@ -265,11 +263,7 @@
     </tr>
     <tr>
       <td style="text-align: left">_site</td>
-      <td style="text-align: right">略</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">.jekyll-metadata</td>
-      <td style="text-align: right">略</td>
+      <td style="text-align: right">默认生成静态页面的目录</td>
     </tr>
   </tbody>
 </table>
@@ -280,20 +274,26 @@
   <p>参考：<a href="http://jekyllcn.com/docs/configuration/">jekyll配置</a></p>
 </blockquote>
 
-<h3 id="指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</h3>
+<ul>
+  <li>
+    <h4 id="指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</h4>
+  </li>
+</ul>
 
 <p><code class="highlighter-rouge">★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数</code></p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-   JEKYLL_ENV=production jekyll build
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   JEKYLL_ENV=production jekyll build
 
    <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">jekyll</span><span class="p">.</span><span class="nv">environment</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"production"</span><span class="w"> </span><span class="p">%}</span>
       <span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>disqus.html<span class="w"> </span><span class="p">%}</span>
    <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
-
 </code></pre></div></div>
 
-<h3 id="头信息默认值">头信息默认值</h3>
+<ul>
+  <li>
+    <h4 id="头信息默认值">头信息默认值</h4>
+  </li>
+</ul>
 
 <blockquote>
   <p>在_config.yml 文件里设置 defaults 的值指定全站范围的默认值</p>
@@ -628,7 +628,7 @@ include_relative引入其他文件</p>
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/">Liquid模板语言</a></p>
+        <p><strong>上一篇</strong> <a href="/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/">Liquid文档</a></p>
         
     </div>
     <div class="nex">

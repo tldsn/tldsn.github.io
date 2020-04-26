@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Liquid模板语言</title>
-    <meta name="description" content="  Liquid模板语言  操作符  真值与假值  数据类型  对象  标记  控制流  迭代  变量赋值  过滤器  filtersLiquid模板语言  https://liquid.bootcss.com/basics/types/对象、标记、过滤器、操作符  contains      检查在一个字符串中...">
+    <title>Liquid文档</title>
+    <meta name="description" content="  Liquid模板语言  base          数据类型      操作符      真值与假值      空白符、raw        标记          控制流      迭代      变量赋值        过滤器          filters        参考Liquid模板语言三要素...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
-    <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <script src="https://kit.fontawesome.com/b8df0d6464.js" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
     <link rel="stylesheet" href="/css/main.css ">
     <link rel="canonical" href="http://localhost:4000/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/">
@@ -140,7 +139,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Liquid模板语言</h1>
+        <h1>Liquid文档</h1>
         <div class="label">
 
             <div class="label-card">
@@ -196,53 +195,36 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc" role="doc-toc">
   <li><a href="#liquid模板语言" id="markdown-toc-liquid模板语言">Liquid模板语言</a></li>
-  <li><a href="#操作符" id="markdown-toc-操作符">操作符</a></li>
-  <li><a href="#真值与假值" id="markdown-toc-真值与假值">真值与假值</a></li>
-  <li><a href="#数据类型" id="markdown-toc-数据类型">数据类型</a></li>
-  <li><a href="#对象" id="markdown-toc-对象">对象</a></li>
-  <li><a href="#标记" id="markdown-toc-标记">标记</a></li>
-  <li><a href="#控制流" id="markdown-toc-控制流">控制流</a></li>
-  <li><a href="#迭代" id="markdown-toc-迭代">迭代</a></li>
-  <li><a href="#变量赋值" id="markdown-toc-变量赋值">变量赋值</a></li>
-  <li><a href="#过滤器" id="markdown-toc-过滤器">过滤器</a></li>
-  <li><a href="#filters" id="markdown-toc-filters">filters</a></li>
+  <li><a href="#base" id="markdown-toc-base">base</a>    <ul>
+      <li><a href="#数据类型" id="markdown-toc-数据类型">数据类型</a></li>
+      <li><a href="#操作符" id="markdown-toc-操作符">操作符</a></li>
+      <li><a href="#真值与假值" id="markdown-toc-真值与假值">真值与假值</a></li>
+      <li><a href="#空白符raw" id="markdown-toc-空白符raw">空白符、raw</a></li>
+    </ul>
+  </li>
+  <li><a href="#标记" id="markdown-toc-标记">标记</a>    <ul>
+      <li><a href="#控制流" id="markdown-toc-控制流">控制流</a></li>
+      <li><a href="#迭代" id="markdown-toc-迭代">迭代</a></li>
+      <li><a href="#变量赋值" id="markdown-toc-变量赋值">变量赋值</a></li>
+    </ul>
+  </li>
+  <li><a href="#过滤器" id="markdown-toc-过滤器">过滤器</a>    <ul>
+      <li><a href="#filters" id="markdown-toc-filters">filters</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
 </ul>
 
 <h3 id="liquid模板语言">Liquid模板语言</h3>
 
-<blockquote>
-  <p><a href="https://liquid.bootcss.com/basics/types/">https://liquid.bootcss.com/basics/types/</a>
-对象、标记、过滤器、</p>
-</blockquote>
+<p><mark>三要素：对象、标记、过滤器</mark></p>
 
-<h3 id="操作符">操作符</h3>
-
-<p><img src="en-resource://database/1896:1" alt="6214808f018e77251bca039b88a8bdf1.png" /></p>
+<h3 id="base">base</h3>
 
 <ul>
-  <li>contains</li>
-</ul>
-
-<blockquote>
-  <ul>
-    <li>检查在一个字符串中是否存在某个子串</li>
-    <li>检查一个字符串数组中是否存在某个字符串</li>
-  </ul>
-</blockquote>
-
-<h3 id="真值与假值">真值与假值</h3>
-
-<blockquote>
-  <p>除了 nil 和 false 之外的所有值都是真值</p>
-</blockquote>
-
-<h3 id="数据类型">数据类型</h3>
-
-<blockquote>
-  <p>通过 assign 或 capture 标记来初始化 Liquid 变量</p>
-</blockquote>
-
-<ul>
+  <li>
+    <h4 id="数据类型">数据类型</h4>
+  </li>
   <li>String</li>
   <li>Number</li>
   <li>Boolean</li>
@@ -250,104 +232,185 @@
   <li>Array</li>
 </ul>
 
-<p><code class="highlighter-rouge">★关于空字符串和Nil</code></p>
+<blockquote>
+  <p>通过 assign 或 capture 标记来初始化 Liquid 变量</p>
+</blockquote>
 
-<p><code class="highlighter-rouge">★你无法只通过 Liquid 语法初始化一个数组。然而，你可以利用 split 过滤器将一个字符串分割为一个子字符串数组。</code></p>
+<p><mark>★你无法只通过 Liquid 语法初始化一个数组。然而，你可以利用 split 过滤器将一个字符串分割为一个子字符串数组。</mark></p>
 
-<h3 id="对象">对象</h3>
+<ul>
+  <li>
+    <h4 id="操作符">操作符</h4>
+  </li>
+</ul>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Liquid模板语言
+<table>
+  <thead>
+    <tr>
+      <th>操作符</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>==</td>
+      <td>相等</td>
+    </tr>
+    <tr>
+      <td>!=</td>
+      <td>不相等</td>
+    </tr>
+    <tr>
+      <td>&gt;</td>
+      <td>大于</td>
+    </tr>
+    <tr>
+      <td>&lt;</td>
+      <td>小于</td>
+    </tr>
+    <tr>
+      <td>&gt;=</td>
+      <td>大于或等于</td>
+    </tr>
+    <tr>
+      <td>&lt;=</td>
+      <td>小于或等于</td>
+    </tr>
+    <tr>
+      <td>or</td>
+      <td>逻辑或</td>
+    </tr>
+    <tr>
+      <td>and</td>
+      <td>逻辑与</td>
+    </tr>
+    <tr>
+      <td>contains</td>
+      <td>包含</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <h4 id="真值与假值">真值与假值</h4>
+  </li>
+</ul>
+
+<blockquote>
+  <p>除了 nil 和 false 之外的所有值都是真值</p>
+</blockquote>
+
+<p><mark>★关于空字符串和Nil</mark><br />
+<mark>★未定义的变量使用时为nil　0值空字符串为true</mark></p>
+
+<ul>
+  <li>
+    <h4 id="空白符raw">空白符、raw</h4>
+  </li>
+  <li>raw</li>
+  <li>endraw</li>
+</ul>
+
+<blockquote>
+  <p>raw 标记临时禁止处理其所包围的代码</p>
+</blockquote>
+
+<blockquote>
+  <p>使用{{-、-}}、{%- 和 -%}取消Liquid 表达式编译后产生的空行### 对象</p>
+</blockquote>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>
 </code></pre></div></div>
+
+<!-- more -->
 
 <h3 id="标记">标记</h3>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="p">%}</span>
+  Hello <span class="p">{{</span><span class="w"> </span><span class="nv">user</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span>!
+<span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
 
-<h3 id="控制流">控制流</h3>
-
 <ul>
-  <li>if</li>
+  <li>
+    <h4 id="控制流">控制流</h4>
+
+    <p><strong>关键字</strong></p>
+  </li>
+  <li>if　　endif</li>
   <li>else</li>
   <li>elseif</li>
-  <li>unless</li>
-  <li>case    when</li>
+  <li>unless　　endunless</li>
+  <li>case　　when　　endcase</li>
 </ul>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-
-         This is a cake
-      
-</code></pre></div></div>
-
-<h3 id="迭代">迭代</h3>
-
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for     in      [limit/offset/reversed]
-break
-continue
-
-limit   限定循环执行的次数。
-offset  从指定索引号开始执行循环。
-</code></pre></div></div>
-
-<hr />
-
-<ul>
-  <li>tablerow</li>
-</ul>
-
-<blockquote>
-  <p>生成一个 HTML 表格。必须用 <code class="highlighter-rouge">&lt;table&gt;</code> 和 <code class="highlighter-rouge">&lt;/table&gt;</code> 这两个 HTML 标签将其包裹起来。
-cols 定义表格应当有多少列</p>
-</blockquote>
-
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'cake'</span><span class="w"> </span><span class="p">%}</span>
+<span class="p">{%</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="nv">handle</span><span class="w"> </span><span class="p">%}</span>
+    <span class="p">{%</span><span class="w"> </span><span class="kr">when</span><span class="w"> </span><span class="s1">'cake'</span><span class="w"> </span><span class="p">%}</span>
+        This is a cake
+    <span class="p">{%</span><span class="w"> </span><span class="kr">when</span><span class="w"> </span><span class="s1">'cookie'</span><span class="w"> </span><span class="p">%}</span>
+        This is a cookie
+    <span class="p">{%</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">%}</span>
+        This is not a cake nor a cookie
+<span class="p">{%</span><span class="w"> </span><span class="kr">endcase</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
 
 <ul>
-  <li>raw</li>
+  <li>
+    <h4 id="迭代">迭代</h4>
+
+    <p><strong>关键字</strong></p>
+  </li>
+  <li>for　　in　　endfor</li>
+  <li>break</li>
+  <li>continue</li>
+  <li>limit  限定循环执行的次数</li>
+  <li>offset  从指定索引号开始执行循环</li>
+  <li>range  定义循环执行的范围</li>
+  <li>reversed  反转循环的执行顺序</li>
+  <li>cycle　　循环一组字符串并按照它们传入的顺序将其输出</li>
+  <li>
+    <p>tablerow　　生成一个 HTML 表格</p>
+  </li>
+  <li>
+    <h4 id="变量赋值">变量赋值</h4>
+
+    <p><strong>关键字</strong></p>
+  </li>
+  <li>assign</li>
+  <li>capture</li>
+  <li>increment　　自增数值变量　初始0</li>
+  <li>decrement　　自减数值变量　初始-1</li>
 </ul>
 
-<blockquote>
-  <p>原始内容</p>
-</blockquote>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="p">%}</span>
+<span class="p">{{</span><span class="w"> </span><span class="nv">foo</span><span class="w"> </span><span class="p">}}</span>
 
-<h3 id="变量赋值">变量赋值</h3>
-
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bar
-
-
-
+<span class="p">{%</span><span class="w"> </span><span class="nt">capture</span><span class="w"> </span><span class="nv">my_variable</span><span class="w"> </span><span class="p">%}</span>
+I am being captured.
+<span class="p">{%</span><span class="w"> </span><span class="nt">endcapture</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
 1
-2
-输出
-    0
-    1
-    2
--1
--2
--3
-输出
-    -1
-    -2
-    -3
+
+0
+1
 </code></pre></div></div>
 
 <h3 id="过滤器">过滤器</h3>
 
 <blockquote>
-  <p>过滤器 改变 Liquid 对象的输出。他们被用在输出上，通过一个 <code class="highlighter-rouge">|</code> 符号分隔。</p>
+  <p>过滤器 改变 Liquid 对象的输出。他们被用在输出上，通过一个 <code class="highlighter-rouge">|</code> 符号分隔</p>
 </blockquote>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello Adam!
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="s2">"adam!"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">capitalize</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">prepend</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello "</span><span class="w"> </span><span class="p">}}</span>
 输出：
 Hello Adam!
 </code></pre></div></div>
 
-<h3 id="filters">filters</h3>
+<h4 id="filters">filters</h4>
 
 <table>
   <thead>
@@ -383,23 +446,23 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">compact</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">删除数组中的nil值</td>
     </tr>
     <tr>
       <td style="text-align: left">concat</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">数组合并</td>
     </tr>
     <tr>
       <td style="text-align: left">date</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">日期格式</td>
     </tr>
     <tr>
       <td style="text-align: left">default</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">默认值</td>
     </tr>
     <tr>
       <td style="text-align: left">divided_by</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">相除</td>
     </tr>
     <tr>
       <td style="text-align: left">downcase</td>
@@ -411,7 +474,7 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">escape_once</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">字符串转义</td>
     </tr>
     <tr>
       <td style="text-align: left">first</td>
@@ -423,7 +486,7 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">join</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">数组转字符串</td>
     </tr>
     <tr>
       <td style="text-align: left">last</td>
@@ -435,15 +498,15 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">map</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right"><strong>构件数组用</strong></td>
     </tr>
     <tr>
       <td style="text-align: left">minus</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">相减</td>
     </tr>
     <tr>
       <td style="text-align: left">modulo</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">取余</td>
     </tr>
     <tr>
       <td style="text-align: left">newline_to_br</td>
@@ -451,15 +514,15 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">plus</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">相加</td>
     </tr>
     <tr>
       <td style="text-align: left">prepend</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">前置添加</td>
     </tr>
     <tr>
       <td style="text-align: left">remove</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">删除</td>
     </tr>
     <tr>
       <td style="text-align: left">remove_first</td>
@@ -467,7 +530,7 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">replace</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">替换</td>
     </tr>
     <tr>
       <td style="text-align: left">replace_first</td>
@@ -475,11 +538,11 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">reverse</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">数组反转</td>
     </tr>
     <tr>
       <td style="text-align: left">round</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">四舍五入</td>
     </tr>
     <tr>
       <td style="text-align: left">rstrip</td>
@@ -487,7 +550,7 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">size</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">字符串数组length</td>
     </tr>
     <tr>
       <td style="text-align: left">slice</td>
@@ -495,7 +558,7 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">sort</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">数组排序</td>
     </tr>
     <tr>
       <td style="text-align: left">sort_natural</td>
@@ -503,11 +566,11 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">split</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">字符串分隔为数组</td>
     </tr>
     <tr>
       <td style="text-align: left">strip</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">删除两侧空白符</td>
     </tr>
     <tr>
       <td style="text-align: left">strip_html</td>
@@ -519,19 +582,19 @@ Hello Adam!
     </tr>
     <tr>
       <td style="text-align: left">times</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">乘</td>
     </tr>
     <tr>
       <td style="text-align: left">truncate</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">字符串截断</td>
     </tr>
     <tr>
       <td style="text-align: left">truncatewords</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">字符串截断加…</td>
     </tr>
     <tr>
       <td style="text-align: left">uniq</td>
-      <td style="text-align: right"> </td>
+      <td style="text-align: right">数组去重</td>
     </tr>
     <tr>
       <td style="text-align: left">upcase</td>
@@ -547,6 +610,12 @@ Hello Adam!
     </tr>
   </tbody>
 </table>
+
+<h3 id="参考">参考</h3>
+
+<blockquote>
+  <p><a href="https://liquid.bootcss.com/basics/types/">https://liquid.bootcss.com/basics/types/</a></p>
+</blockquote>
 
         </article>
         <hr>
