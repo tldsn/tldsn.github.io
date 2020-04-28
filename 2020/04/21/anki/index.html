@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>anki筛选语法</title>
-    <meta name="description" content="  暂停和搁置  卡片性质  标签  卡片状态  最近回答的卡片  anki筛选语法暂停和搁置  is:suspended暂停卡  is:buried搁置卡卡片性质  prop:ivl&gt;=10匹配间隔大于10天的卡片  prop:due=1匹配明天到期的卡片  prop:due=-1匹配昨天到期但尚未复习到...">
+    <meta name="description" content="  暂停和搁置  卡片性质  标签  卡片状态  最近回答的卡片暂停和搁置  is:suspended暂停卡  is:buried搁置卡卡片性质  prop:ivl&gt;=10匹配间隔大于10天的卡片  prop:due=1匹配明天到期的卡片  prop:due=-1匹配昨天到期但尚未复习到的滞留卡片  pro...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -110,6 +110,26 @@
                     
                     <li>
                         
+                        <a href="/todo/">
+                        
+                            <i class="fa fa-check-square-o"></i>Todo
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/note/">
+                        
+                            <i class="fa fa-code"></i>Note
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
                         <a href="/about/">
                         
                             <i class="fa fa-heart"></i>About
@@ -164,7 +184,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#搜索技巧" title="Category: 搜索技巧" rel="category">搜索技巧</a>
+        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
     
   
 
@@ -202,10 +222,6 @@
   <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
   <li><a href="#卡片状态" id="markdown-toc-卡片状态">卡片状态</a></li>
   <li><a href="#最近回答的卡片" id="markdown-toc-最近回答的卡片">最近回答的卡片</a></li>
-</ul>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />anki筛选语法</li>
 </ul>
 
 <h2 id="暂停和搁置">暂停和搁置</h2>
@@ -264,7 +280,7 @@
 匹配已搁置的卡片（包括自动的和手动的）</li>
 </ul>
 
-<p>失误的卡片可以归入几个类别，下面提供一些可能比较有用的搜索办法，以便准确定位搜索结果：</p>
+<hr />
 
 <ul>
   <li>is:learn is:review
@@ -275,7 +291,9 @@
 只匹配第一次学习的卡片</li>
 </ul>
 
-<p><code class="highlighter-rouge">注意到期（is:due）只匹配复习卡片和间隔在1天及以上的学习中卡片，不匹配间隔很短（如10分钟）的学习中卡片。</code></p>
+<p><mark>
+注意到期（is:due）只匹配复习卡片和间隔在1天及以上的学习中卡片，不匹配间隔很短（如10分钟）的学习中卡片。
+</mark></p>
 
 <h2 id="最近回答的卡片">最近回答的卡片</h2>
 
@@ -369,14 +387,14 @@
                     
                 
             
+                
+                    
+                
+                    
+                
+            
         
             
-            
-                
-                    
-                
-                    
-                
             
                 
                     

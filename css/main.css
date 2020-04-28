@@ -467,4 +467,8 @@ pre > code { margin: 0; padding: 0; color: #d1d1c9; border: none; background-col
 
 @media screen and (max-width: 770px) { .back-to-top { right: 2.5%; left: auto; margin-left: 0px; } .back-to-top a { width: 33px; height: 33px; line-height: 33px; text-align: center; font-size: 18px; } }
 
+.page[todo] ul { list-style: none; }
+
+.page[todo] .task-list-item-checkbox { margin-right: 10px; }
+
 /*# sourceMappingURL=main.css.map */

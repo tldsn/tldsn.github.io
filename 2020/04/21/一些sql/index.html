@@ -110,6 +110,26 @@
                     
                     <li>
                         
+                        <a href="/todo/">
+                        
+                            <i class="fa fa-check-square-o"></i>Todo
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/note/">
+                        
+                            <i class="fa fa-code"></i>Note
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
                         <a href="/about/">
                         
                             <i class="fa fa-heart"></i>About
@@ -199,49 +219,50 @@
 
 <h3 id="一些sql">一些sql</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select  DATE_FORMAT(now(),'%Y-%m-%d') statdate, project_name projectname,
-SUM(if(status=0,1,0)) success,
-SUM(if(status!=0,1,0)) fail,
-truncate(SUM(if(status=0,1,0))/count(*)*100,2) successrate,  
-max(a.add_time) lastaddtime 
-from t_log_crawl a
-where a.add_date  = DATE_FORMAT(now(),'%Y-%m-%d')
-group by projectname;
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>  <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">now</span><span class="p">(),</span><span class="s1">'%Y-%m-%d'</span><span class="p">)</span> <span class="n">statdate</span><span class="p">,</span> <span class="n">project_name</span> <span class="n">projectname</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">success</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">!=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">fail</span><span class="p">,</span>
+<span class="k">truncate</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">successrate</span><span class="p">,</span>  
+<span class="k">max</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">add_time</span><span class="p">)</span> <span class="n">lastaddtime</span> 
+<span class="k">from</span> <span class="n">t_log_crawl</span> <span class="n">a</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">add_date</span>  <span class="o">=</span> <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">now</span><span class="p">(),</span><span class="s1">'%Y-%m-%d'</span><span class="p">)</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">projectname</span><span class="p">;</span>
 </code></pre></div></div>
 
 <hr />
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select  DATE_FORMAT(now(),'%Y-%m-%d') statdate, project_name projectname,
-SUM(if(status=0,1,0)) success,
-SUM(if(status!=0,1,0)) fail,
-truncate(SUM(if(status=0,1,0))/count(*)*100,2) successrate,
-max(a.add_time) lastaddtime   
-from t_log_crawl a
-where  a.add_time &gt; now()- INTERVAL 5 MINUTE
-group by projectname;
-</code></pre></div></div>
-
-<hr />
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select
-now() lastTime,
-count(*) total,
-sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0)) onlineNum,
-round(sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0))/count(*)*100,2) onlineRate
-from t_crawler a
-where a.is_valid = 1;
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>  <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">now</span><span class="p">(),</span><span class="s1">'%Y-%m-%d'</span><span class="p">)</span> <span class="n">statdate</span><span class="p">,</span> <span class="n">project_name</span> <span class="n">projectname</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">success</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">!=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">fail</span><span class="p">,</span>
+<span class="k">truncate</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">successrate</span><span class="p">,</span>
+<span class="k">max</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">add_time</span><span class="p">)</span> <span class="n">lastaddtime</span>   
+<span class="k">from</span> <span class="n">t_log_crawl</span> <span class="n">a</span>
+<span class="k">where</span>  <span class="n">a</span><span class="p">.</span><span class="n">add_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">5</span> <span class="k">MINUTE</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">projectname</span><span class="p">;</span>
 </code></pre></div></div>
 
 <hr />
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select
-b.`name` name,
-count(*) total,
-sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0)) onlineNum,
-round(sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0))/count(*)*100,2) onlineRate
-from  t_crawler a,t_project b
-where a.is_valid = 1 and b.status = 0 and FIND_IN_SET(b.name,a.project_list)
-group by name
-order by 4 desc;
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>
+<span class="n">now</span><span class="p">()</span> <span class="n">lastTime</span><span class="p">,</span>
+<span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">total</span><span class="p">,</span>
+<span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">onlineNum</span><span class="p">,</span>
+<span class="n">round</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">onlineRate</span>
+<span class="k">from</span> <span class="n">t_crawler</span> <span class="n">a</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">is_valid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>
+<span class="n">b</span><span class="p">.</span><span class="nv">`name`</span> <span class="n">name</span><span class="p">,</span>
+<span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">total</span><span class="p">,</span>
+<span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">onlineNum</span><span class="p">,</span>
+<span class="n">round</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">onlineRate</span>
+<span class="k">from</span>  <span class="n">t_crawler</span> <span class="n">a</span><span class="p">,</span><span class="n">t_project</span> <span class="n">b</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">is_valid</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">and</span> <span class="n">FIND_IN_SET</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">project_list</span><span class="p">)</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">name</span>
+<span class="k">order</span> <span class="k">by</span> <span class="mi">4</span> <span class="k">desc</span><span class="p">;</span>
 </code></pre></div></div>
 
         </article>
@@ -306,12 +327,12 @@ order by 4 desc;
                     
                 
             
-        
-            
-            
                 
                     
                 
+            
+        
+            
             
                 
                     
@@ -360,7 +381,7 @@ order by 4 desc;
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2020/04/21/jekyll/">jekyll静态博客网站生成器</a></p>
+        <p><strong>上一篇</strong> <a href="/2020/04/21/jekyll/">jekyll初识</a></p>
         
     </div>
     <div class="nex">

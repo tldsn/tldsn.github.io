@@ -110,6 +110,26 @@
                     
                     <li>
                         
+                        <a href="/todo/">
+                        
+                            <i class="fa fa-check-square-o"></i>Todo
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/note/">
+                        
+                            <i class="fa fa-code"></i>Note
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
                         <a href="/about/">
                         
                             <i class="fa fa-heart"></i>About
@@ -216,7 +236,7 @@
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>uby</p>
+    <p>ruby</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo apt-get install ruby-full
 </code></pre></div>    </div>
@@ -225,21 +245,21 @@
     <p>rubygems</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo apt install rubygems
- sudo gem update --system  升级
+ sudo gem update --system　　升级
 </code></pre></div>    </div>
   </li>
   <li>
     <p>jekyll</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo gem install jekyll
- sudo gem update jekyll  升级
+ sudo gem update jekyll　　升级
 </code></pre></div>    </div>
   </li>
 </ol>
 
 <h3 id="gem镜像">gem镜像</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="n">sources</span> <span class="o">--</span><span class="n">add</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">gems</span><span class="p">.</span><span class="nf">ruby</span><span class="o">-</span><span class="n">china</span><span class="p">.</span><span class="nf">com</span><span class="o">/</span> <span class="o">--</span><span class="n">remove</span> <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">rubygems</span><span class="p">.</span><span class="nf">org</span><span class="o">/</span>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 </code></pre></div></div>
 
                 </div>
@@ -306,49 +326,50 @@
 
 <h3 id="一些sql">一些sql</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select  DATE_FORMAT(now(),'%Y-%m-%d') statdate, project_name projectname,
-SUM(if(status=0,1,0)) success,
-SUM(if(status!=0,1,0)) fail,
-truncate(SUM(if(status=0,1,0))/count(*)*100,2) successrate,  
-max(a.add_time) lastaddtime 
-from t_log_crawl a
-where a.add_date  = DATE_FORMAT(now(),'%Y-%m-%d')
-group by projectname;
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>  <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">now</span><span class="p">(),</span><span class="s1">'%Y-%m-%d'</span><span class="p">)</span> <span class="n">statdate</span><span class="p">,</span> <span class="n">project_name</span> <span class="n">projectname</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">success</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">!=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">fail</span><span class="p">,</span>
+<span class="k">truncate</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">successrate</span><span class="p">,</span>  
+<span class="k">max</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">add_time</span><span class="p">)</span> <span class="n">lastaddtime</span> 
+<span class="k">from</span> <span class="n">t_log_crawl</span> <span class="n">a</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">add_date</span>  <span class="o">=</span> <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">now</span><span class="p">(),</span><span class="s1">'%Y-%m-%d'</span><span class="p">)</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">projectname</span><span class="p">;</span>
 </code></pre></div></div>
 
 <hr />
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select  DATE_FORMAT(now(),'%Y-%m-%d') statdate, project_name projectname,
-SUM(if(status=0,1,0)) success,
-SUM(if(status!=0,1,0)) fail,
-truncate(SUM(if(status=0,1,0))/count(*)*100,2) successrate,
-max(a.add_time) lastaddtime   
-from t_log_crawl a
-where  a.add_time &gt; now()- INTERVAL 5 MINUTE
-group by projectname;
-</code></pre></div></div>
-
-<hr />
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select
-now() lastTime,
-count(*) total,
-sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0)) onlineNum,
-round(sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0))/count(*)*100,2) onlineRate
-from t_crawler a
-where a.is_valid = 1;
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>  <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">now</span><span class="p">(),</span><span class="s1">'%Y-%m-%d'</span><span class="p">)</span> <span class="n">statdate</span><span class="p">,</span> <span class="n">project_name</span> <span class="n">projectname</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">success</span><span class="p">,</span>
+<span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">!=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">fail</span><span class="p">,</span>
+<span class="k">truncate</span><span class="p">(</span><span class="k">SUM</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">successrate</span><span class="p">,</span>
+<span class="k">max</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">add_time</span><span class="p">)</span> <span class="n">lastaddtime</span>   
+<span class="k">from</span> <span class="n">t_log_crawl</span> <span class="n">a</span>
+<span class="k">where</span>  <span class="n">a</span><span class="p">.</span><span class="n">add_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">5</span> <span class="k">MINUTE</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">projectname</span><span class="p">;</span>
 </code></pre></div></div>
 
 <hr />
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select
-b.`name` name,
-count(*) total,
-sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0)) onlineNum,
-round(sum(if(a.heartbeat_time &gt; now()- INTERVAL 1 MINUTE,1,0))/count(*)*100,2) onlineRate
-from  t_crawler a,t_project b
-where a.is_valid = 1 and b.status = 0 and FIND_IN_SET(b.name,a.project_list)
-group by name
-order by 4 desc;
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>
+<span class="n">now</span><span class="p">()</span> <span class="n">lastTime</span><span class="p">,</span>
+<span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">total</span><span class="p">,</span>
+<span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">onlineNum</span><span class="p">,</span>
+<span class="n">round</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">onlineRate</span>
+<span class="k">from</span> <span class="n">t_crawler</span> <span class="n">a</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">is_valid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span>
+<span class="n">b</span><span class="p">.</span><span class="nv">`name`</span> <span class="n">name</span><span class="p">,</span>
+<span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">total</span><span class="p">,</span>
+<span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="n">onlineNum</span><span class="p">,</span>
+<span class="n">round</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">heartbeat_time</span> <span class="o">&gt;</span> <span class="n">now</span><span class="p">()</span><span class="o">-</span> <span class="n">INTERVAL</span> <span class="mi">1</span> <span class="k">MINUTE</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">onlineRate</span>
+<span class="k">from</span>  <span class="n">t_crawler</span> <span class="n">a</span><span class="p">,</span><span class="n">t_project</span> <span class="n">b</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">is_valid</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">and</span> <span class="n">FIND_IN_SET</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">project_list</span><span class="p">)</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">name</span>
+<span class="k">order</span> <span class="k">by</span> <span class="mi">4</span> <span class="k">desc</span><span class="p">;</span>
 </code></pre></div></div>
 
                 </div>
@@ -360,7 +381,7 @@ order by 4 desc;
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2020/04/21/jekyll/">jekyll静态博客网站生成器</a>
+                  <a class="post-link" href="/2020/04/21/jekyll/">jekyll初识</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
@@ -410,20 +431,25 @@ order by 4 desc;
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#base" id="markdown-toc-base">base</a></li>
-  <li><a href="#基本命令" id="markdown-toc-基本命令">基本命令</a></li>
-  <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
+  <li><a href="#base" id="markdown-toc-base">base</a>    <ul>
+      <li><a href="#基本命令" id="markdown-toc-基本命令">基本命令</a></li>
+      <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
+    </ul>
+  </li>
   <li><a href="#配置" id="markdown-toc-配置">配置</a>    <ul>
       <li><a href="#指定-jekyll-build-时的环境" id="markdown-toc-指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</a></li>
       <li><a href="#头信息默认值" id="markdown-toc-头信息默认值">头信息默认值</a></li>
+      <li><a href="#头信息" id="markdown-toc-头信息">头信息</a></li>
+      <li><a href="#永久连接" id="markdown-toc-永久连接">永久连接</a></li>
     </ul>
   </li>
-  <li><a href="#头信息" id="markdown-toc-头信息">头信息</a></li>
-  <li><a href="#永久连接" id="markdown-toc-永久连接">永久连接</a></li>
   <li><a href="#常用变量" id="markdown-toc-常用变量">常用变量</a></li>
   <li><a href="#集合" id="markdown-toc-集合">集合</a></li>
-  <li><a href="#过滤器" id="markdown-toc-过滤器">过滤器</a></li>
-  <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
+  <li><a href="#liquid" id="markdown-toc-liquid">Liquid</a>    <ul>
+      <li><a href="#过滤器" id="markdown-toc-过滤器">过滤器</a></li>
+      <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
+    </ul>
+  </li>
   <li><a href="#github-pages" id="markdown-toc-github-pages">github-pages</a></li>
   <li><a href="#markdown选项" id="markdown-toc-markdown选项">markdown选项</a></li>
   <li><a href="#liquid选项" id="markdown-toc-liquid选项">Liquid选项</a></li>
@@ -434,21 +460,28 @@ order by 4 desc;
   <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
 </ul>
 
+<p><mark>本文仅自用，请以最新官方文档为准</mark></p>
+
 <h3 id="base">base</h3>
 
-<h3 id="基本命令">基本命令</h3>
-
 <ul>
-  <li>jekyll build　　默认构建到<code class="highlighter-rouge">./_site</code>文件夹中</li>
-  <li>jekyll sever　　一个开发服务器将会运行在 <a href="http://localhost:4000/">http://localhost:4000/</a></li>
-</ul>
+  <li>
+    <h4 id="基本命令">基本命令</h4>
 
-<h3 id="目录结构">目录结构</h3>
+    <ul>
+      <li>jekyll build　　默认构建到<code class="highlighter-rouge">./_site</code>文件夹中</li>
+      <li>jekyll sever　　一个开发服务器将会运行在 <a href="http://localhost:4000/">http://localhost:4000/</a></li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="目录结构">目录结构</h4>
+  </li>
+</ul>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">文件/目录</th>
+      <th style="text-align: left">主要文件/目录</th>
       <th style="text-align: right">描述</th>
     </tr>
   </thead>
@@ -487,16 +520,23 @@ order by 4 desc;
 <h3 id="配置">配置</h3>
 
 <blockquote>
-  <p>参考：<a href="http://jekyllcn.com/docs/configuration/">jekyll配置</a></p>
+  <p>参考：<a href="http://jekyllcn.com/docs/configuration/">jekyll默认配置</a></p>
 </blockquote>
 
 <ul>
+  <li>Safe　　是否开启自定义插件</li>
+  <li>Defaults　　设置YAML头信息默认值</li>
+  <li>
+    <p>LSI　　为相关文章生成索引</p>
+  </li>
   <li>
     <h4 id="指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</h4>
   </li>
 </ul>
 
-<p><code class="highlighter-rouge">★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数</code></p>
+<p><mark>
+★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数，默认为development
+</mark></p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   JEKYLL_ENV=production jekyll build
 
@@ -515,22 +555,33 @@ order by 4 desc;
   <p>在_config.yml 文件里设置 defaults 的值指定全站范围的默认值</p>
 </blockquote>
 
-<h3 id="头信息">头信息</h3>
-
-<p>预定义全局变量</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defaults:
+  -
+    scope:
+      path: "posts"
+      type: "posts"
+    values:
+      layout: "post"
+      author: "tldsn"
+</code></pre></div></div>
 
 <ul>
+  <li>
+    <h4 id="头信息">头信息</h4>
+
+    <p>预定义全局变量</p>
+  </li>
   <li>layout</li>
   <li>permalink</li>
   <li>published</li>
   <li>date</li>
   <li>category/categories</li>
-  <li>tags</li>
-</ul>
-
-<h3 id="永久连接">永久连接</h3>
-
-<ul>
+  <li>
+    <p>tags</p>
+  </li>
+  <li>
+    <h4 id="永久连接">永久连接</h4>
+  </li>
   <li>permalink</li>
 </ul>
 
@@ -539,15 +590,19 @@ order by 4 desc;
 <ul>
   <li>site</li>
   <li>page</li>
+  <li>layout</li>
+  <li>content</li>
   <li>paginator</li>
 </ul>
 
 <hr />
 
 <ul>
+  <li>site.time</li>
   <li>site.pages</li>
   <li>site.posts</li>
-  <li>site.collections</li>
+  <li>site.related_posts　　相关Post</li>
+  <li><mark>site.collections</mark></li>
   <li>site.data</li>
   <li>site.categories.category</li>
   <li>site.tags.tag</li>
@@ -557,8 +612,9 @@ order by 4 desc;
 <hr />
 
 <ul>
+  <li>page.content</li>
   <li>page.title</li>
-  <li>page.excerpt</li>
+  <li>page.excerpt　　摘要</li>
   <li>page.url</li>
   <li>page.date</li>
   <li>page.id</li>
@@ -571,15 +627,15 @@ order by 4 desc;
 <hr />
 
 <ul>
-  <li>paginator.posts</li>
-  <li>paginator.per_page</li>
-  <li>paginator.total_posts</li>
-  <li>paginator.page</li>
+  <li>paginator.total_posts　　posts总数</li>
+  <li>paginator.per_page　　每页posts数量</li>
+  <li>paginator.total_pages　　总页数</li>
+  <li>paginator.posts　　本页可用posts</li>
+  <li>paginator.page　　当前页码</li>
   <li>paginator.previous_page</li>
   <li>paginator.next_page</li>
   <li>paginator.previous_page_path</li>
   <li>paginator.next_page_path</li>
-  <li>paginator.total_pages</li>
 </ul>
 
 <hr />
@@ -590,19 +646,26 @@ order by 4 desc;
   <p>同pages、posts</p>
 </blockquote>
 
-<h3 id="过滤器">过滤器</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
+- my_collection
+</code></pre></div></div>
+
+<h3 id="liquid">Liquid</h3>
 
 <ul>
+  <li>
+    <h4 id="过滤器">过滤器</h4>
+  </li>
   <li>日期格式</li>
   <li>字符串操作｛转码、过滤字符｝</li>
   <li>json转换</li>
   <li>数组操作｛push、pop、随机、排序、数组转句子、｝</li>
-  <li>对象操作｛分组、判断、检索、｝</li>
-</ul>
-
-<h3 id="标签">标签</h3>
-
-<ul>
+  <li>
+    <p>对象操作｛分组、判断、检索、｝</p>
+  </li>
+  <li>
+    <h4 id="标签">标签</h4>
+  </li>
   <li>include</li>
 </ul>
 
@@ -620,7 +683,7 @@ include_relative引入其他文件</p>
 
 <blockquote>
   <p>可以加入行号
-要使用代码高亮，你还需要包含一个样式表。例如 syntax.css 。它包含了和 GitHub 一样的样式，并且免费</p>
+要使用代码高亮，你还需要包含一个样式表。例如 syntax.css 。它包含了和 GitHub 一样的样式</p>
 </blockquote>
 
 <ul>
@@ -653,7 +716,7 @@ include_relative引入其他文件</p>
 <p>使用 github-pages gem包</p>
 <blockquote>
   <p>管理Jekyll和其在Github Pages上的依赖，
-使用这个包可以让你在将网站部署到Github Pages上时， 不&gt;会因为各种不同版本的gem包而导致意外报错。</p>
+使用这个包可以在将网站部署到Github Pages上时， 不会因为各种不同版本的gem包而导致意外报错。</p>
 </blockquote>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">source</span> <span class="dl">'</span><span class="s1">https://rubygems.org</span><span class="dl">'</span>
@@ -694,9 +757,9 @@ include_relative引入其他文件</p>
   <li>现不支持标签和类别分页，也不支持集合</li>
 </ul>
 
-<p><code class="highlighter-rouge">
-★不要设置 permalink在你的博客的头信息中设置 permalink 会造成分页功能的瘫痪。缺省设置 permalink 即可。
-</code></p>
+<p><mark>
+★不要在博客的头信息中设置 permalink，设置 permalink 会造成分页功能的瘫痪。缺省设置 permalink 即可。
+</mark></p>
 
 <h3 id="插件">插件</h3>
 
@@ -1412,7 +1475,7 @@ awesome + 关键字</p>
   <li><a href="#hi" id="markdown-toc-hi">hi</a></li>
 </ul>
 
-<h1 id="hi">hi</h1>
+<h2 id="hi">hi</h2>
 
                 </div>
                 <div class="read-all">
@@ -1454,13 +1517,13 @@ awesome + 关键字</p>
                     
                         <li><a href="/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/">百度脑图</a></li>
                     
+                        <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">一些工具</a></li>
+                    
                         <li><a href="/2020/04/21/git/">git</a></li>
                     
                         <li><a href="/2020/04/21/anki/">anki筛选语法</a></li>
                     
                         <li><a href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">系统安装与备份</a></li>
-                    
-                        <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">一些工具</a></li>
                     
                         <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%90%86/">一些代理</a></li>
                     
@@ -1484,7 +1547,7 @@ awesome + 关键字</p>
                             <span class="name">
                                 搜索技巧
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -1502,7 +1565,7 @@ awesome + 关键字</p>
                             <span class="name">
                                 环境
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -1534,11 +1597,20 @@ awesome + 关键字</p>
                     </li>
                     
                     <li>
+                        <a href="/category/#其他" class="categories-list-item" cate="其他">
+                            <span class="name">
+                                其他
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
                         <a href="/category/#工具" class="categories-list-item" cate="工具">
                             <span class="name">
                                 工具
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -1678,20 +1750,6 @@ awesome + 关键字</p>
                       
                       
                       
-                      <a href="/tag/#工具" style="font-size: 9pt; color: #999;">工具</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#效率" style="font-size: 9pt; color: #999;">效率</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#装系统" style="font-size: 9pt; color: #999;">装系统</a>
                     
                       
@@ -1700,6 +1758,20 @@ awesome + 关键字</p>
                       
                       
                       <a href="/tag/#anki" style="font-size: 9pt; color: #999;">anki</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#工具" style="font-size: 9pt; color: #999;">工具</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#效率" style="font-size: 9pt; color: #999;">效率</a>
                     
                       
                       

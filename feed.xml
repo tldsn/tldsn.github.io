@@ -5,8 +5,8 @@
     <description>^^</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Apr 2020 18:44:10 +0800</pubDate>
-    <lastBuildDate>Sun, 26 Apr 2020 18:44:10 +0800</lastBuildDate>
+    <pubDate>Tue, 28 Apr 2020 19:12:26 +0800</pubDate>
+    <lastBuildDate>Tue, 28 Apr 2020 19:12:26 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -187,6 +187,52 @@
         <category>流程图</category>
         
         <category>百度脑图</category>
+        
+        
+        <category>工具</category>
+        
+      </item>
+    
+      <item>
+        <title>一些工具</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot; role=&quot;doc-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#githup&quot; id=&quot;markdown-toc-githup&quot;&gt;githup&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#火狐扩展&quot; id=&quot;markdown-toc-火狐扩展&quot;&gt;火狐扩展&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tampermonkey&quot; id=&quot;markdown-toc-tampermonkey&quot;&gt;tampermonkey&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;githup&quot;&gt;githup&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Octotree        文件树形结构展示&lt;/li&gt;
+  &lt;li&gt;OctoLinker      代码跳转&lt;/li&gt;
+  &lt;li&gt;Octohint        变量名高亮&lt;/li&gt;
+  &lt;li&gt;Sourcegraph&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;火狐扩展&quot;&gt;火狐扩展&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Infinity新标签页&lt;/li&gt;
+  &lt;li&gt;印象笔记剪切&lt;/li&gt;
+  &lt;li&gt;anki在线词典助手&lt;/li&gt;
+  &lt;li&gt;Translator Extension(极简翻译)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tampermonkey&quot;&gt;tampermonkey&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ac-baidu&lt;/li&gt;
+  &lt;li&gt;护眼脚本&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/</guid>
+        
+        <category>工具</category>
+        
+        <category>效率</category>
         
         
         <category>工具</category>
@@ -467,10 +513,6 @@ feature
   &lt;li&gt;&lt;a href=&quot;#最近回答的卡片&quot; id=&quot;markdown-toc-最近回答的卡片&quot;&gt;最近回答的卡片&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;ul class=&quot;task-list&quot;&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;anki筛选语法&lt;/li&gt;
-&lt;/ul&gt;
-
 &lt;h2 id=&quot;暂停和搁置&quot;&gt;暂停和搁置&lt;/h2&gt;
 
 &lt;ul&gt;
@@ -527,7 +569,7 @@ feature
 匹配已搁置的卡片（包括自动的和手动的）&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;失误的卡片可以归入几个类别，下面提供一些可能比较有用的搜索办法，以便准确定位搜索结果：&lt;/p&gt;
+&lt;hr /&gt;
 
 &lt;ul&gt;
   &lt;li&gt;is:learn is:review
@@ -538,7 +580,9 @@ feature
 只匹配第一次学习的卡片&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;注意到期（is:due）只匹配复习卡片和间隔在1天及以上的学习中卡片，不匹配间隔很短（如10分钟）的学习中卡片。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;
+注意到期（is:due）只匹配复习卡片和间隔在1天及以上的学习中卡片，不匹配间隔很短（如10分钟）的学习中卡片。
+&lt;/mark&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;最近回答的卡片&quot;&gt;最近回答的卡片&lt;/h2&gt;
 
@@ -562,7 +606,7 @@ feature
         <category>搜索技巧</category>
         
         
-        <category>搜索技巧</category>
+        <category>工具</category>
         
       </item>
     
@@ -626,53 +670,7 @@ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的
         <category>装系统</category>
         
         
-        <category>环境</category>
-        
-      </item>
-    
-      <item>
-        <title>一些工具</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot; role=&quot;doc-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#githup&quot; id=&quot;markdown-toc-githup&quot;&gt;githup&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#火狐扩展&quot; id=&quot;markdown-toc-火狐扩展&quot;&gt;火狐扩展&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#tampermonkey&quot; id=&quot;markdown-toc-tampermonkey&quot;&gt;tampermonkey&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;githup&quot;&gt;githup&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Octotree        文件树形结构展示&lt;/li&gt;
-  &lt;li&gt;OctoLinker      代码跳转&lt;/li&gt;
-  &lt;li&gt;Octohint        变量名高亮&lt;/li&gt;
-  &lt;li&gt;Sourcegraph&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;火狐扩展&quot;&gt;火狐扩展&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Infinity新标签页&lt;/li&gt;
-  &lt;li&gt;印象笔记剪切&lt;/li&gt;
-  &lt;li&gt;anki在线词典助手&lt;/li&gt;
-  &lt;li&gt;Translator Extension(极简翻译)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;tampermonkey&quot;&gt;tampermonkey&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Ac-baidu&lt;/li&gt;
-  &lt;li&gt;护眼脚本&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/</guid>
-        
-        <category>工具</category>
-        
-        <category>效率</category>
-        
-        
-        <category>工具</category>
+        <category>其他</category>
         
       </item>
     
@@ -711,25 +709,25 @@ npm config get registry
         <category>npm</category>
         
         
-        <category>环境</category>
+        <category>其他</category>
         
       </item>
     
       <item>
         <title>ERROR</title>
         <description>
-&lt;p&gt;ERROR//Git错误:&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;ServicePointManager 不支持具有 socks5h 方案的代理&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ERROR//Git错误:&lt;/strong&gt;&lt;br /&gt;
+ServicePointManager 不支持具有 socks5h 方案的代理&lt;/p&gt;
 
-&lt;p&gt;原因：&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;原因：&lt;/strong&gt;&lt;br /&gt;
+虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，&lt;br /&gt;
 所以代理无法使用&lt;/p&gt;
-&lt;/blockquote&gt;
 
-&lt;p&gt;解决：&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;git remote rm origin删除
 重新配置为SSH的项目地址&lt;/p&gt;
@@ -752,22 +750,10 @@ npm config get registry
         <title>为什么GitHub需要SSH Key呢？</title>
         <description>&lt;ul id=&quot;markdown-toc&quot; role=&quot;doc-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#为什么github需要ssh-key呢&quot; id=&quot;markdown-toc-为什么github需要ssh-key呢&quot;&gt;为什么GitHub需要SSH Key呢&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#特点&quot; id=&quot;markdown-toc-特点&quot;&gt;特点&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;为什么github需要ssh-key呢&quot;&gt;为什么GitHub需要SSH Key呢&lt;/h3&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，&lt;br /&gt;
-而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;特点&quot;&gt;特点&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ssh方式单独使用非对称的秘钥进行认证和加密传输，和账号密码分离开来，不需要账号也可以访问repo。&lt;/li&gt;
-  &lt;li&gt;生成和管理秘钥有点繁琐，需要管理员添加成员的public key。不能进行匿名访问，ssh不利于对权限进行细分，用户必须具有通过SSH协议访问你主机的权限，才能进行下一步操作，比较适合内部项目&lt;/li&gt;
-&lt;/ul&gt;
 </description>
         <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/04/21/github-sshkey/</link>

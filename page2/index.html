@@ -110,6 +110,26 @@
                     
                     <li>
                         
+                        <a href="/todo/">
+                        
+                            <i class="fa fa-check-square-o"></i>Todo
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/note/">
+                        
+                            <i class="fa fa-code"></i>Note
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
                         <a href="/about/">
                         
                             <i class="fa fa-heart"></i>About
@@ -148,7 +168,7 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">一些工具</a>
+                  <a class="post-link" href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">系统安装与备份</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
@@ -171,7 +191,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
+        <a href="/category/#其他" title="Category: 其他" rel="category">其他</a>
     
   
 
@@ -188,9 +208,7 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#工具" title="Tag: 工具" rel="tag">工具</a>&nbsp;
-    
-        <a href="/tag/#效率" title="Tag: 效率" rel="tag">效率</a>
+        <a href="/tag/#装系统" title="Tag: 装系统" rel="tag">装系统</a>
     
   
 
@@ -200,39 +218,59 @@
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#githup" id="markdown-toc-githup">githup</a></li>
-  <li><a href="#火狐扩展" id="markdown-toc-火狐扩展">火狐扩展</a></li>
-  <li><a href="#tampermonkey" id="markdown-toc-tampermonkey">tampermonkey</a></li>
+  <li><a href="#windows系统" id="markdown-toc-windows系统">windows系统</a></li>
+  <li><a href="#ubuntu" id="markdown-toc-ubuntu">Ubuntu</a></li>
+  <li><a href="#uefi--gpt-安装" id="markdown-toc-uefi--gpt-安装">UEFI + GPT 安装</a></li>
+  <li><a href="#dism" id="markdown-toc-dism">DISM++</a></li>
+  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
 </ul>
 
-<h3 id="githup">githup</h3>
+<h3 id="windows系统">windows系统</h3>
 
-<ul>
-  <li>Octotree        文件树形结构展示</li>
-  <li>OctoLinker      代码跳转</li>
-  <li>Octohint        变量名高亮</li>
-  <li>Sourcegraph</li>
-</ul>
+<ol>
+  <li>U盘</li>
+  <li>Rufus</li>
+  <li>系统镜像MSDN I Tell You</li>
+  <li>安装密钥</li>
+</ol>
 
-<h3 id="火狐扩展">火狐扩展</h3>
+<h3 id="ubuntu">Ubuntu</h3>
 
-<ul>
-  <li>Infinity新标签页</li>
-  <li>印象笔记剪切</li>
-  <li>anki在线词典助手</li>
-  <li>Translator Extension(极简翻译)</li>
-</ul>
+<ol>
+  <li>把待安装系统的分区设置为用于Ext4文件系统，并设置挂载点为根目录/</li>
+</ol>
 
-<h3 id="tampermonkey">tampermonkey</h3>
+<h3 id="uefi--gpt-安装">UEFI + GPT 安装</h3>
 
-<ul>
-  <li>Ac-baidu</li>
-  <li>护眼脚本</li>
-</ul>
+<blockquote>
+  <p>为什么要用 UEFI 引导方案？
+UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的继承者。跟 BIOS 相比，UEFI 直接从预启动的操作环境加载到操作系统上从而节省开机时间。所以说，用 UEFI 引导方式可有效提升开机速度。
+为什么要用 GPT 分区方案？
+传统的 MBR 分区表只能支持 2.1T 以下的硬盘容量，并且最多创建 4 个主分区，也就是最多同时安装 4 个操作系统。GPT 则没有分区的限制，但是 GPT 必须要 UEFI 引导。</p>
+</blockquote>
+
+<ol>
+  <li>进入BIOS，查看是否支持UEFI BOOT，并设置为Enabled</li>
+  <li>进入winPE，删除硬盘所有分区，转换分区类型为GUID</li>
+  <li>划分硬盘分区：建立新分区，建立主分区</li>
+  <li>安装系统</li>
+</ol>
+
+<h3 id="dism">DISM++</h3>
+
+<blockquote>
+  <p>系统镜像</p>
+</blockquote>
+
+<h3 id="参考">参考</h3>
+
+<blockquote>
+  <p><a href="https://www.jianshu.com/p/a33d0e202fc1">https://www.jianshu.com/p/a33d0e202fc1</a></p>
+</blockquote>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -262,7 +300,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#环境" title="Category: 环境" rel="category">环境</a>
+        <a href="/category/#其他" title="Category: 其他" rel="category">其他</a>
     
   
 
@@ -375,18 +413,18 @@ npm config get registry
                 </div>
                 <div class="excerpt">
                     
-<p>ERROR//Git错误:</p>
-<blockquote>
-  <p>ServicePointManager 不支持具有 socks5h 方案的代理</p>
-</blockquote>
+<p><strong>ERROR//Git错误:</strong><br />
+ServicePointManager 不支持具有 socks5h 方案的代理</p>
 
-<p>原因：</p>
-<blockquote>
-  <p>虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，
+<hr />
+
+<p><strong>原因：</strong><br />
+虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，<br />
 所以代理无法使用</p>
-</blockquote>
 
-<p>解决：</p>
+<hr />
+
+<p><strong>解决：</strong></p>
 <blockquote>
   <p>git remote rm origin删除
 重新配置为SSH的项目地址</p>
@@ -454,22 +492,10 @@ npm config get registry
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
   <li><a href="#为什么github需要ssh-key呢" id="markdown-toc-为什么github需要ssh-key呢">为什么GitHub需要SSH Key呢</a></li>
-  <li><a href="#特点" id="markdown-toc-特点">特点</a></li>
 </ul>
 
 <h3 id="为什么github需要ssh-key呢">为什么GitHub需要SSH Key呢</h3>
 
-<blockquote>
-  <p>因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，<br />
-而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
-</blockquote>
-
-<h3 id="特点">特点</h3>
-
-<ul>
-  <li>ssh方式单独使用非对称的秘钥进行认证和加密传输，和账号密码分离开来，不需要账号也可以访问repo。</li>
-  <li>生成和管理秘钥有点繁琐，需要管理员添加成员的public key。不能进行匿名访问，ssh不利于对权限进行细分，用户必须具有通过SSH协议访问你主机的权限，才能进行下一步操作，比较适合内部项目</li>
-</ul>
 
                 </div>
                 <div class="read-all">
@@ -667,13 +693,13 @@ bundle exec jekyll serve
                     
                         <li><a href="/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/">百度脑图</a></li>
                     
+                        <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">一些工具</a></li>
+                    
                         <li><a href="/2020/04/21/git/">git</a></li>
                     
                         <li><a href="/2020/04/21/anki/">anki筛选语法</a></li>
                     
                         <li><a href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">系统安装与备份</a></li>
-                    
-                        <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">一些工具</a></li>
                     
                         <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%90%86/">一些代理</a></li>
                     
@@ -697,7 +723,7 @@ bundle exec jekyll serve
                             <span class="name">
                                 搜索技巧
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -715,7 +741,7 @@ bundle exec jekyll serve
                             <span class="name">
                                 环境
                             </span>
-                            <span class="badge">4</span>
+                            <span class="badge">2</span>
                         </a>
                     </li>
                     
@@ -747,11 +773,20 @@ bundle exec jekyll serve
                     </li>
                     
                     <li>
+                        <a href="/category/#其他" class="categories-list-item" cate="其他">
+                            <span class="name">
+                                其他
+                            </span>
+                            <span class="badge">2</span>
+                        </a>
+                    </li>
+                    
+                    <li>
                         <a href="/category/#工具" class="categories-list-item" cate="工具">
                             <span class="name">
                                 工具
                             </span>
-                            <span class="badge">3</span>
+                            <span class="badge">4</span>
                         </a>
                     </li>
                     
@@ -891,20 +926,6 @@ bundle exec jekyll serve
                       
                       
                       
-                      <a href="/tag/#工具" style="font-size: 9pt; color: #999;">工具</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#效率" style="font-size: 9pt; color: #999;">效率</a>
-                    
-                      
-                      
-                      
-                      
-                      
                       <a href="/tag/#装系统" style="font-size: 9pt; color: #999;">装系统</a>
                     
                       
@@ -913,6 +934,20 @@ bundle exec jekyll serve
                       
                       
                       <a href="/tag/#anki" style="font-size: 9pt; color: #999;">anki</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#工具" style="font-size: 9pt; color: #999;">工具</a>
+                    
+                      
+                      
+                      
+                      
+                      
+                      <a href="/tag/#效率" style="font-size: 9pt; color: #999;">效率</a>
                     
                       
                       
