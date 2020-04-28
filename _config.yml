@@ -65,3 +65,7 @@ paginate: 6
 #   - jekyll-sitemap
 #   - jekyll-seo-tag
 
+# collections:
+#   fly:
+#   output: true
+#   permalink: /collection/:path/

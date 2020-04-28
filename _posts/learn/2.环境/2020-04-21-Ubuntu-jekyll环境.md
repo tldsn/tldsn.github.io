@@ -17,7 +17,7 @@ author: tldsn
     sudo apt install build-essential
     ```
 
-2. uby
+2. ruby
 
     ```
     sudo apt-get install ruby-full
@@ -27,18 +27,18 @@ author: tldsn
 
     ```
     sudo apt install rubygems
-    sudo gem update --system  升级
+    sudo gem update --system　　升级
     ```
 
 4. jekyll
 
     ```
     sudo gem install jekyll
-    sudo gem update jekyll  升级
+    sudo gem update jekyll　　升级
     ```
 
 ### gem镜像
 
-```ruby
+```
 gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 ```
