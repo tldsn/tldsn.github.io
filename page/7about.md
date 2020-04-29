@@ -15,7 +15,9 @@ type: page
 
 ## 关于本站
 
-<mark>略</mark>
+<mark>时间是检验真理的唯一标准</mark>  
+<mark>耐心是一切聪明才智的基础</mark>
+
 
 ## 联系我
 
