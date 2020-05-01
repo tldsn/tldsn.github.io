@@ -5,8 +5,8 @@
     <description>^^</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Apr 2020 18:25:27 +0800</pubDate>
-    <lastBuildDate>Wed, 29 Apr 2020 18:25:27 +0800</lastBuildDate>
+    <pubDate>Fri, 01 May 2020 17:34:52 +0800</pubDate>
+    <lastBuildDate>Fri, 01 May 2020 17:34:52 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -291,74 +291,6 @@
       </item>
     
       <item>
-        <title>网站备忘</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot; role=&quot;doc-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#go&quot; id=&quot;markdown-toc-go&quot;&gt;go&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#爬虫&quot; id=&quot;markdown-toc-爬虫&quot;&gt;爬虫&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#vscode配置&quot; id=&quot;markdown-toc-vscode配置&quot;&gt;VScode配置&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#grpc实践&quot; id=&quot;markdown-toc-grpc实践&quot;&gt;grpc实践&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#文档&quot; id=&quot;markdown-toc-文档&quot;&gt;文档&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;go&quot;&gt;go&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;爬虫&quot;&gt;爬虫&lt;/h4&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/majianguo/p/8146110.html&quot;&gt;Golang 网络爬虫框架gocolly/colly&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;vscode配置&quot;&gt;VScode配置&lt;/h4&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/GeMarK/article/details/90269561&quot;&gt;vscode关于go语言的settings.json文件内容&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;grpc实践&quot;&gt;grpc实践&lt;/h4&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000008106582&quot;&gt;grpc&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;h4 id=&quot;文档&quot;&gt;文档&lt;/h4&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2010/03/css_cookbook.html&quot;&gt;css&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://www.ruanyifeng.com/blog/2012/06/sass.html&quot;&gt;scss&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://git-scm.com/book/zh/v2&quot;&gt;git&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html&quot;&gt;git-flow&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://help.github.com/cn/github/searching-for-information-on-github/searching-code&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://jekyllcn.com/docs/quickstart/&quot;&gt;jekyll&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://liquid.bootcss.com/basics/types/&quot;&gt;liquid&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://wyagd001.github.io/zh-cn/docs/AutoHotkey.htm&quot;&gt;AutoHotKey&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;https://books.studygolang.com/gobyexample/&quot;&gt;go by Example&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://tour.studygolang.com/list&quot;&gt;go指南&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://www.fontawesome.com.cn/&quot;&gt;fontawesome&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2020/04/21/%E7%BD%91%E7%AB%99%E5%A4%87%E5%BF%98/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/21/%E7%BD%91%E7%AB%99%E5%A4%87%E5%BF%98/</guid>
-        
-        <category>网站备忘</category>
-        
-        
-        <category>资源</category>
-        
-      </item>
-    
-      <item>
         <title>stackoverflow搜索</title>
         <description>&lt;ul id=&quot;markdown-toc&quot; role=&quot;doc-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#base&quot; id=&quot;markdown-toc-base&quot;&gt;base&lt;/a&gt;&lt;/li&gt;
@@ -371,38 +303,39 @@
 &lt;h3 id=&quot;base&quot;&gt;base&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;[n]        在标签下匹配&lt;/li&gt;
-  &lt;li&gt;“n”        精确匹配&lt;/li&gt;
-  &lt;li&gt;title: n&lt;/li&gt;
-  &lt;li&gt;body: n&lt;/li&gt;
-  &lt;li&gt;user:me n        搜索自己&lt;/li&gt;
-  &lt;li&gt;-n        排除&lt;/li&gt;
-  &lt;li&gt;*        通配符&lt;/li&gt;
-  &lt;li&gt;or        或&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[tag] n&lt;/code&gt;　　在标签下匹配&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;n&quot;&lt;/code&gt;　　精确匹配&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;title: n&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;body: n&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;user:me n&lt;/code&gt;　　搜索自己&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;　　通配符&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;空格&lt;/code&gt;　　and&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;or&lt;/code&gt;　　或&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-n　&lt;/code&gt;　排除&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;评分&quot;&gt;评分&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;score:-1或score:-1..        都将返回得分均大于或等于-1的帖子&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;score:-1或score:-1..&lt;/code&gt;　　得分均等于或大于-1的帖子&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;时间&quot;&gt;时间&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;created:        指定创建帖子的时间&lt;/li&gt;
-  &lt;li&gt;lastactive:        在指定时间段内处于活动状态的帖子&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;created:&lt;/code&gt;　　指定创建帖子的时间&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lastactive:&lt;/code&gt;　　 指定时间段内处于活跃状态的帖子&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;created:2012-04..2012-05       在2012年4月1日至2012年5月31日之间创建的搜索帖子。&lt;/p&gt;
+  &lt;p&gt;created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建的搜索帖子。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;状态&quot;&gt;状态&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;intags:mine       仅返回出现在您标记为收藏的标签中的帖子。&lt;/li&gt;
-  &lt;li&gt;isaccepted:yes / true / 1        仅返回已标记为“已接受”的答案；no / false / 0仅返回未标记为接受的答案。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;intags:mine&lt;/code&gt;　　仅返回出现在您标记为收藏的标签中的帖子。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;isaccepted:yes / true / 1&lt;/code&gt;　　仅返回已标记为“已接受”的答案；no / false / 0仅返回未标记为接受的答案。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;参考&quot;&gt;参考&lt;/h3&gt;
@@ -523,63 +456,71 @@
       <item>
         <title>git</title>
         <description>&lt;ul id=&quot;markdown-toc&quot; role=&quot;doc-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#基本命令&quot; id=&quot;markdown-toc-基本命令&quot;&gt;基本命令&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#概念&quot; id=&quot;markdown-toc-概念&quot;&gt;概念&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#base&quot; id=&quot;markdown-toc-base&quot;&gt;base&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#简单提交流程&quot; id=&quot;markdown-toc-简单提交流程&quot;&gt;简单提交流程&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#其他&quot; id=&quot;markdown-toc-其他&quot;&gt;其他&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#进阶&quot; id=&quot;markdown-toc-进阶&quot;&gt;进阶&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#rebase&quot; id=&quot;markdown-toc-rebase&quot;&gt;rebase&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#commit&quot; id=&quot;markdown-toc-commit&quot;&gt;commit&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#撤销revert和重设reset对比&quot; id=&quot;markdown-toc-撤销revert和重设reset对比&quot;&gt;撤销（revert）和重设（reset）对比&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#checkout和reset对比&quot; id=&quot;markdown-toc-checkout和reset对比&quot;&gt;checkout和reset对比&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#分支&quot; id=&quot;markdown-toc-分支&quot;&gt;分支&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#基本操作&quot; id=&quot;markdown-toc-基本操作&quot;&gt;基本操作&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#其他-1&quot; id=&quot;markdown-toc-其他-1&quot;&gt;其他&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tag&quot; id=&quot;markdown-toc-tag&quot;&gt;Tag&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#暂存stash&quot; id=&quot;markdown-toc-暂存stash&quot;&gt;暂存(stash)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bug&quot; id=&quot;markdown-toc-bug&quot;&gt;bug&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ignore&quot; id=&quot;markdown-toc-ignore&quot;&gt;ignore&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#git-fow-分支管理策略&quot; id=&quot;markdown-toc-git-fow-分支管理策略&quot;&gt;git fow 分支管理策略&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#命令&quot; id=&quot;markdown-toc-命令&quot;&gt;命令&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#工作流&quot; id=&quot;markdown-toc-工作流&quot;&gt;工作流&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tips&quot; id=&quot;markdown-toc-tips&quot;&gt;☆tips&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;安装git&lt;/p&gt;
-
-&lt;p&gt;配置环境变量&lt;/p&gt;
-
-&lt;h3 id=&quot;基本命令&quot;&gt;基本命令&lt;/h3&gt;
+&lt;h2 id=&quot;概念&quot;&gt;概念&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;让Git显示颜色&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ```
-  git config --global color.ui true
-  ```
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;工作目录、缓冲区、提交历史&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;配置别名&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ```
-  git config --global alias.lg &quot;log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&amp;lt;%an&amp;gt;%Creset' --abbrev-commit&quot;
-  ```
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;HEAD表示当前版本，也就是最新的提交,上一个版本就是HEAD^，上上一个版本就是HEAD^^&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;创建新仓库&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  git init
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看状态&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  git status
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;提交历史&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  git log --pretty=oneline
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;命令历史&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  git reflog
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看工作区和版本库里面最新版本的区别&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  git diff HEAD -- readme.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;base&quot;&gt;base&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git init&lt;/code&gt;　　创建新仓库　　&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git status&lt;/code&gt;　　查看状态　　&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git log --pretty=oneline&lt;/code&gt;　　提交历史　　&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git reflog&lt;/code&gt;　　命令历史　　&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git diff HEAD -- readme.txt&lt;/code&gt;　　查看工作区和版本库里面最新版本的区别&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;简单提交流程&quot;&gt;简单提交流程&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add &amp;lt;filename&amp;gt;
 
@@ -588,188 +529,202 @@ fit commit -m &quot;提交信息&quot;
 git config --global user.email &quot;you@example.com&quot;
 git config --global user.name &quot;Your Name&quot;
 
-git remote add origin &amp;lt;server&amp;gt;连接远程
+git remote add origin &amp;lt;server&amp;gt;　　//连接远程
 
-git push origin master推送
-
-git push -u origin master
-由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+git push origin master　　//推送
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git rebase
+&lt;h3 id=&quot;其他&quot;&gt;其他&lt;/h3&gt;
 
-git rebase  是将上游更改合并进本地仓库的通常方法，rebase 就好像是说「我想将我的更改建立在其他人的进展之上」
-* rebase操作可以把本地未push的分叉提交历史整理成直线；
-* rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
+&lt;ul&gt;
+  &lt;li&gt;让Git显示颜色&lt;/li&gt;
+&lt;/ul&gt;
 
-在你工作流中使用 rebase 最好的用法之一就是清理本地正在开发的分支。隔一段时间执行一次交互式 rebase，你可以保证你 feature 分支中的每一个提交都是专注和有意义的。你在写代码时不用担心造成孤立的提交——因为你后面一定能修复。
-对最新的 3 次提交进行了交互式 rebase：
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config --global color.ui true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;配置别名&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config --global alias.lg &quot;log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&amp;lt;%an&amp;gt;%Creset' --abbrev-commit&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;进阶&quot;&gt;进阶&lt;/h2&gt;
+
+&lt;h3 id=&quot;rebase&quot;&gt;rebase&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;git rebase  是将上游更改合并进本地仓库的通常方法，rebase 就好像是说「我想将我的更改建立在其他人的进展之上」&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;mark&gt;
+☆rebase操作可以把本地未push的分叉提交历史整理成直线；
+&lt;/mark&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;mark&gt;
+☆rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
+&lt;/mark&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;mark&gt;
+☆在你工作流中使用 rebase 最好的用法之一就是清理本地正在开发的分支。隔一段时间执行一次交互式 rebase，你可以保证你 feature 分支中的每一个提交都是专注和有意义的。你在写代码时不用担心造成孤立的提交——因为你后面一定能修复。
+&lt;/mark&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;对最新的 3 次提交进行了交互式 rebase：
 git checkout feature
 git rebase -i HEAD~3
 
-如果你想用这个方法重写整个 feature 分支，git merge-base 命令非常方便地找出 feature 分支开始分叉的基。下面这段命令返回基提交的 ID，你可以接下来将它传给 git rebase：
-git merge-base feature master
-
-git pull 命令会执行一次merge，但你可以传入--rebase 来强制它通过rebase来整合远程分支。
-
-如果你将 Pull Request 作为你代码审查过程中的一环，你需要避免在创建 Pull Request 之后使用 git rebase。
-
-git rebase -i    交互式变基
-* pick：正常选中
-* reword：选中，并且修改提交信息；
-* edit：选中，rebase时会暂停，允许你修改这个commit（参考这里）
-* squash：选中，会将当前commit与上一个commit合并
-* fixup：与squash相同，但不会保存当前commit的提交信息
-* exec：执行其他shell命令
-
-git rebase -i --autosquash 
-自动组织这些修正提交和关联的普通提交的合并
+//交互式变基
+git rebase -i　　
+* pick：　　//正常选中
+* reword：　　//选中，并且修改提交信息；
+* edit：　　//选中，rebase时会暂停，允许你修改这个commit（参考这里）
+* squash：　　//选中，会将当前commit与上一个commit合并
+* fixup：　　//与squash相同，但不会保存当前commit的提交信息
+* exec：　　//执行其他shell命令
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git commit --amend --no-edit
-合并缓存的修改和上一次的提交，用新的快照替换上一个提交。缓存区没有文件时运行这个命令可以用来编辑上次提交的提交信息，而不会更改快照。
+&lt;h3 id=&quot;commit&quot;&gt;commit&lt;/h3&gt;
 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//合并缓存的修改和上一次的提交，用新的快照替换上一个提交。缓存区没有文件时运行这个命令可以用来编辑上次提交的提交信息，而不会更改快照。
+git commit --amend --no-edit
+
+//自动将提交标记为先前提交的修复
 git commit --fixup &amp;lt;commit&amp;gt;
-自动将提交标记为先前提交的修复
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;撤销（revert）和重设（reset）对比
+&lt;h3 id=&quot;撤销revert和重设reset对比&quot;&gt;撤销（revert）和重设（reset）对比&lt;/h3&gt;
 
-git revert  撤销一个已经提交的快照，保留项目历史，生成新的提交
+&lt;ul&gt;
+  &lt;li&gt;git revert　　撤销一个已经提交的快照，保留项目历史，生成新的提交&lt;/li&gt;
+  &lt;li&gt;git reset　　重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。&lt;/li&gt;
+&lt;/ul&gt;
 
-* 撤销和重设相比有两个重要的优点。首先，它不会改变项目历史，对那些已经发布到共享仓库的提交来说这是一个安全的操作。
-* 其次，git revert 可以针对历史中任何一个提交，而 git reset 只能从当前提交向前回溯。比如，你想用 git reset 重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。不用说，这并不是一个优雅的回滚方案。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;checkout和reset对比&quot;&gt;checkout和reset对比&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;版本回退    checkout    reset
+&lt;ul&gt;
+  &lt;li&gt;git checkout　　移动指针检出一个旧版本&lt;/li&gt;
+  &lt;li&gt;git reset　　重设一个旧的提交，&lt;code class=&quot;highlighter-rouge&quot;&gt;--hard&lt;/code&gt;移除之后的提交，&lt;code class=&quot;highlighter-rouge&quot;&gt;--soft&lt;/code&gt;将之后的提交加入到缓冲区&lt;/li&gt;
+&lt;/ul&gt;
 
-git reset  命令用于撤销提交或被缓存的快照。
-        --hard  取消缓存并改变工作目录
+&lt;h2 id=&quot;分支&quot;&gt;分支&lt;/h2&gt;
+&lt;p&gt;Git鼓励大量使用分支：&lt;/p&gt;
 
-git checkout  检出文件、提交、分支
+&lt;h3 id=&quot;基本操作&quot;&gt;基本操作&lt;/h3&gt;
 
-git checkout -- readme.txt
-意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
-一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
-一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
-总之，就是让这个文件回到最近一次git commit或git add时的状态。
+&lt;ul&gt;
+  &lt;li&gt;查看分支：&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;创建分支：&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;切换分支：&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout &amp;lt;name&amp;gt;  或者  git switch &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;创建+切换分支：&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b &amp;lt;name&amp;gt;  或者  git switch -c &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;合并某分支到当前分支：&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;删除分支：&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch -d &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-git reset &amp;lt;file&amp;gt;从缓存区移除特定文件，但不改变工作目录。
-git reset HEAD &amp;lt;file&amp;gt;可以把暂存区的修改撤销掉（unstage），重新放回工作区
-git reset --hard重设缓冲区和工作目录
+&lt;h3 id=&quot;其他-1&quot;&gt;其他&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git merge --no-ff -m &quot;merge with no-ff&quot; dev&lt;/code&gt;　　//合并分支禁用Fast forward&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout -b dev origin/dev&lt;/code&gt;　　//创建远程origin的dev分支到本地&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git branch --set-upstream-to &amp;lt;branch-name&amp;gt; origin/&amp;lt;branch-name&amp;gt;&lt;/code&gt;　　//本地分支和远程分支建立连接&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote -v&lt;/code&gt;　　//查看远程仓库&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote rm origin&lt;/code&gt;　　//删除已有的GitHub远程库&lt;/li&gt;
+&lt;/ul&gt;
 
-场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
-场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD &amp;lt;file&amp;gt;，就回到了场景1，第二步按场景1操作。
-场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，git reset，不过前提是没有推送到远程库。
+&lt;h2 id=&quot;tag&quot;&gt;Tag&lt;/h2&gt;
 
-git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag&lt;/code&gt;　　可以查看所有标签&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag &amp;lt;tagname&amp;gt;&lt;/code&gt;　　新建一个标签，默认为HEAD，也可以指定一个commit id&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag v0.9 f52c633&lt;/code&gt;　　指定commit id&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -a &amp;lt;tagname&amp;gt; -m &quot;blablabla...&quot;&lt;/code&gt;　　指定message&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin &amp;lt;tagname&amp;gt;&lt;/code&gt;　　可以推送一个本地标签&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin --tags&lt;/code&gt;　　可以推送全部未推送过的本地标签&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git tag -d &amp;lt;tagname&amp;gt;&lt;/code&gt;　　可以删除一个本地标签&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git push origin :refs/tags/&amp;lt;tagname&amp;gt;&lt;/code&gt;　　可以删除一个远程标签&lt;/li&gt;
+&lt;/ul&gt;
 
-git clean  命令将未跟踪的文件从你的工作目录中移除
-        git clean 命令经常和 git reset --hard 一起使用。记住，reset 只影响被跟踪的文件，所以还需要一个单独的命令来清理未被跟踪的文件。这个两个命令相结合，你就可以将工作目录回到之前特定提交时的状态。
-    -n  演习
-    -f  强制删除
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;暂存stash&quot;&gt;暂存(stash)&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;分支
-Git鼓励大量使用分支：
-查看分支：git branch
-创建分支：git branch &amp;lt;name&amp;gt;
-切换分支：git checkout &amp;lt;name&amp;gt;或者git switch &amp;lt;name&amp;gt;
-创建+切换分支：git checkout -b &amp;lt;name&amp;gt;或者git switch -c &amp;lt;name&amp;gt;
-合并某分支到当前分支：git merge &amp;lt;name&amp;gt;
-删除分支：git branch -d &amp;lt;name&amp;gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash list&lt;/code&gt;　　查看&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash apply stash@{0}&lt;/code&gt;　　恢复&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash drop&lt;/code&gt;　　删除&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git stash pop&lt;/code&gt;　　恢复并删除&lt;/li&gt;
+&lt;/ul&gt;
 
-    
-git merge --no-ff -m &quot;merge with no-ff&quot; dev  合并分支禁用Fast forward   
-开发一个新feature，最好新建一个分支；
-如果要丢弃一个没有被合并过的分支，可以通过git branch -D &amp;lt;name&amp;gt;强行删除。
+&lt;h2 id=&quot;bug&quot;&gt;bug&lt;/h2&gt;
 
-git checkout -b dev origin/dev  创建远程origin的dev分支到本地    
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cherry-pick命令&lt;/code&gt;　　复制一个特定的提交到当前分支&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git cherry-pick 4c805e2&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-多人协作的工作模式通常是这样：
-1. 首先，可以试图用git push origin &amp;lt;branch-name&amp;gt;推送自己的修改；
-2. 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
-3. 如果合并有冲突，则解决冲突，并在本地提交；
-4. 没有冲突或者解决掉冲突后，再用git push origin &amp;lt;branch-name&amp;gt;推送就能成功！
-如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to &amp;lt;branch-name&amp;gt; origin/&amp;lt;branch-name&amp;gt;
+&lt;h2 id=&quot;ignore&quot;&gt;ignore&lt;/h2&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;https://github.com/github/gitignore&lt;/p&gt;
+&lt;/blockquote&gt;
 
-git remote -v    查看远程仓库
-git remote rm origin    删除已有的GitHub远程库
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;打Tag
-git tag &amp;lt;tagname&amp;gt;用于新建一个标签，默认为HEAD，也可以指定一个commit id；
-git tag v0.9 f52c633
-git tag -a &amp;lt;tagname&amp;gt; -m &quot;blablabla...&quot;可以指定标签信息；
-git tag可以查看所有标签
-git show &amp;lt;tagname&amp;gt;可以看到说明文字
-
-git push origin &amp;lt;tagname&amp;gt;可以推送一个本地标签；
-git push origin --tags可以推送全部未推送过的本地标签；
-git tag -d &amp;lt;tagname&amp;gt;可以删除一个本地标签；
-git push origin :refs/tags/&amp;lt;tagname&amp;gt;可以删除一个远程标签。
-如果标签已经推送到远程，要先从本地删除,然后，从远程删除
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;暂存        
-git stash    
-git stash list    查看
-git stash apply stash@{0}    恢复
-git stash drop    删除
-git stash pop    恢复并删除
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bug
-cherry-pick命令    让我们能复制一个特定的提交到当前分支
-git cherry-pick 4c805e2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;概念
-工作目录、缓冲区、提交历史
-
-HEAD表示当前版本，也就是最新的提交,上一个版本就是HEAD^，上上一个版本就是HEAD^^
-
-HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gitignore    
-https://github.com/github/gitignore
-忽略文件的原则是：
-1忽略操作系统自动生成的文件，比如缩略图等；
-2. 忽略编译生成的中间文件、可执行文件等，也就是如果一个文件是通过另一个文件自动生成的，那自动生成的文件就没必要放进版本库，比如Java编译产生的.class文件；
-3. 忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件。
+&lt;p&gt;&lt;mark&gt;
 检验.gitignore的标准是git status命令是不是说working directory clean
-git add -f App.class    强制添加
-git check-ignore -v App.class    检查规则
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/mark&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git fow  
-分支管理策略
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git check-ignore -v App.class&lt;/code&gt;    检查规则&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git add -f App.class&lt;/code&gt;    强制添加&lt;/li&gt;
+&lt;/ul&gt;
 
-Git FLow模型定义了五种标准的分支
-主要分支，包括master分支和develop分支。辅助分支，包括feature分支，hotfix分支和release分支
+&lt;h2 id=&quot;git-fow-分支管理策略&quot;&gt;git fow 分支管理策略&lt;/h2&gt;
 
-命令
-git fow init  初始化
-git flow feature  查看feature分支
-git flow feature start feature_branch_name  创建feature分支
-git flow feature finish feature_branch_name  自动合并feature分支到develop分支和master分支，并删除feature分支
-git flow feature publish feature_branch_name  push一个feature分支到远程仓库
-git flow feature pull origin feature_branch_name  pull一个feature分支到远程仓库
+&lt;blockquote&gt;
+  &lt;p&gt;Git FLow模型定义了五种标准的分支&lt;br /&gt;
+主要分支，包括master分支和develop分支。&lt;br /&gt;
+辅助分支，包括feature分支，hotfix分支和release分支&lt;/p&gt;
+&lt;/blockquote&gt;
 
-fit flow备忘清单  https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;命令&quot;&gt;命令&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;工作流
-git fow
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git fow init&lt;/code&gt;  初始化&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow feature&lt;/code&gt;  查看feature分支&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow feature start feature_branch_name&lt;/code&gt;  创建feature分支&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow feature finish feature_branch_name&lt;/code&gt;  自动合并feature分支到develop分支和master分支，并删除feature分支&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow feature publish feature_branch_name&lt;/code&gt;  push一个feature分支到远程仓库&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git flow feature pull origin feature_branch_name&lt;/code&gt;  pull一个feature分支到远程仓库&lt;/li&gt;
+&lt;/ul&gt;
 
-fork  
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html&quot;&gt;fit flow备忘清单&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-feature
+&lt;h2 id=&quot;工作流&quot;&gt;工作流&lt;/h2&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;git fow&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;fork&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;feature&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tips&quot;&gt;☆tips&lt;/h2&gt;
+
+&lt;p&gt;&lt;mark&gt;
 在master上修改代码，要像hotfix一样，创建分支然后分别合并，不然的话，master分支和dev分支的进度就不同步了。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/mark&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/04/21/git/</link>
@@ -792,72 +747,73 @@ feature
   &lt;li&gt;&lt;a href=&quot;#标签&quot; id=&quot;markdown-toc-标签&quot;&gt;标签&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#卡片状态&quot; id=&quot;markdown-toc-卡片状态&quot;&gt;卡片状态&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#最近回答的卡片&quot; id=&quot;markdown-toc-最近回答的卡片&quot;&gt;最近回答的卡片&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#使用建议&quot; id=&quot;markdown-toc-使用建议&quot;&gt;☆使用建议&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考&quot; id=&quot;markdown-toc-参考&quot;&gt;☆参考&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;暂停和搁置&quot;&gt;暂停和搁置&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;is:suspended
-暂停卡&lt;/li&gt;
-  &lt;li&gt;is:buried
-搁置卡&lt;/li&gt;
+  &lt;li&gt;is:suspended　　暂停卡&lt;/li&gt;
+  &lt;li&gt;is:buried　　搁置卡&lt;br /&gt;
+&lt;mark&gt;可以略过的简单卡，设置暂停&lt;/mark&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;卡片性质&quot;&gt;卡片性质&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;prop:ivl&amp;gt;=10
+  &lt;li&gt;prop:ivl&amp;gt;=10　　
 匹配间隔大于10天的卡片&lt;/li&gt;
-  &lt;li&gt;prop:due=1
+  &lt;li&gt;prop:due=1　　
 匹配明天到期的卡片&lt;/li&gt;
-  &lt;li&gt;prop:due=-1
+  &lt;li&gt;prop:due=-1　　
 匹配昨天到期但尚未复习到的滞留卡片&lt;/li&gt;
-  &lt;li&gt;prop:due&amp;gt;-1 prop:due&amp;lt;1
+  &lt;li&gt;prop:due&amp;gt;-1 prop:due&amp;lt;1　　
 匹配昨天到期、今天到期和明天将要到期的卡片&lt;/li&gt;
-  &lt;li&gt;prop:reps&amp;lt;10
+  &lt;li&gt;prop:reps&amp;lt;10　　
 匹配回答次数少于10次的卡片&lt;/li&gt;
-  &lt;li&gt;prop:lapses&amp;gt;3
+  &lt;li&gt;prop:lapses&amp;gt;3　　
 匹配失误再次学习超过3次的卡片&lt;/li&gt;
-  &lt;li&gt;prop:ease!=2.5
+  &lt;li&gt;prop:ease!=2.5　　
 匹配难度大于或小于初始默认值的卡片&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;标签&quot;&gt;标签&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;tag:animal
+  &lt;li&gt;tag:animal　　
 匹配带有“animal”标签的笔记&lt;/li&gt;
-  &lt;li&gt;tag:none
+  &lt;li&gt;tag:none　　
 匹配没有标签的笔记&lt;/li&gt;
-  &lt;li&gt;tag:ani*
+  &lt;li&gt;tag:ani*　　
 匹配标签以“ani”开头的笔记&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;卡片状态&quot;&gt;卡片状态&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;is:due
+  &lt;li&gt;is:due　　
 匹配已到期的的复习卡片和学习中卡片&lt;/li&gt;
-  &lt;li&gt;is:new
+  &lt;li&gt;is:new　　
 匹配新卡片&lt;/li&gt;
-  &lt;li&gt;is:learn
+  &lt;li&gt;is:learn　　
 匹配学习中卡片&lt;/li&gt;
-  &lt;li&gt;is:review
+  &lt;li&gt;is:review　　
 匹配待学习的复习卡片（包括到期的和未到期的）和失误的卡片&lt;/li&gt;
-  &lt;li&gt;is:suspended
+  &lt;li&gt;is:suspended　　
 匹配手动暂停的卡片&lt;/li&gt;
-  &lt;li&gt;is:buried
+  &lt;li&gt;is:buried　　
 匹配已搁置的卡片（包括自动的和手动的）&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;is:learn is:review
+  &lt;li&gt;is:learn is:review　　
 匹配失误的等待再次学习的卡片&lt;/li&gt;
-  &lt;li&gt;-is:learn is:review
+  &lt;li&gt;-is:learn is:review　　
 只匹配正常的复习卡片，不包括失误的卡片&lt;/li&gt;
-  &lt;li&gt;is:learn -is:review
+  &lt;li&gt;is:learn -is:review　　
 只匹配第一次学习的卡片&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -868,15 +824,42 @@ feature
 &lt;h2 id=&quot;最近回答的卡片&quot;&gt;最近回答的卡片&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;rated:1
+  &lt;li&gt;rated:1　　
 匹配今天回答的卡片&lt;/li&gt;
-  &lt;li&gt;rated:1:2
+  &lt;li&gt;rated:1:2　　
 匹配今天回答Hard（2）的卡片&lt;/li&gt;
-  &lt;li&gt;rated:7:1
+  &lt;li&gt;rated:7:1　　
 匹配过去7天回答Again（1）的卡片&lt;/li&gt;
-  &lt;li&gt;rated:31:4
+  &lt;li&gt;rated:31:4　　
 匹配过去1月回答Easy（4）的卡片&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;使用建议&quot;&gt;☆使用建议&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;rated　　复习今天学习时遇到的难度卡&lt;/li&gt;
+  &lt;li&gt;prop:ivl　　复习间隔比较久的简单卡&lt;/li&gt;
+  &lt;li&gt;prop:ease　　强化学习难度卡&lt;/li&gt;
+  &lt;li&gt;tag　　复习标记卡&lt;/li&gt;
+  &lt;li&gt;-is:new　　辅助筛选&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;☆参考&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ankichina.net/manual/anki&quot;&gt;汉化手册&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ankiweb.net/shared/addons/2.1&quot;&gt;插件&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wiki.anki.link/&quot;&gt;Anki资源库&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ankiweb.net/shared/decks/english&quot;&gt;英语牌组&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.laohuang.net/&quot;&gt;教程-老黄老巢&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yuque.com/purequant/anki/uefe4y&quot;&gt;教程-樱梦-Anki学习笔记&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pan.baidu.com/s/1xBjehEu6Zih1Hn5IoZc50g&quot;&gt;自用-词典及牌组&lt;/a&gt;　　提取码：r5z2&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.pdawiki.com/forum/forum.php?mod=viewthread&amp;amp;tid=30146&amp;amp;extra=page%3D1&quot;&gt;更多词库-pdawiki&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://freemdict.com/&quot;&gt;更多词库-freemdict&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://downloads.freemdict.com/100G_Super_Big_Collection/%E5%8F%91%E9%9F%B3%E5%BA%93%28%E6%94%BE%E5%85%A5AudioLib%E6%96%87%E4%BB%B6%E5%A4%B9%29/&quot;&gt;发音库&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bookfere.com/post/tag/kindle%E5%AD%A6%E8%8B%B1%E8%AF%AD&quot;&gt;书&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mangapanda.com/&quot;&gt;漫画&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 </description>
         <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/04/21/anki/</link>
@@ -964,18 +947,17 @@ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的
 
 &lt;h3 id=&quot;git&quot;&gt;git&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;设置代理
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//设置代理
 git config --global http.proxy socks5://127.0.0.1:1080
-取消代理
+//取消代理
 git config --global --unset http.proxy
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;npm&quot;&gt;npm&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;淘宝镜像
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//淘宝镜像
 npm config set registry https://registry.npm.taobao.org
-
-验证
+//验证
 npm config get registry
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
@@ -995,24 +977,24 @@ npm config get registry
       </item>
     
       <item>
-        <title>ERROR</title>
+        <title>git error</title>
         <description>
-&lt;p&gt;&lt;strong&gt;ERROR//Git错误:&lt;/strong&gt;&lt;br /&gt;
-ServicePointManager 不支持具有 socks5h 方案的代理&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ServicePointManager 不支持具有 socks5h 方案的代理&lt;/strong&gt;&lt;/p&gt;
 
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;原因：&lt;/strong&gt;&lt;br /&gt;
-虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，&lt;br /&gt;
-所以代理无法使用&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;git remote rm origin删除
-重新配置为SSH的项目地址&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;原因：&lt;/strong&gt;&lt;br /&gt;
+  虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，&lt;br /&gt;
+  所以代理无法使用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;解决：&lt;/strong&gt;&lt;/p&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git remote rm origin&lt;/code&gt;删除&lt;/li&gt;
+      &lt;li&gt;重新配置为SSH的项目地址&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/04/21/Exception/</link>
@@ -1024,6 +1006,28 @@ ServicePointManager 不支持具有 socks5h 方案的代理&lt;/p&gt;
         
         
         <category>Exception</category>
+        
+      </item>
+    
+      <item>
+        <title>为什么GitHub需要SSH Key呢？</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot; role=&quot;doc-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#为什么github需要ssh-key呢&quot; id=&quot;markdown-toc-为什么github需要ssh-key呢&quot;&gt;为什么GitHub需要SSH Key呢&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;为什么github需要ssh-key呢&quot;&gt;为什么GitHub需要SSH Key呢&lt;/h3&gt;
+
+</description>
+        <pubDate>Tue, 21 Apr 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/04/21/github-sshkey/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/21/github-sshkey/</guid>
+        
+        <category>github</category>
+        
+        <category>SSH</category>
+        
+        
+        <category>问题</category>
         
       </item>
     

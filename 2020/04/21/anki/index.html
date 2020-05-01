@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>anki筛选语法</title>
-    <meta name="description" content="  暂停和搁置  卡片性质  标签  卡片状态  最近回答的卡片暂停和搁置  is:suspended暂停卡  is:buried搁置卡卡片性质  prop:ivl&gt;=10匹配间隔大于10天的卡片  prop:due=1匹配明天到期的卡片  prop:due=-1匹配昨天到期但尚未复习到的滞留卡片  pro...">
+    <meta name="description" content="  暂停和搁置  卡片性质  标签  卡片状态  最近回答的卡片  ☆使用建议  ☆参考暂停和搁置  is:suspended　　暂停卡  is:buried　　搁置卡可以略过的简单卡，设置暂停卡片性质  prop:ivl&gt;=10　　匹配间隔大于10天的卡片  prop:due=1　　匹配明天到期的卡片  ...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -228,72 +228,73 @@
   <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
   <li><a href="#卡片状态" id="markdown-toc-卡片状态">卡片状态</a></li>
   <li><a href="#最近回答的卡片" id="markdown-toc-最近回答的卡片">最近回答的卡片</a></li>
+  <li><a href="#使用建议" id="markdown-toc-使用建议">☆使用建议</a></li>
+  <li><a href="#参考" id="markdown-toc-参考">☆参考</a></li>
 </ul>
 
 <h2 id="暂停和搁置">暂停和搁置</h2>
 
 <ul>
-  <li>is:suspended
-暂停卡</li>
-  <li>is:buried
-搁置卡</li>
+  <li>is:suspended　　暂停卡</li>
+  <li>is:buried　　搁置卡<br />
+<mark>可以略过的简单卡，设置暂停</mark></li>
 </ul>
 
 <h2 id="卡片性质">卡片性质</h2>
 
 <ul>
-  <li>prop:ivl&gt;=10
+  <li>prop:ivl&gt;=10　　
 匹配间隔大于10天的卡片</li>
-  <li>prop:due=1
+  <li>prop:due=1　　
 匹配明天到期的卡片</li>
-  <li>prop:due=-1
+  <li>prop:due=-1　　
 匹配昨天到期但尚未复习到的滞留卡片</li>
-  <li>prop:due&gt;-1 prop:due&lt;1
+  <li>prop:due&gt;-1 prop:due&lt;1　　
 匹配昨天到期、今天到期和明天将要到期的卡片</li>
-  <li>prop:reps&lt;10
+  <li>prop:reps&lt;10　　
 匹配回答次数少于10次的卡片</li>
-  <li>prop:lapses&gt;3
+  <li>prop:lapses&gt;3　　
 匹配失误再次学习超过3次的卡片</li>
-  <li>prop:ease!=2.5
+  <li>prop:ease!=2.5　　
 匹配难度大于或小于初始默认值的卡片</li>
 </ul>
 
 <h2 id="标签">标签</h2>
 
 <ul>
-  <li>tag:animal
+  <li>tag:animal　　
 匹配带有“animal”标签的笔记</li>
-  <li>tag:none
+  <li>tag:none　　
 匹配没有标签的笔记</li>
-  <li>tag:ani*
+  <li>tag:ani*　　
 匹配标签以“ani”开头的笔记</li>
 </ul>
 
 <h2 id="卡片状态">卡片状态</h2>
 
 <ul>
-  <li>is:due
+  <li>is:due　　
 匹配已到期的的复习卡片和学习中卡片</li>
-  <li>is:new
+  <li>is:new　　
 匹配新卡片</li>
-  <li>is:learn
+  <li>is:learn　　
 匹配学习中卡片</li>
-  <li>is:review
+  <li>is:review　　
 匹配待学习的复习卡片（包括到期的和未到期的）和失误的卡片</li>
-  <li>is:suspended
+  <li>is:suspended　　
 匹配手动暂停的卡片</li>
-  <li>is:buried
+  <li>is:buried　　
 匹配已搁置的卡片（包括自动的和手动的）</li>
 </ul>
 
 <hr />
 
 <ul>
-  <li>is:learn is:review
+  <li>is:learn is:review　　
 匹配失误的等待再次学习的卡片</li>
-  <li>-is:learn is:review
+  <li>-is:learn is:review　　
 只匹配正常的复习卡片，不包括失误的卡片</li>
-  <li>is:learn -is:review
+  <li>is:learn -is:review　　
 只匹配第一次学习的卡片</li>
 </ul>
 
@@ -304,15 +305,42 @@
 <h2 id="最近回答的卡片">最近回答的卡片</h2>
 
 <ul>
-  <li>rated:1
+  <li>rated:1　　
 匹配今天回答的卡片</li>
-  <li>rated:1:2
+  <li>rated:1:2　　
 匹配今天回答Hard（2）的卡片</li>
-  <li>rated:7:1
+  <li>rated:7:1　　
 匹配过去7天回答Again（1）的卡片</li>
-  <li>rated:31:4
+  <li>rated:31:4　　
 匹配过去1月回答Easy（4）的卡片</li>
 </ul>
+
+<h2 id="使用建议">☆使用建议</h2>
+
+<ol>
+  <li>rated　　复习今天学习时遇到的难度卡</li>
+  <li>prop:ivl　　复习间隔比较久的简单卡</li>
+  <li>prop:ease　　强化学习难度卡</li>
+  <li>tag　　复习标记卡</li>
+  <li>-is:new　　辅助筛选</li>
+</ol>
+
+<h2 id="参考">☆参考</h2>
+<ul>
+  <li><a href="http://www.ankichina.net/manual/anki">汉化手册</a></li>
+  <li><a href="https://ankiweb.net/shared/addons/2.1">插件</a></li>
+  <li><a href="https://wiki.anki.link/">Anki资源库</a></li>
+  <li><a href="https://ankiweb.net/shared/decks/english">英语牌组</a></li>
+  <li><a href="https://www.laohuang.net/">教程-老黄老巢</a></li>
+  <li><a href="https://www.yuque.com/purequant/anki/uefe4y">教程-樱梦-Anki学习笔记</a></li>
+  <li><a href="https://pan.baidu.com/s/1xBjehEu6Zih1Hn5IoZc50g">自用-词典及牌组</a>　　提取码：r5z2</li>
+  <li><a href="https://www.pdawiki.com/forum/forum.php?mod=viewthread&amp;tid=30146&amp;extra=page%3D1">更多词库-pdawiki</a></li>
+  <li><a href="https://freemdict.com/">更多词库-freemdict</a></li>
+  <li><a href="https://downloads.freemdict.com/100G_Super_Big_Collection/%E5%8F%91%E9%9F%B3%E5%BA%93%28%E6%94%BE%E5%85%A5AudioLib%E6%96%87%E4%BB%B6%E5%A4%B9%29/">发音库</a></li>
+  <li><a href="https://bookfere.com/post/tag/kindle%E5%AD%A6%E8%8B%B1%E8%AF%AD">书</a></li>
+  <li><a href="http://www.mangapanda.com/">漫画</a></li>
+</ul>
+
 
         </article>
         <hr>
@@ -326,15 +354,6 @@
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
             
                 
                     
@@ -431,6 +450,21 @@
                 
                     
                 
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
             
                 
                     

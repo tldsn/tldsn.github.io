@@ -174,158 +174,6 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2020/04/21/anki/">anki筛选语法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2020-04-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>tldsn
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#anki" title="Tag: anki" rel="tag">anki</a>&nbsp;
-    
-        <a href="/tag/#搜索技巧" title="Tag: 搜索技巧" rel="tag">搜索技巧</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#暂停和搁置" id="markdown-toc-暂停和搁置">暂停和搁置</a></li>
-  <li><a href="#卡片性质" id="markdown-toc-卡片性质">卡片性质</a></li>
-  <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
-  <li><a href="#卡片状态" id="markdown-toc-卡片状态">卡片状态</a></li>
-  <li><a href="#最近回答的卡片" id="markdown-toc-最近回答的卡片">最近回答的卡片</a></li>
-</ul>
-
-<h2 id="暂停和搁置">暂停和搁置</h2>
-
-<ul>
-  <li>is:suspended
-暂停卡</li>
-  <li>is:buried
-搁置卡</li>
-</ul>
-
-<h2 id="卡片性质">卡片性质</h2>
-
-<ul>
-  <li>prop:ivl&gt;=10
-匹配间隔大于10天的卡片</li>
-  <li>prop:due=1
-匹配明天到期的卡片</li>
-  <li>prop:due=-1
-匹配昨天到期但尚未复习到的滞留卡片</li>
-  <li>prop:due&gt;-1 prop:due&lt;1
-匹配昨天到期、今天到期和明天将要到期的卡片</li>
-  <li>prop:reps&lt;10
-匹配回答次数少于10次的卡片</li>
-  <li>prop:lapses&gt;3
-匹配失误再次学习超过3次的卡片</li>
-  <li>prop:ease!=2.5
-匹配难度大于或小于初始默认值的卡片</li>
-</ul>
-
-<h2 id="标签">标签</h2>
-
-<ul>
-  <li>tag:animal
-匹配带有“animal”标签的笔记</li>
-  <li>tag:none
-匹配没有标签的笔记</li>
-  <li>tag:ani*
-匹配标签以“ani”开头的笔记</li>
-</ul>
-
-<h2 id="卡片状态">卡片状态</h2>
-
-<ul>
-  <li>is:due
-匹配已到期的的复习卡片和学习中卡片</li>
-  <li>is:new
-匹配新卡片</li>
-  <li>is:learn
-匹配学习中卡片</li>
-  <li>is:review
-匹配待学习的复习卡片（包括到期的和未到期的）和失误的卡片</li>
-  <li>is:suspended
-匹配手动暂停的卡片</li>
-  <li>is:buried
-匹配已搁置的卡片（包括自动的和手动的）</li>
-</ul>
-
-<hr />
-
-<ul>
-  <li>is:learn is:review
-匹配失误的等待再次学习的卡片</li>
-  <li>-is:learn is:review
-只匹配正常的复习卡片，不包括失误的卡片</li>
-  <li>is:learn -is:review
-只匹配第一次学习的卡片</li>
-</ul>
-
-<p><mark>
-注意到期（is:due）只匹配复习卡片和间隔在1天及以上的学习中卡片，不匹配间隔很短（如10分钟）的学习中卡片。
-</mark></p>
-
-<h2 id="最近回答的卡片">最近回答的卡片</h2>
-
-<ul>
-  <li>rated:1
-匹配今天回答的卡片</li>
-  <li>rated:1:2
-匹配今天回答Hard（2）的卡片</li>
-  <li>rated:7:1
-匹配过去7天回答Again（1）的卡片</li>
-  <li>rated:31:4
-匹配过去1月回答Easy（4）的卡片</li>
-</ul>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2020/04/21/anki/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
                   <a class="post-link" href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">系统安装与备份</a>
                 </h2>
                 <div class="label">
@@ -495,18 +343,17 @@ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的
 
 <h3 id="git">git</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>设置代理
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//设置代理
 git config --global http.proxy socks5://127.0.0.1:1080
-取消代理
+//取消代理
 git config --global --unset http.proxy
 </code></pre></div></div>
 
 <h3 id="npm">npm</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>淘宝镜像
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//淘宝镜像
 npm config set registry https://registry.npm.taobao.org
-
-验证
+//验证
 npm config get registry
 </code></pre></div></div>
 
@@ -519,7 +366,7 @@ npm config get registry
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2020/04/21/Exception/">ERROR</a>
+                  <a class="post-link" href="/2020/04/21/Exception/">git error</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
@@ -571,22 +418,22 @@ npm config get registry
                 </div>
                 <div class="excerpt">
                     
-<p><strong>ERROR//Git错误:</strong><br />
-ServicePointManager 不支持具有 socks5h 方案的代理</p>
+<p><strong>ServicePointManager 不支持具有 socks5h 方案的代理</strong></p>
 
-<hr />
-
-<p><strong>原因：</strong><br />
-虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，<br />
-所以代理无法使用</p>
-
-<hr />
-
-<p><strong>解决：</strong></p>
-<blockquote>
-  <p>git remote rm origin删除
-重新配置为SSH的项目地址</p>
-</blockquote>
+<ul>
+  <li>
+    <p><strong>原因：</strong><br />
+  虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，<br />
+  所以代理无法使用</p>
+  </li>
+  <li>
+    <p><strong>解决：</strong></p>
+    <ol>
+      <li><code class="highlighter-rouge">git remote rm origin</code>删除</li>
+      <li>重新配置为SSH的项目地址</li>
+    </ol>
+  </li>
+</ul>
 
                 </div>
                 <div class="read-all">
@@ -726,6 +573,98 @@ ServicePointManager 不支持具有 socks5h 方案的代理</p>
                 <hr>
               </li>
             
+              <li>
+                <h2>
+                  <a class="post-link" href="/2020/04/21/win10-jekyll%E7%8E%AF%E5%A2%83/">win10-jekyll环境</a>
+                </h2>
+                <div class="label">
+                    <div class="label-card">
+                        <i class="fa fa-calendar"></i>2020-04-21
+                    </div>
+                    <div class="label-card">
+                        <i class="fa fa-user"></i>tldsn
+                        
+                    </div>
+                    <div class="label-card">
+                        
+                    </div>
+
+                    <div class="label-card">
+                    
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#环境" title="Category: 环境" rel="category">环境</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+                    </div>
+
+                    <div class="label-card">
+                    
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <a href="/tag/#win10" title="Tag: win10" rel="tag">win10</a>&nbsp;
+    
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+    
+        <a href="/tag/#环境" title="Tag: 环境" rel="tag">环境</a>
+    
+  
+
+</span>
+
+                    </div>
+                </div>
+                <div class="excerpt">
+                    <!-- markdownlint-disable-file -->
+<ul id="markdown-toc" role="doc-toc">
+  <li><a href="#win10jekyll" id="markdown-toc-win10jekyll">win10//jekyll</a></li>
+</ul>
+
+<h3 id="win10jekyll">win10//jekyll</h3>
+
+<blockquote>
+  <p><a href="http://jekyllcn.com/docs/quickstart/">http://jekyllcn.com/docs/quickstart/</a></p>
+</blockquote>
+
+<ul>
+  <li>安装ruby</li>
+  <li>安装rubygems</li>
+  <li>安装bundle</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle init
+
+bundle config set path 'vendor/bundle'
+
+bundle add jekyle
+
+bundle exec jekyll new --force --skip-bundle .
+
+bundle install
+
+bundle exec jekyll serve
+</code></pre></div></div>
+
+                </div>
+                <div class="read-all">
+                    <a  href="/2020/04/21/win10-jekyll%E7%8E%AF%E5%A2%83/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                </div>
+                <hr>
+              </li>
+            
         </ul>
 
 
@@ -755,8 +694,6 @@ ServicePointManager 不支持具有 socks5h 方案的代理</p>
                     
                         <li><a href="/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/">autohotkey-windows快捷键设置神器_疯狂的哈丘的博客</a></li>
                     
-                        <li><a href="/2020/04/21/%E7%BD%91%E7%AB%99%E5%A4%87%E5%BF%98/">网站备忘</a></li>
-                    
                         <li><a href="/2020/04/21/stackoverflow%E6%90%9C%E7%B4%A2/">stackoverflow搜索</a></li>
                     
                         <li><a href="/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/">百度脑图</a></li>
@@ -771,7 +708,9 @@ ServicePointManager 不支持具有 socks5h 方案的代理</p>
                     
                         <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%90%86/">一些代理</a></li>
                     
-                        <li><a href="/2020/04/21/Exception/">ERROR</a></li>
+                        <li><a href="/2020/04/21/Exception/">git error</a></li>
+                    
+                        <li><a href="/2020/04/21/github-sshkey/">为什么GitHub需要SSH Key呢？</a></li>
                     
                 </ul>
             </div>
@@ -789,7 +728,7 @@ ServicePointManager 不支持具有 socks5h 方案的代理</p>
                             <span class="name">
                                 印象笔记导入
                             </span>
-                            <span class="badge">15</span>
+                            <span class="badge">16</span>
                         </a>
                     </li>
                     
@@ -862,15 +801,6 @@ ServicePointManager 不支持具有 socks5h 方案的代理</p>
                                 工具
                             </span>
                             <span class="badge">4</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#资源" class="categories-list-item" cate="资源">
-                            <span class="name">
-                                资源
-                            </span>
-                            <span class="badge">1</span>
                         </a>
                     </li>
                     
@@ -1051,13 +981,6 @@ ServicePointManager 不支持具有 socks5h 方案的代理</p>
                       
                       
                       <a href="/tag/#stackoverflow" style="font-size: 9pt; color: #999;">stackoverflow</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#网站备忘" style="font-size: 9pt; color: #999;">网站备忘</a>
                     
                       
                       

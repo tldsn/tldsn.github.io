@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>github常用搜索</title>
-    <meta name="description" content="  github常用搜索          搜仓库      搜主题      搜代码      代码精确搜索（测试中）      搜提交      搜pr、issur      搜wiki        搜索语法  键盘快捷键  其他github常用搜索      搜仓库    按仓库名称、说明或自述文件内容搜...">
+    <meta name="description" content="  搜索语法  在GitHub上搜索          base      搜代码        键盘快捷键  其他搜索语法  n..n　　      n..*        &gt;YYYY-MM-DD        a not b　　包含a而不包含b　　    -n　　排除n在GitHub上搜索base  i...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -223,84 +223,62 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#github常用搜索" id="markdown-toc-github常用搜索">github常用搜索</a>    <ul>
-      <li><a href="#搜仓库" id="markdown-toc-搜仓库">搜仓库</a></li>
-      <li><a href="#搜主题" id="markdown-toc-搜主题">搜主题</a></li>
+  <li><a href="#搜索语法" id="markdown-toc-搜索语法">搜索语法</a></li>
+  <li><a href="#在github上搜索" id="markdown-toc-在github上搜索">在GitHub上搜索</a>    <ul>
+      <li><a href="#base" id="markdown-toc-base">base</a></li>
       <li><a href="#搜代码" id="markdown-toc-搜代码">搜代码</a></li>
-      <li><a href="#代码精确搜索测试中" id="markdown-toc-代码精确搜索测试中">代码精确搜索（测试中）</a></li>
-      <li><a href="#搜提交" id="markdown-toc-搜提交">搜提交</a></li>
-      <li><a href="#搜prissur" id="markdown-toc-搜prissur">搜pr、issur</a></li>
-      <li><a href="#搜wiki" id="markdown-toc-搜wiki">搜wiki</a></li>
     </ul>
   </li>
-  <li><a href="#搜索语法" id="markdown-toc-搜索语法">搜索语法</a></li>
   <li><a href="#键盘快捷键" id="markdown-toc-键盘快捷键">键盘快捷键</a></li>
   <li><a href="#其他" id="markdown-toc-其他">其他</a></li>
 </ul>
 
-<h2 id="github常用搜索">github常用搜索</h2>
-
-<ul>
-  <li>
-    <h3 id="搜仓库">搜仓库</h3>
-
-    <p>按仓库名称、说明或自述文件内容搜索
-  按复刻数量搜索
-  按星号数量搜索
-  按语言搜索
-  按主题搜索</p>
-  </li>
-  <li>
-    <h3 id="搜主题">搜主题</h3>
-  </li>
-  <li>
-    <h3 id="搜代码">搜代码</h3>
-
-    <p>按语言
-  按文件名
-  按文件路径
-  按扩展名</p>
-  </li>
-  <li>
-    <h3 id="代码精确搜索测试中">代码精确搜索（测试中）</h3>
-
-    <p>f</p>
-  </li>
-  <li>
-    <h3 id="搜提交">搜提交</h3>
-
-    <p>在提交消息内搜索
-  按作者或提交者搜索</p>
-  </li>
-  <li>
-    <h3 id="搜prissur">搜pr、issur</h3>
-
-    <p>type
-  is</p>
-  </li>
-  <li>
-    <h3 id="搜wiki">搜wiki</h3>
-  </li>
-</ul>
-
 <h2 id="搜索语法">搜索语法</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;n
-&gt;=n
-&lt;n
-&lt;=n
+<ul>
+  <li><code class="highlighter-rouge">n..n</code>　　</li>
+  <li>
+    <p><code class="highlighter-rouge">n..*</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">&gt;YYYY-MM-DD</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">a not b</code>　　包含a而不包含b　　</p>
+  </li>
+  <li><code class="highlighter-rouge">-n</code>　　排除n</li>
+</ul>
 
-n..*
-*..n
+<h2 id="在github上搜索">在GitHub上搜索</h2>
 
-n..n
+<h3 id="base">base</h3>
 
-&gt;YYYY-MM-DD
+<ul>
+  <li>in:name　　按仓库名称搜索</li>
+  <li>in:description　　按说明</li>
+  <li>in:readme　　按自述</li>
+  <li>user:USERNAME</li>
+  <li>followers:n　　按关注者数量</li>
+  <li>forks:n　　按复刻数量</li>
+  <li>stars:n　　按星号数量</li>
+  <li>created:YYYY-MM-DD</li>
+  <li>pushed:YYYY-MM-DD　　上次更新时间</li>
+  <li>language:LANGUAGE　　按语言搜索</li>
+  <li>topic:TOPIC　　按主题搜索</li>
+  <li>label:LABEL　　搜标签</li>
+</ul>
 
-not
+<h3 id="搜代码">搜代码</h3>
 
--qualifier
-</code></pre></div></div>
+<ul>
+  <li>extension:EXTENSION　　限定文件扩展名</li>
+  <li>filename:FILENAME　　限定文件名</li>
+  <li>path:DIRECTORY　　在路径下搜索</li>
+  <li>language:LANGUAGE　　在特定语言下搜索</li>
+  <li>user:USERNAME　　</li>
+  <li>in:file　　文件内容中包含</li>
+  <li>in:path　　文件路径中包含</li>
+</ul>
 
 <h2 id="键盘快捷键">键盘快捷键</h2>
 
@@ -328,15 +306,6 @@ awesome + 关键字</p>
                 
                     
                 
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
             
                 
                     
@@ -486,6 +455,30 @@ awesome + 关键字</p>
                 
             
         
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2020/04/21/github-sshkey/">为什么GitHub需要SSH Key呢？
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
         
             </ul>
         
@@ -493,7 +486,7 @@ awesome + 关键字</p>
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2020/04/19/first/">first</a></p>
+        <p><strong>上一篇</strong> <a href="/2020/04/17/%E7%B2%BE%E9%80%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">精通正则表达式</a></p>
         
     </div>
     <div class="nex">

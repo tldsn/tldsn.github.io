@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>jekyll初识</title>
-    <meta name="description" content="  base          基本命令      目录结构        配置          指定 Jekyll build 时的环境      头信息默认值      头信息      永久连接        常用变量  集合  Liquid          过滤器      标签        git...">
+    <meta name="description" content="  base          基本命令      目录结构        ☆常用变量  Liquid          过滤器      标签        配置          头信息默认值      头信息      永久连接      指定 Jekyll build 时的环境      markdown...">
 
     <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/favicon.ico?" type="image/x-icon">
@@ -225,24 +225,24 @@
       <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
     </ul>
   </li>
-  <li><a href="#配置" id="markdown-toc-配置">配置</a>    <ul>
-      <li><a href="#指定-jekyll-build-时的环境" id="markdown-toc-指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</a></li>
-      <li><a href="#头信息默认值" id="markdown-toc-头信息默认值">头信息默认值</a></li>
-      <li><a href="#头信息" id="markdown-toc-头信息">头信息</a></li>
-      <li><a href="#永久连接" id="markdown-toc-永久连接">永久连接</a></li>
-    </ul>
-  </li>
-  <li><a href="#常用变量" id="markdown-toc-常用变量">常用变量</a></li>
-  <li><a href="#集合" id="markdown-toc-集合">集合</a></li>
+  <li><a href="#常用变量" id="markdown-toc-常用变量">☆常用变量</a></li>
   <li><a href="#liquid" id="markdown-toc-liquid">Liquid</a>    <ul>
       <li><a href="#过滤器" id="markdown-toc-过滤器">过滤器</a></li>
       <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
     </ul>
   </li>
-  <li><a href="#github-pages" id="markdown-toc-github-pages">github-pages</a></li>
-  <li><a href="#markdown选项" id="markdown-toc-markdown选项">markdown选项</a></li>
-  <li><a href="#liquid选项" id="markdown-toc-liquid选项">Liquid选项</a></li>
+  <li><a href="#配置" id="markdown-toc-配置">配置</a>    <ul>
+      <li><a href="#头信息默认值" id="markdown-toc-头信息默认值">头信息默认值</a></li>
+      <li><a href="#头信息" id="markdown-toc-头信息">头信息</a></li>
+      <li><a href="#永久连接" id="markdown-toc-永久连接">永久连接</a></li>
+      <li><a href="#指定-jekyll-build-时的环境" id="markdown-toc-指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</a></li>
+      <li><a href="#markdown选项" id="markdown-toc-markdown选项">markdown选项</a></li>
+      <li><a href="#liquid选项" id="markdown-toc-liquid选项">Liquid选项</a></li>
+    </ul>
+  </li>
   <li><a href="#分页" id="markdown-toc-分页">分页</a></li>
+  <li><a href="#集合" id="markdown-toc-集合">集合</a></li>
+  <li><a href="#github-pages" id="markdown-toc-github-pages">github-pages</a></li>
   <li><a href="#插件" id="markdown-toc-插件">插件</a></li>
   <li><a href="#自动部署" id="markdown-toc-自动部署">自动部署</a></li>
   <li><a href="#持续集成" id="markdown-toc-持续集成">持续集成</a></li>
@@ -251,7 +251,7 @@
 
 <p><mark>本文仅自用，请以最新官方文档为准</mark></p>
 
-<h3 id="base">base</h3>
+<h2 id="base">base</h2>
 
 <ul>
   <li>
@@ -306,75 +306,7 @@
   </tbody>
 </table>
 
-<h3 id="配置">配置</h3>
-
-<blockquote>
-  <p>参考：<a href="http://jekyllcn.com/docs/configuration/">jekyll默认配置</a></p>
-</blockquote>
-
-<ul>
-  <li>Safe　　是否开启自定义插件</li>
-  <li>Defaults　　设置YAML头信息默认值</li>
-  <li>
-    <p>LSI　　为相关文章生成索引</p>
-  </li>
-  <li>
-    <h4 id="指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</h4>
-  </li>
-</ul>
-
-<p><mark>
-★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数，默认为development
-</mark></p>
-
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   JEKYLL_ENV=production jekyll build
-
-   <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">jekyll</span><span class="p">.</span><span class="nv">environment</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"production"</span><span class="w"> </span><span class="p">%}</span>
-      <span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>disqus.html<span class="w"> </span><span class="p">%}</span>
-   <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <h4 id="头信息默认值">头信息默认值</h4>
-  </li>
-</ul>
-
-<blockquote>
-  <p>在_config.yml 文件里设置 defaults 的值指定全站范围的默认值</p>
-</blockquote>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defaults:
-  -
-    scope:
-      path: "posts"
-      type: "posts"
-    values:
-      layout: "post"
-      author: "tldsn"
-</code></pre></div></div>
-
-<ul>
-  <li>
-    <h4 id="头信息">头信息</h4>
-
-    <p>预定义全局变量</p>
-  </li>
-  <li>layout</li>
-  <li>permalink</li>
-  <li>published</li>
-  <li>date</li>
-  <li>category/categories</li>
-  <li>
-    <p>tags</p>
-  </li>
-  <li>
-    <h4 id="永久连接">永久连接</h4>
-  </li>
-  <li>permalink</li>
-</ul>
-
-<h3 id="常用变量">常用变量</h3>
+<h2 id="常用变量">☆常用变量</h2>
 
 <ul>
   <li>site</li>
@@ -429,23 +361,13 @@
 
 <hr />
 
-<h3 id="集合">集合</h3>
-
-<blockquote>
-  <p>同pages、posts</p>
-</blockquote>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
-- my_collection
-</code></pre></div></div>
-
-<h3 id="liquid">Liquid</h3>
+<h2 id="liquid">Liquid</h2>
 
 <ul>
   <li>
     <h4 id="过滤器">过滤器</h4>
   </li>
-  <li>日期格式</li>
+  <li>日期格式化</li>
   <li>字符串操作｛转码、过滤字符｝</li>
   <li>json转换</li>
   <li>数组操作｛push、pop、随机、排序、数组转句子、｝</li>
@@ -455,24 +377,22 @@
   <li>
     <h4 id="标签">标签</h4>
   </li>
-  <li>include</li>
-</ul>
+  <li>
+    <p>include</p>
 
-<blockquote>
-  <p>如果你需要在多个地方引用一小代码片段，可以使用 include 标签
-Jekyll 要求所有被引用的文件放在根目录的 _includes 文件夹
-还可以传递参数、变量
-变量可以通过被调用
-include_relative引入其他文件</p>
-</blockquote>
-
-<ul>
+    <blockquote>
+      <p>如果你需要在多个地方引用一小代码片段，可以使用 <code class="highlighter-rouge">include</code> 标签<br />
+Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter-rouge">_includes</code> 文件夹<br />
+还可以传递参数、变量<br />
+变量可以通过``被调用<br />
+<code class="highlighter-rouge">include_relative</code>引入其他文件</p>
+    </blockquote>
+  </li>
   <li>highlight</li>
 </ul>
 
 <blockquote>
-  <p>可以加入行号
-要使用代码高亮，你还需要包含一个样式表。例如 syntax.css 。它包含了和 GitHub 一样的样式</p>
+  <p>可以加入行号</p>
 </blockquote>
 
 <ul>
@@ -500,11 +420,113 @@ include_relative引入其他文件</p>
 需要引入jekyll-gist gem</p>
 </blockquote>
 
-<h3 id="github-pages">github-pages</h3>
+<h2 id="配置">配置</h2>
 
-<p>使用 github-pages gem包</p>
 <blockquote>
-  <p>管理Jekyll和其在Github Pages上的依赖，
+  <p>参考：<a href="http://jekyllcn.com/docs/configuration/">jekyll默认配置</a></p>
+</blockquote>
+
+<ul>
+  <li>Safe　　是否开启自定义插件</li>
+  <li>Defaults　　设置YAML头信息默认值</li>
+  <li>
+    <p>LSI　　为相关文章生成索引</p>
+  </li>
+  <li>
+    <h4 id="头信息默认值">头信息默认值</h4>
+  </li>
+</ul>
+
+<blockquote>
+  <p>在_config.yml 文件里设置 defaults 的值指定全站范围的默认值</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defaults:
+  -
+    scope:
+      path: "posts"
+      type: "posts"
+    values:
+      layout: "post"
+      author: "tldsn"
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <h4 id="头信息">头信息</h4>
+
+    <p>预定义全局变量</p>
+  </li>
+  <li>layout</li>
+  <li>permalink</li>
+  <li>published</li>
+  <li>date</li>
+  <li>category/categories</li>
+  <li>
+    <p>tags</p>
+  </li>
+  <li>
+    <h4 id="永久连接">永久连接</h4>
+  </li>
+  <li>
+    <p>permalink</p>
+  </li>
+  <li>
+    <h4 id="指定-jekyll-build-时的环境">指定 Jekyll build 时的环境</h4>
+  </li>
+</ul>
+
+<p><mark>
+★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数，默认为development
+</mark></p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   JEKYLL_ENV=production jekyll build
+
+   <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">jekyll</span><span class="p">.</span><span class="nv">environment</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"production"</span><span class="w"> </span><span class="p">%}</span>
+      <span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>disqus.html<span class="w"> </span><span class="p">%}</span>
+   <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <h4 id="markdown选项">markdown选项</h4>
+  </li>
+  <li>Kramdown</li>
+  <li>
+    <p>Redcarpet</p>
+  </li>
+  <li>
+    <h4 id="liquid选项">Liquid选项</h4>
+  </li>
+  <li>liquid错误处理方式</li>
+</ul>
+
+<h2 id="分页">分页</h2>
+
+<blockquote>
+  <p>参考：<a href="http://jekyllcn.com/docs/pagination/">分页</a></p>
+</blockquote>
+
+<ul>
+  <li>jekyll-paginate插件</li>
+  <li>只支持html文件</li>
+  <li>现不支持标签和类别分页，也不支持集合</li>
+</ul>
+
+<h2 id="集合">集合</h2>
+
+<blockquote>
+  <p>同pages、posts</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
+- my_collection
+</code></pre></div></div>
+
+<h2 id="github-pages">github-pages</h2>
+
+<blockquote>
+  <p>使用 github-pages gem包管理Jekyll和其在Github Pages上的依赖，
 使用这个包可以在将网站部署到Github Pages上时， 不会因为各种不同版本的gem包而导致意外报错。</p>
 </blockquote>
 
@@ -517,64 +539,18 @@ include_relative引入其他文件</p>
 <span class="nx">gem</span> <span class="dl">'</span><span class="s1">github-pages</span><span class="dl">'</span><span class="p">,</span> <span class="nx">versions</span><span class="p">[</span><span class="dl">'</span><span class="s1">github-pages</span><span class="dl">'</span><span class="p">]</span>
 </code></pre></div></div>
 
-<h3 id="markdown选项">markdown选项</h3>
-
-<ul>
-  <li>
-    <p>Redcarpet</p>
-  </li>
-  <li>
-    <p>Kramdown</p>
-  </li>
-</ul>
-
-<h3 id="liquid选项">Liquid选项</h3>
-
-<ul>
-  <li>liquid错误处理方式</li>
-</ul>
-
-<h3 id="分页">分页</h3>
-
-<blockquote>
-  <p>参考：<a href="http://jekyllcn.com/docs/pagination/">分页</a></p>
-</blockquote>
-
-<ul>
-  <li>jekyll-paginate插件</li>
-  <li>只支持html文件</li>
-  <li>现不支持标签和类别分页，也不支持集合</li>
-</ul>
-
-<p><mark>
-★不要在博客的头信息中设置 permalink，设置 permalink 会造成分页功能的瘫痪。缺省设置 permalink 即可。
-</mark></p>
-
-<h3 id="插件">插件</h3>
-
-<p>安装插件三种方法</p>
-
-<ul>
-  <li>_plugins文件夹</li>
-  <li>在_config.yml中配置</li>
-  <li>在gemfile中安装</li>
-</ul>
-
-<p>自定义插件支持</p>
+<h2 id="插件">插件</h2>
 
 <ol>
-  <li>生成器 - Generators</li>
-  <li>转换器 - Converters</li>
-  <li>命令 - Commands</li>
-  <li>标记 - Tags</li>
-  <li>钩子 - Hooks</li>
+  <li>在gemfile中安装</li>
+  <li>在_config.yml中配置</li>
 </ol>
 
-<h3 id="自动部署">自动部署</h3>
+<h2 id="自动部署">自动部署</h2>
 
-<h3 id="持续集成">持续集成</h3>
+<h2 id="持续集成">持续集成</h2>
 
-<h3 id="参考">参考</h3>
+<h2 id="参考">参考</h2>
 
 <blockquote>
   <p><a href="http://jekyllcn.com/docs/quickstart/">http://jekyllcn.com/docs/quickstart/</a></p>
@@ -602,13 +578,6 @@ include_relative引入其他文件</p>
                     
                 
             
-        
-            
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -670,6 +639,17 @@ include_relative引入其他文件</p>
                 
                     
                 
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
             
                 
                     
