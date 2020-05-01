@@ -26,15 +26,15 @@ author: tldsn
 3. rubygems
 
     ```
-    sudo apt install rubygems
-    sudo gem update --system　　升级
+    sudo apt install rubygems　　//安装
+    sudo gem update --system　　//升级
     ```
 
 4. jekyll
 
     ```
-    sudo gem install jekyll
-    sudo gem update jekyll　　升级
+    sudo gem install jekyll　　//安装
+    sudo gem update jekyll　　//升级
     ```
 
 ### gem镜像
