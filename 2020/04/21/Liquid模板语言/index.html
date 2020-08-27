@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,9 +14,27 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
-    <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/">
-    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link rel="stylesheet" href="/assets/css/main.css ">
+    <link rel="canonical" href="https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Liquid文档 | TLDSN</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Liquid文档" />
+<meta name="author" content="tldsn" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Liquid模板语言 base 数据类型 操作符 真值与假值 空白符、raw 标记 控制流 迭代 变量赋值 过滤器 filters 参考 Liquid模板语言 三要素：对象、标记、过滤器 base 数据类型 String Number Boolean Nil Array 通过 assign 或 capture 标记来初始化 Liquid 变量 ★你无法只通过 Liquid 语法初始化一个数组。然而，你可以利用 split 过滤器将一个字符串分割为一个子字符串数组。 操作符 操作符 含义 == 相等 != 不相等 &gt; 大于 &lt; 小于 &gt;= 大于或等于 &lt;= 小于或等于 or 逻辑或 and 逻辑与 contains 包含 真值与假值 除了 nil 和 false 之外的所有值都是真值 ★关于空字符串和Nil ★未定义的变量使用时为nil　0值空字符串为true 空白符、raw raw　　endraw raw 标记临时禁止处理其所包围的代码 使用{{-、-}}、{%- 和 -%}取消Liquid 表达式编译后产生的空行### 对象 {{ page.title }} 标记 {% if user %} Hello {{ user.name }}! {% endif %} 控制流 关键字 if　　endif else elseif unless　　endunless case　　when　　endcase {% assign handle = &#39;cake&#39; %} {% case handle %} {% when &#39;cake&#39; %} This is a cake {% when &#39;cookie&#39; %} This is a cookie {% else %} This is not a cake nor a cookie {% endcase %} 迭代 关键字 for　　in　　endfor break continue limit　　限定循环执行的次数 offset　　从指定索引号开始执行循环 range　　定义循环执行的范围： 1..num reversed　　反转循环的执行顺序 cycle　　循环一组字符串并按照它们传入的顺序将其输出 tablerow　　生成一个 HTML 表格 变量赋值 关键字 assign capture increment　　自增数值变量　初始0 decrement　　自减数值变量　初始-1 {% assign foo = &quot;bar&quot; %} {{ foo }} {% capture my_variable %} I am being captured. {% endcapture %} 0 1 0 1 过滤器 过滤器 改变 Liquid 对象的输出。他们被用在输出上，通过一个 | 符号分隔 {{ &quot;adam!&quot; | capitalize | prepend: &quot;Hello &quot; }} 输出： Hello Adam! filters filters 解释 abs 绝对值 append 追加 at_least 限制最小值 at_most 限制最大值 capitalize 首字母大写 ceil 取整 compact 删除数组中的nil值 concat 数组合并 date 日期格式 default 默认值 divided_by 相除 downcase   escape   escape_once 字符串转义 first   floor   join 数组转字符串 last   lstrip   map 构件数组用 minus 相减 modulo 取余 newline_to_br   plus 相加 prepend 前置添加 remove 删除 remove_first   replace 替换 replace_first   reverse 数组反转 round 四舍五入 rstrip   size 字符串数组length slice   sort 数组排序 sort_natural   split 字符串分隔为数组 strip 删除两侧空白符 strip_html   strip_newlines   times 乘 truncate 字符串截断 truncatewords 字符串截断加… uniq 数组去重 upcase   url_decode   url_encode   参考 https://liquid.bootcss.com/basics/types/" />
+<meta property="og:description" content="Liquid模板语言 base 数据类型 操作符 真值与假值 空白符、raw 标记 控制流 迭代 变量赋值 过滤器 filters 参考 Liquid模板语言 三要素：对象、标记、过滤器 base 数据类型 String Number Boolean Nil Array 通过 assign 或 capture 标记来初始化 Liquid 变量 ★你无法只通过 Liquid 语法初始化一个数组。然而，你可以利用 split 过滤器将一个字符串分割为一个子字符串数组。 操作符 操作符 含义 == 相等 != 不相等 &gt; 大于 &lt; 小于 &gt;= 大于或等于 &lt;= 小于或等于 or 逻辑或 and 逻辑与 contains 包含 真值与假值 除了 nil 和 false 之外的所有值都是真值 ★关于空字符串和Nil ★未定义的变量使用时为nil　0值空字符串为true 空白符、raw raw　　endraw raw 标记临时禁止处理其所包围的代码 使用{{-、-}}、{%- 和 -%}取消Liquid 表达式编译后产生的空行### 对象 {{ page.title }} 标记 {% if user %} Hello {{ user.name }}! {% endif %} 控制流 关键字 if　　endif else elseif unless　　endunless case　　when　　endcase {% assign handle = &#39;cake&#39; %} {% case handle %} {% when &#39;cake&#39; %} This is a cake {% when &#39;cookie&#39; %} This is a cookie {% else %} This is not a cake nor a cookie {% endcase %} 迭代 关键字 for　　in　　endfor break continue limit　　限定循环执行的次数 offset　　从指定索引号开始执行循环 range　　定义循环执行的范围： 1..num reversed　　反转循环的执行顺序 cycle　　循环一组字符串并按照它们传入的顺序将其输出 tablerow　　生成一个 HTML 表格 变量赋值 关键字 assign capture increment　　自增数值变量　初始0 decrement　　自减数值变量　初始-1 {% assign foo = &quot;bar&quot; %} {{ foo }} {% capture my_variable %} I am being captured. {% endcapture %} 0 1 0 1 过滤器 过滤器 改变 Liquid 对象的输出。他们被用在输出上，通过一个 | 符号分隔 {{ &quot;adam!&quot; | capitalize | prepend: &quot;Hello &quot; }} 输出： Hello Adam! filters filters 解释 abs 绝对值 append 追加 at_least 限制最小值 at_most 限制最大值 capitalize 首字母大写 ceil 取整 compact 删除数组中的nil值 concat 数组合并 date 日期格式 default 默认值 divided_by 相除 downcase   escape   escape_once 字符串转义 first   floor   join 数组转字符串 last   lstrip   map 构件数组用 minus 相减 modulo 取余 newline_to_br   plus 相加 prepend 前置添加 remove 删除 remove_first   replace 替换 replace_first   reverse 数组反转 round 四舍五入 rstrip   size 字符串数组length slice   sort 数组排序 sort_natural   split 字符串分隔为数组 strip 删除两侧空白符 strip_html   strip_newlines   times 乘 truncate 字符串截断 truncatewords 字符串截断加… uniq 数组去重 upcase   url_decode   url_encode   参考 https://liquid.bootcss.com/basics/types/" />
+<link rel="canonical" href="https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/" />
+<meta property="og:url" content="https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/" />
+<meta property="og:site_name" content="TLDSN" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-21T00:00:00+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/"},"url":"https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/","author":{"@type":"Person","name":"tldsn"},"description":"Liquid模板语言 base 数据类型 操作符 真值与假值 空白符、raw 标记 控制流 迭代 变量赋值 过滤器 filters 参考 Liquid模板语言 三要素：对象、标记、过滤器 base 数据类型 String Number Boolean Nil Array 通过 assign 或 capture 标记来初始化 Liquid 变量 ★你无法只通过 Liquid 语法初始化一个数组。然而，你可以利用 split 过滤器将一个字符串分割为一个子字符串数组。 操作符 操作符 含义 == 相等 != 不相等 &gt; 大于 &lt; 小于 &gt;= 大于或等于 &lt;= 小于或等于 or 逻辑或 and 逻辑与 contains 包含 真值与假值 除了 nil 和 false 之外的所有值都是真值 ★关于空字符串和Nil ★未定义的变量使用时为nil　0值空字符串为true 空白符、raw raw　　endraw raw 标记临时禁止处理其所包围的代码 使用{{-、-}}、{%- 和 -%}取消Liquid 表达式编译后产生的空行### 对象 {{ page.title }} 标记 {% if user %} Hello {{ user.name }}! {% endif %} 控制流 关键字 if　　endif else elseif unless　　endunless case　　when　　endcase {% assign handle = &#39;cake&#39; %} {% case handle %} {% when &#39;cake&#39; %} This is a cake {% when &#39;cookie&#39; %} This is a cookie {% else %} This is not a cake nor a cookie {% endcase %} 迭代 关键字 for　　in　　endfor break continue limit　　限定循环执行的次数 offset　　从指定索引号开始执行循环 range　　定义循环执行的范围： 1..num reversed　　反转循环的执行顺序 cycle　　循环一组字符串并按照它们传入的顺序将其输出 tablerow　　生成一个 HTML 表格 变量赋值 关键字 assign capture increment　　自增数值变量　初始0 decrement　　自减数值变量　初始-1 {% assign foo = &quot;bar&quot; %} {{ foo }} {% capture my_variable %} I am being captured. {% endcapture %} 0 1 0 1 过滤器 过滤器 改变 Liquid 对象的输出。他们被用在输出上，通过一个 | 符号分隔 {{ &quot;adam!&quot; | capitalize | prepend: &quot;Hello &quot; }} 输出： Hello Adam! filters filters 解释 abs 绝对值 append 追加 at_least 限制最小值 at_most 限制最大值 capitalize 首字母大写 ceil 取整 compact 删除数组中的nil值 concat 数组合并 date 日期格式 default 默认值 divided_by 相除 downcase   escape   escape_once 字符串转义 first   floor   join 数组转字符串 last   lstrip   map 构件数组用 minus 相减 modulo 取余 newline_to_br   plus 相加 prepend 前置添加 remove 删除 remove_first   replace 替换 replace_first   reverse 数组反转 round 四舍五入 rstrip   size 字符串数组length slice   sort 数组排序 sort_natural   split 字符串分隔为数组 strip 删除两侧空白符 strip_html   strip_newlines   times 乘 truncate 字符串截断 truncatewords 字符串截断加… uniq 数组去重 upcase   url_decode   url_encode   参考 https://liquid.bootcss.com/basics/types/","@type":"BlogPosting","headline":"Liquid文档","dateModified":"2020-04-21T00:00:00+08:00","datePublished":"2020-04-21T00:00:00+08:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
 
     <script>
     // 百度统计代码
@@ -47,9 +65,9 @@
 </head>
 
 
-  <body>
+<body>
 
-    <header id="top">
+  <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">TLDSN</a>
         <small>太阳升起时，请重新开始</small>
@@ -138,6 +156,20 @@
                     
                 
                     
+                    <li>
+                        
+                        <a href="/authors/">
+                        
+                            <i class="fa fa-"></i>Staff
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
                 
                     
                 
@@ -163,7 +195,7 @@
 </header>
 
 
-        <div class="page clearfix" post>
+  <div class="page clearfix" post>
     <div class="left">
         <h1>Liquid文档</h1>
         <div class="label">
@@ -173,7 +205,11 @@
             </div>
 
             <div class="label-card">
-                <i class="fa fa-user"></i>tldsn
+                <!-- <i class="fa fa-user"></i>tldsn
+                 -->
+                
+                
+                  <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
                 
             </div>
 
@@ -653,60 +689,8 @@ Hello Adam!
                     
                 
             
-                
-                    
-                
-            
         
             
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
             
                 
                     
@@ -722,17 +706,17 @@ Hello Adam!
         
             
             
-                
-                    
-                
+        
             
-                
-                    
-                
             
-                
-                    
-                
+        
+            
+            
+        
+            
+            
+        
+            
             
         
             
@@ -741,20 +725,8 @@ Hello Adam!
                     
                 
             
-                
-                    
-                
-            
         
             
-            
-                
-                    
-                
-            
-                
-                    
-                
             
         
         
@@ -786,8 +758,8 @@ Hello Adam!
      */
 
     var disqus_config = function() {
-        this.page.url = 'http://localhost:4000/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://localhost:4000/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://tldsn.github.io/2020/04/21/Liquid%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -836,10 +808,10 @@ Hello Adam!
     }
 }());
 </script>
-<script src="/js/pageContent.js " charset="utf-8"></script>
+<script src="/assets/js/pageContent.js " charset="utf-8"></script>
 
 
-    <footer class="site-footer">
+  <footer class="site-footer">
 
 
     <div class="wrapper">
@@ -874,22 +846,51 @@ Hello Adam!
 </footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-    <div class="back-to-top">
+  <div class="back-to-top">
     <a href="#top" data-scroll>
         <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
-    <script src=" /js/main.js " charset="utf-8"></script>
-    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
-    <script type="text/javascript">
-      smoothScroll.init({
-        speed: 500, // Integer. How fast to complete the scroll in milliseconds
-        easing: 'easeInOutCubic', // Easing pattern to use
-        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
-      });
-    </script>
-    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
-  </body>
+  <div id="music"></div>
+
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+  <script src=" /assets/js/main.js " charset="utf-8"></script>
+  <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
+  <script type="text/javascript">
+    smoothScroll.init({
+      speed: 500, // Integer. How fast to complete the scroll in milliseconds
+      easing: 'easeInOutCubic', // Easing pattern to use
+      offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+    });
+  </script>
+  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
+</body>
 
 </html>

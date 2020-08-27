@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,9 +14,27 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
-    <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/">
-    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link rel="stylesheet" href="/assets/css/main.css ">
+    <link rel="canonical" href="https://tldsn.github.io/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>autohotkey-windows快捷键设置神器_疯狂的哈丘的博客 | TLDSN</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="autohotkey-windows快捷键设置神器_疯狂的哈丘的博客" />
+<meta name="author" content="tldsn" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="autohotkey-windows快捷键设置神器  发表于 2017-06-12 |  分类于 autohotkey |  阅读次数 2605 作为走在时代最前沿的程序员，电脑必须玩的溜。要想电脑玩的溜，首先快捷键必须用的熟练。一般我们用快捷键最多的地方就是IDE,高效的写代码的时候是绝对离不开各种快捷键的。可以说,快捷键在很大程度上减少了我们很多繁琐的工作。 很多软件都自带了各种各样的快捷键，并允许用户修改快捷键。window作为一个成熟的系统,也提供了众多快捷键,比如win+E快速打开我的电脑,win+R快速打开命令行,win+L锁定屏幕等等。但是我们发现，win的快捷键还是不能解决一些我们想要的操作。比如想打开位置比较深的某个文件夹(需要逐渐打开好几层目录),想要快速最小化当前窗口，想要快速打开某个应用(而不是跑到桌面点击应用图标启动),或者在众多打开的程序中快速打开某个程序等等。 autohotkey可以说就是为了解决这些问题而诞生的。 安装 Autohotkey从autohotkey官网下载 安装包。双击安装。安装过程很简单,一直点下一步就好了(放心，不会给你什么全家桶)。安装好后就可以关闭安装窗口。就可以开搞了。 设置快捷键随便找个目录,鼠标右键新建一个autohotkey的脚本。 映射一个动作——最小化当前窗口文件名随便叫,创建好脚本后用编辑器打开这个脚本。然后我们就可以开始写autohotkey的代码。输入以下代码: 123#w:: ;;这里的 #-&gt;表示window键 w-&gt;表示字母w键 WinMinimize,A ;;最小化当前窗口 return ;;结束代码段 写完后我们保存,然后双击该脚本,脚本就开始运行了。这时我们同时按下win+w键，当前正在活动的窗口就会最小化了。 映射一个键——上左下右经常打字的人都知道,我们编辑文本时要上下左右移动光标,难免要将手移到方向键再移回来打字。对我这样的懒癌后期患者,这简直不能忍。所以我们通过autohotkey将上下左右键映射成其他键。下面是代码: 123456789101112131415!k:: ;; !-&gt;alt键 k-&gt;字母键kSend {Up} ;;输入 上 键return!j::Send {Down}return!h::Send {Left}return!l::Send {Right}return 我将它们映射成了 alt+h,j,k,l (符合vim风格,读者可以设置成jkli,可能更容易适应)。这样我们在编辑文本时想移动光标直接左手按alt键,右手hjkl就可以移动光标了。是不是很方便？ 映射一组键盘操作——删除复制粘贴一整行很多IDE都有快速删除一行，复制一行的快捷键。我们通过aotohotkey也能实现 123456789101112131415161718;;;;;;;;;;;;;删除一整行!d:: ;alt+dSend {Home} ;输出回车Send +{End} ;输入shitf键+end键Send {delete} ;输入delete键return ;;;;;;;;;;;;;复制一整行!y::send {home}send +{end}send ^c ;输出ctrl+c,复制一整行return;;;;;;;;;;;;;另起一行粘贴内容 !p:: send {end} send {enter} send %clipboard% ;将剪贴板的内容输出 return 因为autohotkey设置的是windows全局快捷键。这样,我们在任何编辑器都可以使用这些快捷键了,使用alt+d删除一行,alt+y复制一行,alt+p粘贴内容。(但是要注意别把软件自带的快捷键给覆盖了)。 打开某软件或者某网页我们工作中经常要打开某软件或者某网站,又或者搜索某个东西。通过autohotkey我们可以非常快速的做到这一切。 123456789101112131415;;; 选中关键字后,同时按下win+b，打开百度搜索#b:: ;win+bSend ^c ;输入 ctrl+csleep,100 ; 等待100毫秒run https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_idx=1&amp;tn=92765401_hao_pg&amp;wd=%clipboard% ;根据选中的内容打开百度搜索return;;; 判断xshell进程是否启动,启动的话快速激活(窗口最大化)xshell，否则启动xshell!+s:: ;; alt+shift+s ifWinExist,ahk_class Xshell::MainFrame_0 ;;;判断xshell 进程是否启动 winActivate ;;; 激活窗口 else run E:\xshell\Xshell.exe ;;; 运行xshell软件return 这样我们想百度某个关键字的时候,直接选中这个关键字,然后同时按下win+b。系统就会通过默认浏览器打开百度页面(url已经携带了刚才那个关键字了)。 上面的第二段代码实现了快速打开某个应用的功能,我们就不用去管它是否已经启动了,因为这些autohotkey已经帮我们判断了。 如果你不知道应用的 ahk_class ,也可以设置一个快捷键获取应用的ahk_class。 12345#g:: WinGetClass, title,A msgbox,%title% clipboard=%title%return 各个键的映射关系下面列出一些特殊键的映射关系,更多的请参考官方文档: 符号 说明 # window键 ! alt键 ^ ctrl键 + shift键 &lt; 有两个相同键时,表示左边那个键.比如alt有左右两个键,&lt;! 表示左alt键 &gt; 表示相同键中右边的那个键 LButton 鼠标左键 RButton 鼠标右键 MButton 鼠标中间键 WheelDown 滚轮向下 WheelUp 滚轮向上 Backspace 退格键 CapsLock 大小写切换键 Escape 退出键 设置字符串映射简单映射我们可能有时会有这样一个场景,经常要输出一串长字符串,而且都是一样的。但是每次都输入也会觉得麻烦,有时甚至可能输错。autohotkey 提供了一种类似字符串映射的功能, 能够让我们去掉这些重复工作。 12345678::hello:: ;;和快捷键不同,前面加两个冒号 &#39;::&#39; 说明这是个字符串映射 send hello world ;;会变成改成输入hello worldreturn ;;; 这段代码实现::pwd:: send yangjb{tab}123456return 运行这个脚本后,你会发现你输入的hello会全部被autohotkey替换成 hello world。 后面一段代码实现了在网页登录框,输出pwd的时候,自动填写用户密码的功能。({tab}用于换行)。建议做字符串映射的时候前面带一个或两个反斜杠’/‘,这样就不会在平常输入文本的时候自动被映射走了。 通过字符串映射运行程序凡是设置快捷能做的,字符串映射也一样能做。比如我们设置一个输出 /e就打开e盘的功能。 123::/e:: run e: ;;打开e盘return 这样,我们在任何地方输入/e，都会打开e盘了。当然,你也可以打开某个具体的软件,或者打开某个网站。 通过窗口输入命令有时觉得快捷键太多了记不住,输入字符串又要特地去找个编辑的地方输入,都有各自的缺点。这时,我们就可以使用autohotkey自带的界面来优化我们的体验了。通过autohotkey弹出窗口,我们输入自定义的指令,快速实现我们想要的功能。autohotkey唤出一个输出窗口很简单,只要一句话就搞定: inputBox,fieldName,boxName。fieldName是用于接受用户输入的字符串,boxName是窗口名。下面直接上一个代码示范: 12345678910111213141516tmp_path=f:\tmp ;;; autohotkey 可以事先定义一些变量idea_path=E:\IntelliJ IDEA 2017.1.2\bin\idea64.exe!c:: inputBox,command,enter command if ErrorLevel return else if (command==&quot;tmp&quot;) run %tmp_path% ;;;打开指定文件夹 用两个百分号%%包围说明这是一个变量 else if (command==&quot;baidu&quot;) run http://www.baidu.com ;;; 快速打开百度 else if (command==&quot;c&quot; || command==&quot;d&quot; || command==&quot;e&quot; || command==&quot;f&quot;) run %command%:/ ;;快速打开这些盘 else if (command==&quot;idea&quot;) run %idea_path% ;;快速打开idea return 上面的代码,我们自定义了4个操作。当我们按下快捷键alt+c来唤出输入框。输入tmp的时候,会打开f:\tmp 目录。输入baidu的时候,会打开百度。输入c d e f的时候,会打开对应的盘符。最后,输入idea的时候,会打开idea程序。 autohotkey输入框: 这样,我们可以将任何字符串对应到具体的操作中去。 在具体的某个软件中设置快捷键有的时候,我们不想在window全局设置快捷键,只想在某个程序中设置快捷键。autohotkey也可以满足你的要求。123456789#IfWinActive ahk_class Chrome_WidgetWin_1 ;; 下面的语句块只在chrome中生效 !n::Send ^t !x::Send ^w !,::Send ^+{Tab} !.::Send ^{Tab} !z::Send ^+t !+h::send ^hreturn 上面的代码实现只在chrome浏览器设置快捷键的作用。通过 #IfWinActive ahk_class Xshell::MainFrame_0 判断当前活动的是否是chrome进程，来激活快捷键设置。进程的ahk_class如何获取上文中已经说过。 平常我们要左右移动chrome标签,chrome虽然提供了ctrl+tab或者ctrl+shift+tab，但是相当别扭。我们用autohotkey将它映射成alt+,键和alt+.键。就可以很方便的实现标签的切换了。alt+n可以快速的新建标签,alt+x快速关闭一个标签。 快速获取鼠标位置处的颜色取值12345678910!+c:: MouseGetPos, mouseX, mouseY ; 获得鼠标所在坐标，把鼠标的 X 坐标赋值给变量 mouseX ，同理 mouseY PixelGetColor, color, %mouseX%, %mouseY%, RGB ; 调用 PixelGetColor 函数，获得鼠标所在坐标的 RGB 值，并赋值给 color StringRight color,color,6 ; 截取 color（第二个 color）右边的6个字符，因为获得的值是这样的：#RRGGBB，一般我们只需要 RRGGBB 部分。把截取到的值再赋给 color（第一个 color）。 clipboard = %color% ; 把 color 的值发送到剪贴板return 各种强大的脚本autohotkey能做的远不止这些,通过学习autohotkey官网文档 ,你可以了解它们更多强大的功能。点击官网上面各种强大的脚本,上面有各种大神写的脚本。 # autohotkey # 效率 # 快捷键  GitHubPages+Hexo+nexT快速搭建个人博客" />
+<meta property="og:description" content="autohotkey-windows快捷键设置神器  发表于 2017-06-12 |  分类于 autohotkey |  阅读次数 2605 作为走在时代最前沿的程序员，电脑必须玩的溜。要想电脑玩的溜，首先快捷键必须用的熟练。一般我们用快捷键最多的地方就是IDE,高效的写代码的时候是绝对离不开各种快捷键的。可以说,快捷键在很大程度上减少了我们很多繁琐的工作。 很多软件都自带了各种各样的快捷键，并允许用户修改快捷键。window作为一个成熟的系统,也提供了众多快捷键,比如win+E快速打开我的电脑,win+R快速打开命令行,win+L锁定屏幕等等。但是我们发现，win的快捷键还是不能解决一些我们想要的操作。比如想打开位置比较深的某个文件夹(需要逐渐打开好几层目录),想要快速最小化当前窗口，想要快速打开某个应用(而不是跑到桌面点击应用图标启动),或者在众多打开的程序中快速打开某个程序等等。 autohotkey可以说就是为了解决这些问题而诞生的。 安装 Autohotkey从autohotkey官网下载 安装包。双击安装。安装过程很简单,一直点下一步就好了(放心，不会给你什么全家桶)。安装好后就可以关闭安装窗口。就可以开搞了。 设置快捷键随便找个目录,鼠标右键新建一个autohotkey的脚本。 映射一个动作——最小化当前窗口文件名随便叫,创建好脚本后用编辑器打开这个脚本。然后我们就可以开始写autohotkey的代码。输入以下代码: 123#w:: ;;这里的 #-&gt;表示window键 w-&gt;表示字母w键 WinMinimize,A ;;最小化当前窗口 return ;;结束代码段 写完后我们保存,然后双击该脚本,脚本就开始运行了。这时我们同时按下win+w键，当前正在活动的窗口就会最小化了。 映射一个键——上左下右经常打字的人都知道,我们编辑文本时要上下左右移动光标,难免要将手移到方向键再移回来打字。对我这样的懒癌后期患者,这简直不能忍。所以我们通过autohotkey将上下左右键映射成其他键。下面是代码: 123456789101112131415!k:: ;; !-&gt;alt键 k-&gt;字母键kSend {Up} ;;输入 上 键return!j::Send {Down}return!h::Send {Left}return!l::Send {Right}return 我将它们映射成了 alt+h,j,k,l (符合vim风格,读者可以设置成jkli,可能更容易适应)。这样我们在编辑文本时想移动光标直接左手按alt键,右手hjkl就可以移动光标了。是不是很方便？ 映射一组键盘操作——删除复制粘贴一整行很多IDE都有快速删除一行，复制一行的快捷键。我们通过aotohotkey也能实现 123456789101112131415161718;;;;;;;;;;;;;删除一整行!d:: ;alt+dSend {Home} ;输出回车Send +{End} ;输入shitf键+end键Send {delete} ;输入delete键return ;;;;;;;;;;;;;复制一整行!y::send {home}send +{end}send ^c ;输出ctrl+c,复制一整行return;;;;;;;;;;;;;另起一行粘贴内容 !p:: send {end} send {enter} send %clipboard% ;将剪贴板的内容输出 return 因为autohotkey设置的是windows全局快捷键。这样,我们在任何编辑器都可以使用这些快捷键了,使用alt+d删除一行,alt+y复制一行,alt+p粘贴内容。(但是要注意别把软件自带的快捷键给覆盖了)。 打开某软件或者某网页我们工作中经常要打开某软件或者某网站,又或者搜索某个东西。通过autohotkey我们可以非常快速的做到这一切。 123456789101112131415;;; 选中关键字后,同时按下win+b，打开百度搜索#b:: ;win+bSend ^c ;输入 ctrl+csleep,100 ; 等待100毫秒run https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_idx=1&amp;tn=92765401_hao_pg&amp;wd=%clipboard% ;根据选中的内容打开百度搜索return;;; 判断xshell进程是否启动,启动的话快速激活(窗口最大化)xshell，否则启动xshell!+s:: ;; alt+shift+s ifWinExist,ahk_class Xshell::MainFrame_0 ;;;判断xshell 进程是否启动 winActivate ;;; 激活窗口 else run E:\xshell\Xshell.exe ;;; 运行xshell软件return 这样我们想百度某个关键字的时候,直接选中这个关键字,然后同时按下win+b。系统就会通过默认浏览器打开百度页面(url已经携带了刚才那个关键字了)。 上面的第二段代码实现了快速打开某个应用的功能,我们就不用去管它是否已经启动了,因为这些autohotkey已经帮我们判断了。 如果你不知道应用的 ahk_class ,也可以设置一个快捷键获取应用的ahk_class。 12345#g:: WinGetClass, title,A msgbox,%title% clipboard=%title%return 各个键的映射关系下面列出一些特殊键的映射关系,更多的请参考官方文档: 符号 说明 # window键 ! alt键 ^ ctrl键 + shift键 &lt; 有两个相同键时,表示左边那个键.比如alt有左右两个键,&lt;! 表示左alt键 &gt; 表示相同键中右边的那个键 LButton 鼠标左键 RButton 鼠标右键 MButton 鼠标中间键 WheelDown 滚轮向下 WheelUp 滚轮向上 Backspace 退格键 CapsLock 大小写切换键 Escape 退出键 设置字符串映射简单映射我们可能有时会有这样一个场景,经常要输出一串长字符串,而且都是一样的。但是每次都输入也会觉得麻烦,有时甚至可能输错。autohotkey 提供了一种类似字符串映射的功能, 能够让我们去掉这些重复工作。 12345678::hello:: ;;和快捷键不同,前面加两个冒号 &#39;::&#39; 说明这是个字符串映射 send hello world ;;会变成改成输入hello worldreturn ;;; 这段代码实现::pwd:: send yangjb{tab}123456return 运行这个脚本后,你会发现你输入的hello会全部被autohotkey替换成 hello world。 后面一段代码实现了在网页登录框,输出pwd的时候,自动填写用户密码的功能。({tab}用于换行)。建议做字符串映射的时候前面带一个或两个反斜杠’/‘,这样就不会在平常输入文本的时候自动被映射走了。 通过字符串映射运行程序凡是设置快捷能做的,字符串映射也一样能做。比如我们设置一个输出 /e就打开e盘的功能。 123::/e:: run e: ;;打开e盘return 这样,我们在任何地方输入/e，都会打开e盘了。当然,你也可以打开某个具体的软件,或者打开某个网站。 通过窗口输入命令有时觉得快捷键太多了记不住,输入字符串又要特地去找个编辑的地方输入,都有各自的缺点。这时,我们就可以使用autohotkey自带的界面来优化我们的体验了。通过autohotkey弹出窗口,我们输入自定义的指令,快速实现我们想要的功能。autohotkey唤出一个输出窗口很简单,只要一句话就搞定: inputBox,fieldName,boxName。fieldName是用于接受用户输入的字符串,boxName是窗口名。下面直接上一个代码示范: 12345678910111213141516tmp_path=f:\tmp ;;; autohotkey 可以事先定义一些变量idea_path=E:\IntelliJ IDEA 2017.1.2\bin\idea64.exe!c:: inputBox,command,enter command if ErrorLevel return else if (command==&quot;tmp&quot;) run %tmp_path% ;;;打开指定文件夹 用两个百分号%%包围说明这是一个变量 else if (command==&quot;baidu&quot;) run http://www.baidu.com ;;; 快速打开百度 else if (command==&quot;c&quot; || command==&quot;d&quot; || command==&quot;e&quot; || command==&quot;f&quot;) run %command%:/ ;;快速打开这些盘 else if (command==&quot;idea&quot;) run %idea_path% ;;快速打开idea return 上面的代码,我们自定义了4个操作。当我们按下快捷键alt+c来唤出输入框。输入tmp的时候,会打开f:\tmp 目录。输入baidu的时候,会打开百度。输入c d e f的时候,会打开对应的盘符。最后,输入idea的时候,会打开idea程序。 autohotkey输入框: 这样,我们可以将任何字符串对应到具体的操作中去。 在具体的某个软件中设置快捷键有的时候,我们不想在window全局设置快捷键,只想在某个程序中设置快捷键。autohotkey也可以满足你的要求。123456789#IfWinActive ahk_class Chrome_WidgetWin_1 ;; 下面的语句块只在chrome中生效 !n::Send ^t !x::Send ^w !,::Send ^+{Tab} !.::Send ^{Tab} !z::Send ^+t !+h::send ^hreturn 上面的代码实现只在chrome浏览器设置快捷键的作用。通过 #IfWinActive ahk_class Xshell::MainFrame_0 判断当前活动的是否是chrome进程，来激活快捷键设置。进程的ahk_class如何获取上文中已经说过。 平常我们要左右移动chrome标签,chrome虽然提供了ctrl+tab或者ctrl+shift+tab，但是相当别扭。我们用autohotkey将它映射成alt+,键和alt+.键。就可以很方便的实现标签的切换了。alt+n可以快速的新建标签,alt+x快速关闭一个标签。 快速获取鼠标位置处的颜色取值12345678910!+c:: MouseGetPos, mouseX, mouseY ; 获得鼠标所在坐标，把鼠标的 X 坐标赋值给变量 mouseX ，同理 mouseY PixelGetColor, color, %mouseX%, %mouseY%, RGB ; 调用 PixelGetColor 函数，获得鼠标所在坐标的 RGB 值，并赋值给 color StringRight color,color,6 ; 截取 color（第二个 color）右边的6个字符，因为获得的值是这样的：#RRGGBB，一般我们只需要 RRGGBB 部分。把截取到的值再赋给 color（第一个 color）。 clipboard = %color% ; 把 color 的值发送到剪贴板return 各种强大的脚本autohotkey能做的远不止这些,通过学习autohotkey官网文档 ,你可以了解它们更多强大的功能。点击官网上面各种强大的脚本,上面有各种大神写的脚本。 # autohotkey # 效率 # 快捷键  GitHubPages+Hexo+nexT快速搭建个人博客" />
+<link rel="canonical" href="https://tldsn.github.io/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/" />
+<meta property="og:url" content="https://tldsn.github.io/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/" />
+<meta property="og:site_name" content="TLDSN" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-28T00:00:00+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://tldsn.github.io/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/"},"url":"https://tldsn.github.io/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/","author":{"@type":"Person","name":"tldsn"},"description":"autohotkey-windows快捷键设置神器  发表于 2017-06-12 |  分类于 autohotkey |  阅读次数 2605 作为走在时代最前沿的程序员，电脑必须玩的溜。要想电脑玩的溜，首先快捷键必须用的熟练。一般我们用快捷键最多的地方就是IDE,高效的写代码的时候是绝对离不开各种快捷键的。可以说,快捷键在很大程度上减少了我们很多繁琐的工作。 很多软件都自带了各种各样的快捷键，并允许用户修改快捷键。window作为一个成熟的系统,也提供了众多快捷键,比如win+E快速打开我的电脑,win+R快速打开命令行,win+L锁定屏幕等等。但是我们发现，win的快捷键还是不能解决一些我们想要的操作。比如想打开位置比较深的某个文件夹(需要逐渐打开好几层目录),想要快速最小化当前窗口，想要快速打开某个应用(而不是跑到桌面点击应用图标启动),或者在众多打开的程序中快速打开某个程序等等。 autohotkey可以说就是为了解决这些问题而诞生的。 安装 Autohotkey从autohotkey官网下载 安装包。双击安装。安装过程很简单,一直点下一步就好了(放心，不会给你什么全家桶)。安装好后就可以关闭安装窗口。就可以开搞了。 设置快捷键随便找个目录,鼠标右键新建一个autohotkey的脚本。 映射一个动作——最小化当前窗口文件名随便叫,创建好脚本后用编辑器打开这个脚本。然后我们就可以开始写autohotkey的代码。输入以下代码: 123#w:: ;;这里的 #-&gt;表示window键 w-&gt;表示字母w键 WinMinimize,A ;;最小化当前窗口 return ;;结束代码段 写完后我们保存,然后双击该脚本,脚本就开始运行了。这时我们同时按下win+w键，当前正在活动的窗口就会最小化了。 映射一个键——上左下右经常打字的人都知道,我们编辑文本时要上下左右移动光标,难免要将手移到方向键再移回来打字。对我这样的懒癌后期患者,这简直不能忍。所以我们通过autohotkey将上下左右键映射成其他键。下面是代码: 123456789101112131415!k:: ;; !-&gt;alt键 k-&gt;字母键kSend {Up} ;;输入 上 键return!j::Send {Down}return!h::Send {Left}return!l::Send {Right}return 我将它们映射成了 alt+h,j,k,l (符合vim风格,读者可以设置成jkli,可能更容易适应)。这样我们在编辑文本时想移动光标直接左手按alt键,右手hjkl就可以移动光标了。是不是很方便？ 映射一组键盘操作——删除复制粘贴一整行很多IDE都有快速删除一行，复制一行的快捷键。我们通过aotohotkey也能实现 123456789101112131415161718;;;;;;;;;;;;;删除一整行!d:: ;alt+dSend {Home} ;输出回车Send +{End} ;输入shitf键+end键Send {delete} ;输入delete键return ;;;;;;;;;;;;;复制一整行!y::send {home}send +{end}send ^c ;输出ctrl+c,复制一整行return;;;;;;;;;;;;;另起一行粘贴内容 !p:: send {end} send {enter} send %clipboard% ;将剪贴板的内容输出 return 因为autohotkey设置的是windows全局快捷键。这样,我们在任何编辑器都可以使用这些快捷键了,使用alt+d删除一行,alt+y复制一行,alt+p粘贴内容。(但是要注意别把软件自带的快捷键给覆盖了)。 打开某软件或者某网页我们工作中经常要打开某软件或者某网站,又或者搜索某个东西。通过autohotkey我们可以非常快速的做到这一切。 123456789101112131415;;; 选中关键字后,同时按下win+b，打开百度搜索#b:: ;win+bSend ^c ;输入 ctrl+csleep,100 ; 等待100毫秒run https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_idx=1&amp;tn=92765401_hao_pg&amp;wd=%clipboard% ;根据选中的内容打开百度搜索return;;; 判断xshell进程是否启动,启动的话快速激活(窗口最大化)xshell，否则启动xshell!+s:: ;; alt+shift+s ifWinExist,ahk_class Xshell::MainFrame_0 ;;;判断xshell 进程是否启动 winActivate ;;; 激活窗口 else run E:\\xshell\\Xshell.exe ;;; 运行xshell软件return 这样我们想百度某个关键字的时候,直接选中这个关键字,然后同时按下win+b。系统就会通过默认浏览器打开百度页面(url已经携带了刚才那个关键字了)。 上面的第二段代码实现了快速打开某个应用的功能,我们就不用去管它是否已经启动了,因为这些autohotkey已经帮我们判断了。 如果你不知道应用的 ahk_class ,也可以设置一个快捷键获取应用的ahk_class。 12345#g:: WinGetClass, title,A msgbox,%title% clipboard=%title%return 各个键的映射关系下面列出一些特殊键的映射关系,更多的请参考官方文档: 符号 说明 # window键 ! alt键 ^ ctrl键 + shift键 &lt; 有两个相同键时,表示左边那个键.比如alt有左右两个键,&lt;! 表示左alt键 &gt; 表示相同键中右边的那个键 LButton 鼠标左键 RButton 鼠标右键 MButton 鼠标中间键 WheelDown 滚轮向下 WheelUp 滚轮向上 Backspace 退格键 CapsLock 大小写切换键 Escape 退出键 设置字符串映射简单映射我们可能有时会有这样一个场景,经常要输出一串长字符串,而且都是一样的。但是每次都输入也会觉得麻烦,有时甚至可能输错。autohotkey 提供了一种类似字符串映射的功能, 能够让我们去掉这些重复工作。 12345678::hello:: ;;和快捷键不同,前面加两个冒号 &#39;::&#39; 说明这是个字符串映射 send hello world ;;会变成改成输入hello worldreturn ;;; 这段代码实现::pwd:: send yangjb{tab}123456return 运行这个脚本后,你会发现你输入的hello会全部被autohotkey替换成 hello world。 后面一段代码实现了在网页登录框,输出pwd的时候,自动填写用户密码的功能。({tab}用于换行)。建议做字符串映射的时候前面带一个或两个反斜杠’/‘,这样就不会在平常输入文本的时候自动被映射走了。 通过字符串映射运行程序凡是设置快捷能做的,字符串映射也一样能做。比如我们设置一个输出 /e就打开e盘的功能。 123::/e:: run e: ;;打开e盘return 这样,我们在任何地方输入/e，都会打开e盘了。当然,你也可以打开某个具体的软件,或者打开某个网站。 通过窗口输入命令有时觉得快捷键太多了记不住,输入字符串又要特地去找个编辑的地方输入,都有各自的缺点。这时,我们就可以使用autohotkey自带的界面来优化我们的体验了。通过autohotkey弹出窗口,我们输入自定义的指令,快速实现我们想要的功能。autohotkey唤出一个输出窗口很简单,只要一句话就搞定: inputBox,fieldName,boxName。fieldName是用于接受用户输入的字符串,boxName是窗口名。下面直接上一个代码示范: 12345678910111213141516tmp_path=f:\\tmp ;;; autohotkey 可以事先定义一些变量idea_path=E:\\IntelliJ IDEA 2017.1.2\\bin\\idea64.exe!c:: inputBox,command,enter command if ErrorLevel return else if (command==&quot;tmp&quot;) run %tmp_path% ;;;打开指定文件夹 用两个百分号%%包围说明这是一个变量 else if (command==&quot;baidu&quot;) run http://www.baidu.com ;;; 快速打开百度 else if (command==&quot;c&quot; || command==&quot;d&quot; || command==&quot;e&quot; || command==&quot;f&quot;) run %command%:/ ;;快速打开这些盘 else if (command==&quot;idea&quot;) run %idea_path% ;;快速打开idea return 上面的代码,我们自定义了4个操作。当我们按下快捷键alt+c来唤出输入框。输入tmp的时候,会打开f:\\tmp 目录。输入baidu的时候,会打开百度。输入c d e f的时候,会打开对应的盘符。最后,输入idea的时候,会打开idea程序。 autohotkey输入框: 这样,我们可以将任何字符串对应到具体的操作中去。 在具体的某个软件中设置快捷键有的时候,我们不想在window全局设置快捷键,只想在某个程序中设置快捷键。autohotkey也可以满足你的要求。123456789#IfWinActive ahk_class Chrome_WidgetWin_1 ;; 下面的语句块只在chrome中生效 !n::Send ^t !x::Send ^w !,::Send ^+{Tab} !.::Send ^{Tab} !z::Send ^+t !+h::send ^hreturn 上面的代码实现只在chrome浏览器设置快捷键的作用。通过 #IfWinActive ahk_class Xshell::MainFrame_0 判断当前活动的是否是chrome进程，来激活快捷键设置。进程的ahk_class如何获取上文中已经说过。 平常我们要左右移动chrome标签,chrome虽然提供了ctrl+tab或者ctrl+shift+tab，但是相当别扭。我们用autohotkey将它映射成alt+,键和alt+.键。就可以很方便的实现标签的切换了。alt+n可以快速的新建标签,alt+x快速关闭一个标签。 快速获取鼠标位置处的颜色取值12345678910!+c:: MouseGetPos, mouseX, mouseY ; 获得鼠标所在坐标，把鼠标的 X 坐标赋值给变量 mouseX ，同理 mouseY PixelGetColor, color, %mouseX%, %mouseY%, RGB ; 调用 PixelGetColor 函数，获得鼠标所在坐标的 RGB 值，并赋值给 color StringRight color,color,6 ; 截取 color（第二个 color）右边的6个字符，因为获得的值是这样的：#RRGGBB，一般我们只需要 RRGGBB 部分。把截取到的值再赋给 color（第一个 color）。 clipboard = %color% ; 把 color 的值发送到剪贴板return 各种强大的脚本autohotkey能做的远不止这些,通过学习autohotkey官网文档 ,你可以了解它们更多强大的功能。点击官网上面各种强大的脚本,上面有各种大神写的脚本。 # autohotkey # 效率 # 快捷键  GitHubPages+Hexo+nexT快速搭建个人博客","@type":"BlogPosting","headline":"autohotkey-windows快捷键设置神器_疯狂的哈丘的博客","dateModified":"2020-04-28T00:00:00+08:00","datePublished":"2020-04-28T00:00:00+08:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
 
     <script>
     // 百度统计代码
@@ -47,9 +65,9 @@
 </head>
 
 
-  <body>
+<body>
 
-    <header id="top">
+  <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">TLDSN</a>
         <small>太阳升起时，请重新开始</small>
@@ -138,6 +156,20 @@
                     
                 
                     
+                    <li>
+                        
+                        <a href="/authors/">
+                        
+                            <i class="fa fa-"></i>Staff
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
                 
                     
                 
@@ -163,7 +195,7 @@
 </header>
 
 
-        <div class="page clearfix" post>
+  <div class="page clearfix" post>
     <div class="left">
         <h1>autohotkey-windows快捷键设置神器_疯狂的哈丘的博客</h1>
         <div class="label">
@@ -173,7 +205,11 @@
             </div>
 
             <div class="label-card">
-                <i class="fa fa-user"></i>tldsn
+                <!-- <i class="fa fa-user"></i>tldsn
+                 -->
+                
+                
+                  <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
                 
             </div>
 
@@ -501,77 +537,8 @@
                     
                 
             
-                
-                    
-                
-                    
-                
-            
         
             
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">一些工具
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
             
                 
                     
@@ -591,23 +558,17 @@
         
             
             
-                
-                    
-                
-                    
-                
+        
             
-                
-                    
-                
-                    
-                
             
-                
-                    
-                
-                    
-                
+        
+            
+            
+        
+            
+            
+        
+            
             
         
             
@@ -618,45 +579,10 @@
                     
                 
             
-                
-                    
-                
-                    
-                
-            
         
             
             
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
         
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-        
-            </ul>
         
 
         <div class="post-recent">
@@ -667,6 +593,8 @@
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/2020/07/02/%E8%87%AA%E8%A1%8C%E8%BD%A6%E9%9B%B6%E4%BB%B6%E5%A4%A7%E5%85%A8%E5%9B%BE%E8%A7%A3%E5%91%8A%E8%AF%89%E4%BD%A0%E5%B1%B1%E5%9C%B0%E8%BD%A6%E5%8F%8A%E5%85%AC%E8%B7%AF%E8%BD%A6%E5%90%84%E9%9B%B6%E9%83%A8%E4%BB%B6%E7%A7%B0%E5%91%BC-%E9%AA%91%E9%83%A8%E8%90%BD/">自行车零件大全图解告诉你山地车及公路车各零部件称呼-骑部落</a></p>
         
     </div>
 </div>
@@ -684,8 +612,8 @@
      */
 
     var disqus_config = function() {
-        this.page.url = 'http://localhost:4000/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://localhost:4000/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://tldsn.github.io/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://tldsn.github.io/2020/04/28/autohotkey-windows%E5%BF%AB%E6%8D%B7%E9%94%AE%E8%AE%BE%E7%BD%AE%E7%A5%9E%E5%99%A8_%E7%96%AF%E7%8B%82%E7%9A%84%E5%93%88%E4%B8%98%E7%9A%84%E5%8D%9A%E5%AE%A2/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -715,8 +643,6 @@
                 </div>
                 <ul id="content-side" class="content-ul">
                     
-                    <li><a href="#similar_posts">Similar Posts</a></li>
-                    
                     <li><a href="#comments">Comments</a></li>
                 </ul>
             </div>
@@ -736,10 +662,10 @@
     }
 }());
 </script>
-<script src="/js/pageContent.js " charset="utf-8"></script>
+<script src="/assets/js/pageContent.js " charset="utf-8"></script>
 
 
-    <footer class="site-footer">
+  <footer class="site-footer">
 
 
     <div class="wrapper">
@@ -774,22 +700,51 @@
 </footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-    <div class="back-to-top">
+  <div class="back-to-top">
     <a href="#top" data-scroll>
         <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
-    <script src=" /js/main.js " charset="utf-8"></script>
-    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
-    <script type="text/javascript">
-      smoothScroll.init({
-        speed: 500, // Integer. How fast to complete the scroll in milliseconds
-        easing: 'easeInOutCubic', // Easing pattern to use
-        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
-      });
-    </script>
-    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
-  </body>
+  <div id="music"></div>
+
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+  <script src=" /assets/js/main.js " charset="utf-8"></script>
+  <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
+  <script type="text/javascript">
+    smoothScroll.init({
+      speed: 500, // Integer. How fast to complete the scroll in milliseconds
+      easing: 'easeInOutCubic', // Easing pattern to use
+      offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+    });
+  </script>
+  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
+</body>
 
 </html>

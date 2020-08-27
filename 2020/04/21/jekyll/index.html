@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,9 +14,27 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
-    <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2020/04/21/jekyll/">
-    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link rel="stylesheet" href="/assets/css/main.css ">
+    <link rel="canonical" href="https://tldsn.github.io/2020/04/21/jekyll/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>jekyll初识 | TLDSN</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="jekyll初识" />
+<meta name="author" content="tldsn" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="base 基本命令 目录结构 ☆常用变量 Liquid 过滤器 标签 配置 头信息默认值 头信息 永久连接 指定 Jekyll build 时的环境 markdown选项 Liquid选项 分页 集合 github-pages 本文仅自用，请以最新官方文档为准 base 基本命令 jekyll build　　默认构建到./_site文件夹中 jekyll sever　　一个开发服务器将会运行在 http://localhost:4000/ 目录结构 主要文件/目录 描述 _config.yml 配置文件 _drafts 草稿 _includes 复用 _layouts 模板 _posts 文章 _data 网站数据 _site 默认生成静态页面的目录 ☆常用变量 site page layout content paginator site.time site.pages site.posts site.related_posts　　相关Post site.collections site.data site.categories.category site.tags.tag site.自定义变量 page.content page.title page.excerpt　　摘要 page.url page.date page.id page.categories page.tags page.next page.previous paginator.total_posts　　posts总数 paginator.per_page　　每页posts数量 paginator.total_pages　　总页数 paginator.posts　　本页可用posts paginator.page　　当前页码 paginator.previous_page paginator.next_page paginator.previous_page_path paginator.next_page_path Liquid 过滤器 日期格式化 字符串操作｛转码、过滤字符｝ json转换 数组操作｛push、pop、随机、排序、数组转句子、｝ 对象操作｛分组、判断、检索、｝ 标签 include 如果你需要在多个地方引用一小代码片段，可以使用 include 标签 Jekyll 要求所有被引用的文件放在根目录的 _includes 文件夹 还可以传递参数、变量 变量可以通过``被调用 include_relative引入其他文件 highlight 可以加入行号 link 链接 post_url 博文链接 gist 引入Github Gist 需要引入jekyll-gist gem 配置 参考：jekyll默认配置 Safe　　是否开启自定义插件 Defaults　　设置YAML头信息默认值 LSI　　为相关文章生成索引 头信息默认值 在_config.yml 文件里设置 defaults 的值指定全站范围的默认值 defaults: - scope: path: &quot;posts&quot; type: &quot;posts&quot; values: layout: &quot;post&quot; author: &quot;tldsn&quot; 头信息 预定义全局变量 layout permalink published date category/categories tags 永久连接 permalink 指定 Jekyll build 时的环境 ★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数，默认为development JEKYLL_ENV=production jekyll build {% if jekyll.environment == &quot;production&quot; %} {% include disqus.html %} {% endif %} markdown选项 Kramdown Redcarpet Liquid选项 liquid错误处理方式 分页 参考：分页 jekyll-paginate插件 只支持html文件 现不支持标签和类别分页，也不支持集合 集合 同pages、posts collections: - my_collection github-pages 使用 github-pages gem包管理Jekyll和其在Github Pages上的依赖， 使用这个包可以在将网站部署到Github Pages上时， 不会因为各种不同版本的gem包而导致意外报错。 source &#39;https://rubygems.org&#39; require &#39;json&#39; require &#39;open-uri&#39; versions =JSON.parse(open(&#39;https://pages.github.com/versions.json&#39;).read) gem &#39;github-pages&#39;, versions[&#39;github-pages&#39;]" />
+<meta property="og:description" content="base 基本命令 目录结构 ☆常用变量 Liquid 过滤器 标签 配置 头信息默认值 头信息 永久连接 指定 Jekyll build 时的环境 markdown选项 Liquid选项 分页 集合 github-pages 本文仅自用，请以最新官方文档为准 base 基本命令 jekyll build　　默认构建到./_site文件夹中 jekyll sever　　一个开发服务器将会运行在 http://localhost:4000/ 目录结构 主要文件/目录 描述 _config.yml 配置文件 _drafts 草稿 _includes 复用 _layouts 模板 _posts 文章 _data 网站数据 _site 默认生成静态页面的目录 ☆常用变量 site page layout content paginator site.time site.pages site.posts site.related_posts　　相关Post site.collections site.data site.categories.category site.tags.tag site.自定义变量 page.content page.title page.excerpt　　摘要 page.url page.date page.id page.categories page.tags page.next page.previous paginator.total_posts　　posts总数 paginator.per_page　　每页posts数量 paginator.total_pages　　总页数 paginator.posts　　本页可用posts paginator.page　　当前页码 paginator.previous_page paginator.next_page paginator.previous_page_path paginator.next_page_path Liquid 过滤器 日期格式化 字符串操作｛转码、过滤字符｝ json转换 数组操作｛push、pop、随机、排序、数组转句子、｝ 对象操作｛分组、判断、检索、｝ 标签 include 如果你需要在多个地方引用一小代码片段，可以使用 include 标签 Jekyll 要求所有被引用的文件放在根目录的 _includes 文件夹 还可以传递参数、变量 变量可以通过``被调用 include_relative引入其他文件 highlight 可以加入行号 link 链接 post_url 博文链接 gist 引入Github Gist 需要引入jekyll-gist gem 配置 参考：jekyll默认配置 Safe　　是否开启自定义插件 Defaults　　设置YAML头信息默认值 LSI　　为相关文章生成索引 头信息默认值 在_config.yml 文件里设置 defaults 的值指定全站范围的默认值 defaults: - scope: path: &quot;posts&quot; type: &quot;posts&quot; values: layout: &quot;post&quot; author: &quot;tldsn&quot; 头信息 预定义全局变量 layout permalink published date category/categories tags 永久连接 permalink 指定 Jekyll build 时的环境 ★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数，默认为development JEKYLL_ENV=production jekyll build {% if jekyll.environment == &quot;production&quot; %} {% include disqus.html %} {% endif %} markdown选项 Kramdown Redcarpet Liquid选项 liquid错误处理方式 分页 参考：分页 jekyll-paginate插件 只支持html文件 现不支持标签和类别分页，也不支持集合 集合 同pages、posts collections: - my_collection github-pages 使用 github-pages gem包管理Jekyll和其在Github Pages上的依赖， 使用这个包可以在将网站部署到Github Pages上时， 不会因为各种不同版本的gem包而导致意外报错。 source &#39;https://rubygems.org&#39; require &#39;json&#39; require &#39;open-uri&#39; versions =JSON.parse(open(&#39;https://pages.github.com/versions.json&#39;).read) gem &#39;github-pages&#39;, versions[&#39;github-pages&#39;]" />
+<link rel="canonical" href="https://tldsn.github.io/2020/04/21/jekyll/" />
+<meta property="og:url" content="https://tldsn.github.io/2020/04/21/jekyll/" />
+<meta property="og:site_name" content="TLDSN" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-21T00:00:00+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://tldsn.github.io/2020/04/21/jekyll/"},"url":"https://tldsn.github.io/2020/04/21/jekyll/","author":{"@type":"Person","name":"tldsn"},"description":"base 基本命令 目录结构 ☆常用变量 Liquid 过滤器 标签 配置 头信息默认值 头信息 永久连接 指定 Jekyll build 时的环境 markdown选项 Liquid选项 分页 集合 github-pages 本文仅自用，请以最新官方文档为准 base 基本命令 jekyll build　　默认构建到./_site文件夹中 jekyll sever　　一个开发服务器将会运行在 http://localhost:4000/ 目录结构 主要文件/目录 描述 _config.yml 配置文件 _drafts 草稿 _includes 复用 _layouts 模板 _posts 文章 _data 网站数据 _site 默认生成静态页面的目录 ☆常用变量 site page layout content paginator site.time site.pages site.posts site.related_posts　　相关Post site.collections site.data site.categories.category site.tags.tag site.自定义变量 page.content page.title page.excerpt　　摘要 page.url page.date page.id page.categories page.tags page.next page.previous paginator.total_posts　　posts总数 paginator.per_page　　每页posts数量 paginator.total_pages　　总页数 paginator.posts　　本页可用posts paginator.page　　当前页码 paginator.previous_page paginator.next_page paginator.previous_page_path paginator.next_page_path Liquid 过滤器 日期格式化 字符串操作｛转码、过滤字符｝ json转换 数组操作｛push、pop、随机、排序、数组转句子、｝ 对象操作｛分组、判断、检索、｝ 标签 include 如果你需要在多个地方引用一小代码片段，可以使用 include 标签 Jekyll 要求所有被引用的文件放在根目录的 _includes 文件夹 还可以传递参数、变量 变量可以通过``被调用 include_relative引入其他文件 highlight 可以加入行号 link 链接 post_url 博文链接 gist 引入Github Gist 需要引入jekyll-gist gem 配置 参考：jekyll默认配置 Safe　　是否开启自定义插件 Defaults　　设置YAML头信息默认值 LSI　　为相关文章生成索引 头信息默认值 在_config.yml 文件里设置 defaults 的值指定全站范围的默认值 defaults: - scope: path: &quot;posts&quot; type: &quot;posts&quot; values: layout: &quot;post&quot; author: &quot;tldsn&quot; 头信息 预定义全局变量 layout permalink published date category/categories tags 永久连接 permalink 指定 Jekyll build 时的环境 ★在 build（或者 serve）参数中，可以指定 Jekyll 的环境参数，默认为development JEKYLL_ENV=production jekyll build {% if jekyll.environment == &quot;production&quot; %} {% include disqus.html %} {% endif %} markdown选项 Kramdown Redcarpet Liquid选项 liquid错误处理方式 分页 参考：分页 jekyll-paginate插件 只支持html文件 现不支持标签和类别分页，也不支持集合 集合 同pages、posts collections: - my_collection github-pages 使用 github-pages gem包管理Jekyll和其在Github Pages上的依赖， 使用这个包可以在将网站部署到Github Pages上时， 不会因为各种不同版本的gem包而导致意外报错。 source &#39;https://rubygems.org&#39; require &#39;json&#39; require &#39;open-uri&#39; versions =JSON.parse(open(&#39;https://pages.github.com/versions.json&#39;).read) gem &#39;github-pages&#39;, versions[&#39;github-pages&#39;]","@type":"BlogPosting","headline":"jekyll初识","dateModified":"2020-04-21T00:00:00+08:00","datePublished":"2020-04-21T00:00:00+08:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
 
     <script>
     // 百度统计代码
@@ -47,9 +65,9 @@
 </head>
 
 
-  <body>
+<body>
 
-    <header id="top">
+  <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">TLDSN</a>
         <small>太阳升起时，请重新开始</small>
@@ -138,6 +156,20 @@
                     
                 
                     
+                    <li>
+                        
+                        <a href="/authors/">
+                        
+                            <i class="fa fa-"></i>Staff
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
                 
                     
                 
@@ -163,7 +195,7 @@
 </header>
 
 
-        <div class="page clearfix" post>
+  <div class="page clearfix" post>
     <div class="left">
         <h1>jekyll初识</h1>
         <div class="label">
@@ -173,7 +205,11 @@
             </div>
 
             <div class="label-card">
-                <i class="fa fa-user"></i>tldsn
+                <!-- <i class="fa fa-user"></i>tldsn
+                 -->
+                
+                
+                  <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
                 
             </div>
 
@@ -567,60 +603,8 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
                     
                 
             
-                
-                    
-                
-            
         
             
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
             
                 
                     
@@ -636,17 +620,17 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
         
             
             
-                
-                    
-                
+        
             
-                
-                    
-                
             
-                
-                    
-                
+        
+            
+            
+        
+            
+            
+        
+            
             
         
             
@@ -655,20 +639,8 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
                     
                 
             
-                
-                    
-                
-            
         
             
-            
-                
-                    
-                
-            
-                
-                    
-                
             
         
         
@@ -700,8 +672,8 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
      */
 
     var disqus_config = function() {
-        this.page.url = 'http://localhost:4000/2020/04/21/jekyll/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://localhost:4000/2020/04/21/jekyll/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://tldsn.github.io/2020/04/21/jekyll/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://tldsn.github.io/2020/04/21/jekyll/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -750,10 +722,10 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
     }
 }());
 </script>
-<script src="/js/pageContent.js " charset="utf-8"></script>
+<script src="/assets/js/pageContent.js " charset="utf-8"></script>
 
 
-    <footer class="site-footer">
+  <footer class="site-footer">
 
 
     <div class="wrapper">
@@ -788,22 +760,51 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
 </footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-    <div class="back-to-top">
+  <div class="back-to-top">
     <a href="#top" data-scroll>
         <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </a>
 </div>
 
-    <script src=" /js/main.js " charset="utf-8"></script>
-    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
-    <script type="text/javascript">
-      smoothScroll.init({
-        speed: 500, // Integer. How fast to complete the scroll in milliseconds
-        easing: 'easeInOutCubic', // Easing pattern to use
-        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
-      });
-    </script>
-    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
-  </body>
+  <div id="music"></div>
+
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+  <script src=" /assets/js/main.js " charset="utf-8"></script>
+  <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
+  <script type="text/javascript">
+    smoothScroll.init({
+      speed: 500, // Integer. How fast to complete the scroll in milliseconds
+      easing: 'easeInOutCubic', // Easing pattern to use
+      offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+    });
+  </script>
+  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
+</body>
 
 </html>

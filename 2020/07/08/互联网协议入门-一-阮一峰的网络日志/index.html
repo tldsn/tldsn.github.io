@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>互联网协议入门（一）-阮一峰的网络日志</title>
+    <meta name="description" content="                                       互联网协议入门（一）                                            ">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
+    <link rel="stylesheet" href="/assets/css/main.css ">
+    <link rel="canonical" href="https://tldsn.github.io/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>互联网协议入门（一）-阮一峰的网络日志 | TLDSN</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="互联网协议入门（一）-阮一峰的网络日志" />
+<meta name="author" content="tldsn" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="互联网协议入门（一）" />
+<meta property="og:description" content="互联网协议入门（一）" />
+<link rel="canonical" href="https://tldsn.github.io/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/" />
+<meta property="og:url" content="https://tldsn.github.io/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/" />
+<meta property="og:site_name" content="TLDSN" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-08T00:00:00+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://tldsn.github.io/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/"},"url":"https://tldsn.github.io/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/","author":{"@type":"Person","name":"tldsn"},"description":"互联网协议入门（一）","@type":"BlogPosting","headline":"互联网协议入门（一）-阮一峰的网络日志","dateModified":"2020-07-08T00:00:00+08:00","datePublished":"2020-07-08T00:00:00+08:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ccd4104a124f2218d64c124431d52789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-163446273-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+</head>
+
+
+<body>
+
+  <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">TLDSN</a>
+        <small>太阳升起时，请重新开始</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/todo/">
+                        
+                            <i class="fa fa-check-square-o"></i>Todo
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/note/">
+                        
+                            <i class="fa fa-code"></i>Note
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/authors/">
+                        
+                            <i class="fa fa-"></i>Staff
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="page clearfix" post>
+    <div class="left">
+        <h1>互联网协议入门（一）-阮一峰的网络日志</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2020-07-08
+            </div>
+
+            <div class="label-card">
+                <!-- <i class="fa fa-user"></i>tldsn
+                 -->
+                
+                
+                  <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#印象笔记导入" title="Category: 印象笔记导入" rel="category">印象笔记导入</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <html><head></head><body><div class="ennote">
+  <div style="--en-clipped-content:article">
+<div><br></div><div style="font-size: 16px; display:block; min-width: 100%; position: relative;"> <div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;font-family:Georgia, serif;letter-spacing:-0.01em;word-spacing:0.2em;line-height:1.8em;font-size:62.5%;background-color:rgb(245, 245, 213);color:rgb(17, 17, 17);"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);background-color:rgb(245, 245, 213);min-width:640px;"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);"><div style="list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);"><div>
+                                    <h1 style="list-style-type:none;text-align:left;text-decoration:none;font-style:normal;border:medium none;font-size:2.88em;letter-spacing:-0.03em;border-bottom:1px solid rgb(211, 211, 211);margin:0.4em 0px 0.2em;padding:0px 0px 0.2em;font-weight:500;color:rgb(0, 0, 0);line-height:250%;font-family:&quot;Trebuchet MS&quot;, Arial, &quot;Lucida Grande&quot;, Verdana, Lucida, Helvetica, sans-serif;">互联网协议入门（一）</h1>
+                                            <div style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);float:right;padding-right:2em;padding-top:1em;">
+<a href="http://www.bshare.cn/share" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;background:rgba(0, 0, 0, 0) none repeat scroll 0% 0%;font:12px / 14px Helvetica, Calibri, Tahoma, Arial, 宋体, sans-serif;border:medium none;overflow:hidden;color:rgb(85, 102, 119);height:21px;line-height:18px;font-size:12px;padding-left:0px;display:block;width:51px;"><div style="list-style-type:none;margin:0px;padding:0px;text-align:center;font-style:normal;text-decoration:none;font-weight:bold;border:medium none;color:#333;display:inline-block;background:transparent url(http://static.bshare.cn/frame/images/button_custom10-zh-Orange.gif) no-repeat;line-height:1.2;cursor:pointer;height:21px;width:51px;"></div><div style="list-style-type:none;text-align:left;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);display:inline-block;background:rgba(0, 0, 0, 0) none repeat scroll 0% 0%;line-height:1.2;margin:0px;padding:0px;text-decoration:none;border:medium none;clear:both;"></div></a>
+
+
+
+
+
+</div>
+
+<div style="padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);line-height:0.8;margin:1.5em auto 2em;">
+                                        
+
+                                            <p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;color:rgb(85, 102, 119);">作者： <a href="http://www.ruanyifeng.com/" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(85, 102, 119);">阮一峰</a></p>
+                                    <p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;color:rgb(85, 102, 119);">日期： <a href="http://www.ruanyifeng.com/blog/2012/05/" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(85, 102, 119);"><abbr title="2012-05-31T12:44:03+08:00" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(85, 102, 119);">2012年5月31日</abbr></a></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+                                
+                                <div style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);">
+
+                                    
+                                        <p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">我们每天使用互联网，你是否想过，它是如何实现的？</p>
+                                    
+
+
+                                    
+                                        <p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">全世界几十亿台电脑，连接在一起，两两通信。上海的某一块网卡送出信号，洛杉矶的另一块网卡居然就收到了，两者实际上根本不知道对方的物理位置，你不觉得这是很神奇的事情吗？</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">互联网的核心是一系列协议，总称为"互联网协议"（Internet Protocol Suite）。它们对电脑如何连接和组网，做出了详尽的规定。理解了这些协议，就理解了互联网的原理。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">下面就是我的学习笔记。因为这些协议实在太复杂、太庞大，我想整理一个简洁的框架，帮助自己从总体上把握它们。为了保证简单易懂，我做了大量的简化，有些地方并不全面和精确，但是应该能够说清楚互联网的原理。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">=================================================</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">互联网协议入门</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">作者：阮一峰</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="326" height="434" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiI4MGVjOTBmOS1iYjExLTQ2NmYtOWIwOS01MDdmY2ZlN2Y2N2MifQ==" data-original-width="326" mime="image/png" data-original-height="434" id="bf71bdc82726f1504ddf45b3158491fd" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">一、概述</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">1.1 五层模型</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">互联网的实现，分成好几层。每一层都有自己的功能，就像建筑物一样，每一层都靠下一层支持。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">用户接触到的，只是最上面的一层，根本没有感觉到下面的层。要理解互联网，必须从最下层开始，自下而上理解每一层的功能。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">如何分层有不同的模型，有的模型分七层，有的分四层。我觉得，把互联网分成五层，比较容易解释。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="800" height="476" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiJkYzM2OTA5MC05Nzk5LTQ0NzEtYWJmMy00MzFhNGQ1OTE3ZDMifQ==" data-original-width="800" mime="image/png" data-original-height="476" id="e01e7ba34ce420645c156d3f4fb26b1c" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">如上图所示，最底下的一层叫做"实体层"（Physical Layer），最上面的一层叫做"应用层"（Application Layer），中间的三层（自下而上）分别是"链接层"（Link Layer）、"网络层"（Network Layer）和"传输层"（Transport Layer）。越下面的层，越靠近硬件；越上面的层，越靠近用户。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">它们叫什么名字，其实并不重要。只需要知道，互联网分成若干层就可以了。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">1.2 层与协议</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">每一层都是为了完成一种功能。为了实现这些功能，就需要大家都遵守共同的规则。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">大家都遵守的规则，就叫做"协议"（protocol）。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">互联网的每一层，都定义了很多协议。这些协议的总称，就叫做"互联网协议"（Internet Protocol Suite）。它们是互联网的核心，下面介绍每一层的功能，主要就是介绍每一层的主要协议。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">二、实体层</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">我们从最底下的一层开始。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">电脑要组网，第一件事要干什么？当然是先把电脑连起来，可以用光缆、电缆、双绞线、无线电波等方式。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="564" height="205" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiI3ZTBkMmM3OC0wOTNjLTQ3ZjYtOTExMS03OWIwNmVjNDVkY2UifQ==" data-original-width="564" mime="image/png" data-original-height="205" id="4126a4e619993f67554ae5c363c96d13" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">这就叫做"实体层"，它就是把电脑连接起来的物理手段。它主要规定了网络的一些电气特性，作用是负责传送0和1的电信号。</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">三、链接层</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">3.1 定义</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">单纯的0和1没有任何意义，必须规定解读方式：多少个电信号算一组？每个信号位有何意义？</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">这就是"链接层"的功能，它在"实体层"的上方，确定了0和1的分组方式。</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">3.2 以太网协议</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">早期的时候，每家公司都有自己的电信号分组方式。逐渐地，一种叫做<a href="http://zh.wikipedia.org/wiki/%E4%BB%A5%E5%A4%AA%E7%BD%91" target="_blank" style="margin:0px;padding:0px;list-style-type:none;text-align:left;font-weight:normal;font-style:normal;border:medium none;text-decoration:underline;color:rgb(34, 52, 114);">"以太网"</a>（Ethernet）的协议，占据了主导地位。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">以太网规定，一组电信号构成一个数据包，叫做"帧"（Frame）。每一帧分成两个部分：标头（Head）和数据（Data）。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="650" height="112" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiI1NjhmZWRkZC05NWE0LTRmYWUtYWQ2OC1mMjYzOWU3ZDExNTQifQ==" data-original-width="650" mime="image/png" data-original-height="112" id="bfa8c70c7bb9311023fc03d4dded1049" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">"标头"包含数据包的一些说明项，比如发送者、接受者、数据类型等等；"数据"则是数据包的具体内容。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">"标头"的长度，固定为18字节。"数据"的长度，最短为46字节，最长为1500字节。因此，整个"帧"最短为64字节，最长为1518字节。如果数据很长，就必须分割成多个帧进行发送。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">3.3 MAC地址</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">上面提到，以太网数据包的"标头"，包含了发送者和接受者的信息。那么，发送者和接受者是如何标识呢？</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">以太网规定，连入网络的所有设备，都必须具有"网卡"接口。数据包必须是从一块网卡，传送到另一块网卡。网卡的地址，就是数据包的发送地址和接收地址，这叫做MAC地址。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="500" height="371" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiIxMmVlZTJlNC0wYjI4LTQ3MWItYjJhMC0xNmFhMWI3ZjQxYjkifQ==" data-original-width="500" mime="image/png" data-original-height="371" id="3e206cc37a88bda9da71b61502d6c66c" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">每块网卡出厂的时候，都有一个全世界独一无二的MAC地址，长度是48个二进制位，通常用12个十六进制数表示。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="500" height="259" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiIwYWFhMzdlMC1mYThhLTQyZWUtOGMzOC0yOTNlOTMxODJjOWYifQ==" data-original-width="500" mime="image/png" data-original-height="259" id="df86ba34ee4c6874dee1f91030e23703" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">前6个十六进制数是厂商编号，后6个是该厂商的网卡流水号。有了MAC地址，就可以定位网卡和数据包的路径了。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">3.4 广播</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">定义地址只是第一步，后面还有更多的步骤。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">首先，一块网卡怎么会知道另一块网卡的MAC地址？</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">回答是有一种ARP协议，可以解决这个问题。这个留到后面介绍，这里只需要知道，以太网数据包必须知道接收方的MAC地址，然后才能发送。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">其次，就算有了MAC地址，系统怎样才能把数据包准确送到接收方？</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">回答是以太网采用了一种很"原始"的方式，它不是把数据包准确送到接收方，而是向本网络内所有计算机发送，让每台计算机自己判断，是否为接收方。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="700" height="531" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiIzMjY4OTM2Yy0xODJmLTQ3MjgtYjJhZC0xNWY3M2VmNGYzZmYifQ==" data-original-width="700" mime="image/png" data-original-height="531" id="9cddf14528172b15ea840304a30400a3" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">上图中，1号计算机向2号计算机发送一个数据包，同一个子网络的3号、4号、5号计算机都会收到这个包。它们读取这个包的"标头"，找到接收方的MAC地址，然后与自身的MAC地址相比较，如果两者相同，就接受这个包，做进一步处理，否则就丢弃这个包。这种发送方式就叫做"广播"（broadcasting）。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">有了数据包的定义、网卡的MAC地址、广播的发送方式，"链接层"就可以在多台计算机之间传送数据了。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">四、网络层</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">4.1 网络层的由来</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">以太网协议，依靠MAC地址发送数据。理论上，单单依靠MAC地址，上海的网卡就可以找到洛杉矶的网卡了，技术上是可以实现的。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">但是，这样做有一个重大的缺点。以太网采用广播方式发送数据包，所有成员人手一"包"，不仅效率低，而且局限在发送者所在的子网络。也就是说，如果两台计算机不在同一个子网络，广播是传不过去的。这种设计是合理的，否则互联网上每一台计算机都会收到所有包，那会引起灾难。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">互联网是无数子网络共同组成的一个巨型网络，很像想象上海和洛杉矶的电脑会在同一个子网络，这几乎是不可能的。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="682" height="537" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiI4MjBjYjQwYi0wMzY3LTQzNjctOGVmZi0yZjkyZmRkYmNlNzUifQ==" data-original-width="682" mime="image/png" data-original-height="537" id="0cdcff0e423964dddd17e91b85ec5d9e" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">因此，必须找到一种方法，能够区分哪些MAC地址属于同一个子网络，哪些不是。如果是同一个子网络，就采用广播方式发送，否则就采用"路由"方式发送。（"路由"的意思，就是指如何向不同的子网络分发数据包，这是一个很大的主题，本文不涉及。）遗憾的是，MAC地址本身无法做到这一点。它只与厂商有关，与所处网络无关。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">这就导致了"网络层"的诞生。它的作用是引进一套新的地址，使得我们能够区分不同的计算机是否属于同一个子网络。这套地址就叫做"网络地址"，简称"网址"。</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">于是，"网络层"出现以后，每台计算机有了两种地址，一种是MAC地址，另一种是网络地址。两种地址之间没有任何联系，MAC地址是绑定在网卡上的，网络地址则是管理员分配的，它们只是随机组合在一起。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">网络地址帮助我们确定计算机所在的子网络，MAC地址则将数据包送到该子网络中的目标网卡。因此，从逻辑上可以推断，必定是先处理网络地址，然后再处理MAC地址。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">4.2 IP协议</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">规定网络地址的协议，叫做IP协议。它所定义的地址，就被称为IP地址。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">目前，广泛采用的是IP协议第四版，简称IPv4。这个版本规定，网络地址由32个二进制位组成。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="500" height="269" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiIyMDNkOGFiNi00ZGJkLTRjZWMtOWZhYi03OTE3ZjJiMzMyN2IifQ==" data-original-width="500" mime="image/png" data-original-height="269" id="1ab4b0889c89092cde636d5607e570aa" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">习惯上，我们用分成四段的十进制数表示IP地址，从0.0.0.0一直到255.255.255.255。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">互联网上的每一台计算机，都会分配到一个IP地址。这个地址分成两个部分，前一部分代表网络，后一部分代表主机。比如，IP地址172.16.254.1，这是一个32位的地址，假定它的网络部分是前24位（172.16.254），那么主机部分就是后8位（最后的那个1）。处于同一个子网络的电脑，它们IP地址的网络部分必定是相同的，也就是说172.16.254.2应该与172.16.254.1处在同一个子网络。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">但是，问题在于单单从IP地址，我们无法判断网络部分。还是以172.16.254.1为例，它的网络部分，到底是前24位，还是前16位，甚至前28位，从IP地址上是看不出来的。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">那么，怎样才能从IP地址，判断两台计算机是否属于同一个子网络呢？这就要用到另一个参数"子网掩码"（subnet mask）。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">所谓"子网掩码"，就是表示子网络特征的一个参数。它在形式上等同于IP地址，也是一个32位二进制数字，它的网络部分全部为1，主机部分全部为0。比如，IP地址172.16.254.1，如果已知网络部分是前24位，主机部分是后8位，那么子网络掩码就是11111111.11111111.11111111.00000000，写成十进制就是255.255.255.0。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">知道"子网掩码"，我们就能判断，任意两个IP地址是否处在同一个子网络。方法是将两个IP地址与子网掩码分别进行AND运算（两个数位都为1，运算结果为1，否则为0），然后比较结果是否相同，如果是的话，就表明它们在同一个子网络中，否则就不是。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">比如，已知IP地址172.16.254.1和172.16.254.233的子网掩码都是255.255.255.0，请问它们是否在同一个子网络？两者与子网掩码分别进行AND运算，结果都是172.16.254.0，因此它们在同一个子网络。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">总结一下，IP协议的作用主要有两个，一个是为每一台计算机分配IP地址，另一个是确定哪些地址在同一个子网络。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">4.3 IP数据包</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">根据IP协议发送的数据，就叫做IP数据包。不难想象，其中必定包括IP地址信息。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">但是前面说过，以太网数据包只包含MAC地址，并没有IP地址的栏位。那么是否需要修改数据定义，再添加一个栏位呢？</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">回答是不需要，我们可以把IP数据包直接放进以太网数据包的"数据"部分，因此完全不用修改以太网的规格。这就是互联网分层结构的好处：上层的变动完全不涉及下层的结构。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">具体来说，IP数据包也分为"标头"和"数据"两个部分。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="650" height="132" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiI0NmY3NTQwYy0yYTQ0LTQzYmItYmQzNS1lMTE0ZGJlMWMxZmYifQ==" data-original-width="650" mime="image/png" data-original-height="132" id="5cc5c85eb1f6db93d7465bcb9344a8d1" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">"标头"部分主要包括版本、长度、IP地址等信息，"数据"部分则是IP数据包的具体内容。它放进以太网数据包后，以太网数据包就变成了下面这样。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="655" height="137" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiJkM2E0MWI2OS1kNDdlLTRkMDUtYjRhMC05N2JjYzQyNDg3NGQifQ==" data-original-width="655" mime="image/png" data-original-height="137" id="6a33bebe26e1e89340779f239d4d6a1d" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">IP数据包的"标头"部分的长度为20到60字节，整个数据包的总长度最大为65,535字节。因此，理论上，一个IP数据包的"数据"部分，最长为65,515字节。前面说过，以太网数据包的"数据"部分，最长只有1500字节。因此，如果IP数据包超过了1500字节，它就需要分割成几个以太网数据包，分开发送了。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">4.4 ARP协议</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">关于"网络层"，还有最后一点需要说明。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">因为IP数据包是放在以太网数据包里发送的，所以我们必须同时知道两个地址，一个是对方的MAC地址，另一个是对方的IP地址。通常情况下，对方的IP地址是已知的（后文会解释），但是我们不知道它的MAC地址。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">所以，我们需要一种机制，能够从IP地址得到MAC地址。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">这里又可以分成两种情况。第一种情况，如果两台主机不在同一个子网络，那么事实上没有办法得到对方的MAC地址，只能把数据包传送到两个子网络连接处的"网关"（gateway），让网关去处理。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">第二种情况，如果两台主机在同一个子网络，那么我们可以用ARP协议，得到对方的MAC地址。ARP协议也是发出一个数据包（包含在以太网数据包中），其中包含它所要查询主机的IP地址，在对方的MAC地址这一栏，填的是FF:FF:FF:FF:FF:FF，表示这是一个"广播"地址。它所在子网络的每一台主机，都会收到这个数据包，从中取出IP地址，与自身的IP地址进行比较。如果两者相同，都做出回复，向对方报告自己的MAC地址，否则就丢弃这个包。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">总之，有了ARP协议之后，我们就可以得到同一个子网络内的主机MAC地址，可以把数据包发送到任意一台主机之上了。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">五、传输层</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">5.1 传输层的由来</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">有了MAC地址和IP地址，我们已经可以在互联网上任意两台主机上建立通信。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">接下来的问题是，同一台主机上有许多程序都需要用到网络，比如，你一边浏览网页，一边与朋友在线聊天。当一个数据包从互联网上发来的时候，你怎么知道，它是表示网页的内容，还是表示在线聊天的内容？</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">也就是说，我们还需要一个参数，表示这个数据包到底供哪个程序（进程）使用。这个参数就叫做"端口"（port），它其实是每一个使用网卡的程序的编号。每个数据包都发到主机的特定端口，所以不同的程序就能取到自己所需要的数据。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">"端口"是0到65535之间的一个整数，正好16个二进制位。0到1023的端口被系统占用，用户只能选用大于1023的端口。不管是浏览网页还是在线聊天，应用程序会随机选用一个端口，然后与服务器的相应端口联系。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">"传输层"的功能，就是建立"端口到端口"的通信。相比之下，"网络层"的功能是建立"主机到主机"的通信。只要确定主机和端口，我们就能实现程序之间的交流。</strong>因此，Unix系统就把主机+端口，叫做"套接字"（socket）。有了它，就可以进行网络应用程序开发了。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">5.2 UDP协议</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">现在，我们必须在数据包中加入端口信息，这就需要新的协议。最简单的实现叫做UDP协议，它的格式几乎就是在数据前面，加上端口号。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">UDP数据包，也是由"标头"和"数据"两部分组成。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="666" height="146" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiI0YzM4NzU0Ny1iMDA3LTRlYzgtYTFlNi0yZmRkOTZiZjE1OTQifQ==" data-original-width="666" mime="image/png" data-original-height="146" id="8b7eb26ec9610b54f303a2ab3a7ef6b8" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">"标头"部分主要定义了发出端口和接收端口，"数据"部分就是具体的内容。然后，把整个UDP数据包放入IP数据包的"数据"部分，而前面说过，IP数据包又是放在以太网数据包之中的，所以整个以太网数据包现在变成了下面这样：</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="622" height="123" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiI4NTRiOWYyZi1kN2FkLTRiNWQtYWRjOS03ZjQzODA0ODcyZjMifQ==" data-original-width="622" mime="image/png" data-original-height="123" id="e2744fa7b691a110ed64c105f3321cc7" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">UDP数据包非常简单，"标头"部分一共只有8个字节，总长度不超过65,535字节，正好放进一个IP数据包。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">5.3 TCP协议</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">UDP协议的优点是比较简单，容易实现，但是缺点是可靠性较差，一旦数据包发出，无法知道对方是否收到。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">为了解决这个问题，提高网络可靠性，TCP协议就诞生了。这个协议非常复杂，但可以近似认为，它就是有确认机制的UDP协议，每发出一个数据包都要求确认。如果有一个数据包遗失，就收不到确认，发出方就知道有必要重发这个数据包了。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">因此，TCP协议能够确保数据不会遗失。它的缺点是过程复杂、实现困难、消耗较多的资源。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">TCP数据包和UDP数据包一样，都是内嵌在IP数据包的"数据"部分。TCP数据包没有长度限制，理论上可以无限长，但是为了保证网络的效率，通常TCP数据包的长度不会超过IP数据包的长度，以确保单个TCP数据包不必再分割。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">六、应用层</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">应用程序收到"传输层"的数据，接下来就要进行解读。由于互联网是开放架构，数据来源五花八门，必须事先规定好格式，否则根本无法解读。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><strong style="font-weight:800;">"应用层"的作用，就是规定应用程序的数据格式。</strong></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">举例来说，TCP协议可以为各种各样的程序传递数据，比如Email、WWW、FTP等等。那么，必须有不同协议规定电子邮件、网页、FTP数据的格式，这些应用程序协议就构成了"应用层"。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">这是最高的一层，直接面对用户。它的数据就放在TCP数据包的"数据"部分。因此，现在的以太网的数据包就变成下面这样。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;"><img width="745" height="254" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;color:rgb(17, 17, 17);border-radius:1em;border:0.3em solid rgb(224, 223, 204);" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiNTQwMWI5YjctZDQwMy00NWJiLTgzZTUtMjE3YTEyYmJhZjg4IiwicmVzb3VyY0d1aWQiOiJhNTIxNWVkOC02ZTBiLTRmYzgtYWVhNS01OGZkMTIwNDY2YmMifQ==" data-original-width="745" mime="image/png" data-original-height="254" id="ecb586d585a2f55efab67c3e58b45680" class="en-media"></p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">至此，整个互联网的五层结构，自下而上全部讲完了。这是从系统的角度，解释互联网是如何构成的。<a href="http://www.ruanyifeng.com/blog/2012/06/internet_protocol_suite_part_ii.html" target="_blank" style="margin:0px;padding:0px;list-style-type:none;text-align:left;font-weight:normal;font-style:normal;border:medium none;text-decoration:underline;color:rgb(34, 52, 114);">下一篇</a>，我反过来，从用户的角度，自上而下看看这个结构是如何发挥作用，完成一次网络数据交换的。</p>
+
+<p style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);font-size:1.6em;margin-top:1em;margin-left:0.8em;line-height:180%;">（完）</p>
+                                    
+
+                                </div>
+    
+                                <div style="list-style-type:none;text-align:left;text-decoration:none;font-style:normal;border-radius:1em;box-shadow:rgb(238, 238, 238) 0px 1px 0px 0px inset;background:rgb(170, 210, 240) linear-gradient(rgb(170, 210, 240) 5%, rgb(139, 193, 237) 100%) repeat scroll 0% 0%;text-shadow:rgb(238, 238, 238) 1px 1px 0px;margin:0px 0px 1em;font-weight:bold;color:rgb(252, 178, 151);margin-top:2em;background-color:rgb(222, 235, 247);padding:1.5em;border:1px solid rgb(211, 211, 211);">
+
+<h3 style="list-style-type:none;text-align:left;text-decoration:none;font-style:normal;border:medium none;letter-spacing:-0.03em;margin:0.4em 0px 0.2em;padding:0px 0px 0.2em;font-weight:bold;color:rgb(85, 102, 119);font-size:1.92em;border-bottom:1px solid gray;">文档信息</h3>
+<ul style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(17, 17, 17);padding-left:2em;padding-right:2em;">
+<li style="margin:0px;padding:0px;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;font-size:1.6em;line-height:220%;list-style-type:square;color:rgb(85, 102, 119);">版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(85, 102, 119);">创意共享3.0许可证</a>）</li>
+<li style="margin:0px;padding:0px;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;font-size:1.6em;line-height:220%;list-style-type:square;color:rgb(85, 102, 119);">发表日期： <abbr title="2012-05-31T12:44:03+08:00" style="margin:0px;padding:0px;list-style-type:none;text-align:left;text-decoration:none;font-weight:normal;font-style:normal;border:medium none;color:rgb(61, 61, 61);">2012年5月31日</abbr></li>
+
+</ul>
+                                </div>
+</div></div></div></div></div></div></div></div></div></div></div>
+</div>
+</div></body></html>
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+            
+        
+            
+            
+                
+            
+        
+            
+            
+                
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+        
+            
+            
+                
+            
+        
+            
+            
+        
+            
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2020/07/08/WebSocket%E6%95%99%E7%A8%8B-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">WebSocket教程-阮一峰的网络日志</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%BA%8C-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">互联网协议入门（二）-阮一峰的网络日志</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'https://tldsn.github.io/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://tldsn.github.io/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//https-tldsn-github-io.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/assets/js/pageContent.js " charset="utf-8"></script>
+
+
+  <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/tldsn" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=742720531@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="http://weibo.com/5578237033" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>  
+            <a href="https://www.zhihu.com/people/yao-yu-jie-90" title="Zhihu"><i class="iconfont blog-zhihu"></i></a>  
+            <a href="https://www.douban.com/people/122400251" title="Douban"><i class="iconfont blog-douban"></i></a>  
+            <a href="https://music.163.com/#/user/home?id=263386850" title="Cloudmusic"><i class="iconfont blog-yinle"></i></a>  
+             
+               
+            
+        </p>
+        <p class="busuanzi">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+  <div id="music"></div>
+
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+  <script src=" /assets/js/main.js " charset="utf-8"></script>
+  <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
+  <script type="text/javascript">
+    smoothScroll.init({
+      speed: 500, // Integer. How fast to complete the scroll in milliseconds
+      easing: 'easeInOutCubic', // Easing pattern to use
+      offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+    });
+  </script>
+  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
+</body>
+
+</html>
