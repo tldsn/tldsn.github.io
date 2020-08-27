@@ -67,6 +67,9 @@ GEM
       ffi (~> 1.9)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+    thread_safe (0.3.6)
+    tzinfo (1.2.7)
+      thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
     wdm (0.1.1)
 
@@ -82,7 +85,8 @@ DEPENDENCIES
   kramdown (~> 2.1)
   rouge
   sass (~> 3.7)
-  wdm
+  tzinfo (~> 1.2)
+  wdm (~> 0.1.1)
 
 BUNDLED WITH
    2.1.2

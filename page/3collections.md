@@ -45,6 +45,7 @@ type: page
 
   * [go指南](http://tour.studygolang.com/list)  
 
+  * [go中的正则](https://www.cnblogs.com/golove/p/3269099.html)
 
 * #### 爬虫
 

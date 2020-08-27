@@ -56,16 +56,35 @@ excerpt_separator: "\n\n\n\n"
 
 # paginate
 # gems: [jekyll-paginate]
-plugins: [jekyll-paginate]
-paginate: 6
+# plugins: [jekyll-paginate]
 
 #plugins
-# plugins:
-#   - jekyll-feed
-#   - jekyll-sitemap
-#   - jekyll-seo-tag
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  
+paginate: 6
 
-# collections:
-#   fly:
-#   output: true
-#   permalink: /collection/:path/
+collections:
+  authors:
+    output: true
+      
+      
+
+defaults:
+  - scope:
+      path: "/_posts/learn/6.其他/"
+      # type: "authors"
+    values:
+      layout: "author"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"

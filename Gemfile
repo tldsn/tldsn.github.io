@@ -6,7 +6,7 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "jekyll", "~> 4.0.0"
 
-gem 'wdm'
+gem 'wdm', '~> 0.1.1'
 
 # gem "github-pages"
 
@@ -23,3 +23,7 @@ gem "rouge"
 gem "jekyll-paginate", "~> 1.1"
 
 gem "sass", "~> 3.7"
+
+gem 'tzinfo', '~> 1.2'
+
+
