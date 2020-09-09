@@ -15,9 +15,9 @@
     <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
     <link rel="stylesheet" href="/assets/css/main.css ">
-    <link rel="canonical" href="https://tldsn.github.io/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">
-    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
-    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <link rel="canonical" href="http://localhost:4000/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="TLDSN" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>系统安装与备份 | TLDSN</title>
 <meta name="generator" content="Jekyll v4.0.0" />
@@ -26,13 +26,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="windows系统 Ubuntu UEFI + GPT 安装 DISM++ 参考 windows系统 U盘 Rufus 系统镜像MSDN I Tell You 安装密钥 Ubuntu 把待安装系统的分区设置为用于Ext4文件系统，并设置挂载点为根目录/ UEFI + GPT 安装 为什么要用 UEFI 引导方案？ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的继承者。跟 BIOS 相比，UEFI 直接从预启动的操作环境加载到操作系统上从而节省开机时间。所以说，用 UEFI 引导方式可有效提升开机速度。 为什么要用 GPT 分区方案？ 传统的 MBR 分区表只能支持 2.1T 以下的硬盘容量，并且最多创建 4 个主分区，也就是最多同时安装 4 个操作系统。GPT 则没有分区的限制，但是 GPT 必须要 UEFI 引导。 进入BIOS，查看是否支持UEFI BOOT，并设置为Enabled 进入winPE，删除硬盘所有分区，转换分区类型为GUID 划分硬盘分区：建立新分区，建立主分区 安装系统 DISM++ 系统镜像 参考 https://www.jianshu.com/p/a33d0e202fc1" />
 <meta property="og:description" content="windows系统 Ubuntu UEFI + GPT 安装 DISM++ 参考 windows系统 U盘 Rufus 系统镜像MSDN I Tell You 安装密钥 Ubuntu 把待安装系统的分区设置为用于Ext4文件系统，并设置挂载点为根目录/ UEFI + GPT 安装 为什么要用 UEFI 引导方案？ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的继承者。跟 BIOS 相比，UEFI 直接从预启动的操作环境加载到操作系统上从而节省开机时间。所以说，用 UEFI 引导方式可有效提升开机速度。 为什么要用 GPT 分区方案？ 传统的 MBR 分区表只能支持 2.1T 以下的硬盘容量，并且最多创建 4 个主分区，也就是最多同时安装 4 个操作系统。GPT 则没有分区的限制，但是 GPT 必须要 UEFI 引导。 进入BIOS，查看是否支持UEFI BOOT，并设置为Enabled 进入winPE，删除硬盘所有分区，转换分区类型为GUID 划分硬盘分区：建立新分区，建立主分区 安装系统 DISM++ 系统镜像 参考 https://www.jianshu.com/p/a33d0e202fc1" />
-<link rel="canonical" href="https://tldsn.github.io/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/" />
-<meta property="og:url" content="https://tldsn.github.io/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/" />
+<link rel="canonical" href="http://localhost:4000/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/" />
+<meta property="og:url" content="http://localhost:4000/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/" />
 <meta property="og:site_name" content="TLDSN" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-21T00:00:00+08:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://tldsn.github.io/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/"},"url":"https://tldsn.github.io/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/","author":{"@type":"Person","name":"tldsn"},"description":"windows系统 Ubuntu UEFI + GPT 安装 DISM++ 参考 windows系统 U盘 Rufus 系统镜像MSDN I Tell You 安装密钥 Ubuntu 把待安装系统的分区设置为用于Ext4文件系统，并设置挂载点为根目录/ UEFI + GPT 安装 为什么要用 UEFI 引导方案？ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的继承者。跟 BIOS 相比，UEFI 直接从预启动的操作环境加载到操作系统上从而节省开机时间。所以说，用 UEFI 引导方式可有效提升开机速度。 为什么要用 GPT 分区方案？ 传统的 MBR 分区表只能支持 2.1T 以下的硬盘容量，并且最多创建 4 个主分区，也就是最多同时安装 4 个操作系统。GPT 则没有分区的限制，但是 GPT 必须要 UEFI 引导。 进入BIOS，查看是否支持UEFI BOOT，并设置为Enabled 进入winPE，删除硬盘所有分区，转换分区类型为GUID 划分硬盘分区：建立新分区，建立主分区 安装系统 DISM++ 系统镜像 参考 https://www.jianshu.com/p/a33d0e202fc1","@type":"BlogPosting","headline":"系统安装与备份","dateModified":"2020-04-21T00:00:00+08:00","datePublished":"2020-04-21T00:00:00+08:00","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/","author":{"@type":"Person","name":"tldsn"},"description":"windows系统 Ubuntu UEFI + GPT 安装 DISM++ 参考 windows系统 U盘 Rufus 系统镜像MSDN I Tell You 安装密钥 Ubuntu 把待安装系统的分区设置为用于Ext4文件系统，并设置挂载点为根目录/ UEFI + GPT 安装 为什么要用 UEFI 引导方案？ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的继承者。跟 BIOS 相比，UEFI 直接从预启动的操作环境加载到操作系统上从而节省开机时间。所以说，用 UEFI 引导方式可有效提升开机速度。 为什么要用 GPT 分区方案？ 传统的 MBR 分区表只能支持 2.1T 以下的硬盘容量，并且最多创建 4 个主分区，也就是最多同时安装 4 个操作系统。GPT 则没有分区的限制，但是 GPT 必须要 UEFI 引导。 进入BIOS，查看是否支持UEFI BOOT，并设置为Enabled 进入winPE，删除硬盘所有分区，转换分区类型为GUID 划分硬盘分区：建立新分区，建立主分区 安装系统 DISM++ 系统镜像 参考 https://www.jianshu.com/p/a33d0e202fc1","dateModified":"2020-04-21T00:00:00+08:00","datePublished":"2020-04-21T00:00:00+08:00","headline":"系统安装与备份","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -160,19 +160,19 @@
                         
                         <a href="/authors/">
                         
-                            <i class="fa fa-"></i>Staff
+                            <i class="fa fa-id-card-o"></i>Staff
                         </a>
                     </li>
                     
                 
                     
-                
-                    
-                
-                    
-                
-                    
-                
+                    <li>
+                        
+                        <a href="/evernote/">
+                        
+                            <i class="fa fa-reply-all"></i>evernote
+                        </a>
+                    </li>
                     
                 
                     
@@ -208,8 +208,6 @@
                 <!-- <i class="fa fa-user"></i>tldsn
                  -->
                 
-                
-                  <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
                 
             </div>
 
@@ -317,8 +315,16 @@ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的
                     
                 
             
+                
+                    
+                
+            
         
             
+            
+                
+                    
+                
             
                 
                     
@@ -331,20 +337,9 @@ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的
                     
                 
             
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
+                
+                    
+                
             
         
             
@@ -353,8 +348,83 @@ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的
                     
                 
             
+                
+                    
+                
+            
         
             
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
             
         
         
@@ -386,8 +456,8 @@ UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的
      */
 
     var disqus_config = function() {
-        this.page.url = 'https://tldsn.github.io/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://tldsn.github.io/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://localhost:4000/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE

@@ -15,9 +15,9 @@
     <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
     <link rel="stylesheet" href="/assets/css/main.css ">
-    <link rel="canonical" href="https://tldsn.github.io/2020/04/21/git/">
-    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
-    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <link rel="canonical" href="http://localhost:4000/2020/04/21/git/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="TLDSN" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>git | TLDSN</title>
 <meta name="generator" content="Jekyll v4.0.0" />
@@ -26,13 +26,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="概念 base 简单提交流程 其他 进阶 rebase commit 撤销（revert）和重设（reset）对比 checkout和reset对比 分支 基本操作 其他 Tag 暂存(stash) bug ignore 概念 工作目录、缓冲区、提交历史 HEAD表示当前版本，也就是最新的提交,上一个版本就是HEAD^，上上一个版本就是HEAD^^ HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。 base git init　　创建新仓库　　 git status　　查看状态　　 git log --pretty=oneline　　提交历史　　 git reflog　　命令历史　　 git diff HEAD -- readme.txt　　查看工作区和版本库里面最新版本的区别 简单提交流程 git add &lt;filename&gt; fit commit -m &quot;提交信息&quot; git config --global user.email &quot;you@example.com&quot; git config --global user.name &quot;Your Name&quot; git remote add origin &lt;server&gt;　　//连接远程 git push origin master　　//推送 其他 让Git显示颜色 git config --global color.ui true 配置别名 git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot; 进阶 rebase git rebase 是将上游更改合并进本地仓库的通常方法，rebase 就好像是说「我想将我的更改建立在其他人的进展之上」 ☆rebase操作可以把本地未push的分叉提交历史整理成直线；   ☆rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。   ☆在你工作流中使用 rebase 最好的用法之一就是清理本地正在开发的分支。隔一段时间执行一次交互式 rebase，你可以保证你 feature 分支中的每一个提交都是专注和有意义的。你在写代码时不用担心造成孤立的提交——因为你后面一定能修复。 对最新的 3 次提交进行了交互式 rebase： git checkout feature git rebase -i HEAD~3 //交互式变基 git rebase -i　　 * pick：　　//正常选中 * reword：　　//选中，并且修改提交信息； * edit：　　//选中，rebase时会暂停，允许你修改这个commit（参考这里） * squash：　　//选中，会将当前commit与上一个commit合并 * fixup：　　//与squash相同，但不会保存当前commit的提交信息 * exec：　　//执行其他shell命令 commit //合并缓存的修改和上一次的提交，用新的快照替换上一个提交。缓存区没有文件时运行这个命令可以用来编辑上次提交的提交信息，而不会更改快照。 git commit --amend --no-edit //自动将提交标记为先前提交的修复 git commit --fixup &lt;commit&gt; 撤销（revert）和重设（reset）对比 git revert　　撤销一个已经提交的快照，保留项目历史，生成新的提交 git reset　　重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。 checkout和reset对比 git checkout　　移动指针检出一个旧版本 git reset　　重设一个旧的提交，--hard移除之后的提交，--soft将之后的提交加入到缓冲区 分支 Git鼓励大量使用分支： 基本操作 查看分支：git branch 创建分支：git branch &lt;name&gt; 切换分支：git checkout &lt;name&gt; 或者 git switch &lt;name&gt; 创建+切换分支：git checkout -b &lt;name&gt; 或者 git switch -c &lt;name&gt; 合并某分支到当前分支：git merge &lt;name&gt; 删除分支：git branch -d &lt;name&gt; 其他 git merge --no-ff -m &quot;merge with no-ff&quot; dev　　//合并分支禁用Fast forward git checkout -b dev origin/dev　　//创建远程origin的dev分支到本地 git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;　　//本地分支和远程分支建立连接 git remote -v　　//查看远程仓库 git remote rm origin　　//删除已有的GitHub远程库 Tag git tag　　可以查看所有标签 git tag &lt;tagname&gt;　　新建一个标签，默认为HEAD，也可以指定一个commit id git tag v0.9 f52c633　　指定commit id git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;　　指定message git push origin &lt;tagname&gt;　　可以推送一个本地标签 git push origin --tags　　可以推送全部未推送过的本地标签 git tag -d &lt;tagname&gt;　　可以删除一个本地标签 git push origin :refs/tags/&lt;tagname&gt;　　可以删除一个远程标签 暂存(stash) git stash git stash list　　查看 git stash apply stash@{0}　　恢复 git stash drop　　删除 git stash pop　　恢复并删除 bug cherry-pick命令　　复制一个特定的提交到当前分支 git cherry-pick 4c805e2 ignore https://github.com/github/gitignore 检验.gitignore的标准是git status命令是不是说working directory clean git check-ignore -v App.class 检查规则 git add -f App.class 强制添加" />
 <meta property="og:description" content="概念 base 简单提交流程 其他 进阶 rebase commit 撤销（revert）和重设（reset）对比 checkout和reset对比 分支 基本操作 其他 Tag 暂存(stash) bug ignore 概念 工作目录、缓冲区、提交历史 HEAD表示当前版本，也就是最新的提交,上一个版本就是HEAD^，上上一个版本就是HEAD^^ HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。 base git init　　创建新仓库　　 git status　　查看状态　　 git log --pretty=oneline　　提交历史　　 git reflog　　命令历史　　 git diff HEAD -- readme.txt　　查看工作区和版本库里面最新版本的区别 简单提交流程 git add &lt;filename&gt; fit commit -m &quot;提交信息&quot; git config --global user.email &quot;you@example.com&quot; git config --global user.name &quot;Your Name&quot; git remote add origin &lt;server&gt;　　//连接远程 git push origin master　　//推送 其他 让Git显示颜色 git config --global color.ui true 配置别名 git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot; 进阶 rebase git rebase 是将上游更改合并进本地仓库的通常方法，rebase 就好像是说「我想将我的更改建立在其他人的进展之上」 ☆rebase操作可以把本地未push的分叉提交历史整理成直线；   ☆rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。   ☆在你工作流中使用 rebase 最好的用法之一就是清理本地正在开发的分支。隔一段时间执行一次交互式 rebase，你可以保证你 feature 分支中的每一个提交都是专注和有意义的。你在写代码时不用担心造成孤立的提交——因为你后面一定能修复。 对最新的 3 次提交进行了交互式 rebase： git checkout feature git rebase -i HEAD~3 //交互式变基 git rebase -i　　 * pick：　　//正常选中 * reword：　　//选中，并且修改提交信息； * edit：　　//选中，rebase时会暂停，允许你修改这个commit（参考这里） * squash：　　//选中，会将当前commit与上一个commit合并 * fixup：　　//与squash相同，但不会保存当前commit的提交信息 * exec：　　//执行其他shell命令 commit //合并缓存的修改和上一次的提交，用新的快照替换上一个提交。缓存区没有文件时运行这个命令可以用来编辑上次提交的提交信息，而不会更改快照。 git commit --amend --no-edit //自动将提交标记为先前提交的修复 git commit --fixup &lt;commit&gt; 撤销（revert）和重设（reset）对比 git revert　　撤销一个已经提交的快照，保留项目历史，生成新的提交 git reset　　重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。 checkout和reset对比 git checkout　　移动指针检出一个旧版本 git reset　　重设一个旧的提交，--hard移除之后的提交，--soft将之后的提交加入到缓冲区 分支 Git鼓励大量使用分支： 基本操作 查看分支：git branch 创建分支：git branch &lt;name&gt; 切换分支：git checkout &lt;name&gt; 或者 git switch &lt;name&gt; 创建+切换分支：git checkout -b &lt;name&gt; 或者 git switch -c &lt;name&gt; 合并某分支到当前分支：git merge &lt;name&gt; 删除分支：git branch -d &lt;name&gt; 其他 git merge --no-ff -m &quot;merge with no-ff&quot; dev　　//合并分支禁用Fast forward git checkout -b dev origin/dev　　//创建远程origin的dev分支到本地 git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;　　//本地分支和远程分支建立连接 git remote -v　　//查看远程仓库 git remote rm origin　　//删除已有的GitHub远程库 Tag git tag　　可以查看所有标签 git tag &lt;tagname&gt;　　新建一个标签，默认为HEAD，也可以指定一个commit id git tag v0.9 f52c633　　指定commit id git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;　　指定message git push origin &lt;tagname&gt;　　可以推送一个本地标签 git push origin --tags　　可以推送全部未推送过的本地标签 git tag -d &lt;tagname&gt;　　可以删除一个本地标签 git push origin :refs/tags/&lt;tagname&gt;　　可以删除一个远程标签 暂存(stash) git stash git stash list　　查看 git stash apply stash@{0}　　恢复 git stash drop　　删除 git stash pop　　恢复并删除 bug cherry-pick命令　　复制一个特定的提交到当前分支 git cherry-pick 4c805e2 ignore https://github.com/github/gitignore 检验.gitignore的标准是git status命令是不是说working directory clean git check-ignore -v App.class 检查规则 git add -f App.class 强制添加" />
-<link rel="canonical" href="https://tldsn.github.io/2020/04/21/git/" />
-<meta property="og:url" content="https://tldsn.github.io/2020/04/21/git/" />
+<link rel="canonical" href="http://localhost:4000/2020/04/21/git/" />
+<meta property="og:url" content="http://localhost:4000/2020/04/21/git/" />
 <meta property="og:site_name" content="TLDSN" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-21T00:00:00+08:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://tldsn.github.io/2020/04/21/git/"},"url":"https://tldsn.github.io/2020/04/21/git/","author":{"@type":"Person","name":"tldsn"},"description":"概念 base 简单提交流程 其他 进阶 rebase commit 撤销（revert）和重设（reset）对比 checkout和reset对比 分支 基本操作 其他 Tag 暂存(stash) bug ignore 概念 工作目录、缓冲区、提交历史 HEAD表示当前版本，也就是最新的提交,上一个版本就是HEAD^，上上一个版本就是HEAD^^ HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。 base git init　　创建新仓库　　 git status　　查看状态　　 git log --pretty=oneline　　提交历史　　 git reflog　　命令历史　　 git diff HEAD -- readme.txt　　查看工作区和版本库里面最新版本的区别 简单提交流程 git add &lt;filename&gt; fit commit -m &quot;提交信息&quot; git config --global user.email &quot;you@example.com&quot; git config --global user.name &quot;Your Name&quot; git remote add origin &lt;server&gt;　　//连接远程 git push origin master　　//推送 其他 让Git显示颜色 git config --global color.ui true 配置别名 git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot; 进阶 rebase git rebase 是将上游更改合并进本地仓库的通常方法，rebase 就好像是说「我想将我的更改建立在其他人的进展之上」 ☆rebase操作可以把本地未push的分叉提交历史整理成直线；   ☆rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。   ☆在你工作流中使用 rebase 最好的用法之一就是清理本地正在开发的分支。隔一段时间执行一次交互式 rebase，你可以保证你 feature 分支中的每一个提交都是专注和有意义的。你在写代码时不用担心造成孤立的提交——因为你后面一定能修复。 对最新的 3 次提交进行了交互式 rebase： git checkout feature git rebase -i HEAD~3 //交互式变基 git rebase -i　　 * pick：　　//正常选中 * reword：　　//选中，并且修改提交信息； * edit：　　//选中，rebase时会暂停，允许你修改这个commit（参考这里） * squash：　　//选中，会将当前commit与上一个commit合并 * fixup：　　//与squash相同，但不会保存当前commit的提交信息 * exec：　　//执行其他shell命令 commit //合并缓存的修改和上一次的提交，用新的快照替换上一个提交。缓存区没有文件时运行这个命令可以用来编辑上次提交的提交信息，而不会更改快照。 git commit --amend --no-edit //自动将提交标记为先前提交的修复 git commit --fixup &lt;commit&gt; 撤销（revert）和重设（reset）对比 git revert　　撤销一个已经提交的快照，保留项目历史，生成新的提交 git reset　　重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。 checkout和reset对比 git checkout　　移动指针检出一个旧版本 git reset　　重设一个旧的提交，--hard移除之后的提交，--soft将之后的提交加入到缓冲区 分支 Git鼓励大量使用分支： 基本操作 查看分支：git branch 创建分支：git branch &lt;name&gt; 切换分支：git checkout &lt;name&gt; 或者 git switch &lt;name&gt; 创建+切换分支：git checkout -b &lt;name&gt; 或者 git switch -c &lt;name&gt; 合并某分支到当前分支：git merge &lt;name&gt; 删除分支：git branch -d &lt;name&gt; 其他 git merge --no-ff -m &quot;merge with no-ff&quot; dev　　//合并分支禁用Fast forward git checkout -b dev origin/dev　　//创建远程origin的dev分支到本地 git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;　　//本地分支和远程分支建立连接 git remote -v　　//查看远程仓库 git remote rm origin　　//删除已有的GitHub远程库 Tag git tag　　可以查看所有标签 git tag &lt;tagname&gt;　　新建一个标签，默认为HEAD，也可以指定一个commit id git tag v0.9 f52c633　　指定commit id git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;　　指定message git push origin &lt;tagname&gt;　　可以推送一个本地标签 git push origin --tags　　可以推送全部未推送过的本地标签 git tag -d &lt;tagname&gt;　　可以删除一个本地标签 git push origin :refs/tags/&lt;tagname&gt;　　可以删除一个远程标签 暂存(stash) git stash git stash list　　查看 git stash apply stash@{0}　　恢复 git stash drop　　删除 git stash pop　　恢复并删除 bug cherry-pick命令　　复制一个特定的提交到当前分支 git cherry-pick 4c805e2 ignore https://github.com/github/gitignore 检验.gitignore的标准是git status命令是不是说working directory clean git check-ignore -v App.class 检查规则 git add -f App.class 强制添加","@type":"BlogPosting","headline":"git","dateModified":"2020-04-21T00:00:00+08:00","datePublished":"2020-04-21T00:00:00+08:00","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/2020/04/21/git/","author":{"@type":"Person","name":"tldsn"},"description":"概念 base 简单提交流程 其他 进阶 rebase commit 撤销（revert）和重设（reset）对比 checkout和reset对比 分支 基本操作 其他 Tag 暂存(stash) bug ignore 概念 工作目录、缓冲区、提交历史 HEAD表示当前版本，也就是最新的提交,上一个版本就是HEAD^，上上一个版本就是HEAD^^ HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。 base git init　　创建新仓库　　 git status　　查看状态　　 git log --pretty=oneline　　提交历史　　 git reflog　　命令历史　　 git diff HEAD -- readme.txt　　查看工作区和版本库里面最新版本的区别 简单提交流程 git add &lt;filename&gt; fit commit -m &quot;提交信息&quot; git config --global user.email &quot;you@example.com&quot; git config --global user.name &quot;Your Name&quot; git remote add origin &lt;server&gt;　　//连接远程 git push origin master　　//推送 其他 让Git显示颜色 git config --global color.ui true 配置别名 git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot; 进阶 rebase git rebase 是将上游更改合并进本地仓库的通常方法，rebase 就好像是说「我想将我的更改建立在其他人的进展之上」 ☆rebase操作可以把本地未push的分叉提交历史整理成直线；   ☆rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。   ☆在你工作流中使用 rebase 最好的用法之一就是清理本地正在开发的分支。隔一段时间执行一次交互式 rebase，你可以保证你 feature 分支中的每一个提交都是专注和有意义的。你在写代码时不用担心造成孤立的提交——因为你后面一定能修复。 对最新的 3 次提交进行了交互式 rebase： git checkout feature git rebase -i HEAD~3 //交互式变基 git rebase -i　　 * pick：　　//正常选中 * reword：　　//选中，并且修改提交信息； * edit：　　//选中，rebase时会暂停，允许你修改这个commit（参考这里） * squash：　　//选中，会将当前commit与上一个commit合并 * fixup：　　//与squash相同，但不会保存当前commit的提交信息 * exec：　　//执行其他shell命令 commit //合并缓存的修改和上一次的提交，用新的快照替换上一个提交。缓存区没有文件时运行这个命令可以用来编辑上次提交的提交信息，而不会更改快照。 git commit --amend --no-edit //自动将提交标记为先前提交的修复 git commit --fixup &lt;commit&gt; 撤销（revert）和重设（reset）对比 git revert　　撤销一个已经提交的快照，保留项目历史，生成新的提交 git reset　　重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。 checkout和reset对比 git checkout　　移动指针检出一个旧版本 git reset　　重设一个旧的提交，--hard移除之后的提交，--soft将之后的提交加入到缓冲区 分支 Git鼓励大量使用分支： 基本操作 查看分支：git branch 创建分支：git branch &lt;name&gt; 切换分支：git checkout &lt;name&gt; 或者 git switch &lt;name&gt; 创建+切换分支：git checkout -b &lt;name&gt; 或者 git switch -c &lt;name&gt; 合并某分支到当前分支：git merge &lt;name&gt; 删除分支：git branch -d &lt;name&gt; 其他 git merge --no-ff -m &quot;merge with no-ff&quot; dev　　//合并分支禁用Fast forward git checkout -b dev origin/dev　　//创建远程origin的dev分支到本地 git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;　　//本地分支和远程分支建立连接 git remote -v　　//查看远程仓库 git remote rm origin　　//删除已有的GitHub远程库 Tag git tag　　可以查看所有标签 git tag &lt;tagname&gt;　　新建一个标签，默认为HEAD，也可以指定一个commit id git tag v0.9 f52c633　　指定commit id git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;　　指定message git push origin &lt;tagname&gt;　　可以推送一个本地标签 git push origin --tags　　可以推送全部未推送过的本地标签 git tag -d &lt;tagname&gt;　　可以删除一个本地标签 git push origin :refs/tags/&lt;tagname&gt;　　可以删除一个远程标签 暂存(stash) git stash git stash list　　查看 git stash apply stash@{0}　　恢复 git stash drop　　删除 git stash pop　　恢复并删除 bug cherry-pick命令　　复制一个特定的提交到当前分支 git cherry-pick 4c805e2 ignore https://github.com/github/gitignore 检验.gitignore的标准是git status命令是不是说working directory clean git check-ignore -v App.class 检查规则 git add -f App.class 强制添加","dateModified":"2020-04-21T00:00:00+08:00","datePublished":"2020-04-21T00:00:00+08:00","headline":"git","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/04/21/git/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -160,19 +160,19 @@
                         
                         <a href="/authors/">
                         
-                            <i class="fa fa-"></i>Staff
+                            <i class="fa fa-id-card-o"></i>Staff
                         </a>
                     </li>
                     
                 
                     
-                
-                    
-                
-                    
-                
-                    
-                
+                    <li>
+                        
+                        <a href="/evernote/">
+                        
+                            <i class="fa fa-reply-all"></i>evernote
+                        </a>
+                    </li>
                     
                 
                     
@@ -208,8 +208,6 @@
                 <!-- <i class="fa fa-user"></i>tldsn
                  -->
                 
-                
-                  <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
                 
             </div>
 
@@ -542,8 +540,50 @@ git commit --fixup &lt;commit&gt;
                     
                 
             
+                
+                    
+                
+                    
+                
+            
         
             
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
             
                 
                     
@@ -563,20 +603,29 @@ git commit --fixup &lt;commit&gt;
         
             
             
-        
+                
+                    
+                
+                    
+                
             
-            
-        
-            
-            
-        
-            
-            
-        
-            
-            
-        
-            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%90%86/">一些代理
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
             
                 
                     
@@ -587,7 +636,90 @@ git commit --fixup &lt;commit&gt;
         
             
             
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2020/04/21/Exception/">git error
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
         
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2020/04/21/ssh%E7%94%9F%E6%88%90/">ssh生成
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
         
 
         <div class="post-recent">
@@ -617,8 +749,8 @@ git commit --fixup &lt;commit&gt;
      */
 
     var disqus_config = function() {
-        this.page.url = 'https://tldsn.github.io/2020/04/21/git/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://tldsn.github.io/2020/04/21/git/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://localhost:4000/2020/04/21/git/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/2020/04/21/git/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -647,6 +779,8 @@ git commit --fixup &lt;commit&gt;
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
