@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>浅谈CSRF攻击方式-hyddd-博客园</title>
+    <meta name="description" content="   浅谈CSRF攻击方式 - hyddd - 博客园    一.CSRF是什么？　　CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。二.CSRF可以做什么？　　你这可以...">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
+    <link rel="stylesheet" href="/assets/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/imports/other/2020-07-07-%E6%B5%85%E8%B0%88CSRF%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-hyddd-%E5%8D%9A%E5%AE%A2%E5%9B%AD/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="TLDSN" />
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>浅谈CSRF攻击方式-hyddd-博客园 | TLDSN</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="浅谈CSRF攻击方式-hyddd-博客园" />
+<meta name="author" content="tldsn" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="浅谈CSRF攻击方式 - hyddd - 博客园 一.CSRF是什么？ 　　CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。 二.CSRF可以做什么？ 　　你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账......造成的问题包括：个人隐私泄露以及财产安全。 三.CSRF漏洞现状 　　CSRF这种攻击方式在2000年已经被国外的安全人员提出，但在国内，直到06年才开始被关注，08年，国内外的多个大型社区和交互网站分别爆出CSRF漏洞，如：NYTimes.com（纽约时报）、Metafilter（一个大型的BLOG网站），YouTube和百度HI......而现在，互联网上的许多站点仍对此毫无防备，以至于安全业界称CSRF为“沉睡的巨人”。 四.CSRF的原理 　　下图简单阐述了CSRF攻击的思想： 　　 　　从上图可以看出，要完成一次CSRF攻击，受害者必须依次完成两个步骤： 　　1.登录受信任网站A，并在本地生成Cookie。 　　2.在不登出A的情况下，访问危险网站B。 　　看到这里，你也许会说：“如果我不满足以上两个条件中的一个，我就不会受到CSRF的攻击”。是的，确实如此，但你不能保证以下情况不会发生： 　　1.你不能保证你登录了一个网站后，不再打开一个tab页面并访问另外的网站。 　　2.你不能保证你关闭浏览器了后，你本地的Cookie立刻过期，你上次的会话已经结束。（事实上，关闭浏览器不能结束一个会话，但大多数人都会错误的认为关闭浏览器就等于退出登录/结束会话了......） 　　3.上图中所谓的攻击网站，可能是一个存在其他漏洞的可信任的经常被人访问的网站。 　　上面大概地讲了一下CSRF攻击的思想，下面我将用几个例子详细说说具体的CSRF攻击，这里我以一个银行转账的操作作为例子（仅仅是例子，真实的银行网站没这么傻:&gt;） 　　示例1： 　　银行网站A，它以GET请求来完成银行转账的操作，如：http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000 　　危险网站B，它里面有一段HTML的代码如下： 　　&lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt; 　　首先，你登录了银行网站A，然后访问危险网站B，噢，这时你会发现你的银行账户少了1000块...... 　　为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的&lt;img&gt;以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源“http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000”，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作...... 　　示例2： 　　为了杜绝上面的问题，银行决定改用POST请求完成转账操作。 　　银行网站A的WEB表单如下：　　 　　&lt;form&nbsp;action=&quot;Transfer.php&quot;&nbsp;method=&quot;POST&quot;&gt;　　　　&lt;p&gt;ToBankId:&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;toBankId&quot;/&gt;&lt;/p&gt;　　　　&lt;p&gt;Money:&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;money&quot;/&gt;&lt;/p&gt;　　　　&lt;p&gt;&lt;input&nbsp;type=&quot;submit&quot;&nbsp;value=&quot;Transfer&quot;/&gt;&lt;/p&gt;　　&lt;/form&gt; 　　后台处理页面Transfer.php如下： 　　&lt;?php　　　　session_start();　　　　if&nbsp;(isset($_REQUEST[&#39;toBankId&#39;]&nbsp;&amp;&amp;isset($_REQUEST[&#39;money&#39;]))　　　　{　　　　&nbsp;&nbsp;&nbsp; buy_stocks($_REQUEST[&#39;toBankId&#39;],$_REQUEST[&#39;money&#39;]);　　　　}　　?&gt; 　　危险网站B，仍然只是包含那句HTML代码： &lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt; 　　和示例1中的操作一样，你首先登录了银行网站A，然后访问危险网站B，结果.....和示例1一样，你再次没了1000块～T_T，这次事故的原因是：银行后台使用了$_REQUEST去获取请求的数据，而$_REQUEST既可以获取GET请求的数据，也可以获取POST请求的数据，这就造成了在后台处理程序无法区分这到底是GET请求的数据还是POST请求的数据。在PHP中，可以使用$_GET和$_POST分别获取GET请求和POST请求的数据。在JAVA中，用于获取请求数据request一样存在不能区分GET请求数据和POST数据的问题。 　　示例3： 　　经过前面2个惨痛的教训，银行决定把获取请求数据的方法也改了，改用$_POST，只获取POST请求的数据，后台处理页面Transfer.php代码如下： &lt;?php　　　　session_start();　　　　if&nbsp;(isset($_POST[&#39;toBankId&#39;]&nbsp;&amp;&amp;isset($_POST[&#39;money&#39;]))　　　　{　　　　&nbsp;&nbsp;&nbsp;&nbsp;buy_stocks($_POST[&#39;toBankId&#39;],$_POST[&#39;money&#39;]);　　　　}　　?&gt; 　　然而，危险网站B与时俱进，它改了一下代码： &lt;html&gt;　　&lt;head&gt;　　　　&lt;script&nbsp;type=&quot;text/javascript&quot;&gt;　　　　　　function&nbsp;steal()　　　　　　{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　　　 iframe&nbsp;=&nbsp;document.frames[&quot;steal&quot;];　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iframe.document.Submit(&quot;transfer&quot;);　　　　　　}　　　　&lt;/script&gt;　　&lt;/head&gt;&lt;body&nbsp;onload=&quot;steal()&quot;&gt;　　&lt;iframe&nbsp;name=&quot;steal&quot;&nbsp;display=&quot;none&quot;&gt;　　　　　　&lt;form&nbsp;method=&quot;POST&quot;&nbsp;name=&quot;transfer&quot;　action=&quot;http://www.myBank.com/Transfer.php&quot;&gt;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;toBankId&quot;&nbsp;value=&quot;11&quot;&gt;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;money&quot;&nbsp;value=&quot;1000&quot;&gt;&lt;/form&gt;　　　　&lt;/iframe&gt;　　&lt;/body&gt;&lt;/html&gt; 如果用户仍是继续上面的操作，很不幸，结果将会是再次不见1000块......因为这里危险网站B暗地里发送了POST请求到银行! 　　总结一下上面3个例子，CSRF主要的攻击模式基本上是以上的3种，其中以第1,2种最为严重，因为触发条件很简单，一个&lt;img&gt;就可以了，而第3种比较麻烦，需要使用JavaScript，所以使用的机会会比前面的少很多，但无论是哪种情况，只要触发了CSRF攻击，后果都有可能很严重。 　　理解上面的3种攻击模式，其实可以看出，CSRF攻击是源于WEB的隐式身份验证机制！WEB的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的！ 五.CSRF的防御 　　我总结了一下看到的资料，CSRF的防御可以从服务端和客户端两方面着手，防御效果是从服务端着手效果比较好，现在一般的CSRF防御也都在服务端进行。 　　1.服务端进行CSRF防御 　　服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。 　　(1).Cookie Hashing(所有表单都包含同一个伪随机值)： 　　这可能是最简单的解决方案了，因为攻击者不能获得第三方的Cookie(理论上)，所以表单中的数据也就构造失败了:&gt; 　　&lt;?php　　　　//构造加密的Cookie信息　　　　$value=&nbsp;“DefenseSCRF”;　　　　setcookie(”cookie”,$value,time()+3600);　　?&gt; 　　在表单里增加Hash值，以认证这确实是用户发送的请求。 　　&lt;?php　　　　$hash=md5($_COOKIE[&#39;cookie&#39;]);　　?&gt;　　&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;　　　　&lt;input&nbsp;type=”hidden”&nbsp;name=”hash”&nbsp;value=”&lt;?=$hash;?&gt;”&gt;　　　　&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;　　&lt;/form&gt; 　　然后在服务器端进行Hash值验证 &lt;?phpif(isset($_POST[&#39;check&#39;]))&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $hash=md5($_COOKIE[&#39;cookie&#39;]);if($_POST[&#39;check&#39;]&nbsp;==$hash)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 doJob();　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{　　　　　　　　//...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 }　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{　　　　　　//...　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt; 　　这个方法个人觉得已经可以杜绝99%的CSRF攻击了，那还有1%呢....由于用户的Cookie很容易由于网站的XSS漏洞而被盗取，这就另外的1%。一般的攻击者看到有需要算Hash值，基本都会放弃了，某些除外，所以如果需要100%的杜绝，这个不是最好的方法。　　(2).验证码 　　这个方案的思路是：每次的用户提交都需要用户在表单中填写一个图片上的随机字符串，厄....这个方案可以完全解决CSRF，但个人觉得在易用性方面似乎不是太好，还有听闻是验证码图片的使用涉及了一个被称为MHTML的Bug，可能在某些版本的微软IE中受影响。 　　(3).One-Time Tokens(不同的表单包含一个不同的伪随机值) 　　在实现One-Time Tokens时，需要注意一点：就是“并行会话的兼容”。如果用户在一个站点上同时打开了两个不同的表单，CSRF保护措施不应该影响到他对任何表单的提交。考虑一下如果每次表单被装入时站点生成一个伪随机值来覆盖以前的伪随机值将会发生什么情况：用户只能成功地提交他最后打开的表单，因为所有其他的表单都含有非法的伪随机值。必须小心操作以确保CSRF保护措施不会影响选项卡式的浏览或者利用多个浏览器窗口浏览一个站点。 　　以下我的实现: 　　1).先是令牌生成函数(gen_token())： &lt;?phpfunction&nbsp;gen_token()&nbsp;{　　　　//这里我是贪方便，实际上单使用Rand()得出的随机数作为令牌，也是不安全的。　　　　//这个可以参考我写的Findbugs笔记中的《Random object created and used only once》$token=md5(uniqid(rand(),true));return$token;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 　　2).然后是Session令牌生成函数(gen_stoken())： &lt;?php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　function&nbsp;gen_stoken()&nbsp;{　　　　　　$pToken = &quot;&quot;;　　　　　　if($_SESSION[STOKEN_NAME]&nbsp; == $pToken){　　　　　　　　//没有值，赋新值　　　　　　　　$_SESSION[STOKEN_NAME]&nbsp;=gen_token();　　　　　　}&nbsp;&nbsp;&nbsp; 　　　　　　else{　　　　　　　　//继续使用旧的值　　　　　　}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt; 　　3).WEB表单生成隐藏输入域的函数：　　 &nbsp;&nbsp;&nbsp;&nbsp; &lt;?php　　&nbsp;&nbsp;&nbsp;&nbsp; function gen_input() {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; gen_stoken();　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo “&lt;input type=\”hidden\” name=\”&quot; . FTOKEN_NAME . “\”&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; value=\”&quot; . $_SESSION[STOKEN_NAME] . “\”&gt; “;&nbsp;&nbsp;&nbsp;&nbsp; 　　}&nbsp;&nbsp;&nbsp;&nbsp; ?&gt; 　　4).WEB表单结构： &lt;?php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session_start();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include(”functions.php”);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt;&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;&lt;?&nbsp;gen_input();&nbsp;?&gt;&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;&lt;/FORM&gt; 　　5).服务端核对令牌： 　　这个很简单，这里就不再啰嗦了。 　　上面这个其实不完全符合“并行会话的兼容”的规则，大家可以在此基础上修改。 　　其实还有很多想写，无奈精力有限，暂且打住，日后补充，如果错漏，请指出:&gt; 　　PS：今天下午写这篇文档的时候FF崩溃了一次，写了一半文章的全没了，郁闷好久T_T....... 　　转载请说明出处，谢谢[hyddd(http://www.cnblogs.com/hyddd/)] 六.参考文献 [1].Preventing CSRF [2].Security Corner: Cross-Site Request Forgeries [3].《深入解析跨站请求伪造漏洞：原理剖析》 [4].《Web安全测试之跨站请求伪造（CSRF）》 [5].《深入解析跨站请求伪造漏洞：实例讲解》 [6].http://baike.baidu.com/view/1609487.htm" />
+<meta property="og:description" content="浅谈CSRF攻击方式 - hyddd - 博客园 一.CSRF是什么？ 　　CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。 二.CSRF可以做什么？ 　　你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账......造成的问题包括：个人隐私泄露以及财产安全。 三.CSRF漏洞现状 　　CSRF这种攻击方式在2000年已经被国外的安全人员提出，但在国内，直到06年才开始被关注，08年，国内外的多个大型社区和交互网站分别爆出CSRF漏洞，如：NYTimes.com（纽约时报）、Metafilter（一个大型的BLOG网站），YouTube和百度HI......而现在，互联网上的许多站点仍对此毫无防备，以至于安全业界称CSRF为“沉睡的巨人”。 四.CSRF的原理 　　下图简单阐述了CSRF攻击的思想： 　　 　　从上图可以看出，要完成一次CSRF攻击，受害者必须依次完成两个步骤： 　　1.登录受信任网站A，并在本地生成Cookie。 　　2.在不登出A的情况下，访问危险网站B。 　　看到这里，你也许会说：“如果我不满足以上两个条件中的一个，我就不会受到CSRF的攻击”。是的，确实如此，但你不能保证以下情况不会发生： 　　1.你不能保证你登录了一个网站后，不再打开一个tab页面并访问另外的网站。 　　2.你不能保证你关闭浏览器了后，你本地的Cookie立刻过期，你上次的会话已经结束。（事实上，关闭浏览器不能结束一个会话，但大多数人都会错误的认为关闭浏览器就等于退出登录/结束会话了......） 　　3.上图中所谓的攻击网站，可能是一个存在其他漏洞的可信任的经常被人访问的网站。 　　上面大概地讲了一下CSRF攻击的思想，下面我将用几个例子详细说说具体的CSRF攻击，这里我以一个银行转账的操作作为例子（仅仅是例子，真实的银行网站没这么傻:&gt;） 　　示例1： 　　银行网站A，它以GET请求来完成银行转账的操作，如：http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000 　　危险网站B，它里面有一段HTML的代码如下： 　　&lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt; 　　首先，你登录了银行网站A，然后访问危险网站B，噢，这时你会发现你的银行账户少了1000块...... 　　为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的&lt;img&gt;以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源“http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000”，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作...... 　　示例2： 　　为了杜绝上面的问题，银行决定改用POST请求完成转账操作。 　　银行网站A的WEB表单如下：　　 　　&lt;form&nbsp;action=&quot;Transfer.php&quot;&nbsp;method=&quot;POST&quot;&gt;　　　　&lt;p&gt;ToBankId:&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;toBankId&quot;/&gt;&lt;/p&gt;　　　　&lt;p&gt;Money:&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;money&quot;/&gt;&lt;/p&gt;　　　　&lt;p&gt;&lt;input&nbsp;type=&quot;submit&quot;&nbsp;value=&quot;Transfer&quot;/&gt;&lt;/p&gt;　　&lt;/form&gt; 　　后台处理页面Transfer.php如下： 　　&lt;?php　　　　session_start();　　　　if&nbsp;(isset($_REQUEST[&#39;toBankId&#39;]&nbsp;&amp;&amp;isset($_REQUEST[&#39;money&#39;]))　　　　{　　　　&nbsp;&nbsp;&nbsp; buy_stocks($_REQUEST[&#39;toBankId&#39;],$_REQUEST[&#39;money&#39;]);　　　　}　　?&gt; 　　危险网站B，仍然只是包含那句HTML代码： &lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt; 　　和示例1中的操作一样，你首先登录了银行网站A，然后访问危险网站B，结果.....和示例1一样，你再次没了1000块～T_T，这次事故的原因是：银行后台使用了$_REQUEST去获取请求的数据，而$_REQUEST既可以获取GET请求的数据，也可以获取POST请求的数据，这就造成了在后台处理程序无法区分这到底是GET请求的数据还是POST请求的数据。在PHP中，可以使用$_GET和$_POST分别获取GET请求和POST请求的数据。在JAVA中，用于获取请求数据request一样存在不能区分GET请求数据和POST数据的问题。 　　示例3： 　　经过前面2个惨痛的教训，银行决定把获取请求数据的方法也改了，改用$_POST，只获取POST请求的数据，后台处理页面Transfer.php代码如下： &lt;?php　　　　session_start();　　　　if&nbsp;(isset($_POST[&#39;toBankId&#39;]&nbsp;&amp;&amp;isset($_POST[&#39;money&#39;]))　　　　{　　　　&nbsp;&nbsp;&nbsp;&nbsp;buy_stocks($_POST[&#39;toBankId&#39;],$_POST[&#39;money&#39;]);　　　　}　　?&gt; 　　然而，危险网站B与时俱进，它改了一下代码： &lt;html&gt;　　&lt;head&gt;　　　　&lt;script&nbsp;type=&quot;text/javascript&quot;&gt;　　　　　　function&nbsp;steal()　　　　　　{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　　　 iframe&nbsp;=&nbsp;document.frames[&quot;steal&quot;];　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iframe.document.Submit(&quot;transfer&quot;);　　　　　　}　　　　&lt;/script&gt;　　&lt;/head&gt;&lt;body&nbsp;onload=&quot;steal()&quot;&gt;　　&lt;iframe&nbsp;name=&quot;steal&quot;&nbsp;display=&quot;none&quot;&gt;　　　　　　&lt;form&nbsp;method=&quot;POST&quot;&nbsp;name=&quot;transfer&quot;　action=&quot;http://www.myBank.com/Transfer.php&quot;&gt;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;toBankId&quot;&nbsp;value=&quot;11&quot;&gt;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;money&quot;&nbsp;value=&quot;1000&quot;&gt;&lt;/form&gt;　　　　&lt;/iframe&gt;　　&lt;/body&gt;&lt;/html&gt; 如果用户仍是继续上面的操作，很不幸，结果将会是再次不见1000块......因为这里危险网站B暗地里发送了POST请求到银行! 　　总结一下上面3个例子，CSRF主要的攻击模式基本上是以上的3种，其中以第1,2种最为严重，因为触发条件很简单，一个&lt;img&gt;就可以了，而第3种比较麻烦，需要使用JavaScript，所以使用的机会会比前面的少很多，但无论是哪种情况，只要触发了CSRF攻击，后果都有可能很严重。 　　理解上面的3种攻击模式，其实可以看出，CSRF攻击是源于WEB的隐式身份验证机制！WEB的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的！ 五.CSRF的防御 　　我总结了一下看到的资料，CSRF的防御可以从服务端和客户端两方面着手，防御效果是从服务端着手效果比较好，现在一般的CSRF防御也都在服务端进行。 　　1.服务端进行CSRF防御 　　服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。 　　(1).Cookie Hashing(所有表单都包含同一个伪随机值)： 　　这可能是最简单的解决方案了，因为攻击者不能获得第三方的Cookie(理论上)，所以表单中的数据也就构造失败了:&gt; 　　&lt;?php　　　　//构造加密的Cookie信息　　　　$value=&nbsp;“DefenseSCRF”;　　　　setcookie(”cookie”,$value,time()+3600);　　?&gt; 　　在表单里增加Hash值，以认证这确实是用户发送的请求。 　　&lt;?php　　　　$hash=md5($_COOKIE[&#39;cookie&#39;]);　　?&gt;　　&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;　　　　&lt;input&nbsp;type=”hidden”&nbsp;name=”hash”&nbsp;value=”&lt;?=$hash;?&gt;”&gt;　　　　&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;　　&lt;/form&gt; 　　然后在服务器端进行Hash值验证 &lt;?phpif(isset($_POST[&#39;check&#39;]))&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $hash=md5($_COOKIE[&#39;cookie&#39;]);if($_POST[&#39;check&#39;]&nbsp;==$hash)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 doJob();　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{　　　　　　　　//...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 }　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{　　　　　　//...　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt; 　　这个方法个人觉得已经可以杜绝99%的CSRF攻击了，那还有1%呢....由于用户的Cookie很容易由于网站的XSS漏洞而被盗取，这就另外的1%。一般的攻击者看到有需要算Hash值，基本都会放弃了，某些除外，所以如果需要100%的杜绝，这个不是最好的方法。　　(2).验证码 　　这个方案的思路是：每次的用户提交都需要用户在表单中填写一个图片上的随机字符串，厄....这个方案可以完全解决CSRF，但个人觉得在易用性方面似乎不是太好，还有听闻是验证码图片的使用涉及了一个被称为MHTML的Bug，可能在某些版本的微软IE中受影响。 　　(3).One-Time Tokens(不同的表单包含一个不同的伪随机值) 　　在实现One-Time Tokens时，需要注意一点：就是“并行会话的兼容”。如果用户在一个站点上同时打开了两个不同的表单，CSRF保护措施不应该影响到他对任何表单的提交。考虑一下如果每次表单被装入时站点生成一个伪随机值来覆盖以前的伪随机值将会发生什么情况：用户只能成功地提交他最后打开的表单，因为所有其他的表单都含有非法的伪随机值。必须小心操作以确保CSRF保护措施不会影响选项卡式的浏览或者利用多个浏览器窗口浏览一个站点。 　　以下我的实现: 　　1).先是令牌生成函数(gen_token())： &lt;?phpfunction&nbsp;gen_token()&nbsp;{　　　　//这里我是贪方便，实际上单使用Rand()得出的随机数作为令牌，也是不安全的。　　　　//这个可以参考我写的Findbugs笔记中的《Random object created and used only once》$token=md5(uniqid(rand(),true));return$token;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 　　2).然后是Session令牌生成函数(gen_stoken())： &lt;?php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　function&nbsp;gen_stoken()&nbsp;{　　　　　　$pToken = &quot;&quot;;　　　　　　if($_SESSION[STOKEN_NAME]&nbsp; == $pToken){　　　　　　　　//没有值，赋新值　　　　　　　　$_SESSION[STOKEN_NAME]&nbsp;=gen_token();　　　　　　}&nbsp;&nbsp;&nbsp; 　　　　　　else{　　　　　　　　//继续使用旧的值　　　　　　}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt; 　　3).WEB表单生成隐藏输入域的函数：　　 &nbsp;&nbsp;&nbsp;&nbsp; &lt;?php　　&nbsp;&nbsp;&nbsp;&nbsp; function gen_input() {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; gen_stoken();　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo “&lt;input type=\”hidden\” name=\”&quot; . FTOKEN_NAME . “\”&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; value=\”&quot; . $_SESSION[STOKEN_NAME] . “\”&gt; “;&nbsp;&nbsp;&nbsp;&nbsp; 　　}&nbsp;&nbsp;&nbsp;&nbsp; ?&gt; 　　4).WEB表单结构： &lt;?php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session_start();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include(”functions.php”);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt;&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;&lt;?&nbsp;gen_input();&nbsp;?&gt;&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;&lt;/FORM&gt; 　　5).服务端核对令牌： 　　这个很简单，这里就不再啰嗦了。 　　上面这个其实不完全符合“并行会话的兼容”的规则，大家可以在此基础上修改。 　　其实还有很多想写，无奈精力有限，暂且打住，日后补充，如果错漏，请指出:&gt; 　　PS：今天下午写这篇文档的时候FF崩溃了一次，写了一半文章的全没了，郁闷好久T_T....... 　　转载请说明出处，谢谢[hyddd(http://www.cnblogs.com/hyddd/)] 六.参考文献 [1].Preventing CSRF [2].Security Corner: Cross-Site Request Forgeries [3].《深入解析跨站请求伪造漏洞：原理剖析》 [4].《Web安全测试之跨站请求伪造（CSRF）》 [5].《深入解析跨站请求伪造漏洞：实例讲解》 [6].http://baike.baidu.com/view/1609487.htm" />
+<link rel="canonical" href="http://localhost:4000/imports/other/2020-07-07-%E6%B5%85%E8%B0%88CSRF%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-hyddd-%E5%8D%9A%E5%AE%A2%E5%9B%AD/" />
+<meta property="og:url" content="http://localhost:4000/imports/other/2020-07-07-%E6%B5%85%E8%B0%88CSRF%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-hyddd-%E5%8D%9A%E5%AE%A2%E5%9B%AD/" />
+<meta property="og:site_name" content="TLDSN" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-07T00:00:00+08:00" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/imports/other/2020-07-07-%E6%B5%85%E8%B0%88CSRF%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-hyddd-%E5%8D%9A%E5%AE%A2%E5%9B%AD/","author":{"@type":"Person","name":"tldsn"},"description":"浅谈CSRF攻击方式 - hyddd - 博客园 一.CSRF是什么？ 　　CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。 二.CSRF可以做什么？ 　　你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账......造成的问题包括：个人隐私泄露以及财产安全。 三.CSRF漏洞现状 　　CSRF这种攻击方式在2000年已经被国外的安全人员提出，但在国内，直到06年才开始被关注，08年，国内外的多个大型社区和交互网站分别爆出CSRF漏洞，如：NYTimes.com（纽约时报）、Metafilter（一个大型的BLOG网站），YouTube和百度HI......而现在，互联网上的许多站点仍对此毫无防备，以至于安全业界称CSRF为“沉睡的巨人”。 四.CSRF的原理 　　下图简单阐述了CSRF攻击的思想： 　　 　　从上图可以看出，要完成一次CSRF攻击，受害者必须依次完成两个步骤： 　　1.登录受信任网站A，并在本地生成Cookie。 　　2.在不登出A的情况下，访问危险网站B。 　　看到这里，你也许会说：“如果我不满足以上两个条件中的一个，我就不会受到CSRF的攻击”。是的，确实如此，但你不能保证以下情况不会发生： 　　1.你不能保证你登录了一个网站后，不再打开一个tab页面并访问另外的网站。 　　2.你不能保证你关闭浏览器了后，你本地的Cookie立刻过期，你上次的会话已经结束。（事实上，关闭浏览器不能结束一个会话，但大多数人都会错误的认为关闭浏览器就等于退出登录/结束会话了......） 　　3.上图中所谓的攻击网站，可能是一个存在其他漏洞的可信任的经常被人访问的网站。 　　上面大概地讲了一下CSRF攻击的思想，下面我将用几个例子详细说说具体的CSRF攻击，这里我以一个银行转账的操作作为例子（仅仅是例子，真实的银行网站没这么傻:&gt;） 　　示例1： 　　银行网站A，它以GET请求来完成银行转账的操作，如：http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000 　　危险网站B，它里面有一段HTML的代码如下： 　　&lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt; 　　首先，你登录了银行网站A，然后访问危险网站B，噢，这时你会发现你的银行账户少了1000块...... 　　为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的&lt;img&gt;以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源“http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000”，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作...... 　　示例2： 　　为了杜绝上面的问题，银行决定改用POST请求完成转账操作。 　　银行网站A的WEB表单如下：　　 　　&lt;form&nbsp;action=&quot;Transfer.php&quot;&nbsp;method=&quot;POST&quot;&gt;　　　　&lt;p&gt;ToBankId:&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;toBankId&quot;/&gt;&lt;/p&gt;　　　　&lt;p&gt;Money:&nbsp;&lt;input&nbsp;type=&quot;text&quot;&nbsp;name=&quot;money&quot;/&gt;&lt;/p&gt;　　　　&lt;p&gt;&lt;input&nbsp;type=&quot;submit&quot;&nbsp;value=&quot;Transfer&quot;/&gt;&lt;/p&gt;　　&lt;/form&gt; 　　后台处理页面Transfer.php如下： 　　&lt;?php　　　　session_start();　　　　if&nbsp;(isset($_REQUEST[&#39;toBankId&#39;]&nbsp;&amp;&amp;isset($_REQUEST[&#39;money&#39;]))　　　　{　　　　&nbsp;&nbsp;&nbsp; buy_stocks($_REQUEST[&#39;toBankId&#39;],$_REQUEST[&#39;money&#39;]);　　　　}　　?&gt; 　　危险网站B，仍然只是包含那句HTML代码： &lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt; 　　和示例1中的操作一样，你首先登录了银行网站A，然后访问危险网站B，结果.....和示例1一样，你再次没了1000块～T_T，这次事故的原因是：银行后台使用了$_REQUEST去获取请求的数据，而$_REQUEST既可以获取GET请求的数据，也可以获取POST请求的数据，这就造成了在后台处理程序无法区分这到底是GET请求的数据还是POST请求的数据。在PHP中，可以使用$_GET和$_POST分别获取GET请求和POST请求的数据。在JAVA中，用于获取请求数据request一样存在不能区分GET请求数据和POST数据的问题。 　　示例3： 　　经过前面2个惨痛的教训，银行决定把获取请求数据的方法也改了，改用$_POST，只获取POST请求的数据，后台处理页面Transfer.php代码如下： &lt;?php　　　　session_start();　　　　if&nbsp;(isset($_POST[&#39;toBankId&#39;]&nbsp;&amp;&amp;isset($_POST[&#39;money&#39;]))　　　　{　　　　&nbsp;&nbsp;&nbsp;&nbsp;buy_stocks($_POST[&#39;toBankId&#39;],$_POST[&#39;money&#39;]);　　　　}　　?&gt; 　　然而，危险网站B与时俱进，它改了一下代码： &lt;html&gt;　　&lt;head&gt;　　　　&lt;script&nbsp;type=&quot;text/javascript&quot;&gt;　　　　　　function&nbsp;steal()　　　　　　{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　　　 iframe&nbsp;=&nbsp;document.frames[&quot;steal&quot;];　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iframe.document.Submit(&quot;transfer&quot;);　　　　　　}　　　　&lt;/script&gt;　　&lt;/head&gt;&lt;body&nbsp;onload=&quot;steal()&quot;&gt;　　&lt;iframe&nbsp;name=&quot;steal&quot;&nbsp;display=&quot;none&quot;&gt;　　　　　　&lt;form&nbsp;method=&quot;POST&quot;&nbsp;name=&quot;transfer&quot;　action=&quot;http://www.myBank.com/Transfer.php&quot;&gt;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;toBankId&quot;&nbsp;value=&quot;11&quot;&gt;&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;money&quot;&nbsp;value=&quot;1000&quot;&gt;&lt;/form&gt;　　　　&lt;/iframe&gt;　　&lt;/body&gt;&lt;/html&gt; 如果用户仍是继续上面的操作，很不幸，结果将会是再次不见1000块......因为这里危险网站B暗地里发送了POST请求到银行! 　　总结一下上面3个例子，CSRF主要的攻击模式基本上是以上的3种，其中以第1,2种最为严重，因为触发条件很简单，一个&lt;img&gt;就可以了，而第3种比较麻烦，需要使用JavaScript，所以使用的机会会比前面的少很多，但无论是哪种情况，只要触发了CSRF攻击，后果都有可能很严重。 　　理解上面的3种攻击模式，其实可以看出，CSRF攻击是源于WEB的隐式身份验证机制！WEB的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的！ 五.CSRF的防御 　　我总结了一下看到的资料，CSRF的防御可以从服务端和客户端两方面着手，防御效果是从服务端着手效果比较好，现在一般的CSRF防御也都在服务端进行。 　　1.服务端进行CSRF防御 　　服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。 　　(1).Cookie Hashing(所有表单都包含同一个伪随机值)： 　　这可能是最简单的解决方案了，因为攻击者不能获得第三方的Cookie(理论上)，所以表单中的数据也就构造失败了:&gt; 　　&lt;?php　　　　//构造加密的Cookie信息　　　　$value=&nbsp;“DefenseSCRF”;　　　　setcookie(”cookie”,$value,time()+3600);　　?&gt; 　　在表单里增加Hash值，以认证这确实是用户发送的请求。 　　&lt;?php　　　　$hash=md5($_COOKIE[&#39;cookie&#39;]);　　?&gt;　　&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;　　　　&lt;input&nbsp;type=”hidden”&nbsp;name=”hash”&nbsp;value=”&lt;?=$hash;?&gt;”&gt;　　　　&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;　　&lt;/form&gt; 　　然后在服务器端进行Hash值验证 &lt;?phpif(isset($_POST[&#39;check&#39;]))&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $hash=md5($_COOKIE[&#39;cookie&#39;]);if($_POST[&#39;check&#39;]&nbsp;==$hash)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 doJob();　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{　　　　　　　　//...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 }　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{　　　　　　//...　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt; 　　这个方法个人觉得已经可以杜绝99%的CSRF攻击了，那还有1%呢....由于用户的Cookie很容易由于网站的XSS漏洞而被盗取，这就另外的1%。一般的攻击者看到有需要算Hash值，基本都会放弃了，某些除外，所以如果需要100%的杜绝，这个不是最好的方法。　　(2).验证码 　　这个方案的思路是：每次的用户提交都需要用户在表单中填写一个图片上的随机字符串，厄....这个方案可以完全解决CSRF，但个人觉得在易用性方面似乎不是太好，还有听闻是验证码图片的使用涉及了一个被称为MHTML的Bug，可能在某些版本的微软IE中受影响。 　　(3).One-Time Tokens(不同的表单包含一个不同的伪随机值) 　　在实现One-Time Tokens时，需要注意一点：就是“并行会话的兼容”。如果用户在一个站点上同时打开了两个不同的表单，CSRF保护措施不应该影响到他对任何表单的提交。考虑一下如果每次表单被装入时站点生成一个伪随机值来覆盖以前的伪随机值将会发生什么情况：用户只能成功地提交他最后打开的表单，因为所有其他的表单都含有非法的伪随机值。必须小心操作以确保CSRF保护措施不会影响选项卡式的浏览或者利用多个浏览器窗口浏览一个站点。 　　以下我的实现: 　　1).先是令牌生成函数(gen_token())： &lt;?phpfunction&nbsp;gen_token()&nbsp;{　　　　//这里我是贪方便，实际上单使用Rand()得出的随机数作为令牌，也是不安全的。　　　　//这个可以参考我写的Findbugs笔记中的《Random object created and used only once》$token=md5(uniqid(rand(),true));return$token;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 　　2).然后是Session令牌生成函数(gen_stoken())： &lt;?php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　function&nbsp;gen_stoken()&nbsp;{　　　　　　$pToken = &quot;&quot;;　　　　　　if($_SESSION[STOKEN_NAME]&nbsp; == $pToken){　　　　　　　　//没有值，赋新值　　　　　　　　$_SESSION[STOKEN_NAME]&nbsp;=gen_token();　　　　　　}&nbsp;&nbsp;&nbsp; 　　　　　　else{　　　　　　　　//继续使用旧的值　　　　　　}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt; 　　3).WEB表单生成隐藏输入域的函数：　　 &nbsp;&nbsp;&nbsp;&nbsp; &lt;?php　　&nbsp;&nbsp;&nbsp;&nbsp; function gen_input() {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; gen_stoken();　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo “&lt;input type=\\”hidden\\” name=\\”&quot; . FTOKEN_NAME . “\\”&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; value=\\”&quot; . $_SESSION[STOKEN_NAME] . “\\”&gt; “;&nbsp;&nbsp;&nbsp;&nbsp; 　　}&nbsp;&nbsp;&nbsp;&nbsp; ?&gt; 　　4).WEB表单结构： &lt;?php&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session_start();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include(”functions.php”);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt;&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;&lt;?&nbsp;gen_input();&nbsp;?&gt;&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;&lt;/FORM&gt; 　　5).服务端核对令牌： 　　这个很简单，这里就不再啰嗦了。 　　上面这个其实不完全符合“并行会话的兼容”的规则，大家可以在此基础上修改。 　　其实还有很多想写，无奈精力有限，暂且打住，日后补充，如果错漏，请指出:&gt; 　　PS：今天下午写这篇文档的时候FF崩溃了一次，写了一半文章的全没了，郁闷好久T_T....... 　　转载请说明出处，谢谢[hyddd(http://www.cnblogs.com/hyddd/)] 六.参考文献 [1].Preventing CSRF [2].Security Corner: Cross-Site Request Forgeries [3].《深入解析跨站请求伪造漏洞：原理剖析》 [4].《Web安全测试之跨站请求伪造（CSRF）》 [5].《深入解析跨站请求伪造漏洞：实例讲解》 [6].http://baike.baidu.com/view/1609487.htm","dateModified":"2020-07-07T00:00:00+08:00","datePublished":"2020-07-07T00:00:00+08:00","headline":"浅谈CSRF攻击方式-hyddd-博客园","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/imports/other/2020-07-07-%E6%B5%85%E8%B0%88CSRF%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-hyddd-%E5%8D%9A%E5%AE%A2%E5%9B%AD/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ccd4104a124f2218d64c124431d52789";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-163446273-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+</head>
+
+
+<body>
+
+  <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">TLDSN</a>
+        <small>太阳升起时，请重新开始</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/todo/">
+                        
+                            <i class="fa fa-check-square-o"></i>Todo
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/note/">
+                        
+                            <i class="fa fa-code"></i>Note
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/authors/">
+                        
+                            <i class="fa fa-id-card-o"></i>Staff
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/evernote/">
+                        
+                            <i class="fa fa-reply-all"></i>evernote
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+  <div class="page clearfix" post>
+  <div class="left">    
+      <html><head></head><body><div class="ennote">
+  <div style="--en-clipped-content:simplified">
+<div><br></div><div style="font-size: 16px; display:block; min-width: 100%; "> <div style="background-color:transparent;font:inherit;vertical-align:baseline;"><div style="background-color:transparent;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;font-size:16px;line-height:1.5em;color:rgb(31, 9, 9);text-align:left;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;z-index:200;padding-left:2em;padding-right:2em;margin-left:auto;margin-right:auto;position:relative;width:36em;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;position:relative;margin-left:-25px;margin-right:25px;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;position:relative;padding-top:0px;padding-bottom:9em;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;position:relative;margin-bottom:0px;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:0px;"><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:0px;"><h1 style="border:0px none;font:inherit;vertical-align:baseline;font-family:&quot;PT Serif&quot;;text-align:left;font-size:35px;font-weight:normal;line-height:35px;margin-bottom:20px;padding:0px;margin:0px;">浅谈CSRF攻击方式 - hyddd - 博客园</h1><div style="padding:0px;border:0px none;font:inherit;vertical-align:baseline;position:relative;height:1em;line-height:1;text-align:center;margin:0px;padding-top:1.5em;padding-bottom:1.5em;margin-bottom:0px;"><div style="padding:0px;border:0px none;font:inherit;vertical-align:baseline;position:absolute;left:-4em;top:50%;z-index:10;width:100%;padding-left:4em;padding-right:4em;height:0.1em;opacity:0.5;margin:0px;background:rgba(0, 0, 0, 0) -webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%) repeat scroll 0% 0%;margin-bottom:0px;"><span style="font:inherit;position:absolute;left:-4em;top:50%;z-index:10;width:100%;padding-left:4em;padding-right:4em;height:0.1em;margin:0px;opacity:0.5;background:rgba(0, 0, 0, 0) -webkit-linear-gradient(0deg, rgb(243, 242, 238) 1%, rgb(31, 9, 9) 50%, rgb(243, 242, 238) 99%) repeat scroll 0% 0%;"></span></div></div></div>
+    <p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">一.CSRF是什么？</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">二.CSRF可以做什么？</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账......造成的问题包括：个人隐私泄露以及财产安全。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">三.CSRF漏洞现状</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　CSRF这种攻击方式在2000年已经被国外的安全人员提出，但在国内，直到06年才开始被关注，08年，国内外的多个大型社区和交互网站分别爆出CSRF漏洞，如：NYTimes.com（纽约时报）、Metafilter（一个大型的BLOG网站），YouTube和百度HI......而现在，互联网上的许多站点仍对此毫无防备，以至于安全业界称CSRF为“沉睡的巨人”。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">四.CSRF的原理</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　下图简单阐述了CSRF攻击的思想：</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　</p><div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;display:block;text-align:center;margin-top:1em;margin-bottom:1em;"><img width="576" height="325" style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;border-color:rgb(31, 9, 9);display:block;max-width:100%;" src="https://app.yinxiang.com/files/common-services/binary-datas/c2VydmljZVR5cGU9MiZzZXJ2aWNlRGF0YT17Im5vdGVHdWlkIjoiMDc5MDVkMTctNTEzNS00OWM0LWJjNzctYzdiNWEyNzU5YzZhIiwicmVzb3VyY0d1aWQiOiJiZWJhMWMxOC1kMDBhLTRlYTctYTI4OC0zYThkNWYwZjU2OGEifQ==" data-original-width="1052" mime="image/jpeg" data-original-height="593" id="0c63c4193d48b8f42c4a4f53d82330df" class="en-media"></div><p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　从上图可以看出，要完成一次CSRF攻击，受害者必须依次完成两个步骤：</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　1.登录受信任网站A，并在本地生成Cookie。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　2.在不登出A的情况下，访问危险网站B。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　看到这里，你也许会说：“如果我不满足以上两个条件中的一个，我就不会受到CSRF的攻击”。是的，确实如此，但你不能保证以下情况不会发生：</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　1.你不能保证你登录了一个网站后，不再打开一个tab页面并访问另外的网站。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　2.你不能保证你关闭浏览器了后，你本地的Cookie立刻过期，你上次的会话已经结束。（事实上，关闭浏览器不能结束一个会话，但大多数人都会错误的认为关闭浏览器就等于退出登录/结束会话了......）</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　3.上图中所谓的攻击网站，可能是一个存在其他漏洞的可信任的经常被人访问的网站。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　上面大概地讲了一下CSRF攻击的思想，下面我将用几个例子详细说说具体的CSRF攻击，这里我以一个银行转账的操作作为例子（仅仅是例子，真实的银行网站没这么傻:&gt;）</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">　　示例1：</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　银行网站A，它以GET请求来完成银行转账的操作，如：http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　危险网站B，它里面有一段HTML的代码如下：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　&lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　首先，你登录了银行网站A，然后访问危险网站B，噢，这时你会发现你的银行账户少了1000块......</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　为什么会这样呢？原因是银行网站A违反了HTTP规范，使用GET请求更新资源。在访问危险网站B的之前，你已经登录了银行网站A，而B中的&lt;img&gt;以GET的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了），所以你的浏览器会带上你的银行网站A的Cookie发出Get请求，去获取资源“http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000”，结果银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作......</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　<b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">示例2：</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　为了杜绝上面的问题，银行决定改用POST请求完成转账操作。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　银行网站A的WEB表单如下：　　</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　&lt;form&nbsp;action="Transfer.php"&nbsp;method="POST"&gt;　　　　&lt;p&gt;ToBankId:&nbsp;&lt;input&nbsp;type="text"&nbsp;name="toBankId"/&gt;&lt;/p&gt;　　　　&lt;p&gt;Money:&nbsp;&lt;input&nbsp;type="text"&nbsp;name="money"/&gt;&lt;/p&gt;　　　　&lt;p&gt;&lt;input&nbsp;type="submit"&nbsp;value="Transfer"/&gt;&lt;/p&gt;　　&lt;/form&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　后台处理页面Transfer.php如下：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　&lt;?php<br>　　　　session_start();<br>　　　　if&nbsp;(isset($_REQUEST['toBankId']&nbsp;&amp;&amp;isset($_REQUEST['money']))<br>　　　　{<br>　　　　&nbsp;&nbsp;&nbsp; buy_stocks($_REQUEST['toBankId'],$_REQUEST['money']);<br>　　　　}<br>　　?&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　危险网站B，仍然只是包含那句HTML代码：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&lt;img&nbsp;src=http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　和示例1中的操作一样，你首先登录了银行网站A，然后访问危险网站B，结果.....和示例1一样，你再次没了1000块～T_T，这次事故的原因是：银行后台使用了$_REQUEST去获取请求的数据，而$_REQUEST既可以获取GET请求的数据，也可以获取POST请求的数据，这就造成了在后台处理程序无法区分这到底是GET请求的数据还是POST请求的数据。在PHP中，可以使用$_GET和$_POST分别获取GET请求和POST请求的数据。在JAVA中，用于获取请求数据request一样存在不能区分GET请求数据和POST数据的问题。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　<b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">示例3：</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　经过前面2个惨痛的教训，银行决定把获取请求数据的方法也改了，改用$_POST，只获取POST请求的数据，后台处理页面Transfer.php代码如下：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&lt;?php<br>　　　　session_start();<br>　　　　if&nbsp;(isset($_POST['toBankId']&nbsp;&amp;&amp;isset($_POST['money']))<br>　　　　{<br>　　　　&nbsp;&nbsp;&nbsp;&nbsp;buy_stocks($_POST['toBankId'],$_POST['money']);<br>　　　　}<br>　　?&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　然而，危险网站B与时俱进，它改了一下代码：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&lt;html&gt;　　&lt;head&gt;　　　　&lt;script&nbsp;type="text/javascript"&gt;　　　　　　function&nbsp;steal()<br>　　　　　　{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　　　 iframe&nbsp;=&nbsp;document.frames["steal"];<br>　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iframe.document.Submit("transfer");<br>　　　　　　}<br>　　　　&lt;/script&gt;　　&lt;/head&gt;&lt;body&nbsp;onload="steal()"&gt;　　&lt;iframe&nbsp;name="steal"&nbsp;display="none"&gt;　　　　　　&lt;form&nbsp;method="POST"&nbsp;name="transfer"　action="http://www.myBank.com/Transfer.php"&gt;&lt;input&nbsp;type="hidden"&nbsp;name="toBankId"&nbsp;value="11"&gt;&lt;input&nbsp;type="hidden"&nbsp;name="money"&nbsp;value="1000"&gt;&lt;/form&gt;　　　　&lt;/iframe&gt;　　&lt;/body&gt;&lt;/html&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">如果用户仍是继续上面的操作，很不幸，结果将会是再次不见1000块......因为这里危险网站B暗地里发送了POST请求到银行!</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　总结一下上面3个例子，CSRF主要的攻击模式基本上是以上的3种，其中以第1,2种最为严重，因为触发条件很简单，一个&lt;img&gt;就可以了，而第3种比较麻烦，需要使用JavaScript，所以使用的机会会比前面的少很多，但无论是哪种情况，只要触发了CSRF攻击，后果都有可能很严重。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　理解上面的3种攻击模式，其实可以看出，CSRF攻击是源于WEB的隐式身份验证机制！WEB的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的！</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">五.CSRF的防御</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　我总结了一下看到的资料，CSRF的防御可以从服务端和客户端两方面着手，防御效果是从服务端着手效果比较好，现在一般的CSRF防御也都在服务端进行。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　<b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">1.服务端进行CSRF防御</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　服务端的CSRF方式方法很多样，但总的思想都是一致的，就是在客户端页面增加伪随机数。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　(1).Cookie Hashing(所有表单都包含同一个伪随机值)：</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　这可能是最简单的解决方案了，因为攻击者不能获得第三方的Cookie(理论上)，所以表单中的数据也就构造失败了:&gt;</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　&lt;?php<br>　　　　//构造加密的Cookie信息　　　　$value=&nbsp;“DefenseSCRF”;<br>　　　　setcookie(”cookie”,$value,time()+3600);<br>　　?&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　在表单里增加Hash值，以认证这确实是用户发送的请求。</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　&lt;?php　　　　$hash=md5($_COOKIE['cookie']);<br>　　?&gt;　　&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;　　　　&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;　　　　&lt;input&nbsp;type=”hidden”&nbsp;name=”hash”&nbsp;value=”&lt;?=$hash;?&gt;”&gt;　　　　&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;　　&lt;/form&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　然后在服务器端进行Hash值验证</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&lt;?php<br>if(isset($_POST['check']))&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $hash=md5($_COOKIE['cookie']);if($_POST['check']&nbsp;==$hash)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 doJob();<br>　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{<br>　　　　　　　　//...<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　 }<br>　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;else&nbsp;{<br>　　　　　　//...<br>　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　这个方法个人觉得已经可以杜绝99%的CSRF攻击了，那还有1%呢....由于用户的Cookie很容易由于网站的XSS漏洞而被盗取，这就另外的1%。一般的攻击者看到有需要算Hash值，基本都会放弃了，某些除外，所以如果需要100%的杜绝，这个不是最好的方法。<br>　　(2).验证码</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　这个方案的思路是：每次的用户提交都需要用户在表单中填写一个图片上的随机字符串，厄....这个方案可以完全解决CSRF，但个人觉得在易用性方面似乎不是太好，还有听闻是验证码图片的使用涉及了一个被称为MHTML的Bug，可能在某些版本的微软IE中受影响。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　(3).One-Time Tokens(不同的表单包含一个不同的伪随机值)</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　在实现One-Time Tokens时，需要注意一点：就是“并行会话的兼容”。如果用户在一个站点上同时打开了两个不同的表单，CSRF保护措施不应该影响到他对任何表单的提交。考虑一下如果每次表单被装入时站点生成一个伪随机值来覆盖以前的伪随机值将会发生什么情况：用户只能成功地提交他最后打开的表单，因为所有其他的表单都含有非法的伪随机值。必须小心操作以确保CSRF保护措施不会影响选项卡式的浏览或者利用多个浏览器窗口浏览一个站点。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　以下我的实现:</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　1).先是令牌生成函数(gen_token())：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&lt;?phpfunction&nbsp;gen_token()&nbsp;{<br>　　　　//这里我是贪方便，实际上单使用Rand()得出的随机数作为令牌，也是不安全的。<br>　　　　//这个可以参考我写的Findbugs笔记中的<a href="https://www.cnblogs.com/hyddd/articles/1391737.html" target="_blank" style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">《Random object created and used only once》</a><br>$token=md5(uniqid(rand(),true));return$token;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　2).然后是Session令牌生成函数(gen_stoken())：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&lt;?php<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　function&nbsp;gen_stoken()&nbsp;{<br>　　　　　　$pToken = "";<br>　　　　　　if($_SESSION[STOKEN_NAME]&nbsp; == $pToken){<br>　　　　　　　　//没有值，赋新值<br>　　　　　　　　$_SESSION[STOKEN_NAME]&nbsp;=gen_token();<br>　　　　　　}&nbsp;&nbsp;&nbsp; <br>　　　　　　else{<br>　　　　　　　　//继续使用旧的值<br>　　　　　　}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　3).WEB表单生成隐藏输入域的函数：　　</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;?php<br>　　&nbsp;&nbsp;&nbsp;&nbsp; function gen_input() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; gen_stoken();<br>　　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo “&lt;input type=\”hidden\” name=\”" . FTOKEN_NAME . “\”<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;　　&nbsp;&nbsp;&nbsp;&nbsp; value=\”" . $_SESSION[STOKEN_NAME] . “\”&gt; “;<br>&nbsp;&nbsp;&nbsp;&nbsp; 　　}<br>&nbsp;&nbsp;&nbsp;&nbsp; ?&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　4).WEB表单结构：</p>
+<div style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">&lt;?php<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;session_start();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include(”functions.php”);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&gt;&lt;form&nbsp;method=”POST”&nbsp;action=”transfer.php”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”toBankId”&gt;&lt;input&nbsp;type=”text”&nbsp;name=”money”&gt;&lt;?&nbsp;gen_input();&nbsp;?&gt;&lt;input&nbsp;type=”submit”&nbsp;name=”submit”&nbsp;value=”Submit”&gt;&lt;/FORM&gt;</div>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　5).服务端核对令牌：</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　这个很简单，这里就不再啰嗦了。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　上面这个其实不完全符合“并行会话的兼容”的规则，大家可以在此基础上修改。</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　其实还有很多想写，无奈精力有限，暂且打住，日后补充，如果错漏，请指出:&gt;</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　PS：今天下午写这篇文档的时候FF崩溃了一次，写了一半文章的全没了，郁闷好久T_T.......</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">　　转载请说明出处，谢谢[hyddd(http://www.cnblogs.com/hyddd/)]</p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;"><b style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;font-weight:bold;">六.参考文献</b></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">[1].<a href="http://www.playhack.net/view.php?id=31" target="_blank" style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Preventing CSRF</a></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">[2].<a href="http://shiflett.org/articles/cross-site-request-forgeries" target="_blank" style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">Security Corner: Cross-Site Request Forgeries</a></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">[3].<a href="http://netsecurity.51cto.com/art/200812/102951.htm" target="_blank" style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">《深入解析跨站请求伪造漏洞：原理剖析》</a></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">[4].<a href="http://netsecurity.51cto.com/art/200811/97281.htm" target="_blank" style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">《Web安全测试之跨站请求伪造（CSRF）》</a></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:1.5em;">[5].<a href="http://netsecurity.51cto.com/art/200812/102925.htm" target="_blank" style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;color:rgb(6, 85, 136);text-decoration:none;">《深入解析跨站请求伪造漏洞：实例讲解》</a></p>
+<p style="margin:0px;padding:0px;border:0px none;font:inherit;vertical-align:baseline;margin-bottom:0px;">[6].http://baike.baidu.com/view/1609487.htm</p>
+</div></div></div></div></div></div></div></div></div></div>
+</div>
+</div></body></html>
+  </div>
+</div>
+
+
+
+  <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/tldsn" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=742720531@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="http://weibo.com/5578237033" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>  
+            <a href="https://www.zhihu.com/people/yao-yu-jie-90" title="Zhihu"><i class="iconfont blog-zhihu"></i></a>  
+            <a href="https://www.douban.com/people/122400251" title="Douban"><i class="iconfont blog-douban"></i></a>  
+            <a href="https://music.163.com/#/user/home?id=263386850" title="Cloudmusic"><i class="iconfont blog-yinle"></i></a>  
+             
+               
+            
+        </p>
+        <p class="busuanzi">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p>
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+  <div id="music"></div>
+
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+  <script src=" /assets/js/main.js " charset="utf-8"></script>
+  <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
+  <script type="text/javascript">
+    smoothScroll.init({
+      speed: 500, // Integer. How fast to complete the scroll in milliseconds
+      easing: 'easeInOutCubic', // Easing pattern to use
+      offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+    });
+  </script>
+  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
+</body>
+
+</html>
