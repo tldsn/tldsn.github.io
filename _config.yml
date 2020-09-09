@@ -67,24 +67,26 @@ plugins:
   
 paginate: 6
 
+collections_dir: my_collection
+
 collections:
   authors:
     output: true
+  imports:
+    output: true
       
-      
-
-defaults:
-  - scope:
-      path: "/_posts/learn/6.其他/"
-      # type: "authors"
-    values:
-      layout: "author"
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-    values:
-      layout: "default"
+# defaults:
+#   - scope:
+#       path: "/_posts/other/"
+#       # type: "authors"
+#     values:
+#       layout: "author"
+#   - scope:
+#       path: ""
+#       type: "posts"
+#     values:
+#       layout: "post"
+#   - scope:
+#       path: ""
+#     values:
+#       layout: "default"
