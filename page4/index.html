@@ -19,7 +19,7 @@
     <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
     <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Page 4 of 8 for TLDSN | ^^</title>
+<title>Page 4 of 4 for TLDSN | ^^</title>
 <meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="TLDSN" />
 <meta name="author" content="tldsn" />
@@ -30,9 +30,8 @@
 <meta property="og:url" content="https://tldsn.github.io/page4/" />
 <meta property="og:site_name" content="TLDSN" />
 <link rel="prev" href="https://tldsn.github.io/page3" />
-<link rel="next" href="https://tldsn.github.io/page5" />
 <script type="application/ld+json">
-{"url":"https://tldsn.github.io/page4/","author":{"@type":"Person","name":"tldsn"},"description":"^^","@type":"WebPage","headline":"TLDSN","@context":"https://schema.org"}</script>
+{"url":"https://tldsn.github.io/page4/","author":{"@type":"Person","name":"tldsn"},"description":"^^","headline":"TLDSN","@type":"WebPage","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -160,17 +159,19 @@
                         
                         <a href="/authors/">
                         
-                            <i class="fa fa-"></i>Staff
+                            <i class="fa fa-id-card-o"></i>authors
                         </a>
                     </li>
                     
                 
                     
-                
-                    
-                
-                    
-                
+                    <li>
+                        
+                        <a href="/evernote/">
+                        
+                            <i class="fa fa-reply-all"></i>evernote
+                        </a>
+                    </li>
                     
                 
                     
@@ -206,11 +207,11 @@
             
               <li>
                 <h2>
-                  <a class="post-link" href="/2020/04/21/git/">git</a>
+                  <a class="post-link" href="/2020/04/20/github%E5%B8%B8%E7%94%A8%E6%90%9C%E7%B4%A2/">github常用搜索</a>
                 </h2>
                 <div class="label">
                     <div class="label-card">
-                        <i class="fa fa-calendar"></i>2020-04-21
+                        <i class="fa fa-calendar"></i>2020-04-20
                     </div>
                     <div class="label-card">
                         <i class="fa fa-user"></i>tldsn
@@ -229,739 +230,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
-    
-        <a href="/tag/#命令" title="Tag: 命令" rel="tag">命令</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#概念" id="markdown-toc-概念">概念</a></li>
-  <li><a href="#base" id="markdown-toc-base">base</a>    <ul>
-      <li><a href="#简单提交流程" id="markdown-toc-简单提交流程">简单提交流程</a></li>
-      <li><a href="#其他" id="markdown-toc-其他">其他</a></li>
-    </ul>
-  </li>
-  <li><a href="#进阶" id="markdown-toc-进阶">进阶</a>    <ul>
-      <li><a href="#rebase" id="markdown-toc-rebase">rebase</a></li>
-      <li><a href="#commit" id="markdown-toc-commit">commit</a></li>
-      <li><a href="#撤销revert和重设reset对比" id="markdown-toc-撤销revert和重设reset对比">撤销（revert）和重设（reset）对比</a></li>
-      <li><a href="#checkout和reset对比" id="markdown-toc-checkout和reset对比">checkout和reset对比</a></li>
-    </ul>
-  </li>
-  <li><a href="#分支" id="markdown-toc-分支">分支</a>    <ul>
-      <li><a href="#基本操作" id="markdown-toc-基本操作">基本操作</a></li>
-      <li><a href="#其他-1" id="markdown-toc-其他-1">其他</a></li>
-    </ul>
-  </li>
-  <li><a href="#tag" id="markdown-toc-tag">Tag</a></li>
-  <li><a href="#暂存stash" id="markdown-toc-暂存stash">暂存(stash)</a></li>
-  <li><a href="#bug" id="markdown-toc-bug">bug</a></li>
-  <li><a href="#ignore" id="markdown-toc-ignore">ignore</a></li>
-</ul>
-
-<h2 id="概念">概念</h2>
-
-<ul>
-  <li>
-    <p>工作目录、缓冲区、提交历史</p>
-  </li>
-  <li>
-    <p>HEAD表示当前版本，也就是最新的提交,上一个版本就是HEAD^，上上一个版本就是HEAD^^</p>
-  </li>
-  <li>
-    <p>HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。</p>
-  </li>
-</ul>
-
-<h2 id="base">base</h2>
-
-<ul>
-  <li>
-    <p><code class="highlighter-rouge">git init</code>　　创建新仓库　　</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">git status</code>　　查看状态　　</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">git log --pretty=oneline</code>　　提交历史　　</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">git reflog</code>　　命令历史　　</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">git diff HEAD -- readme.txt</code>　　查看工作区和版本库里面最新版本的区别</p>
-  </li>
-</ul>
-
-<h3 id="简单提交流程">简单提交流程</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add &lt;filename&gt;
-
-fit commit -m "提交信息"
-
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-
-git remote add origin &lt;server&gt;　　//连接远程
-
-git push origin master　　//推送
-</code></pre></div></div>
-
-<h3 id="其他">其他</h3>
-
-<ul>
-  <li>让Git显示颜色</li>
-</ul>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global color.ui true
-</code></pre></div></div>
-
-<ul>
-  <li>配置别名</li>
-</ul>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit"
-</code></pre></div></div>
-
-<h2 id="进阶">进阶</h2>
-
-<h3 id="rebase">rebase</h3>
-
-<blockquote>
-  <p>git rebase  是将上游更改合并进本地仓库的通常方法，rebase 就好像是说「我想将我的更改建立在其他人的进展之上」</p>
-</blockquote>
-
-<p><mark>
-☆rebase操作可以把本地未push的分叉提交历史整理成直线；
-</mark></p>
-
-<p> </p>
-
-<p><mark>
-☆rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
-</mark></p>
-
-<p> </p>
-
-<p><mark>
-☆在你工作流中使用 rebase 最好的用法之一就是清理本地正在开发的分支。隔一段时间执行一次交互式 rebase，你可以保证你 feature 分支中的每一个提交都是专注和有意义的。你在写代码时不用担心造成孤立的提交——因为你后面一定能修复。
-</mark></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>对最新的 3 次提交进行了交互式 rebase：
-git checkout feature
-git rebase -i HEAD~3
-
-//交互式变基
-git rebase -i　　
-* pick：　　//正常选中
-* reword：　　//选中，并且修改提交信息；
-* edit：　　//选中，rebase时会暂停，允许你修改这个commit（参考这里）
-* squash：　　//选中，会将当前commit与上一个commit合并
-* fixup：　　//与squash相同，但不会保存当前commit的提交信息
-* exec：　　//执行其他shell命令
-</code></pre></div></div>
-
-<h3 id="commit">commit</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//合并缓存的修改和上一次的提交，用新的快照替换上一个提交。缓存区没有文件时运行这个命令可以用来编辑上次提交的提交信息，而不会更改快照。
-git commit --amend --no-edit
-
-//自动将提交标记为先前提交的修复
-git commit --fixup &lt;commit&gt;
-</code></pre></div></div>
-
-<h3 id="撤销revert和重设reset对比">撤销（revert）和重设（reset）对比</h3>
-
-<ul>
-  <li>git revert　　撤销一个已经提交的快照，保留项目历史，生成新的提交</li>
-  <li>git reset　　重设一个旧的提交，你不得不移除那个提交后的所有提交，再移除那个提交，然后重新提交后面的所有提交。</li>
-</ul>
-
-<h3 id="checkout和reset对比">checkout和reset对比</h3>
-
-<ul>
-  <li>git checkout　　移动指针检出一个旧版本</li>
-  <li>git reset　　重设一个旧的提交，<code class="highlighter-rouge">--hard</code>移除之后的提交，<code class="highlighter-rouge">--soft</code>将之后的提交加入到缓冲区</li>
-</ul>
-
-<h2 id="分支">分支</h2>
-<p>Git鼓励大量使用分支：</p>
-
-<h3 id="基本操作">基本操作</h3>
-
-<ul>
-  <li>查看分支：<code class="highlighter-rouge">git branch</code></li>
-  <li>创建分支：<code class="highlighter-rouge">git branch &lt;name&gt;</code></li>
-  <li>切换分支：<code class="highlighter-rouge">git checkout &lt;name&gt;  或者  git switch &lt;name&gt;</code></li>
-  <li>创建+切换分支：<code class="highlighter-rouge">git checkout -b &lt;name&gt;  或者  git switch -c &lt;name&gt;</code></li>
-  <li>合并某分支到当前分支：<code class="highlighter-rouge">git merge &lt;name&gt;</code></li>
-  <li>删除分支：<code class="highlighter-rouge">git branch -d &lt;name&gt;</code></li>
-</ul>
-
-<h3 id="其他-1">其他</h3>
-<ul>
-  <li><code class="highlighter-rouge">git merge --no-ff -m "merge with no-ff" dev</code>　　//合并分支禁用Fast forward</li>
-  <li><code class="highlighter-rouge">git checkout -b dev origin/dev</code>　　//创建远程origin的dev分支到本地</li>
-  <li>
-    <p><code class="highlighter-rouge">git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;</code>　　//本地分支和远程分支建立连接</p>
-  </li>
-  <li><code class="highlighter-rouge">git remote -v</code>　　//查看远程仓库</li>
-  <li><code class="highlighter-rouge">git remote rm origin</code>　　//删除已有的GitHub远程库</li>
-</ul>
-
-<h2 id="tag">Tag</h2>
-
-<ul>
-  <li><code class="highlighter-rouge">git tag</code>　　可以查看所有标签</li>
-  <li><code class="highlighter-rouge">git tag &lt;tagname&gt;</code>　　新建一个标签，默认为HEAD，也可以指定一个commit id</li>
-  <li><code class="highlighter-rouge">git tag v0.9 f52c633</code>　　指定commit id</li>
-  <li>
-    <p><code class="highlighter-rouge">git tag -a &lt;tagname&gt; -m "blablabla..."</code>　　指定message</p>
-  </li>
-  <li><code class="highlighter-rouge">git push origin &lt;tagname&gt;</code>　　可以推送一个本地标签</li>
-  <li><code class="highlighter-rouge">git push origin --tags</code>　　可以推送全部未推送过的本地标签</li>
-  <li><code class="highlighter-rouge">git tag -d &lt;tagname&gt;</code>　　可以删除一个本地标签</li>
-  <li><code class="highlighter-rouge">git push origin :refs/tags/&lt;tagname&gt;</code>　　可以删除一个远程标签</li>
-</ul>
-
-<h2 id="暂存stash">暂存(stash)</h2>
-
-<ul>
-  <li><code class="highlighter-rouge">git stash</code></li>
-  <li><code class="highlighter-rouge">git stash list</code>　　查看</li>
-  <li><code class="highlighter-rouge">git stash apply stash@{0}</code>　　恢复</li>
-  <li><code class="highlighter-rouge">git stash drop</code>　　删除</li>
-  <li><code class="highlighter-rouge">git stash pop</code>　　恢复并删除</li>
-</ul>
-
-<h2 id="bug">bug</h2>
-
-<ul>
-  <li><code class="highlighter-rouge">cherry-pick命令</code>　　复制一个特定的提交到当前分支</li>
-  <li><code class="highlighter-rouge">git cherry-pick 4c805e2</code></li>
-</ul>
-
-<h2 id="ignore">ignore</h2>
-
-<blockquote>
-  <p>https://github.com/github/gitignore</p>
-</blockquote>
-
-<p><mark>
-检验.gitignore的标准是git status命令是不是说working directory clean
-</mark></p>
-
-<ul>
-  <li><code class="highlighter-rouge">git check-ignore -v App.class</code>    检查规则</li>
-  <li><code class="highlighter-rouge">git add -f App.class</code>    强制添加</li>
-</ul>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2020/04/21/git/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2020/04/21/anki/">anki筛选语法</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2020-04-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>tldsn
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#anki" title="Tag: anki" rel="tag">anki</a>&nbsp;
-    
-        <a href="/tag/#搜索技巧" title="Tag: 搜索技巧" rel="tag">搜索技巧</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#暂停和搁置" id="markdown-toc-暂停和搁置">暂停和搁置</a></li>
-  <li><a href="#卡片性质" id="markdown-toc-卡片性质">卡片性质</a></li>
-  <li><a href="#标签" id="markdown-toc-标签">标签</a></li>
-  <li><a href="#卡片状态" id="markdown-toc-卡片状态">卡片状态</a></li>
-  <li><a href="#最近回答的卡片" id="markdown-toc-最近回答的卡片">最近回答的卡片</a></li>
-  <li><a href="#使用建议" id="markdown-toc-使用建议">☆使用建议</a></li>
-  <li><a href="#参考" id="markdown-toc-参考">☆参考</a></li>
-</ul>
-
-<h2 id="暂停和搁置">暂停和搁置</h2>
-
-<ul>
-  <li>is:suspended　　暂停卡</li>
-  <li>is:buried　　搁置卡<br />
-<mark>可以略过的简单卡，设置暂停</mark></li>
-</ul>
-
-<h2 id="卡片性质">卡片性质</h2>
-
-<ul>
-  <li>prop:ivl&gt;=10　　
-匹配间隔大于10天的卡片</li>
-  <li>prop:due=1　　
-匹配明天到期的卡片</li>
-  <li>prop:due=-1　　
-匹配昨天到期但尚未复习到的滞留卡片</li>
-  <li>prop:due&gt;-1 prop:due&lt;1　　
-匹配昨天到期、今天到期和明天将要到期的卡片</li>
-  <li>prop:reps&lt;10　　
-匹配回答次数少于10次的卡片</li>
-  <li>prop:lapses&gt;3　　
-匹配失误再次学习超过3次的卡片</li>
-  <li>prop:ease!=2.5　　
-匹配难度大于或小于初始默认值的卡片</li>
-</ul>
-
-<h2 id="标签">标签</h2>
-
-<ul>
-  <li>tag:animal　　
-匹配带有“animal”标签的笔记</li>
-  <li>tag:none　　
-匹配没有标签的笔记</li>
-  <li>tag:ani*　　
-匹配标签以“ani”开头的笔记</li>
-</ul>
-
-<h2 id="卡片状态">卡片状态</h2>
-
-<ul>
-  <li>is:due　　
-匹配已到期的的复习卡片和学习中卡片</li>
-  <li>is:new　　
-匹配新卡片</li>
-  <li>is:learn　　
-匹配学习中卡片</li>
-  <li>is:review　　
-匹配待学习的复习卡片（包括到期的和未到期的）和失误的卡片</li>
-  <li>is:suspended　　
-匹配手动暂停的卡片</li>
-  <li>is:buried　　
-匹配已搁置的卡片（包括自动的和手动的）</li>
-</ul>
-
-<hr />
-
-<ul>
-  <li>is:learn is:review　　
-匹配失误的等待再次学习的卡片</li>
-  <li>-is:learn is:review　　
-只匹配正常的复习卡片，不包括失误的卡片</li>
-  <li>is:learn -is:review　　
-只匹配第一次学习的卡片</li>
-</ul>
-
-<p><mark>
-注意到期（is:due）只匹配复习卡片和间隔在1天及以上的学习中卡片，不匹配间隔很短（如10分钟）的学习中卡片。
-</mark></p>
-
-<h2 id="最近回答的卡片">最近回答的卡片</h2>
-
-<ul>
-  <li>rated:1　　
-匹配今天回答的卡片</li>
-  <li>rated:1:2　　
-匹配今天回答Hard（2）的卡片</li>
-  <li>rated:7:1　　
-匹配过去7天回答Again（1）的卡片</li>
-  <li>rated:31:4　　
-匹配过去1月回答Easy（4）的卡片</li>
-</ul>
-
-<h2 id="使用建议">☆使用建议</h2>
-
-<ol>
-  <li>rated　　复习今天学习时遇到的难度卡</li>
-  <li>prop:ivl　　复习间隔比较久的简单卡</li>
-  <li>prop:ease　　强化学习难度卡</li>
-  <li>tag　　复习标记卡</li>
-  <li>-is:new　　辅助筛选</li>
-</ol>
-
-<h2 id="参考">☆参考</h2>
-<ul>
-  <li><a href="http://www.ankichina.net/manual/anki">汉化手册</a></li>
-  <li><a href="https://ankiweb.net/shared/addons/2.1">插件</a></li>
-  <li><a href="https://wiki.anki.link/">Anki资源库</a></li>
-  <li><a href="https://ankiweb.net/shared/decks/english">英语牌组</a></li>
-  <li><a href="https://www.laohuang.net/">教程-老黄老巢</a></li>
-  <li><a href="https://www.yuque.com/purequant/anki/uefe4y">教程-樱梦-Anki学习笔记</a></li>
-  <li><a href="https://pan.baidu.com/s/1xBjehEu6Zih1Hn5IoZc50g">自用-词典及牌组</a>　　提取码：r5z2</li>
-  <li><a href="https://www.pdawiki.com/forum/forum.php?mod=viewthread&amp;tid=30146&amp;extra=page%3D1">更多词库-pdawiki</a></li>
-  <li><a href="https://freemdict.com/">更多词库-freemdict</a></li>
-  <li><a href="https://downloads.freemdict.com/100G_Super_Big_Collection/%E5%8F%91%E9%9F%B3%E5%BA%93%28%E6%94%BE%E5%85%A5AudioLib%E6%96%87%E4%BB%B6%E5%A4%B9%29/">发音库</a></li>
-  <li><a href="https://bookfere.com/post/tag/kindle%E5%AD%A6%E8%8B%B1%E8%AF%AD">书</a></li>
-  <li><a href="http://www.mangapanda.com/">漫画</a></li>
-</ul>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2020/04/21/anki/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">系统安装与备份</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2020-04-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>tldsn
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#其他" title="Category: 其他" rel="category">其他</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#装系统" title="Tag: 装系统" rel="tag">装系统</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#windows系统" id="markdown-toc-windows系统">windows系统</a></li>
-  <li><a href="#ubuntu" id="markdown-toc-ubuntu">Ubuntu</a></li>
-  <li><a href="#uefi--gpt-安装" id="markdown-toc-uefi--gpt-安装">UEFI + GPT 安装</a></li>
-  <li><a href="#dism" id="markdown-toc-dism">DISM++</a></li>
-  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
-</ul>
-
-<h3 id="windows系统">windows系统</h3>
-
-<ol>
-  <li>U盘</li>
-  <li>Rufus</li>
-  <li>系统镜像MSDN I Tell You</li>
-  <li>安装密钥</li>
-</ol>
-
-<h3 id="ubuntu">Ubuntu</h3>
-
-<ol>
-  <li>把待安装系统的分区设置为用于Ext4文件系统，并设置挂载点为根目录/</li>
-</ol>
-
-<h3 id="uefi--gpt-安装">UEFI + GPT 安装</h3>
-
-<blockquote>
-  <p>为什么要用 UEFI 引导方案？
-UEFI 引导是一种新的系统引导方式，被看作是传统 BIOS 引导的继承者。跟 BIOS 相比，UEFI 直接从预启动的操作环境加载到操作系统上从而节省开机时间。所以说，用 UEFI 引导方式可有效提升开机速度。
-为什么要用 GPT 分区方案？
-传统的 MBR 分区表只能支持 2.1T 以下的硬盘容量，并且最多创建 4 个主分区，也就是最多同时安装 4 个操作系统。GPT 则没有分区的限制，但是 GPT 必须要 UEFI 引导。</p>
-</blockquote>
-
-<ol>
-  <li>进入BIOS，查看是否支持UEFI BOOT，并设置为Enabled</li>
-  <li>进入winPE，删除硬盘所有分区，转换分区类型为GUID</li>
-  <li>划分硬盘分区：建立新分区，建立主分区</li>
-  <li>安装系统</li>
-</ol>
-
-<h3 id="dism">DISM++</h3>
-
-<blockquote>
-  <p>系统镜像</p>
-</blockquote>
-
-<h3 id="参考">参考</h3>
-
-<blockquote>
-  <p><a href="https://www.jianshu.com/p/a33d0e202fc1">https://www.jianshu.com/p/a33d0e202fc1</a></p>
-</blockquote>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2020/04/21/%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%90%86/">一些代理</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2020-04-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>tldsn
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#其他" title="Category: 其他" rel="category">其他</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#代理" title="Tag: 代理" rel="tag">代理</a>&nbsp;
-    
-        <a href="/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
-    
-        <a href="/tag/#npm" title="Tag: npm" rel="tag">npm</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#git" id="markdown-toc-git">git</a></li>
-  <li><a href="#npm" id="markdown-toc-npm">npm</a></li>
-</ul>
-
-<h3 id="git">git</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//设置代理
-git config --global http.proxy socks5://127.0.0.1:1080
-//取消代理
-git config --global --unset http.proxy
-</code></pre></div></div>
-
-<h3 id="npm">npm</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//淘宝镜像
-npm config set registry https://registry.npm.taobao.org
-//验证
-npm config get registry
-</code></pre></div></div>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2020/04/21/%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%90%86/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2020/04/21/Exception/">git error</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2020-04-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>tldsn
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Exception" title="Category: Exception" rel="category">Exception</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Exception" title="Tag: Exception" rel="tag">Exception</a>&nbsp;
-    
-        <a href="/tag/#git" title="Tag: git" rel="tag">git</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    
-<p><strong>ServicePointManager 不支持具有 socks5h 方案的代理</strong></p>
-
-<ul>
-  <li>
-    <p><strong>原因：</strong><br />
-  虽然配置了socks5h代理，但是git remote add origin配置的是https的项目地址，<br />
-  所以代理无法使用</p>
-  </li>
-  <li>
-    <p><strong>解决：</strong></p>
-    <ol>
-      <li><code class="highlighter-rouge">git remote rm origin</code>删除</li>
-      <li>重新配置为SSH的项目地址</li>
-    </ol>
-  </li>
-</ul>
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2020/04/21/Exception/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2020/04/21/github-sshkey/">为什么GitHub需要SSH Key呢？</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2020-04-21
-                    </div>
-                    <div class="label-card">
-                        <i class="fa fa-user"></i>tldsn
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#问题" title="Category: 问题" rel="category">问题</a>
+        <a href="/category/#搜索技巧" title="Category: 搜索技巧" rel="category">搜索技巧</a>
     
   
 
@@ -980,7 +249,7 @@ npm config get registry
     
         <a href="/tag/#github" title="Tag: github" rel="tag">github</a>&nbsp;
     
-        <a href="/tag/#SSH" title="Tag: SSH" rel="tag">SSH</a>
+        <a href="/tag/#搜索技巧" title="Tag: 搜索技巧" rel="tag">搜索技巧</a>
     
   
 
@@ -990,15 +259,80 @@ npm config get registry
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#为什么github需要ssh-key呢" id="markdown-toc-为什么github需要ssh-key呢">为什么GitHub需要SSH Key呢</a></li>
+  <li><a href="#搜索语法" id="markdown-toc-搜索语法">搜索语法</a></li>
+  <li><a href="#在github上搜索" id="markdown-toc-在github上搜索">在GitHub上搜索</a>    <ul>
+      <li><a href="#base" id="markdown-toc-base">base</a></li>
+      <li><a href="#搜代码" id="markdown-toc-搜代码">搜代码</a></li>
+    </ul>
+  </li>
+  <li><a href="#键盘快捷键" id="markdown-toc-键盘快捷键">键盘快捷键</a></li>
+  <li><a href="#其他" id="markdown-toc-其他">其他</a></li>
 </ul>
 
-<h3 id="为什么github需要ssh-key呢">为什么GitHub需要SSH Key呢</h3>
+<h2 id="搜索语法">搜索语法</h2>
 
+<ul>
+  <li><code class="highlighter-rouge">n..n</code>　　</li>
+  <li>
+    <p><code class="highlighter-rouge">n..*</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">&gt;YYYY-MM-DD</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">a not b</code>　　包含a而不包含b　　</p>
+  </li>
+  <li><code class="highlighter-rouge">-n</code>　　排除n</li>
+</ul>
+
+<h2 id="在github上搜索">在GitHub上搜索</h2>
+
+<h3 id="base">base</h3>
+
+<ul>
+  <li>in:name　　按仓库名称搜索</li>
+  <li>in:description　　按说明</li>
+  <li>in:readme　　按自述</li>
+  <li>user:USERNAME</li>
+  <li>followers:n　　按关注者数量</li>
+  <li>forks:n　　按复刻数量</li>
+  <li>stars:n　　按星号数量</li>
+  <li>created:YYYY-MM-DD</li>
+  <li>pushed:YYYY-MM-DD　　上次更新时间</li>
+  <li>language:LANGUAGE　　按语言搜索</li>
+  <li>topic:TOPIC　　按主题搜索</li>
+  <li>label:LABEL　　搜标签</li>
+</ul>
+
+<h3 id="搜代码">搜代码</h3>
+
+<ul>
+  <li>extension:EXTENSION　　限定文件扩展名</li>
+  <li>filename:FILENAME　　限定文件名</li>
+  <li>path:DIRECTORY　　在路径下搜索</li>
+  <li>language:LANGUAGE　　在特定语言下搜索</li>
+  <li>user:USERNAME　　</li>
+  <li>in:file　　文件内容中包含</li>
+  <li>in:path　　文件路径中包含</li>
+</ul>
+
+<h2 id="键盘快捷键">键盘快捷键</h2>
+
+<blockquote>
+  <p>在 GitHub 中输入 ? 可弹出一个对话框，列出可用于该页面的键盘快捷键。</p>
+</blockquote>
+
+<h2 id="其他">其他</h2>
+
+<p>搜索优秀项目:<br />
+awesome + 关键字</p>
+
+<p>寻找脚手架：<br />
+技术栈 + boilerplate 或者 starter 等关键词</p>
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2020/04/21/github-sshkey/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a  href="/2020/04/20/github%E5%B8%B8%E7%94%A8%E6%90%9C%E7%B4%A2/"><i class="fa fa-newspaper-o"></i>Read All</a>
                 </div>
                 <hr>
               </li>
@@ -1013,10 +347,10 @@ npm config get registry
             <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
             <a href="/page3" class="previous"><i class="fa fa-angle-left"></i></a>
           
-          <span class="page_number ">4/8</span>
+          <span class="page_number ">4/4</span>
           
-            <a href="/page5" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page8" class="next"><i class="fa fa-angle-double-right"></i></a>
+            <span class="next disable"><i class="fa fa-angle-right"></i></span>
+            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
           
         </div>
     </div>
@@ -1030,25 +364,25 @@ npm config get registry
                 </div>
                 <ul class="content-ul" recent>
                     
-                        <li><a href="/2020/08/18/Fiddler%E6%8A%93%E5%8C%85%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%E8%BF%87%E6%BB%A4-%E8%B5%B5%E5%BD%A6%E5%86%9B-%E5%8D%9A%E5%AE%A2%E5%9B%AD/">Fiddler抓包使用教程-过滤-赵彦军-博客园</a></li>
+                        <li><a href="/2020/04/21/stackoverflow%E6%90%9C%E7%B4%A2/">stackoverflow搜索</a></li>
                     
-                        <li><a href="/2020/08/14/Docker%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%99%E7%A8%8B-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">Docker微服务教程-阮一峰的网络日志</a></li>
+                        <li><a href="/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/">百度脑图</a></li>
                     
-                        <li><a href="/2020/08/14/Docker%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">Docker入门教程-阮一峰的网络日志</a></li>
+                        <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/">一些工具</a></li>
                     
-                        <li><a href="/2020/08/12/%E7%8E%8B%E8%B7%AF-%E5%87%BA%E5%AE%B6%E4%BA%BA%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E6%80%A7%E6%AC%B2-_%E7%99%BE%E7%A7%91TA%E8%AF%B4/">王路：出家人怎么解决性欲？_百科TA说</a></li>
+                        <li><a href="/2020/04/21/git/">git</a></li>
                     
-                        <li><a href="/2020/07/29/%E5%A6%82%E4%BD%95%E8%B0%83%E6%95%B4%E8%87%AA%E8%A1%8C%E8%BD%A6%E8%BD%A6%E5%9C%88-%E7%BE%8E%E9%AA%91%E7%BD%91_Biketo.com/">如何调整自行车车圈-美骑网_Biketo.com</a></li>
+                        <li><a href="/2020/04/21/anki/">anki筛选语法</a></li>
                     
-                        <li><a href="/2020/07/20/%E4%B8%AD%E5%9B%BD%E7%A4%BE%E4%BA%A4%E4%BA%8C%E5%8D%81%E5%B9%B4-%E8%99%8E%E5%97%85%E7%BD%91/">中国社交二十年-虎嗅网</a></li>
+                        <li><a href="/2020/04/21/%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E4%B8%8E%E5%A4%87%E4%BB%BD/">系统安装与备份</a></li>
                     
-                        <li><a href="/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%BA%8C-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">互联网协议入门（二）-阮一峰的网络日志</a></li>
+                        <li><a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%90%86/">一些代理</a></li>
                     
-                        <li><a href="/2020/07/08/%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE%E5%85%A5%E9%97%A8-%E4%B8%80-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">互联网协议入门（一）-阮一峰的网络日志</a></li>
+                        <li><a href="/2020/04/21/Exception/">git error</a></li>
                     
-                        <li><a href="/2020/07/08/WebSocket%E6%95%99%E7%A8%8B-%E9%98%AE%E4%B8%80%E5%B3%B0%E7%9A%84%E7%BD%91%E7%BB%9C%E6%97%A5%E5%BF%97/">WebSocket教程-阮一峰的网络日志</a></li>
+                        <li><a href="/2020/04/21/github-sshkey/">为什么GitHub需要SSH Key呢？</a></li>
                     
-                        <li><a href="/2020/07/07/%E6%B5%85%E8%B0%88CSRF%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-hyddd-%E5%8D%9A%E5%AE%A2%E5%9B%AD/">浅谈CSRF攻击方式-hyddd-博客园</a></li>
+                        <li><a href="/2020/04/21/ssh%E7%94%9F%E6%88%90/">ssh生成</a></li>
                     
                 </ul>
             </div>
@@ -1060,15 +394,6 @@ npm config get registry
                     Categories
                 </div>
                 <ul class="content-ul" cate>
-                    
-                    <li>
-                        <a href="/category/#印象笔记导入" class="categories-list-item" cate="印象笔记导入">
-                            <span class="name">
-                                印象笔记导入
-                            </span>
-                            <span class="badge">30</span>
-                        </a>
-                    </li>
                     
                     <li>
                         <a href="/category/#搜索技巧" class="categories-list-item" cate="搜索技巧">
@@ -1164,21 +489,14 @@ npm config get registry
                       
                       
                       
-                      <a href="/tag/#tips" style="font-size: 18pt; color: #000;">tips</a>
+                      <a href="/tag/#github" style="font-size: 13.5pt; color: #444;">github</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#github" style="font-size: 11pt; color: #777;">github</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#搜索技巧" style="font-size: 12.5pt; color: #555;">搜索技巧</a>
+                      <a href="/tag/#搜索技巧" style="font-size: 18pt; color: #000;">搜索技巧</a>
                     
                       
                       
@@ -1192,7 +510,7 @@ npm config get registry
                       
                       
                       
-                      <a href="/tag/#jekyll" style="font-size: 12.5pt; color: #555;">jekyll</a>
+                      <a href="/tag/#jekyll" style="font-size: 18pt; color: #000;">jekyll</a>
                     
                       
                       
@@ -1213,7 +531,7 @@ npm config get registry
                       
                       
                       
-                      <a href="/tag/#环境" style="font-size: 11pt; color: #777;">环境</a>
+                      <a href="/tag/#环境" style="font-size: 13.5pt; color: #444;">环境</a>
                     
                       
                       
@@ -1234,7 +552,7 @@ npm config get registry
                       
                       
                       
-                      <a href="/tag/#命令" style="font-size: 11pt; color: #777;">命令</a>
+                      <a href="/tag/#命令" style="font-size: 13.5pt; color: #444;">命令</a>
                     
                       
                       
@@ -1255,7 +573,7 @@ npm config get registry
                       
                       
                       
-                      <a href="/tag/#git" style="font-size: 12.5pt; color: #555;">git</a>
+                      <a href="/tag/#git" style="font-size: 18pt; color: #000;">git</a>
                     
                       
                       
@@ -1290,7 +608,7 @@ npm config get registry
                       
                       
                       
-                      <a href="/tag/#工具" style="font-size: 11pt; color: #777;">工具</a>
+                      <a href="/tag/#工具" style="font-size: 9pt; color: #999;">工具</a>
                     
                       
                       
@@ -1319,41 +637,6 @@ npm config get registry
                       
                       
                       <a href="/tag/#stackoverflow" style="font-size: 9pt; color: #999;">stackoverflow</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#autohotkey" style="font-size: 9pt; color: #999;">autohotkey</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#websocket" style="font-size: 9pt; color: #999;">websocket</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#docket" style="font-size: 9pt; color: #999;">docket</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#docker" style="font-size: 9pt; color: #999;">docker</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#fiddler" style="font-size: 9pt; color: #999;">fiddler</a>
                     
                 </div>
             </div>
