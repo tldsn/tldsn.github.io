@@ -54,10 +54,6 @@ tag_dir: tag/
 # excerpt
 excerpt_separator: "\n\n\n\n"
 
-# paginate
-# gems: [jekyll-paginate]
-# plugins: [jekyll-paginate]
-
 #plugins
 plugins:
   - jekyll-feed
@@ -65,13 +61,13 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   
-paginate: 6
+paginate: 5
 
 collections_dir: my_collection
 
 collections:
   authors:
-    output: true
+    # output: true
   imports:
     output: true
       

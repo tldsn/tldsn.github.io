@@ -10,7 +10,7 @@ icon: reply-all
     {% assign sorts = site.imports | where: 'type', "sort-" %}
     {% for sort in sorts %}
     <li>
-      <h2><a href="{{ sort.url }}">{{ sort.name }}</a></h2>
+      <h2>{{ sort.name }}</h2>
       <p>{{ sort.content | markdownify }}</p>
     </li>
   {% endfor %}
