@@ -15,7 +15,12 @@ type: sort-
       <ul>
         {% assign filtered_posts = site.posts | where: 'author', page.name %}
         {% for post in filtered_posts %}
-          <li><a href="{{post.url}}">{{post.title}}</a></li>
+          <li>
+              <time>
+                  {{ post.date | date:"%F" }} {{ post.date | date: "%a" }}.
+              </time>
+              <a href="{{post.url}}">{{post.title}}</a>
+          </li>
         {% endfor %}
       </ul>
 </div>

@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Note
-permalink: /note/
+title: Code
+permalink: /code/
 icon: code
 type: page
 ---

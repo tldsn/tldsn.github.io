@@ -14,7 +14,7 @@ layout: default
             <div class="label-card">
                 <!-- {% if page.author %}<i class="fa fa-user"></i>{{ page.author }}
                 {% endif %} -->
-                {% assign author = site.authors | where: 'short_name', page.author | first %}
+                {% assign author = site.authors | where: 'name', page.author | first %}
                 {% if author %}
                   <a href="{{ author.url }}"><i class="fa fa-user"></i>{{ page.author }}</a>
                 {% endif %}

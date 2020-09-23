@@ -1,8 +1,8 @@
 ---
 layout: post
 title: git error
-categories: Exception
-tags: Exception git
+categories: 异常
+tags: 异常 git
 author: tldsn
 ---
 
