@@ -15,9 +15,9 @@
     <!-- <script src="https://kit.fontawesome.com/bff30092be.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1096581_7o3r6v7yzsh.css">
     <link rel="stylesheet" href="/assets/css/main.css ">
-    <link rel="canonical" href="https://tldsn.github.io/about/">
-    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="https://tldsn.github.io/feed.xml ">
-    <link type="application/atom+xml" rel="alternate" href="https://tldsn.github.io/feed.xml" title="TLDSN" />
+    <link rel="canonical" href="http://localhost:4000/about/">
+    <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="TLDSN" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>About | TLDSN</title>
 <meta name="generator" content="Jekyll v4.0.0" />
@@ -26,11 +26,11 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="^^" />
 <meta property="og:description" content="^^" />
-<link rel="canonical" href="https://tldsn.github.io/about/" />
-<meta property="og:url" content="https://tldsn.github.io/about/" />
+<link rel="canonical" href="http://localhost:4000/about/" />
+<meta property="og:url" content="http://localhost:4000/about/" />
 <meta property="og:site_name" content="TLDSN" />
 <script type="application/ld+json">
-{"url":"https://tldsn.github.io/about/","author":{"@type":"Person","name":"tldsn"},"description":"^^","name":"TLDSN","headline":"About","@type":"WebSite","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/about/","author":{"@type":"Person","name":"tldsn"},"description":"^^","name":"TLDSN","headline":"About","@type":"WebSite","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -114,13 +114,33 @@
                     
                     <li>
                         
+                        <a href="/code/">
+                        
+                            <i class="fa fa-code"></i>Code
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/evernote/">
+                        
+                            <i class="fa fa-moon-o"></i>Evernote
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
                         <a href="/collection/">
                         
                             <i class="fa fa-bookmark"></i>Collections
                         </a>
                     </li>
-                    
-                
                     
                 
                     
@@ -136,39 +156,9 @@
                     
                     <li>
                         
-                        <a href="/note/">
-                        
-                            <i class="fa fa-code"></i>Note
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
                         <a class="active" href="/about/">
                             
                             <i class="fa fa-heart"></i>About
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/authors/">
-                        
-                            <i class="fa fa-id-card-o"></i>authors
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/evernote/">
-                        
-                            <i class="fa fa-reply-all"></i>evernote
                         </a>
                     </li>
                     
@@ -244,8 +234,8 @@
      */
 
     var disqus_config = function() {
-        this.page.url = 'https://tldsn.github.io/about/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://tldsn.github.io/about/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://localhost:4000/about/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/about/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -326,33 +316,6 @@
 
   <div id="music"></div>
 
-  <!-- 加载 cplayer 脚本 -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
-  <script>
-    let player = new cplayer({
-      element: document.getElementById('music'),
-      playlist: [
-      ]
-    })
-
-    cplayer.prototype.add163 = function add163(id) {
-      if (!id) throw new Error("Unable Property.");
-      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
-        let obj = {
-          name: data.info.songs[0].name,
-          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
-          poster: data.pic.url,
-          lyric: data.lyric.lyric,
-          sublyric: data.lyric.tlyric,
-          src: data.url.url,
-          album: data.info.songs[0].al.name
-        }
-        this.add(obj);
-        return obj;
-      }.bind(this))
-    }
-    player.add163(263386850)
-  </script> -->
   <script src=" /assets/js/main.js " charset="utf-8"></script>
   <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
   <script type="text/javascript">
