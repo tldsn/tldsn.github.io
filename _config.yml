@@ -67,7 +67,7 @@ collections_dir: my_collection
 
 collections:
   authors:
-    # output: true
+    output: true
   imports:
     output: true
       
