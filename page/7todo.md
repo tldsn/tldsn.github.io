@@ -13,12 +13,11 @@ type: page
 ## 清单
 
 * [x] 完善网站
-* [ ] +music
 
 ## 完成
 
 <!-- <iframe src="https://www.yinxiang.com/everhub/note/257ecedf-b543-4b1c-8680-65b721ba712c">
 </iframe> -->
 
-## Comments
-{% include comments.html %}
+<!-- ## Comments
+{% include comments.html %} -->

@@ -12,5 +12,5 @@ type: page
 <mark>这里搬运Gist</mark>
 ## 123
 
-## Comments
-{% include comments.html %}
+<!-- ## Comments
+{% include comments.html %} -->
