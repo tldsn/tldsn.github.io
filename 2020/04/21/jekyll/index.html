@@ -191,14 +191,10 @@
     <div class="left">
         <h1>jekyll初识</h1>
         <div class="label">
-
             <div class="label-card">
                 <i class="fa fa-calendar"></i>2020-04-21
             </div>
-
             <div class="label-card">
-                <!-- <i class="fa fa-user"></i>tldsn
-                 -->
                 
                 
                   <a href="/authors/tldsn/"><i class="fa fa-user"></i>tldsn</a>
@@ -243,7 +239,6 @@
 </span>
 
             </div>
-
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
@@ -416,37 +411,17 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
 <code class="highlighter-rouge">include_relative</code>引入其他文件</p>
     </blockquote>
   </li>
-  <li>highlight</li>
+  <li>
+    <p>highlight　　可以加入行号</p>
+  </li>
+  <li>
+    <p>link　　链接</p>
+  </li>
+  <li>
+    <p>post_url　　博文链接</p>
+  </li>
+  <li>gist　　引入Github Gist，需要引入jekyll-gist gem</li>
 </ul>
-
-<blockquote>
-  <p>可以加入行号</p>
-</blockquote>
-
-<ul>
-  <li>link</li>
-</ul>
-
-<blockquote>
-  <p>链接</p>
-</blockquote>
-
-<ul>
-  <li>post_url</li>
-</ul>
-
-<blockquote>
-  <p>博文链接</p>
-</blockquote>
-
-<ul>
-  <li>gist</li>
-</ul>
-
-<blockquote>
-  <p>引入Github Gist
-需要引入jekyll-gist gem</p>
-</blockquote>
 
 <h2 id="配置">配置</h2>
 
@@ -824,6 +799,34 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
 
   <div id="music"></div>
 
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+
   <script src=" /assets/js/main.js " charset="utf-8"></script>
   <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
   <script type="text/javascript">
@@ -833,7 +836,6 @@ Jekyll 要求所有被引用的文件放在根目录的 <code class="highlighter
       offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
     });
   </script>
-  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
 </body>
 
 </html>

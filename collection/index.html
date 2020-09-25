@@ -207,7 +207,6 @@
   <li><a href="#vscode配置" id="markdown-toc-vscode配置">VScode配置</a></li>
   <li><a href="#软件" id="markdown-toc-软件">软件</a></li>
   <li><a href="#其他" id="markdown-toc-其他">☆其他</a></li>
-  <li><a href="#comments" id="markdown-toc-comments">Comments</a></li>
 </ul>
 
 <p><mark>这里收集常用的网站</mark></p>
@@ -349,10 +348,11 @@
   <li><a href="https://woyaozufang.live/#/">租房</a></li>
   <li><a href="https://www.tianxun.com/">国内机票</a></li>
   <li><a href="https://www.ted.com/talks">TED</a></li>
-  <li><a href="https://www.cctv.com/index.shtml">央视网</a></li>
 </ul>
 
-<h2 id="comments">Comments</h2>
+<!-- ## Comments
+
+
 
 <div id="disqus_thread"></div>
 <script>
@@ -376,9 +376,9 @@
         (d.head || d.body).appendChild(s);
     })();
 </script>
-
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
+ -->
 
     </div>
     <button class="anchor"><i class="fa fa-anchor"></i></button>
@@ -444,6 +444,34 @@
 
   <div id="music"></div>
 
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+
   <script src=" /assets/js/main.js " charset="utf-8"></script>
   <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
   <script type="text/javascript">
@@ -453,7 +481,6 @@
       offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
     });
   </script>
-  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
 </body>
 
 </html>

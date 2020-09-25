@@ -5,8 +5,8 @@
     <description>^^</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Sep 2020 16:39:16 +0800</pubDate>
-    <lastBuildDate>Wed, 23 Sep 2020 16:39:16 +0800</lastBuildDate>
+    <pubDate>Fri, 25 Sep 2020 13:41:35 +0800</pubDate>
+    <lastBuildDate>Fri, 25 Sep 2020 13:41:35 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -22,15 +22,15 @@
 &lt;h3 id=&quot;base&quot;&gt;base&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[tag] n&lt;/code&gt;　　在标签下匹配&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;n&quot;&lt;/code&gt;　　精确匹配&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;title: n&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;body: n&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;user:me n&lt;/code&gt;　　搜索自己&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;　　通配符&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;空格&lt;/code&gt;　　and&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;or&lt;/code&gt;　　或&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-n　&lt;/code&gt;　排除&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-n&lt;/code&gt;　排除&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;title: n&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;body: n&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[tag]&lt;/code&gt;　　在标签下匹配&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;user:me&lt;/code&gt;　　搜索自己&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;评分&quot;&gt;评分&lt;/h3&gt;
@@ -46,9 +46,9 @@
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lastactive:&lt;/code&gt;　　 指定时间段内处于活跃状态的帖子&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建的搜索帖子。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;mark&gt;
+created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建的搜索帖子。
+&lt;/mark&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;状态&quot;&gt;状态&lt;/h3&gt;
 

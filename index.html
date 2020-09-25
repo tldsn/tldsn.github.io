@@ -261,15 +261,15 @@
 <h3 id="base">base</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">[tag] n</code>　　在标签下匹配</li>
   <li><code class="highlighter-rouge">"n"</code>　　精确匹配</li>
-  <li><code class="highlighter-rouge">title: n</code></li>
-  <li><code class="highlighter-rouge">body: n</code></li>
-  <li><code class="highlighter-rouge">user:me n</code>　　搜索自己</li>
   <li><code class="highlighter-rouge">*</code>　　通配符</li>
   <li><code class="highlighter-rouge">空格</code>　　and</li>
   <li><code class="highlighter-rouge">or</code>　　或</li>
-  <li><code class="highlighter-rouge">-n　</code>　排除</li>
+  <li><code class="highlighter-rouge">-n</code>　排除</li>
+  <li><code class="highlighter-rouge">title: n</code></li>
+  <li><code class="highlighter-rouge">body: n</code></li>
+  <li><code class="highlighter-rouge">[tag]</code>　　在标签下匹配</li>
+  <li><code class="highlighter-rouge">user:me</code>　　搜索自己</li>
 </ul>
 
 <h3 id="评分">评分</h3>
@@ -285,9 +285,9 @@
   <li><code class="highlighter-rouge">lastactive:</code>　　 指定时间段内处于活跃状态的帖子</li>
 </ul>
 
-<blockquote>
-  <p>created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建的搜索帖子。</p>
-</blockquote>
+<p><mark>
+created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建的搜索帖子。
+</mark></p>
 
 <h3 id="状态">状态</h3>
 
@@ -1065,6 +1065,34 @@
 
   <div id="music"></div>
 
+  <!-- 加载 cplayer 脚本 -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/cplayer/dist/cplayer.min.js"></script>
+  <script>
+    let player = new cplayer({
+      element: document.getElementById('music'),
+      playlist: [
+      ]
+    })
+
+    cplayer.prototype.add163 = function add163(id) {
+      if (!id) throw new Error("Unable Property.");
+      return fetch("https://music.huaji8.top/?id=" + id).then(function (res) { return res.json() }).then(function (data) {
+        let obj = {
+          name: data.info.songs[0].name,
+          artist: data.info.songs[0].ar.map(function (ar) { return ar.name }).join(','),
+          poster: data.pic.url,
+          lyric: data.lyric.lyric,
+          sublyric: data.lyric.tlyric,
+          src: data.url.url,
+          album: data.info.songs[0].al.name
+        }
+        this.add(obj);
+        return obj;
+      }.bind(this))
+    }
+    player.add163(263386850)
+  </script> -->
+
   <script src=" /assets/js/main.js " charset="utf-8"></script>
   <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
   <script type="text/javascript">
@@ -1074,7 +1102,6 @@
       offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
     });
   </script>
-  <!-- <script src=" /assets/js/scroll.min.js " charset="utf-8"></script> -->
 </body>
 
 </html>
