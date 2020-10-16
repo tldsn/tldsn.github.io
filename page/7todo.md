@@ -3,7 +3,7 @@ layout: todo
 title: Todo
 permalink: /todo/
 icon: check-square-o
-type: page
+type:
 ---
 
 * content

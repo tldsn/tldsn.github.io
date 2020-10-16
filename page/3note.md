@@ -3,7 +3,7 @@ layout: page
 title: Code
 permalink: /code/
 icon: code
-type: page
+type:
 ---
 
 * content
