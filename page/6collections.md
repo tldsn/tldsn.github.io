@@ -9,11 +9,21 @@ type: page
 * content
 {:toc}
 
-<mark>这里收集常用的网站</mark>
 
 ## ☆博客
 
-  * [董的博客](https://poph163.com/category/goland/)  
+  * [邪王真眼的夏](http://xiajian.github.io/2014/10/22/bundle)
+  * [STORM-SPIRIT](http://wulfric.me/2014/09/jekyll-plugs/)
+  * [Hom's Blog](https://gohom.win/2016/02/04/update-github-rouge/)
+  * [szhshp 的第三边境研究所](https://szhshp.org/)
+  * [苏易北](https://abelsu7.top/)
+  * [休止千鹤](https://www.restkhz.com/)
+  * [弹霄博科](https://www.txisfine.cn/)
+  * [胡椒的小站](https://moxo.io/) 
+  * [董的博客](https://poph163.com/category/goland/) 
+  * [谢益辉](https://yihui.org/cn/)
+  * [Little Child](http://www.albertbamboo.cn/markdown/2018/01/20/kramdown.html)
+  * [XStar's Wiki](http://xstarcd.github.io/wiki/index.html)
 
 ## ☆搜索
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Code
+title: Note
 permalink: /code/
 icon: code
 type:

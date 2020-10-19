@@ -15,8 +15,8 @@ type: page
 
 ## 关于本站
 
+<mark>耐心是一切聪明才智的基础</mark>  
 <mark>实践是检验真理的唯一标准</mark>  
-<mark>耐心是一切聪明才智的基础</mark>
 
 * 2020-04-29　　写了一个爬虫，将印象笔记通过印象识堂导入到博客里
 * 2020-04-12　　first commit
@@ -34,5 +34,5 @@ type: page
 <!-- ## 友情链接 -->
 
 
-<!-- ## Comments
-{% include comments.html %} -->
+## Comments
+{% include comments.html %}
