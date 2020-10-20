@@ -60,6 +60,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-paginate
+  - jemoji
   
 paginate: 5
 

@@ -113,6 +113,7 @@ type: page
   * [租房](https://woyaozufang.live/#/)  
   * [国内机票](https://www.tianxun.com/)  
   * [TED](https://www.ted.com/talks)  
-
+  * [emoji](https://gist.github.com/tldsn/9fedce660646a63024162f42ddaa9c1c)
+  
 <!-- ## Comments
 {% include comments.html %} -->

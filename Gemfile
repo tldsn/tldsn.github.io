@@ -26,4 +26,4 @@ gem "sass", "~> 3.7"
 
 gem 'tzinfo', '~> 1.2'
 
-
+gem 'jemoji'
