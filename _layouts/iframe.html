@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+<div class="page clearfix" post>
+    <div class="left">
+        <h1>{{page.title}}</h1>
+        <hr>
+        <iframe width="100%" height="100%" style="border:0;" src="" frameborder="0" id="elifeView">
+        </iframe>
+        {{content}}
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+
+<script>
+  /**
+   * target _blank
+   */
+  (function() {
+    var url = location.search; //获取url中"?"符后的字串
+         if (url.indexOf("?") != -1) {
+            var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+            strs = str.split("="); //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+            link = strs[1]
+            // alert(strs[1]); //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
+            iframe = document.getElementById("elifeView")
+            iframe.src = link
+            iframe.onload = function() {
+                this.contentWindow.onbeforeunload = function() {
+                    iframe.style.visibility = 'hidden';
+                    iframe.setAttribute('height', 'auto');
+                };
+                this.setAttribute('height', this.contentWindow.document.body.scrollHeight);
+                this.style.visibility = 'visible';
+            };
+         }
+  }());
+  </script>
+
+<script src="{{ "/assets/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>

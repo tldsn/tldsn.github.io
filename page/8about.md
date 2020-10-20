@@ -9,18 +9,33 @@ type: page
 * content
 {:toc}
 
-## 关于我
+### 关于我
 
-<mark>略</mark>
+time|do
+---|---
+2018~2021.3 | 点动创想（正式开始工作）
+2017~2018.3 | 启芯教育（找工作不顺利，在这里算是实习）
+2016~2017.8 | 北京吉云教育学习java
+2016.6 | 上海闸北大悦城云海肴工作三个月辞职
+2014~2016.3 | 郑州新东方烹饪学校毕业
+2013.10 | 北大青鸟辍学
+2011~2012.12 | 高中实验班辍学
+2008~2011 | 初中学霸
 
-## 关于本站
+<br/>
+<mark>★技术内容基本从网上收集整理，Evernote是一些生活小记，</mark>  
+<mark>★未来想骑自行车环中国，喜欢看电影，想要读很多书不过暂时有些缺乏耐心，</mark>  
+<mark>★喜欢坦诚、有个性的朋友，</mark>  
+<mark>★没有强烈的物欲，有整理癖，以后想要住在乡下或是市郊，</mark>  
+<mark>★实用主义和浪漫主义的结合体，知道如何令自己开心。</mark>  
 
-<mark>耐心是一切聪明才智的基础</mark>  
-<mark>实践是检验真理的唯一标准</mark>  
+### 关于本站
 
-* 2020-04-29　　写了一个爬虫，将印象笔记通过印象识堂导入到博客里
-* 2020-04-12　　first commit
-
+time|do
+---|---
+2020-10-20 | 印象笔记支持公开分享了，把一些生活笔记放到博客里
+2020-04-29 | 写了一个爬虫，将印象笔记通过印象识堂导入到博客里
+2020-04-12 | first commit
 
 ## 联系我
 
@@ -30,6 +45,8 @@ type: page
 
 * <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email={{site.email_username}}" style="text-decoration:none;">
 <img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+
+<img src="/assets/image/vx.png" class="vxpng">
 
 <!-- ## 友情链接 -->
 

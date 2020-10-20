@@ -86,3 +86,6 @@ collections:
 #       path: ""
 #     values:
 #       layout: "default"
+
+
+exclude: [spider, bat]
