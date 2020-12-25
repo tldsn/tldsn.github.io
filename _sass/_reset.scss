@@ -43,8 +43,9 @@ body::before {
 	right: 0;
 	bottom: 0;
 	left: -150px;
-	background: url(/assets/image/bg.jpg) center 0 no-repeat;
-	background-size: cover;
+	// background: url(/assets/image/bg.jpg) center 0 no-repeat;
+    background-size: cover;
+    background-color: #d0e6ff;
 	/* opacity: .2; */
 }
 
@@ -55,11 +56,11 @@ body::before {
 // }
 //背景色-------------------------------------------------------------------------------------
 .left {
-    background: #fff9e4 !important;
+    background: #f3f3df !important;
     border-top: 0.5em solid #1BC4F7;
 }
 .side {
-    background: #fff9e4 !important;
+    background: #f3f3df !important;
 }
 //标题-------------------------------------------------------------------------------------
 h1,
@@ -195,7 +196,7 @@ table {
 a {
     text-decoration: none;
     &:visited {
-        color: #1bcebdb5 !important;
+        color: #32b8b8 !important;
     }
 }
 button {

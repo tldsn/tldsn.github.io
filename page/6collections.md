@@ -10,21 +10,6 @@ type: page
 {:toc}
 
 
-## ☆博客
-
-  * [邪王真眼的夏](http://xiajian.github.io/2014/10/22/bundle)
-  * [STORM-SPIRIT](http://wulfric.me/2014/09/jekyll-plugs/)
-  * [Hom's Blog](https://gohom.win/2016/02/04/update-github-rouge/)
-  * [szhshp 的第三边境研究所](https://szhshp.org/)
-  * [苏易北](https://abelsu7.top/)
-  * [休止千鹤](https://www.restkhz.com/)
-  * [弹霄博科](https://www.txisfine.cn/)
-  * [胡椒的小站](https://moxo.io/) 
-  * [董的博客](https://poph163.com/category/goland/) 
-  * [谢益辉](https://yihui.org/cn/)
-  * [Little Child](http://www.albertbamboo.cn/markdown/2018/01/20/kramdown.html)
-  * [XStar's Wiki](http://xstarcd.github.io/wiki/index.html)
-
 ## ☆搜索
 
   * [MDN web docs](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)  
@@ -57,26 +42,37 @@ type: page
 
   * [go中的正则](https://www.cnblogs.com/golove/p/3269099.html)
 
-* #### 爬虫
-
-  * [Golang 网络爬虫框架gocolly/colly](https://www.cnblogs.com/majianguo/p/8146110.html)
-
 * #### 框架
 
   * [grpc实践](https://segmentfault.com/a/1190000008106582)
+  * [grpc 指南](https://jergoo.github.io/go-grpc-tutorial/#/)
+  * [Go Frame](https://goframe.org/index)
+
+* #### package
+  
+  * [xorm](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
 
 * #### 书
   
   * [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN#go)
   * [Go 语言中文开源图书、资料或文档](https://books.studygolang.com/)
   * [build-web-application-with-golang](build-web-application-with-golang)
+  * [Go语言圣经](https://books.studygolang.com/gopl-zh/)
+
+* #### 爬虫
+
+  * [Golang 网络爬虫框架gocolly/colly](https://www.cnblogs.com/majianguo/p/8146110.html)
+
+* #### 其他
+
+  * [github golang Trending](https://github.com/trending/go?since=monthly)
 
 
 ## 前端
 
   * [css](http://www.ruanyifeng.com/blog/2010/03/css_cookbook.html)  
 
-  * [scss](https://www.ruanyifeng.com/blog/2012/06/sass.html) 
+  * [sass](https://www.ruanyifeng.com/blog/2012/06/sass.html) 
   
   * [fontawesome](http://www.fontawesome.com.cn/)  
 
@@ -88,6 +84,10 @@ type: page
   * [github](https://help.github.com/cn/github/searching-for-information-on-github/searching-code)
 
   * [git-flow](https://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html)  
+  * [git子模块](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
+
+## linux
+  * [Homebrew](https://brew.sh/)
 
 ## jekyll
 
@@ -96,14 +96,30 @@ type: page
   * [liquid](https://liquid.bootcss.com/basics/types/)  
 
 
-## VScode配置
+## 配置
 
-  * [vscode关于go语言的settings.json文件内容](https://blog.csdn.net/GeMarK/article/details/90269561)
+  * [vscode关于go语言的settings.json文件内容](https://juejin.im/post/6844904122450182151)
 
 
 ## 软件
 
   * [AutoHotKey](https://wyagd001.github.io/zh-cn/docs/AutoHotkey.htm)  
+
+## ☆网站相关
+
+  * [Web中文字体应用指南](https://ruby-china.org/topics/14005)
+  * [十六进制颜色代码表](https://encycolorpedia.cn/fecdc1)
+  * [Jekyll写作效率提升篇](https://xu3352.github.io/blog/2017/08/06/jekyll-skills)
+  * [批处理教程™](https://www.yiibai.com/batch_script/)
+  * [Font Awesome Icons](https://fontawesome.com/v4.7.0/icons/)
+  * [12+ CSS Glitch Text Effect](https://csshint.com/css-glitch-text-effect/)
+  * [网易云音乐 NodeJS 版 API](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi)
+  * [Material-UI：当下流行的 React UI 框架](https://material-ui.com/zh/)
+  * [SM.MS图床](https://sm.ms/)
+  * [Google Analytics（分析）](https://analytics.google.com/analytics/web/#/report/visitors-geo/a163446273w228823629p215691923/)
+  * [网站概况 - 百度统计](https://tongji.baidu.com/web/10000184192/overview/index?siteId=14951554)
+  * [博客+音乐解决方案](https://szhshp.org/tech/2017/04/04/randommusic)
+  * [cPlayer](https://cplayer.js.org/)
 
 ## ☆其他
   
@@ -117,3 +133,18 @@ type: page
   
 <!-- ## Comments
 {% include comments.html %} -->
+
+## ☆beautiful blog
+
+  * [邪王真眼的夏](http://xiajian.github.io/2014/10/22/bundle)
+  * [STORM-SPIRIT](http://wulfric.me/2014/09/jekyll-plugs/)
+  * [Hom's Blog](https://gohom.win/2016/02/04/update-github-rouge/)
+  * [szhshp 的第三边境研究所](https://szhshp.org/)
+  * [苏易北](https://abelsu7.top/)
+  * [休止千鹤](https://www.restkhz.com/)
+  * [弹霄博科](https://www.txisfine.cn/)
+  * [胡椒的小站](https://moxo.io/) 
+  * [董的博客](https://poph163.com/category/goland/) 
+  * [谢益辉](https://yihui.org/cn/)
+  * [Little Child](http://www.albertbamboo.cn/markdown/2018/01/20/kramdown.html)
+  * [XStar's Wiki](http://xstarcd.github.io/wiki/index.html)
