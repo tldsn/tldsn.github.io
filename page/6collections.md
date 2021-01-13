@@ -23,14 +23,16 @@ type: page
 
   * [json格式化](http://www.bejson.com/)  
   * [菜鸟工具](https://c.runoob.com/)  
-  * [百度脑图](https://naotu.baidu.com/home)  
+  * [百度脑图](https://naotu.baidu.com/home) 
+  * [在线时间戳](https://www.sojson.com/unixtime.html) 
   * [在线html编辑器](http://kindeditor.net/demo.php)  
   * [在线WEBM视频转换器](https://convertio.co/zh/webm-converter/)  
 
 ## ☆入门网站
 
   * [w3cschool](https://www.w3cschool.cn/)  
-  * [菜鸟教程](https://www.runoob.com/design-pattern/design-pattern-tutorial.html)  
+  * [菜鸟教程](https://www.runoob.com/design-pattern/design-pattern-tutorial.html)
+  * [机器学习](https://www.tensorflow.org/)  
 
 ## ☆go
 
@@ -120,16 +122,6 @@ type: page
   * [网站概况 - 百度统计](https://tongji.baidu.com/web/10000184192/overview/index?siteId=14951554)
   * [博客+音乐解决方案](https://szhshp.org/tech/2017/04/04/randommusic)
   * [cPlayer](https://cplayer.js.org/)
-
-## ☆其他
-  
-  * [电子书](http://cn.epubee.com/books/)  
-  * [漫画](https://volmoe.com/)
-  * [电影](http://magnet.chongbuluo.com/)  
-  * [租房](https://woyaozufang.live/#/)  
-  * [国内机票](https://www.tianxun.com/)  
-  * [TED](https://www.ted.com/talks)  
-  * [emoji](https://gist.github.com/tldsn/9fedce660646a63024162f42ddaa9c1c)
   
 <!-- ## Comments
 {% include comments.html %} -->
@@ -148,3 +140,34 @@ type: page
   * [谢益辉](https://yihui.org/cn/)
   * [Little Child](http://www.albertbamboo.cn/markdown/2018/01/20/kramdown.html)
   * [XStar's Wiki](http://xstarcd.github.io/wiki/index.html)
+
+
+## ☆其他
+  
+  * [电子书](http://cn.epubee.com/books/)  
+  * [漫画](https://volmoe.com/)
+  * [电影](http://magnet.chongbuluo.com/)
+  * [伊万的电影世界](https://www.10000movie.com/)  
+  * [租房](https://woyaozufang.live/#/)  
+  * [国内机票](https://www.tianxun.com/)  
+  * [TED](https://www.ted.com/talks)  
+  * [emoji](https://gist.github.com/tldsn/9fedce660646a63024162f42ddaa9c1c)
+  * [快递比价](https://m.kuaidi100.com/price/)
+
+
+## ☆投资
+
+  * [天天基金](http://fund.eastmoney.com/ztjj/#!c/0/curr/zf-%E7%83%AD%E9%97%A8%E4%B8%BB%E9%A2%98/syl/SYL_W/dt/syl/zjlr/Cinflow_W)
+  * [个人贷款计算器](https://www.cmbchina.com/CmbWebPubInfo/Cal_Loan_Per.aspx?chnl=dkjsq)
+  * [集思录](https://www.jisilu.cn/question/15659)
+  * [晨星网](http://cn.morningstar.com/main/default.aspx)
+  * [解方程](https://zs.symbolab.com/solver/system-of-equations-calculator)
+  * [计算器](https://www.desmos.com/scientific?lang=zh-CN)
+  * [红杉资本](https://www.sequoiacap.com/china/companies/)
+  * [高瓴资本](https://www.hillhousecap.com/zh-hans/category/updates-zh-hans/)
+  * [聪明投资者](https://www.cmtzz.cn/top-managers)
+  * [新京报](http://www.bjnews.com.cn/financial)
+  * [36氪](https://36kr.com/)
+  * [雪球](https://xueqiu.com/)
+  * [中国结算](https://invquery.chinaclear.cn/home.html#/uniqueCode)
+  * [格隆汇](https://www.gelonghui.com/)
