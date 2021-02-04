@@ -11,11 +11,7 @@ type: page
 
 ### 关于我
 
-<mark>★技术内容基本从网上收集整理，Evernote是一些生活小记，</mark>  
-<mark>★未来想骑自行车环中国，喜欢看电影，想要读很多书不过暂时有些缺乏耐心，</mark>  
-<mark>★喜欢独立思考的人，</mark>  
-<mark>★没有强烈的物欲，有整理癖，以后想要住在乡下或是市郊，</mark>  
-<mark>★实用主义和浪漫主义的结合体，知道如何令自己开心。:wink: </mark>  
+<mark>★技术内容基本从网上收集整理，Evernote是一些生活小记 :wink:</mark>  
 
 ### 关于本站
 
@@ -25,7 +21,7 @@ time|do
 2020-04-29 | 写了一个爬虫，将印象笔记通过印象识堂导入到博客里
 2020-04-12 | first commit
 
-## 联系我
+### 联系我
 
 * [Github](https://github.com/{{site.github_username}})
 * [Zhihu](https://www.zhihu.com/people/{{site.zhihu_username}})
