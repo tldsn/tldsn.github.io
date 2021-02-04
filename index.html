@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="/assets/css/main.css ">
     <link rel="canonical" href="http://localhost:4000/">
     <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet"> 
     <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="TLDSN" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>TLDSN | ^^</title>
@@ -174,7 +176,7 @@
 
   <div class="page clearfix" index>
     <div class="left">
-        <h1>Welcome to TLDSN's Blog!</h1>
+        <h1 class="pageTitle">Welcome t<img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20"> TLDSN's Blog!</h1>
         <small></small>
         <hr>
         <ul>
@@ -208,7 +210,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#搜索技巧" title="Category: 搜索技巧" rel="category">搜索技巧</a>
+        <a href="/category/#%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7" title="Category: 搜索技巧" rel="category">搜索技巧</a>
     
   
 
@@ -225,9 +227,9 @@
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#stackoverflow" title="Tag: stackoverflow" rel="tag">stackoverflow</a>&nbsp;
+        <a href="/tag/#stackoverflow" title="Tag: stackoverflow" rel="tag">stackoverflow</a> 
     
-        <a href="/tag/#搜索技巧" title="Tag: 搜索技巧" rel="tag">搜索技巧</a>
+        <a href="/tag/#%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7" title="Tag: 搜索技巧" rel="tag">搜索技巧</a>
     
   
 
@@ -238,37 +240,47 @@
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
   <li><a href="#base" id="markdown-toc-base">base</a></li>
-  <li><a href="#评分" id="markdown-toc-评分">评分</a></li>
-  <li><a href="#时间" id="markdown-toc-时间">时间</a></li>
-  <li><a href="#状态" id="markdown-toc-状态">状态</a></li>
-  <li><a href="#参考" id="markdown-toc-参考">参考</a></li>
+  <li><a href="#%E8%AF%84%E5%88%86" id="markdown-toc-评分">评分</a></li>
+  <li><a href="#%E6%97%B6%E9%97%B4" id="markdown-toc-时间">时间</a></li>
+  <li><a href="#%E7%8A%B6%E6%80%81" id="markdown-toc-状态">状态</a></li>
+  <li><a href="#%E5%8F%82%E8%80%83" id="markdown-toc-参考">参考</a></li>
 </ul>
 
 <h3 id="base">base</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">"n"</code>　　精确匹配</li>
-  <li><code class="highlighter-rouge">*</code>　　通配符</li>
-  <li><code class="highlighter-rouge">空格</code>　　and</li>
-  <li><code class="highlighter-rouge">or</code>　　或</li>
-  <li><code class="highlighter-rouge">-n</code>　排除</li>
+  <li>
+<code class="highlighter-rouge">"n"</code>　　精确匹配</li>
+  <li>
+<code class="highlighter-rouge">*</code>　　通配符</li>
+  <li>
+<code class="highlighter-rouge">空格</code>　　and</li>
+  <li>
+<code class="highlighter-rouge">or</code>　　或</li>
+  <li>
+<code class="highlighter-rouge">-n</code>　排除</li>
   <li><code class="highlighter-rouge">title: n</code></li>
   <li><code class="highlighter-rouge">body: n</code></li>
-  <li><code class="highlighter-rouge">[tag]</code>　　在标签下匹配</li>
-  <li><code class="highlighter-rouge">user:me</code>　　搜索自己</li>
+  <li>
+<code class="highlighter-rouge">[tag]</code>　　在标签下匹配</li>
+  <li>
+<code class="highlighter-rouge">user:me</code>　　搜索自己</li>
 </ul>
 
 <h3 id="评分">评分</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">score:-1或score:-1..</code>　　得分均等于或大于-1的帖子</li>
+  <li>
+<code class="highlighter-rouge">score:-1或score:-1..</code>　　得分均等于或大于-1的帖子</li>
 </ul>
 
 <h3 id="时间">时间</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">created:</code>　　指定创建帖子的时间</li>
-  <li><code class="highlighter-rouge">lastactive:</code>　　 指定时间段内处于活跃状态的帖子</li>
+  <li>
+<code class="highlighter-rouge">created:</code>　　指定创建帖子的时间</li>
+  <li>
+<code class="highlighter-rouge">lastactive:</code>　　 指定时间段内处于活跃状态的帖子</li>
 </ul>
 
 <p><mark>
@@ -278,8 +290,10 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
 <h3 id="状态">状态</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">intags:mine</code>　　仅返回出现在您标记为收藏的标签中的帖子。</li>
-  <li><code class="highlighter-rouge">isaccepted:yes / true / 1</code>　　仅返回已标记为“已接受”的答案；no / false / 0仅返回未标记为接受的答案。</li>
+  <li>
+<code class="highlighter-rouge">intags:mine</code>　　仅返回出现在您标记为收藏的标签中的帖子。</li>
+  <li>
+<code class="highlighter-rouge">isaccepted:yes / true / 1</code>　　仅返回已标记为“已接受”的答案；no / false / 0仅返回未标记为接受的答案。</li>
 </ul>
 
 <h3 id="参考">参考</h3>
@@ -290,7 +304,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2020/04/21/stackoverflow%E6%90%9C%E7%B4%A2/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a href="/2020/04/21/stackoverflow%E6%90%9C%E7%B4%A2/"><i class="fa fa-newspaper-o"></i>Read All <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> </a>
                 </div>
                 <hr>
               </li>
@@ -324,7 +338,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
+        <a href="/category/#%E5%B7%A5%E5%85%B7" title="Category: 工具" rel="category">工具</a>
     
   
 
@@ -341,9 +355,9 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#流程图" title="Tag: 流程图" rel="tag">流程图</a>&nbsp;
+        <a href="/tag/#%E6%B5%81%E7%A8%8B%E5%9B%BE" title="Tag: 流程图" rel="tag">流程图</a> 
     
-        <a href="/tag/#百度脑图" title="Tag: 百度脑图" rel="tag">百度脑图</a>
+        <a href="/tag/#%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE" title="Tag: 百度脑图" rel="tag">百度脑图</a>
     
   
 
@@ -353,7 +367,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#百度脑图" id="markdown-toc-百度脑图">百度脑图</a></li>
+  <li><a href="#%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE" id="markdown-toc-百度脑图">百度脑图</a></li>
 </ul>
 
 <h3 id="百度脑图">百度脑图</h3>
@@ -389,7 +403,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a href="/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/"><i class="fa fa-newspaper-o"></i>Read All <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> </a>
                 </div>
                 <hr>
               </li>
@@ -423,7 +437,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
+        <a href="/category/#%E5%B7%A5%E5%85%B7" title="Category: 工具" rel="category">工具</a>
     
   
 
@@ -440,9 +454,9 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#工具" title="Tag: 工具" rel="tag">工具</a>&nbsp;
+        <a href="/tag/#%E5%B7%A5%E5%85%B7" title="Tag: 工具" rel="tag">工具</a> 
     
-        <a href="/tag/#效率" title="Tag: 效率" rel="tag">效率</a>
+        <a href="/tag/#%E6%95%88%E7%8E%87" title="Tag: 效率" rel="tag">效率</a>
     
   
 
@@ -453,7 +467,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
   <li><a href="#githup" id="markdown-toc-githup">githup</a></li>
-  <li><a href="#火狐扩展" id="markdown-toc-火狐扩展">火狐扩展</a></li>
+  <li><a href="#%E7%81%AB%E7%8B%90%E6%89%A9%E5%B1%95" id="markdown-toc-火狐扩展">火狐扩展</a></li>
   <li><a href="#tampermonkey" id="markdown-toc-tampermonkey">tampermonkey</a></li>
 </ul>
 
@@ -484,7 +498,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a href="/2020/04/21/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/"><i class="fa fa-newspaper-o"></i>Read All <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> </a>
                 </div>
                 <hr>
               </li>
@@ -518,7 +532,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
+        <a href="/category/#%E5%B7%A5%E5%85%B7" title="Category: 工具" rel="category">工具</a>
     
   
 
@@ -535,9 +549,9 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#git" title="Tag: git" rel="tag">git</a>&nbsp;
+        <a href="/tag/#git" title="Tag: git" rel="tag">git</a> 
     
-        <a href="/tag/#命令" title="Tag: 命令" rel="tag">命令</a>
+        <a href="/tag/#%E5%91%BD%E4%BB%A4" title="Tag: 命令" rel="tag">命令</a>
     
   
 
@@ -547,7 +561,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#概念" id="markdown-toc-概念">概念</a></li>
+  <li><a href="#%E6%A6%82%E5%BF%B5" id="markdown-toc-概念">概念</a></li>
   <li><a href="#base" id="markdown-toc-base">base</a></li>
 </ul>
 
@@ -587,7 +601,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2020/04/21/git/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a href="/2020/04/21/git/"><i class="fa fa-newspaper-o"></i>Read All <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> </a>
                 </div>
                 <hr>
               </li>
@@ -621,7 +635,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>
+        <a href="/category/#%E5%B7%A5%E5%85%B7" title="Category: 工具" rel="category">工具</a>
     
   
 
@@ -638,9 +652,9 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
   <i class="fa fa-tags"></i>
   
     
-        <a href="/tag/#anki" title="Tag: anki" rel="tag">anki</a>&nbsp;
+        <a href="/tag/#anki" title="Tag: anki" rel="tag">anki</a> 
     
-        <a href="/tag/#搜索技巧" title="Tag: 搜索技巧" rel="tag">搜索技巧</a>
+        <a href="/tag/#%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7" title="Tag: 搜索技巧" rel="tag">搜索技巧</a>
     
   
 
@@ -650,16 +664,17 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                 </div>
                 <div class="excerpt">
                     <ul id="markdown-toc" role="doc-toc">
-  <li><a href="#暂停和搁置" id="markdown-toc-暂停和搁置">暂停和搁置</a></li>
-  <li><a href="#卡片性质" id="markdown-toc-卡片性质">卡片性质</a></li>
+  <li><a href="#%E6%9A%82%E5%81%9C%E5%92%8C%E6%90%81%E7%BD%AE" id="markdown-toc-暂停和搁置">暂停和搁置</a></li>
+  <li><a href="#%E5%8D%A1%E7%89%87%E6%80%A7%E8%B4%A8" id="markdown-toc-卡片性质">卡片性质</a></li>
 </ul>
 
 <h2 id="暂停和搁置">暂停和搁置</h2>
 
 <ul>
   <li>is:suspended　　暂停卡</li>
-  <li>is:buried　　搁置卡<br />
-<mark>可以略过的简单卡，设置暂停</mark></li>
+  <li>is:buried　　搁置卡<br>
+<mark>可以略过的简单卡，设置暂停</mark>
+</li>
 </ul>
 
 <h2 id="卡片性质">卡片性质</h2>
@@ -683,7 +698,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
 
                 </div>
                 <div class="read-all">
-                    <a  href="/2020/04/21/anki/"><i class="fa fa-newspaper-o"></i>Read All</a>
+                    <a href="/2020/04/21/anki/"><i class="fa fa-newspaper-o"></i>Read All <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20"> </a>
                 </div>
                 <hr>
               </li>
@@ -747,7 +762,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                 <ul class="content-ul" cate>
                     
                     <li>
-                        <a href="/category/#搜索技巧" class="categories-list-item" cate="搜索技巧">
+                        <a href="/category/#%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7" class="categories-list-item" cate="搜索技巧">
                             <span class="name">
                                 搜索技巧
                             </span>
@@ -756,7 +771,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                     </li>
                     
                     <li>
-                        <a href="/category/#语言" class="categories-list-item" cate="语言">
+                        <a href="/category/#%E8%AF%AD%E8%A8%80" class="categories-list-item" cate="语言">
                             <span class="name">
                                 语言
                             </span>
@@ -765,7 +780,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                     </li>
                     
                     <li>
-                        <a href="/category/#环境" class="categories-list-item" cate="环境">
+                        <a href="/category/#%E7%8E%AF%E5%A2%83" class="categories-list-item" cate="环境">
                             <span class="name">
                                 环境
                             </span>
@@ -783,7 +798,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                     </li>
                     
                     <li>
-                        <a href="/category/#问题" class="categories-list-item" cate="问题">
+                        <a href="/category/#%E9%97%AE%E9%A2%98" class="categories-list-item" cate="问题">
                             <span class="name">
                                 问题
                             </span>
@@ -792,7 +807,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                     </li>
                     
                     <li>
-                        <a href="/category/#异常" class="categories-list-item" cate="异常">
+                        <a href="/category/#%E5%BC%82%E5%B8%B8" class="categories-list-item" cate="异常">
                             <span class="name">
                                 异常
                             </span>
@@ -801,7 +816,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                     </li>
                     
                     <li>
-                        <a href="/category/#其他" class="categories-list-item" cate="其他">
+                        <a href="/category/#%E5%85%B6%E4%BB%96" class="categories-list-item" cate="其他">
                             <span class="name">
                                 其他
                             </span>
@@ -810,7 +825,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                     </li>
                     
                     <li>
-                        <a href="/category/#工具" class="categories-list-item" cate="工具">
+                        <a href="/category/#%E5%B7%A5%E5%85%B7" class="categories-list-item" cate="工具">
                             <span class="name">
                                 工具
                             </span>
@@ -847,7 +862,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                       
                       
                       
-                      <a href="/tag/#搜索技巧" style="font-size: 18pt; color: #000;">搜索技巧</a>
+                      <a href="/tag/#%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7" style="font-size: 18pt; color: #000;">搜索技巧</a>
                     
                       
                       
@@ -882,7 +897,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                       
                       
                       
-                      <a href="/tag/#环境" style="font-size: 13.5pt; color: #444;">环境</a>
+                      <a href="/tag/#%E7%8E%AF%E5%A2%83" style="font-size: 13.5pt; color: #444;">环境</a>
                     
                       
                       
@@ -903,7 +918,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                       
                       
                       
-                      <a href="/tag/#命令" style="font-size: 13.5pt; color: #444;">命令</a>
+                      <a href="/tag/#%E5%91%BD%E4%BB%A4" style="font-size: 13.5pt; color: #444;">命令</a>
                     
                       
                       
@@ -917,7 +932,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                       
                       
                       
-                      <a href="/tag/#异常" style="font-size: 9pt; color: #999;">异常</a>
+                      <a href="/tag/#%E5%BC%82%E5%B8%B8" style="font-size: 9pt; color: #999;">异常</a>
                     
                       
                       
@@ -931,7 +946,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                       
                       
                       
-                      <a href="/tag/#代理" style="font-size: 9pt; color: #999;">代理</a>
+                      <a href="/tag/#%E4%BB%A3%E7%90%86" style="font-size: 9pt; color: #999;">代理</a>
                     
                       
                       
@@ -945,7 +960,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                       
                       
                       
-                      <a href="/tag/#装系统" style="font-size: 9pt; color: #999;">装系统</a>
+                      <a href="/tag/#%E8%A3%85%E7%B3%BB%E7%BB%9F" style="font-size: 9pt; color: #999;">装系统</a>
                     
                       
                       
@@ -959,28 +974,28 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
                       
                       
                       
-                      <a href="/tag/#工具" style="font-size: 9pt; color: #999;">工具</a>
+                      <a href="/tag/#%E5%B7%A5%E5%85%B7" style="font-size: 9pt; color: #999;">工具</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#效率" style="font-size: 9pt; color: #999;">效率</a>
+                      <a href="/tag/#%E6%95%88%E7%8E%87" style="font-size: 9pt; color: #999;">效率</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#流程图" style="font-size: 9pt; color: #999;">流程图</a>
+                      <a href="/tag/#%E6%B5%81%E7%A8%8B%E5%9B%BE" style="font-size: 9pt; color: #999;">流程图</a>
                     
                       
                       
                       
                       
                       
-                      <a href="/tag/#百度脑图" style="font-size: 9pt; color: #999;">百度脑图</a>
+                      <a href="/tag/#%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE" style="font-size: 9pt; color: #999;">百度脑图</a>
                     
                       
                       
@@ -1019,7 +1034,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
         <p class="contact">
             Contact me at: 
             <a href="https://github.com/tldsn" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=742720531@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
+            <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=742720531@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>  
             <a href="http://weibo.com/5578237033" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a>  
             <a href="https://www.zhihu.com/people/yao-yu-jie-90" title="Zhihu"><i class="iconfont blog-zhihu"></i></a>  
             <a href="https://www.douban.com/people/122400251" title="Douban"><i class="iconfont blog-douban"></i></a>  
@@ -1033,7 +1048,7 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
         </p>
         <p class="power">
             <span>
-                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> &amp; <a href="https://pages.github.com/">Github Pages</a>.
             </span>
             <span>
                 Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
@@ -1079,8 +1094,8 @@ created:2012-04..2012-05　　在2012年4月1日至2012年5月31日之间创建�
     player.add163(263386850)
   </script> -->
 
-  <script src=" /assets/js/main.js " charset="utf-8"></script>
-  <script src=" /assets/js/smooth-scroll.min.js " charset="utf-8"></script>
+  <script src="/assets/js/main.js%20" charset="utf-8"></script>
+  <script src="/assets/js/smooth-scroll.min.js%20" charset="utf-8"></script>
   <script type="text/javascript">
     smoothScroll.init({
       speed: 500, // Integer. How fast to complete the scroll in milliseconds

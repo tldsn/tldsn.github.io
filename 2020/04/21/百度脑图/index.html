@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="/assets/css/main.css ">
     <link rel="canonical" href="http://localhost:4000/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/">
     <link rel="alternate" type="application/rss+xml" title="TLDSN" href="http://localhost:4000/feed.xml ">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet"> 
     <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="TLDSN" />
     <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>百度脑图 | TLDSN</title>
@@ -175,7 +177,7 @@
 
   <div class="page clearfix" post>
     <div class="left">
-        <h1>百度脑图</h1>
+        <h1 class="pageTitle">百度脑图</h1>
         <div class="label">
             <div class="label-card">
                 <i class="fa fa-calendar"></i>2020-04-21
@@ -436,7 +438,6 @@
         
     </div>
     <div class="nex">
-
         
         <p><strong>下一篇</strong> <a href="/2020/04/21/stackoverflow%E6%90%9C%E7%B4%A2/">stackoverflow搜索</a></p>
         
@@ -448,19 +449,29 @@
         
 
 
-<div id="disqus_thread"></div>
+<div id="disqus_recommendations"></div>
+<div id="disqus_thread">
+</div>
 <script>
     /**
      * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
      * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
      */
 
-    var disqus_config = function() {
+    var disqus_config = function () {
         this.page.url = 'http://localhost:4000/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/'; // Replace PAGE_URL with your page's canonical URL variable
         this.page.identifier = 'http://localhost:4000/2020/04/21/%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
-    (function() { // DON'T EDIT BELOW THIS LINE
+    (function () { // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document,
+            s = d.createElement('script'); // IMPORTANT: Replace EXAMPLE with your forum shortname!
+        s.src = '//https-tldsn-github-io.disqus.com/recommendations.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+
+    (function () { // DON'T EDIT BELOW THIS LINE
         var d = document,
             s = d.createElement('script');
 
@@ -471,6 +482,7 @@
     })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
 
 
 
