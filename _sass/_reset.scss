@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'ZCOOL KuaiLe';
+    src: url('/assets/font/ZCOOL_KuaiLe/ZCOOLKuaiLe-Regular.woff') format('woff2'),
+         url('/assets/font/ZCOOL_KuaiLe/ZCOOLKuaiLe-Regular.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html,
 body,
 div,
@@ -24,9 +32,7 @@ body {
     position: relative;
     min-height: 100%;
     padding-bottom: 190px;
-
     background-color: #e7f1e4;
-    
     font-family: "Helvetica Neue","Microsoft YaHei", "WenQuanYi Micro Hei",Arial, sans-serif;
     font-size: 16px;
 	line-height: 1.6;
@@ -34,7 +40,7 @@ body {
     word-break: break-all;
 }
 
-.pageTitle,.evernotePageFont,.pageFont {
+.pageTitle,.pageFont {
     font-family: 'ZCOOL KuaiLe', cursive;
 }
 
