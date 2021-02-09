@@ -2,7 +2,7 @@
 layout: post
 title: 为什么GitHub需要SSH Key呢？
 categories: 问题
-tags: github SSH
+tags: github ssh
 author: tldsn
 ---
 
